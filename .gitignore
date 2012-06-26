@@ -8,6 +8,9 @@
 *.so
 *.obj
 Debug/*
+Release/*
+CMakeFiles/*
+src/*
 
 # Packages #
 ############
