@@ -27,6 +27,11 @@ void Quaternion::createQuaternion(float angle, float axis_x, float axis_y, float
 	this->normalize();
 }
 
+void Quaternion::createQuaternion(float angle, Vector3 axis)
+{
+	createQuaternion(angle, axis[0], axis[1], axis[2]);
+}
+
 Quaternion Quaternion::normalize()
 {
 	float magnitude = sqrt((*this)[0]*(*this)[0]+(*this)[1]*(*this)[1]+(*this)[2]*(*this)[2]+(*this)[3]*(*this)[3]);

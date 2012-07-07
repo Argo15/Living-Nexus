@@ -1,5 +1,6 @@
 #include "WorldState.h"
 #include "Matrix.h"
+#include "TimeManager.h"
 
 WorldState::WorldState(const char *filename)
 { 
@@ -44,18 +45,7 @@ void WorldState::tick(int fps)
 			glutSetCursor(GLUT_CURSOR_RIGHT_ARROW);
 	}
 
-	// get time
-	time_t t = time(0);
-    struct tm * now = localtime( & t );
-	std::string pm = "am";
-	if (now->tm_hour >= 12) {
-		pm = "pm";
-		now->tm_hour -= 12;
-	}
-	if (now->tm_hour == 0) {
-		now->tm_hour = 12;
-	}
-	printf("Time: %d:%d:%d %d/%d/%d \r",now->tm_hour, now->tm_min, now->tm_sec, now->tm_mon+1, now->tm_mday, now->tm_year+1900);
+	printf(TimeManager::getInstance()->toString().c_str());
 
 	physicsManager->tick(fps);
 	worldManager->tick(fps);

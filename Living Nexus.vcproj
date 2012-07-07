@@ -110,7 +110,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;C:\bullet-2.79\src&quot;"
+				AdditionalIncludeDirectories="C:\boost_1_49_0;&quot;C:\bullet-2.79\src&quot;"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="3"
@@ -127,7 +127,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				IgnoreDefaultLibraryNames=""
+				AdditionalDependencies="libboost_date_time-vc100-mt-1_49.lib"
+				IgnoreDefaultLibraryNames="libboost_date_time-vc90-mt-1_49.lib"
 				GenerateDebugInformation="true"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
@@ -424,6 +425,14 @@
 					>
 				</File>
 				<File
+					RelativePath=".\GameTime.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GameTime.h"
+					>
+				</File>
+				<File
 					RelativePath=".\InputManager.cpp"
 					>
 				</File>
@@ -437,6 +446,14 @@
 				</File>
 				<File
 					RelativePath=".\Root.h"
+					>
+				</File>
+				<File
+					RelativePath=".\TimeManager.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\TimeManager.h"
 					>
 				</File>
 			</Filter>

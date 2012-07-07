@@ -4,6 +4,7 @@
 #include <GL/freeglut.h>
 #include "Root.h"
 #include "WorldState.h"
+#include "TimeManager.h"
 
 int currentTime = 0;
 int vsync = 0;
@@ -37,13 +38,15 @@ void resize(int w, int h) {
 }
 
 void render(void) {
+	
 	int lastTime = currentTime;
 	currentTime = glutGet( GLUT_ELAPSED_TIME );
-	int timePassed = currentTime - lastTime;
-	vsync += timePassed;
+	int elapsedTime = currentTime - lastTime;
+	vsync += elapsedTime;
 	
 	if (vsync > (1000/60)){
-		float fps = 1000.0f/timePassed;
+		TimeManager::getInstance()->tick();
+		float fps = 1000.0f/elapsedTime;
 		if (fps > 60)
 			fps=60;
 		vsync = 0;
@@ -98,7 +101,7 @@ int main(int argc, char **argv) {
 	// init GLUT and create window
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-	glutInitWindowPosition(50,50);
+	glutInitWindowPosition(300,0);
 	glutInitWindowSize(1600,900);
 	glutCreateWindow("Living Nexus");
 

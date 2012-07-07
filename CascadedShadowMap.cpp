@@ -26,7 +26,7 @@ void CascadedShadowMap::buildShadowMaps()
 	shadowMaps[3]->bind();
 	glClearDepth(1.0);
 	glClear(GL_DEPTH_BUFFER_BIT);
-
+	glDisable(GL_CULL_FACE);
 	for (int i=0; i<3; i++) {
 		Camera *lightCamera = createLightCamera(slice[i],slice[i+1],camera,view,sun);
 		View *lightView = createLightView(slice[i],slice[i+1],camera,lightCamera,view,frustum);
@@ -66,6 +66,7 @@ void CascadedShadowMap::buildShadowMaps()
 		delete lightView;
 		delete lightFrustum;
 	}
+	glEnable(GL_CULL_FACE);
 	
 }
 

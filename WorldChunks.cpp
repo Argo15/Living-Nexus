@@ -28,7 +28,6 @@ void WorldChunks::generateChunks(ChunkManager *chunks, PhysicsManager *physicsMa
 	chunkNames[8] = "Beach Chunk";
 	chunkNames[9] = "Beach River Chunk";
 	chunkNames[10] = "Invisible Wall";
-	chunkNames[11] = "Under Chunk";
 
 	srand ( time(NULL) );
 
@@ -46,10 +45,6 @@ void WorldChunks::generateChunks(ChunkManager *chunks, PhysicsManager *physicsMa
 			for (int j=0; j<height-1; j++) {
 				*worldChunks[i][j] = *(chunks->getChunk(chunkNames[0]));
 				worldChunks[i][j]->setTranslate(i*10.0f,0,j*10.0f);
-				Chunk *underChunk = new Chunk();
-				*underChunk = *(chunks->getChunk(chunkNames[11]));
-				underChunk->setTranslate(i*10.0f,0,j*10.0f);
-				allChunks->push_back(underChunk);
 			}
 		}
 		for (int i=0; i< width; i++) {

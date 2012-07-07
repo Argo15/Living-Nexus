@@ -34,7 +34,7 @@ void WorldRenderer::resize(int w, int h)
 		h = 1;
 	GLfloat aspect = GLfloat(w) / h;
 	view->viewport(0, 0, w, h);
-	view->set3D(45.0f,aspect,0.01,45);
+	view->set3D(45.0f,aspect,0.01,50);
 	view->set2D(0,1,0,1,0,1);
 }
 

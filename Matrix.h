@@ -214,6 +214,7 @@ public:
 	Quaternion();
 	Quaternion(float s, float v1, float v2, float v3);
 	void createQuaternion(float angle, float axis_x, float axis_y, float axis_z);
+	void createQuaternion(float angle, Vector3 axis);
 	Quaternion normalize();
 	Matrix4 getMatrix();
 

@@ -3,6 +3,8 @@
 #include "WorldState.h"
 #include "Camera.h"
 
+static Vector3 V_SUN_QUATERNION(2.0f,0.0f,-1.0f);
+
 WorldManager::WorldManager()
 {
 	worldChunks = new WorldChunks(10,10);
@@ -12,6 +14,7 @@ WorldManager::WorldManager()
 
 void WorldManager::tick(int fps)
 {
+	updateSunToGameTime(TimeManager::getInstance()->getGameTime());
 	if(Root::inputManager->isKeyDownOnce('r')) {
 		WorldState *worldState = (WorldState *) Root::GAMESTATE;
 		worldState->getPhysicsManager()->getBulletManager()->clearDynamicsWorld();
@@ -46,4 +49,11 @@ void WorldManager::renderWorld(string shader, Frustum *frustum)
 	for (vector<Tile *>::iterator i = visTiles->begin(); i != visTiles->end(); i++) {
 		(*i)->drawTile(shader);
 	}
+}
+
+void WorldManager::updateSunToGameTime(GameTime time) {
+	float angle = (time.getHours()/24.0f + time.getMinutes()/60.0f/24.0f + time.getSeconds()/60.0f/60.0f/24.0f) - 0.5f;
+	Quaternion quat;
+	quat.createQuaternion(angle*(2*3.1415), V_SUN_QUATERNION);
+	sun->setRotate(quat);
 }
