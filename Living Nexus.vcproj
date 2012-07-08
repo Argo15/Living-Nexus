@@ -421,15 +421,15 @@
 				Name="Util"
 				>
 				<File
+					RelativePath=".\Config.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Config.h"
+					>
+				</File>
+				<File
 					RelativePath=".\dirent.h"
-					>
-				</File>
-				<File
-					RelativePath=".\GameTime.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\GameTime.h"
 					>
 				</File>
 				<File
@@ -448,14 +448,26 @@
 					RelativePath=".\Root.h"
 					>
 				</File>
-				<File
-					RelativePath=".\TimeManager.cpp"
+				<Filter
+					Name="Time"
 					>
-				</File>
-				<File
-					RelativePath=".\TimeManager.h"
-					>
-				</File>
+					<File
+						RelativePath=".\GameTime.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\GameTime.h"
+						>
+					</File>
+					<File
+						RelativePath=".\TimeManager.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\TimeManager.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="Resource"

@@ -27,7 +27,7 @@ void CascadedShadowMap::buildShadowMaps()
 	glClearDepth(1.0);
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glDisable(GL_CULL_FACE);
-	for (int i=0; i<3; i++) {
+	for (int i=0; i<4; i++) {
 		Camera *lightCamera = createLightCamera(slice[i],slice[i+1],camera,view,sun);
 		View *lightView = createLightView(slice[i],slice[i+1],camera,lightCamera,view,frustum);
 		Frustum *lightFrustum = new Frustum();
@@ -53,9 +53,7 @@ void CascadedShadowMap::buildShadowMaps()
 		glslProgram->sendUniform("camPos",camera->geteyeX(),camera->geteyeY(),camera->geteyeZ());
 		glBindAttribLocation(glslProgram->getHandle(), 0, "v_vertex");
 
-		if (i<3) {
-			worldState->getWorldManager()->renderWorld("SunShadow",lightFrustum);
-		}
+		worldState->getWorldManager()->renderWorld("SunShadow",lightFrustum);
 		
 		glslProgram->disable();
 		glPopAttrib();
