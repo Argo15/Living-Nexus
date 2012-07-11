@@ -7,11 +7,18 @@
 #undef __gl_h_
 #include <GL/GLee.h>
 #include <vector>
+#include <boost/algorithm/string/split.hpp>
+#include <boost/algorithm/string/classification.hpp>
 #include "Chunk.h"
 #include "WorldState.h"
 #include "Camera.h"
 #include "Frustum.h"
 #include "View.h"
+#include "TimeManager.h"
+#include "Config.h"
+#include "Matrix.h"
+#include "MathUtils.h"
+#include "TimeUtils.h"
 using namespace std;
 
 class AtmosphereBuffer {
@@ -39,6 +46,10 @@ public:
 
 	int getWidth() {return width;}
 	int getHeight() {return height;}
+	
+	Vector3 getNearSunColor();
+	Vector3 getAwaySunColor();
+	Vector3 getCloudColor();
 };
 
 #endif

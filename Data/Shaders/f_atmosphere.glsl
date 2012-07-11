@@ -9,6 +9,9 @@ uniform float far;
 uniform mat4 inverseMVPMatrix;
 uniform vec3 cameraPos;
 uniform vec3 sunDir; 
+uniform vec3 nearSunColor;
+uniform vec3 awaySunColor;
+uniform vec3 cloudColor;
 in vec2 texCoord;
 out vec4 colorBuffer;
 out vec4 glowBuffer;
@@ -31,10 +34,8 @@ void main() {
 		//if (sunIntensity < 0.75) {
 		//	sunIntensity = 0.0;
 		//}
-		vec3 nearColor = vec3(0.3,0.6,0.8);
-		vec3 awayColor = vec3(0.1,0.2,0.8);
 		float skyBrightness = 1-acos(dot(eyeDir,sun))/3.14;
-		vec3 skyColor = skyBrightness*nearColor+(1.0-skyBrightness)*awayColor;
+		vec3 skyColor = skyBrightness*nearSunColor+(1.0-skyBrightness)*awaySunColor;
 		
 		
 		eyeDir.y += 0.3;
@@ -45,7 +46,7 @@ void main() {
 		factor *= 0.4;
 		float cloudValue = texture2D(cloudTex,factor*vec2(cloudU,cloudV)).r;
 		
-		color = vec4((1-cloudValue)*skyColor,color.w) + vec4(cloudValue,cloudValue,cloudValue,color.w);
+		color = vec4((1-cloudColor * cloudValue)*skyColor,color.w) + vec4(cloudColor * cloudValue,color.w);
 		glow = glow + vec4(sunIntensity,sunIntensity,sunIntensity,0.0);
 	}
 

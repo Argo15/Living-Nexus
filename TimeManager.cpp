@@ -19,11 +19,11 @@ void TimeManager::tick() {
 
 std::string TimeManager::toString() {
 	char buff[100];
-	int hours = (gameTime.getHours()-1) % 12 + 1;
-	if (hours == 0) 
-		hours = 12;
+	//int hours = (gameTime.getHours()-1) % 12 + 1;
+	//if (hours == 0) 
+		//hours = 12;
 	sprintf(buff, "Time: %d:%d:%d %d/%d/%d \r", 
-		hours, gameTime.getMinutes(), gameTime.getSeconds(),
+		gameTime.getHours(), gameTime.getMinutes(), gameTime.getSeconds(),
 		gameTime.getMonth(), gameTime.getDay(), gameTime.getYear());
 	std::string sTime = buff;
 	return sTime;

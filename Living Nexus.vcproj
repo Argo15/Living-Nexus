@@ -393,6 +393,10 @@
 				Name="Math"
 				>
 				<File
+					RelativePath=".\MathUtils.h"
+					>
+				</File>
+				<File
 					RelativePath=".\Matrix.h"
 					>
 				</File>
@@ -426,6 +430,10 @@
 				</File>
 				<File
 					RelativePath=".\Config.h"
+					>
+				</File>
+				<File
+					RelativePath=".\ConfigNames.h"
 					>
 				</File>
 				<File
@@ -465,6 +473,10 @@
 					</File>
 					<File
 						RelativePath=".\TimeManager.h"
+						>
+					</File>
+					<File
+						RelativePath=".\TimeUtils.h"
 						>
 					</File>
 				</Filter>
@@ -722,6 +734,10 @@
 				</Filter>
 			</Filter>
 		</Filter>
+		<File
+			RelativePath=".\Config\common.ini"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

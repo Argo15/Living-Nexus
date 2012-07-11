@@ -2,6 +2,10 @@
 #include "DrawFunc.h"
 #include <assert.h>
 
+static Vector3 DEFAULT_SKY_NEAR_COLOR(77, 153, 204);
+static Vector3 DEFAULT_SKY_AWAY_COLOR(26, 52, 204);
+static Vector3 DEFAULT_CLOUD_COLOR(255, 255, 255);
+
 AtmosphereBuffer::AtmosphereBuffer(int width, int height)
 {
 	this->width=width;
@@ -76,6 +80,9 @@ void AtmosphereBuffer::drawToBuffer(GLuint colorBuf, GLuint glowBuf, GLuint dept
 	glslProgram->sendUniform("cameraPos",camera->geteyeX(),camera->geteyeY(),camera->geteyeZ());
 	Vector3 sunDir = worldState->getWorldManager()->getSun()->getDirection();
 	glslProgram->sendUniform("sunDir",sunDir[0],sunDir[1],sunDir[2]);
+	glslProgram->sendUniform("nearSunColor",getNearSunColor()[0],getNearSunColor()[1],getNearSunColor()[2]);
+	glslProgram->sendUniform("awaySunColor",getAwaySunColor()[0],getAwaySunColor()[1],getAwaySunColor()[2]);
+	glslProgram->sendUniform("cloudColor",getCloudColor()[0],getCloudColor()[1],getCloudColor()[2]);
 
 	glActiveTexture(GL_TEXTURE0); 
 	glBindTexture(GL_TEXTURE_2D, colorBuf);
@@ -95,4 +102,68 @@ void AtmosphereBuffer::drawToBuffer(GLuint colorBuf, GLuint glowBuf, GLuint dept
 	drawScreenShader(0,0,1.0f,1.0f);
 	glslProgram->disable();
 	unbind();	
+}
+
+Vector3 AtmosphereBuffer::getNearSunColor()
+{
+	float timeWeights[] = {
+		getWeightForTimeOfDay(Time::TimeOfDay::MORNING),
+		getWeightForTimeOfDay(Time::TimeOfDay::DAY),
+		getWeightForTimeOfDay(Time::TimeOfDay::EVENING),
+		getWeightForTimeOfDay(Time::TimeOfDay::NIGHT)
+	};
+	Vector3 timeColors[] = {
+		getSkyNearSunColor(Time::TimeOfDay::MORNING),
+		getSkyNearSunColor(Time::TimeOfDay::DAY),
+		getSkyNearSunColor(Time::TimeOfDay::EVENING),
+		getSkyNearSunColor(Time::TimeOfDay::NIGHT)
+	};
+	Vector3 vColor(0);
+	for (int i=0; i<4; i++) {
+		vColor = vColor + timeColors[i] * timeWeights[i];
+	}
+	return vColor;
+}
+
+Vector3 AtmosphereBuffer::getAwaySunColor()
+{
+	float timeWeights[] = {
+		getWeightForTimeOfDay(Time::TimeOfDay::MORNING),
+		getWeightForTimeOfDay(Time::TimeOfDay::DAY),
+		getWeightForTimeOfDay(Time::TimeOfDay::EVENING),
+		getWeightForTimeOfDay(Time::TimeOfDay::NIGHT)
+	};
+	Vector3 timeColors[] = {
+		getSkyAwaySunColor(Time::TimeOfDay::MORNING),
+		getSkyAwaySunColor(Time::TimeOfDay::DAY),
+		getSkyAwaySunColor(Time::TimeOfDay::EVENING),
+		getSkyAwaySunColor(Time::TimeOfDay::NIGHT)
+	};
+	Vector3 vColor(0);
+	for (int i=0; i<4; i++) {
+		vColor = vColor + timeColors[i] * timeWeights[i];
+	}
+	return vColor;
+}
+
+Vector3 AtmosphereBuffer::getCloudColor()
+{
+	float timeWeights[] = {
+		getWeightForTimeOfDay(Time::MORNING),
+		getWeightForTimeOfDay(Time::DAY),
+		getWeightForTimeOfDay(Time::EVENING),
+		getWeightForTimeOfDay(Time::NIGHT)
+	};
+	Vector3 timeColors[] = {
+		Time::getCloudColor(Time::MORNING),
+		Time::getCloudColor(Time::DAY),
+		Time::getCloudColor(Time::EVENING),
+		Time::getCloudColor(Time::NIGHT)
+	};
+	Vector3 vColor(0);
+	for (int i=0; i<4; i++) {
+		vColor = vColor + timeColors[i] * timeWeights[i];
+	}
+	cout << vColor[0] << " " << vColor[1] << " " << vColor[2];
+	return vColor;
 }
