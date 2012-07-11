@@ -164,6 +164,5 @@ Vector3 AtmosphereBuffer::getCloudColor()
 	for (int i=0; i<4; i++) {
 		vColor = vColor + timeColors[i] * timeWeights[i];
 	}
-	cout << vColor[0] << " " << vColor[1] << " " << vColor[2];
 	return vColor;
 }
