@@ -82,7 +82,7 @@ namespace Time {
 			nColorWeights[EVENING] = 1.0f - (float)(nEveningSeconds - nCurrentSeconds) / (float)nTransitionSeconds;
 			nColorWeights[DAY] = (float)(nEveningSeconds - nCurrentSeconds) / (float)nTransitionSeconds;
 		}
-		nColorWeights[time] = MathUtils::clamp(nColorWeights[time], 0, 1.0f);
+		nColorWeights[time] = sqrt(MathUtils::clamp(nColorWeights[time], 0, 1.0f));
 		return nColorWeights[time];
 	}
 
