@@ -1,4 +1,5 @@
 #include "CascadedShadowMap.h"
+#include "Profiler.h"
 
 #define ANG2RAD 3.14159265358979323846/180.0
 
@@ -16,6 +17,7 @@ CascadedShadowMap::CascadedShadowMap(int size, float slice1, float slice2, float
 
 void CascadedShadowMap::buildShadowMaps()
 {
+	Profiler::getInstance()->startProfile("Build Shadow Maps");
 	float slice[] = {0.0, slices[0], slices[1], slices[2], 1.0};
 	WorldState *worldState = (WorldState *) Root::GAMESTATE;
 	Camera *camera = worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera();
@@ -65,7 +67,7 @@ void CascadedShadowMap::buildShadowMaps()
 		delete lightFrustum;
 	}
 	glEnable(GL_CULL_FACE);
-	
+	Profiler::getInstance()->endProfile();
 }
 
 Camera *CascadedShadowMap::createLightCamera(float slice1, float slice2, Camera *camera, View *view, DirectLight *dLight)

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "GBuffer.h"
 #include "Logger.h"
+#include "Profiler.h"
 
 GBuffer::GBuffer(int width, int height)
 {
@@ -90,6 +91,7 @@ GBuffer::GBuffer(int width, int height)
 
 void GBuffer::drawToBuffer(View *view)
 {
+	Profiler::getInstance()->startProfile("Draw GBuffer");
 	GLSLProgram *glslProgram = Root::shaderManager->getShader("GBuffer");
 	glslProgram->use();
 
@@ -132,4 +134,5 @@ void GBuffer::drawToBuffer(View *view)
 
 	lastCameraProj = Root::ProjectionMatrix.top();
 	lastCamera = *camera;
+	Profiler::getInstance()->endProfile();
 }

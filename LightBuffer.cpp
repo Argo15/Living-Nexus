@@ -2,6 +2,7 @@
 #include "DrawFunc.h"
 #include <assert.h>
 #include "Logger.h"
+#include "Profiler.h"
 
 LightBuffer::LightBuffer(int width, int height)
 {
@@ -45,6 +46,7 @@ LightBuffer::LightBuffer(int width, int height)
 
 void LightBuffer::drawToBuffer(GLuint normalTex, GLuint depthTex, GLuint glowTex, View *view)
 {
+	Profiler::getInstance()->startProfile("Draw Light");
 	GLSLProgram *glslProgram = Root::shaderManager->getShader("DirectLight");
 	glslProgram->use();
 
@@ -96,4 +98,5 @@ void LightBuffer::drawToBuffer(GLuint normalTex, GLuint depthTex, GLuint glowTex
 	drawScreenShader(0,0,1.0f,1.0f);
 	glslProgram->disable();
 	unbind();	
+	Profiler::getInstance()->endProfile();
 }

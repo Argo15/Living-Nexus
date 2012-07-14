@@ -1,5 +1,6 @@
 #include "BulletManager.h"
 #include "WorldState.h"
+#include "Profiler.h"
 
 BulletManager::BulletManager()
 {
@@ -67,6 +68,7 @@ void BulletManager::createPlayerBody()
 
 void BulletManager::updateDynamicsWorld(float speed)
 {
+	Profiler::getInstance()->startProfile("Update Dynamics World");
 	// move camera
 	WorldState *worldState = (WorldState *) Root::GAMESTATE;
 	WorldCamera *camera = worldState->getPhysicsManager()->getWorldCameras()->getPlayerCamera();
@@ -92,4 +94,5 @@ void BulletManager::updateDynamicsWorld(float speed)
 	// update camera
 	btVector3 camPos = playerBody->getWorldTransform().getOrigin();
 	camera->setPosition(camPos[0],camPos[1]+0.8,camPos[2]);
+	Profiler::getInstance()->endProfile();
 }

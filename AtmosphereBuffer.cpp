@@ -2,6 +2,7 @@
 #include "DrawFunc.h"
 #include <assert.h>
 #include "Logger.h"
+#include "Profiler.h"
 
 static Vector3 DEFAULT_SKY_NEAR_COLOR(77, 153, 204);
 static Vector3 DEFAULT_SKY_AWAY_COLOR(26, 52, 204);
@@ -49,6 +50,7 @@ AtmosphereBuffer::AtmosphereBuffer(int width, int height)
 
 void AtmosphereBuffer::drawToBuffer(GLuint colorBuf, GLuint glowBuf, GLuint depthBuf, View *view)
 {
+	Profiler::getInstance()->startProfile("Draw Atmosphere");
 	GLSLProgram *glslProgram = Root::shaderManager->getShader("Atmosphere");
 	glslProgram->use();
 
@@ -103,6 +105,7 @@ void AtmosphereBuffer::drawToBuffer(GLuint colorBuf, GLuint glowBuf, GLuint dept
 	drawScreenShader(0,0,1.0f,1.0f);
 	glslProgram->disable();
 	unbind();	
+	Profiler::getInstance()->endProfile();
 }
 
 Vector3 AtmosphereBuffer::getNearSunColor()

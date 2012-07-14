@@ -58,6 +58,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="libboost_date_time-vc100-mt-1_49.lib"
+				IgnoreDefaultLibraryNames="libboost_date_time-vc90-mt-1_49.lib"
 				GenerateDebugInformation="true"
 				TargetMachine="1"
 			/>
@@ -437,11 +439,23 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Profiler.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Profiler.h"
+					>
+				</File>
+				<File
 					RelativePath=".\Root.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Root.h"
+					>
+				</File>
+				<File
+					RelativePath=".\StringUtils.h"
 					>
 				</File>
 				<Filter

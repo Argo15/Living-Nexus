@@ -6,6 +6,7 @@
 #include "WorldState.h"
 #include "TimeManager.h"
 #include "Config.h"
+#include "Profiler.h"
 
 int currentTime = 0;
 int vsync = 0;
@@ -65,7 +66,10 @@ void render(void) {
 }
 
 void keyDown(unsigned char key, int xx, int yy) {
-	if (key == 27) exit(0);
+	if (key == 27) { 
+		Profiler::getInstance()->logProfile();
+		exit(0);
+	}
 	Root::inputManager->registerKeyDown((int)key);
 	if (key >= '0' && key <= '9') 
 		Root::RENDERSTATE = (RenderState)((int)key-(int)'0');

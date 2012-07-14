@@ -2,6 +2,7 @@
 #include "DrawFunc.h"
 #include <assert.h>
 #include "Logger.h"
+#include "Profiler.h"
 
 FinalBuffer::FinalBuffer(int width, int height)
 {
@@ -35,6 +36,7 @@ FinalBuffer::FinalBuffer(int width, int height)
 
 void FinalBuffer::drawToBuffer(GLuint colorTex, GLuint lightTex, GLuint glowTex, View *view)
 {
+	Profiler::getInstance()->startProfile("Draw Final");
 	GLSLProgram *glslProgram = Root::shaderManager->getShader("Final");
 	glslProgram->use();
 
@@ -69,4 +71,5 @@ void FinalBuffer::drawToBuffer(GLuint colorTex, GLuint lightTex, GLuint glowTex,
 	drawScreenShader(0,0,1.0f,1.0f);
 	glslProgram->disable();
 	unbind();	
+	Profiler::getInstance()->endProfile();
 }

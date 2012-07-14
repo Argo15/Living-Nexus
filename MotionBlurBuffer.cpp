@@ -2,6 +2,7 @@
 #include "DrawFunc.h"
 #include <assert.h>
 #include "Logger.h"
+#include "Profiler.h"
 
 MotionBlurBuffer::MotionBlurBuffer(int width, int height)
 {
@@ -35,6 +36,7 @@ MotionBlurBuffer::MotionBlurBuffer(int width, int height)
 
 void MotionBlurBuffer::drawToBuffer(GLuint texture, GLuint velocityTex, int numSamples, View *view)
 {
+	Profiler::getInstance()->startProfile("Draw Motion Blur");
 	GLSLProgram *glslProgram = Root::shaderManager->getShader("MotionBlur");
 	glslProgram->use();
 
@@ -67,4 +69,5 @@ void MotionBlurBuffer::drawToBuffer(GLuint texture, GLuint velocityTex, int numS
 	drawScreenShader(0,0,1.0f,1.0f);
 	glslProgram->disable();
 	unbind();	
+	Profiler::getInstance()->endProfile();
 }
