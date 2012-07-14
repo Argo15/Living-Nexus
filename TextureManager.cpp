@@ -5,6 +5,7 @@
 #include<string.h>
 #include<fstream>
 #include "dirent.h"
+#include "Logger.h"
 
 TextureManager::TextureManager()
 {
@@ -13,6 +14,7 @@ TextureManager::TextureManager()
 
 void TextureManager::Initialize()
 {
+	Logging::GRAPHICS->info("Loading Textures");
 	DIR *pDIR;
 	struct dirent *entry;
 	if( pDIR=opendir("./Data/Textures") ){
@@ -24,6 +26,7 @@ void TextureManager::Initialize()
 	}
 	textures["Cloud"] = new PerlinNoise();
 	textures["Cloud"]->load("Cloud");
+	Logging::GRAPHICS->info("Done Loading Textures");
 }
 
 void TextureManager::LoadTexture(string filename)
@@ -35,6 +38,8 @@ void TextureManager::LoadTexture(string filename)
 		string name = filename.substr(start_pos,end_pos-start_pos);
 		texture->setName(name);
 		textures[name]=texture;
+	} else {
+		Logging::GRAPHICS->error("Texture failed to load: " + filename);
 	}
 }
 

@@ -5,6 +5,7 @@
 #include<string.h>
 #include<fstream>
 #include "dirent.h"
+#include "Logger.h"
 
 ModelManager::ModelManager()
 {
@@ -13,6 +14,7 @@ ModelManager::ModelManager()
 
 void ModelManager::Initialize()
 {
+	Logging::GRAPHICS->info("Loading Models");
 	DIR *pDIR;
 	struct dirent *entry;
 	if( pDIR=opendir("./Data/Models") ){
@@ -22,6 +24,7 @@ void ModelManager::Initialize()
 		}
 		closedir(pDIR);
 	}
+	Logging::GRAPHICS->info("Done Loading Models");
 }
 
 void ModelManager::LoadModel(string filename)
@@ -33,6 +36,8 @@ void ModelManager::LoadModel(string filename)
 		string name = filename.substr(start_pos,end_pos-start_pos);
 		model->setName(name);
 		models[name]=model;
+	} else {
+		Logging::GRAPHICS->error("Model failed to load: " + filename);
 	}
 }
 

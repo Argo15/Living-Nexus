@@ -10,7 +10,7 @@ using namespace std;
 class ShaderManager {
 private:
 	map<string,GLSLProgram *> shaders;
-	void compileProgram(GLSLProgram *program);
+	void compileProgram(GLSLProgram *program, string shaderName);
 
 public:
 	ShaderManager();

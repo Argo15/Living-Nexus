@@ -7,7 +7,7 @@
 #include "Matrix.h"
 #include "MathUtils.h"
 
-namespace Time {
+namespace TimeUtils {
 	enum TimeOfDay{ MORNING, DAY, EVENING, NIGHT };
 
 	static std::string SKY_NEAR_SUN_COLORS[] = {

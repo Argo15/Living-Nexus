@@ -1,26 +1,28 @@
 #include "ShaderManager.h"
 #include <assert.h>
+#include "Logger.h"
 
 ShaderManager::ShaderManager()
 {
 
 }
 
-void ShaderManager::compileProgram(GLSLProgram *program)
+void ShaderManager::compileProgram(GLSLProgram *program, string shaderName)
 {
 	std::string log;
 	if (!program->vertex_->isCompiled()){
 		program->vertex_->getShaderLog(log);
-		assert(false);
+		Logging::GRAPHICS->error("Vertex shader failed to compile: " + shaderName + "\n" + log);
 	}
 	if (!program->fragment_->isCompiled()){	
 		program->fragment_->getShaderLog(log);
-		assert(false);
+		Logging::GRAPHICS->error("Fragment shader failed to compile " + shaderName + "\n" + log);
 	}
 }
 
 void ShaderManager::Initialize()
 {
+	Logging::GRAPHICS->info("Loading Shaders");
 	LoadShader("Basic", "Data/Shaders/v_material.glsl","Data/Shaders/f_material.glsl");
 	LoadShader("GBuffer", "Data/Shaders/v_GBuffer.glsl","Data/Shaders/f_GBuffer.glsl");
 	LoadShader("DirectLight", "Data/Shaders/v_light.glsl","Data/Shaders/f_dlight.glsl");
@@ -28,12 +30,13 @@ void ShaderManager::Initialize()
 	LoadShader("SunShadow", "Data/Shaders/v_dShadow.glsl","Data/Shaders/f_dShadow.glsl");
 	LoadShader("MotionBlur", "Data/Shaders/v_motionBlur.glsl","Data/Shaders/f_motionBlur.glsl");
 	LoadShader("Atmosphere", "Data/Shaders/v_motionBlur.glsl","Data/Shaders/f_atmosphere.glsl");
+	Logging::GRAPHICS->info("Done Loading Shaders");
 }
 
 void ShaderManager::LoadShader(string name, string vertexShader, string fragmentShader)
 {
 	GLSLProgram *glslProgram = new GLSLProgram(vertexShader,fragmentShader);
-	compileProgram(glslProgram);
+	compileProgram(glslProgram, name);
 	shaders[name] = glslProgram;
 }
 

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "DepthBuffer.h"
+#include "Logger.h"
 
 DepthBuffer::DepthBuffer(int width, int height)
 {
@@ -24,9 +25,9 @@ DepthBuffer::DepthBuffer(int width, int height)
 	// check FbO status
 	GLenum FBOstatus = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
 	if(FBOstatus != GL_FRAMEBUFFER_COMPLETE_EXT)
-		printf("GL_FRAMEBUFFER_COMPLETE failed, CANNOT use FBO. %i\n",FBOstatus);
+		Logging::GRAPHICS->error("GL_FRAMEBUFFER_COMPLETE failed, CANNOT use FBO. " + FBOstatus);
 	else
-		printf("Depth buffer Done\n");
+		Logging::GRAPHICS->info("Depth buffer Done");
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 }

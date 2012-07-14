@@ -20,6 +20,8 @@ void init() {
 	Root::ProjectionMatrix.push(glm::mat4(1.0f));
 	Root::NormalMatrix.push(glm::mat3(1.0f));
 
+	Root::inputManager = new InputManager();
+
 	Root::textureManager = new TextureManager();
 	Root::textureManager->Initialize();
 	Root::modelManager = new ModelManager();
@@ -27,9 +29,7 @@ void init() {
 	Root::materialManager = new MaterialManager();
 	Root::materialManager->Initialize();
 	Root::shaderManager = new ShaderManager();
-	Root::shaderManager->Initialize();
-
-	Root::inputManager = new InputManager();
+	Root::shaderManager->Initialize();	
 
 	Root::GAMESTATE = new WorldState();
 }

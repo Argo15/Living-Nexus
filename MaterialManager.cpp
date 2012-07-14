@@ -5,6 +5,7 @@
 #include<string.h>
 #include<fstream>
 #include "dirent.h"
+#include "Logger.h"
 
 MaterialManager::MaterialManager()
 {
@@ -12,6 +13,7 @@ MaterialManager::MaterialManager()
 
 void MaterialManager::Initialize()
 {
+	Logging::GRAPHICS->info("Loading Materials");
 	DIR *pDIR;
 	struct dirent *entry;
 	if( pDIR=opendir("./Data/Materials") ){
@@ -21,6 +23,7 @@ void MaterialManager::Initialize()
 		}
 		closedir(pDIR);
 	}
+	Logging::GRAPHICS->info("Done Loading Materials");
 }
 
 void MaterialManager::LoadMaterial(string filename)
@@ -29,6 +32,8 @@ void MaterialManager::LoadMaterial(string filename)
 	if (newMaterial->loadMaterial(filename.c_str())) {
 		string *name = newMaterial->getName();
 		materials[*name] = newMaterial;
+	} else {
+		Logging::GRAPHICS->error("Material failed to load: " + filename);
 	}
 }
 

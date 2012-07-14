@@ -5,6 +5,7 @@
 #include<string.h>
 #include<fstream>
 #include "dirent.h"
+#include "Logger.h"
 
 ChunkManager::ChunkManager()
 {
@@ -13,6 +14,7 @@ ChunkManager::ChunkManager()
 
 void ChunkManager::Initialize()
 {
+	Logging::GRAPHICS->info("Loading Chunks");
 	DIR *pDIR;
 	struct dirent *entry;
 	if( pDIR=opendir("./Data/Chunks") ){
@@ -22,6 +24,7 @@ void ChunkManager::Initialize()
 		}
 		closedir(pDIR);
 	}
+	Logging::GRAPHICS->info("Done Loading Chunks");
 }
 
 void ChunkManager::LoadChunk(string filename)
@@ -33,6 +36,9 @@ void ChunkManager::LoadChunk(string filename)
 		string name = filename.substr(start_pos,end_pos-start_pos);
 		chunk->setName(name);
 		chunks[name]=chunk;
+		return;
+	} else {
+		Logging::GRAPHICS->error("Chunk failed to load: " + filename);
 	}
 }
 

@@ -45,8 +45,6 @@ void WorldState::tick(int fps)
 			glutSetCursor(GLUT_CURSOR_RIGHT_ARROW);
 	}
 
-	printf(TimeManager::getInstance()->toString().c_str());
-
 	physicsManager->tick(fps);
 	worldManager->tick(fps);
 	shadowMapManager->tick(fps);

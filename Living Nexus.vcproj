@@ -425,18 +425,6 @@
 				Name="Util"
 				>
 				<File
-					RelativePath=".\Config.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Config.h"
-					>
-				</File>
-				<File
-					RelativePath=".\ConfigNames.h"
-					>
-				</File>
-				<File
 					RelativePath=".\dirent.h"
 					>
 				</File>
@@ -477,6 +465,38 @@
 					</File>
 					<File
 						RelativePath=".\TimeUtils.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="Config"
+					>
+					<File
+						RelativePath=".\Config.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Config.h"
+						>
+					</File>
+					<File
+						RelativePath=".\ConfigNames.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="Logging"
+					>
+					<File
+						RelativePath=".\Logger.h"
+						>
+					</File>
+					<File
+						RelativePath=".\LoggerHelper.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\LoggerHelper.h"
 						>
 					</File>
 				</Filter>

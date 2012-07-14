@@ -1,7 +1,7 @@
 #include "LightBuffer.h"
 #include "DrawFunc.h"
 #include <assert.h>
-
+#include "Logger.h"
 
 LightBuffer::LightBuffer(int width, int height)
 {
@@ -36,9 +36,9 @@ LightBuffer::LightBuffer(int width, int height)
 	// check FbO status
 	GLenum FBOstatus = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
 	if(FBOstatus != GL_FRAMEBUFFER_COMPLETE_EXT)
-		printf("GL_FRAMEBUFFER_COMPLETE failed, CANNOT use FBO. %i\n",FBOstatus);
+		Logging::GRAPHICS->error("GL_FRAMEBUFFER_COMPLETE failed, CANNOT use FBO. " + FBOstatus);
 	else
-		printf("Light Buffer Done\n");
+		Logging::GRAPHICS->info("Light Buffer Done");
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 }

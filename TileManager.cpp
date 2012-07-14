@@ -5,6 +5,7 @@
 #include<string.h>
 #include<fstream>
 #include "dirent.h"
+#include "Logger.h"
 
 TileManager::TileManager()
 {
@@ -13,6 +14,7 @@ TileManager::TileManager()
 
 void TileManager::Initialize()
 {
+	Logging::GRAPHICS->info("Loading Tiles");
 	DIR *pDIR;
 	struct dirent *entry;
 	if( pDIR=opendir("./Data/Tiles") ){
@@ -22,6 +24,7 @@ void TileManager::Initialize()
 		}
 		closedir(pDIR);
 	}
+	Logging::GRAPHICS->info("Done Loading Tiles");
 }
 
 void TileManager::LoadTile(string filename)
@@ -33,6 +36,8 @@ void TileManager::LoadTile(string filename)
 		string name = filename.substr(start_pos,end_pos-start_pos);
 		tile->setName(name);
 		tiles[name]=tile;
+	} else {
+		Logging::GRAPHICS->error("Tile failed to load: " + filename);
 	}
 }
 
