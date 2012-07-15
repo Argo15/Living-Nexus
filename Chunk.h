@@ -36,6 +36,7 @@ protected:
 	int orientation;
 	float radius;
 	int tileModes[10][10];
+	virtual void drawExtra(string shader) {}
 
 public:
 	Chunk();

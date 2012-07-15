@@ -35,6 +35,7 @@ void Chunk::drawChunk(string shader)
 			Root::ModelviewMatrix.pop();
 			Root::NormalMatrix.pop();
 		}
+		drawExtra(shader);
 	Root::ModelviewMatrix.pop();
 	Root::NormalMatrix.pop();
 }

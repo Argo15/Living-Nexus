@@ -39,5 +39,6 @@ public:
 	WorldManager *getWorldManager() {return worldManager;}
 	WorldRenderer *getRenderer() {return renderer;}
 	ShadowMapManager *getShadowMapManager() {return shadowMapManager;}
+	TileManager *getTileManager() {return tileManager;}
 };
 #endif

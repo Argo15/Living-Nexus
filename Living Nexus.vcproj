@@ -569,6 +569,14 @@
 						RelativePath=".\TileManager.h"
 						>
 					</File>
+					<File
+						RelativePath=".\Tree.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Tree.h"
+						>
+					</File>
 				</Filter>
 				<Filter
 					Name="Chunks"
@@ -763,6 +771,66 @@
 					</File>
 					<File
 						RelativePath=".\WorldTiles.h"
+						>
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="User"
+				>
+				<File
+					RelativePath=".\User.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\User.h"
+					>
+				</File>
+				<File
+					RelativePath=".\UserSession.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\UserSession.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Object"
+				>
+				<File
+					RelativePath=".\Object.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Object.h"
+					>
+				</File>
+				<Filter
+					Name="Components"
+					>
+					<File
+						RelativePath=".\GroundComponent.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\GroundComponent.h"
+						>
+					</File>
+					<File
+						RelativePath=".\InventoryComponent.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\InventoryComponent.h"
+						>
+					</File>
+					<File
+						RelativePath=".\WorldComponent.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\WorldComponent.h"
 						>
 					</File>
 				</Filter>

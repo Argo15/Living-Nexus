@@ -1,4 +1,5 @@
 #include "WorldTiles.h"
+#include "Tree.h"
 
 WorldTiles::WorldTiles(int w, int h)
 {
@@ -33,8 +34,8 @@ void WorldTiles::initializeFromChunks(WorldChunks *chunks, TileManager *manager,
 	}
 	for (int i=0; i<width; i++) {
 		for (int j=0; j<height; j++) {
-			Tile *blockTile = new Tile();
-			*blockTile = *manager->getTile("Tree");
+			Tile *blockTile = new Tree();
+			*blockTile = *(Tree*)manager->getTile("Tree");
 			blockTile->Translate(i-5, 0, j-5);
 			if (rand() % 50 == 1)
 				addTile(i,j,blockTile,physicsManager);

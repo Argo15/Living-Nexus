@@ -7,6 +7,7 @@
 #include "TimeManager.h"
 #include "Config.h"
 #include "Profiler.h"
+#include "UserSession.h"
 
 int currentTime = 0;
 int vsync = 0;
@@ -31,6 +32,8 @@ void init() {
 	Root::materialManager->Initialize();
 	Root::shaderManager = new ShaderManager();
 	Root::shaderManager->Initialize();	
+
+	UserSession::getInstance()->startUserSession("Argo");
 
 	Root::GAMESTATE = new WorldState();
 }
@@ -67,6 +70,7 @@ void render(void) {
 
 void keyDown(unsigned char key, int xx, int yy) {
 	if (key == 27) { 
+		UserSession::getInstance()->endUserSession();
 		Profiler::getInstance()->logProfile();
 		exit(0);
 	}
