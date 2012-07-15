@@ -15,13 +15,17 @@ InputManager::InputManager()
 
 void InputManager::registerKeyDown(int key)
 {
-	keys[key]=true;
-	keysPressedNotChecked[key]=true;
+	if (key < 256) {
+		keys[key]=true;
+		keysPressedNotChecked[key]=true;
+	}
 }
 
 void InputManager::registerKeyUp(int key)
 {
-	keys[key]=false;
+	if (key < 256) {
+		keys[key]=false;
+	}
 }
 
 bool InputManager::isKeyDown(int key)

@@ -58,8 +58,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libboost_date_time-vc100-mt-1_49.lib"
-				IgnoreDefaultLibraryNames="libboost_date_time-vc90-mt-1_49.lib"
+				AdditionalDependencies="libboost_date_time-vc100-mt-gd-1_49.lib"
+				IgnoreDefaultLibraryNames="libboost_date_time-vc90-mt-gd-1_49.lib"
 				GenerateDebugInformation="true"
 				TargetMachine="1"
 			/>
@@ -163,7 +163,7 @@
 	</References>
 	<Files>
 		<Filter
-			Name="Resource Files"
+			Name="Shaders"
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
