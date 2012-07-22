@@ -536,6 +536,14 @@
 				RelativePath=".\QtCamera.h"
 				>
 			</File>
+			<File
+				RelativePath=".\SceneManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\SceneManager.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath=".\chunkeditor2.cpp"
