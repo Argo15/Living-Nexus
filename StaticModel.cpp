@@ -24,3 +24,14 @@ void StaticModel::draw()
 	glDisableVertexAttribArray(3);
 	glDisableVertexAttribArray(4);
 }
+
+void StaticModel::drawGeometry()
+{
+	glEnableVertexAttribArray(0);
+
+	glBindBufferARB(GL_ARRAY_BUFFER,bufferID);
+	glVertexAttribPointerARB(0,3,GL_FLOAT,GL_FALSE,0,0);
+	glDrawArrays(GL_TRIANGLES, 0, numTriangles*3);
+
+	glDisableVertexAttribArray(0);
+}

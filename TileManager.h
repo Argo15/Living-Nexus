@@ -21,7 +21,7 @@ public:
 	void DeleteAllTiles();
 
 	Tile *getTile(string name) { return tiles[name]; }
-	map<string,Tile *> *getTile() {return &tiles;}
+	map<string,Tile *> *getTiles() {return &tiles;}
 };
 
 #endif

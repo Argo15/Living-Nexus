@@ -11,6 +11,8 @@ Debug/*
 Release/*
 CMakeFiles/*
 src/*
+Tools/ChunkEditor2/Debug/*
+Tools/ChunkEditor2/GeneratedFiles/*
 
 # Packages #
 ############

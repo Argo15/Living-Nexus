@@ -2,6 +2,9 @@
 #include "Matrix.h"
 #include "NoState.h"
 #include "QtCamera.h"
+#include "SceneManager.h"
+#include "FileWidget.h"
+#include "DrawFunc.h"
 
 MainGraphicsWidget::MainGraphicsWidget(QGLFormat fmt, QWidget *parent)
     : QGLWidget(fmt,parent) 
@@ -14,12 +17,11 @@ MainGraphicsWidget::MainGraphicsWidget(QGLFormat fmt, QWidget *parent)
 }
 
 void MainGraphicsWidget::initializeGL() {
+	Root::GAMESTATE = new NoState();
 	Root::ModelviewMatrix.push(glm::mat4(1.0f)); 
 	Root::ProjectionMatrix.push(glm::mat4(1.0f));
 	Root::NormalMatrix.push(glm::mat3(1.0f));
-
 	Root::inputManager = new InputManager();
-
 	Root::textureManager = new TextureManager();
 	Root::textureManager->Initialize();
 	Root::modelManager = new ModelManager();
@@ -27,12 +29,7 @@ void MainGraphicsWidget::initializeGL() {
 	Root::materialManager = new MaterialManager();
 	Root::materialManager->Initialize();
 	Root::shaderManager = new ShaderManager();
-	Root::shaderManager->Initialize();	
-
-	tileManager = new TileManager();
-	tileManager->Initialize();
-
-	Root::GAMESTATE = new NoState();
+	Root::shaderManager->Initialize();
 
 	glShadeModel(GL_SMOOTH);
 	glClearDepth(1.0f);
@@ -49,6 +46,13 @@ void MainGraphicsWidget::initializeGL() {
 	camera->setPosition(5,5,5);
 	camera->setLookAt(0,0,0);
 	camera->setUp(0,1,0);
+
+	FileWidget::getInstance()->refresh();
+	SceneManager::getInstance()->addTile("Tree");
+	SceneManager::getInstance()->addChunk("Flat Chunk");
+
+	myGrid = new grid(10, 10);
+	myGrid->setColor(1.0, 1.0 ,1.0);
 }
 
 void MainGraphicsWidget::resizeGL(int width, int height) {
@@ -87,10 +91,17 @@ void MainGraphicsWidget::render() {
 	glslProgram->sendUniform("light.ambient", 0.7f);
 	glslProgram->sendUniform("light.diffuse", 0.6f);
 	glslProgram->sendUniform("projectionMatrix", &Root::ProjectionMatrix.top()[0][0]);
+	glslProgram->sendUniform("modelviewMatrix", &Root::ModelviewMatrix.top()[0][0]);
+	glslProgram->sendUniform("curveGeometry", false);
 
-	tileManager->DrawTile("Tree", "Basic");
+	Root::materialManager->getMaterial("Default")->sendToShader("Basic");
+	myGrid->draw();
+
+	SceneManager::getInstance()->draw();
 
 	glslProgram->disable();
+
+	SceneManager::getInstance()->drawTransformers();
 }
 
 
@@ -103,6 +114,17 @@ void MainGraphicsWidget::keyReleaseEvent (QKeyEvent *event) {
 }
 
 void MainGraphicsWidget::mousePressEvent(QMouseEvent *event) {
+	int x = event->x();
+	int y = event->y();
+	if (event->buttons() & Qt::LeftButton) {
+		if (Transformer::selected == -1)
+			SceneManager::getInstance()->setSelectedActor(-1);
+		Root::ModelviewMatrix.top() = glm::mat4(1.0f);
+		Root::ProjectionMatrix.top() = glm::mat4(1.0f);
+		view->use3D(true);
+		camera->transform();
+		Selection::calculateSelection(x,y);
+	}
 	Root::inputManager->registerMouseButtonDown(event->button());
 }
 
@@ -111,9 +133,20 @@ void MainGraphicsWidget::mouseReleaseEvent(QMouseEvent *event) {
 }
 
 void MainGraphicsWidget::mouseMoveEvent(QMouseEvent *event) {
+	Root::ModelviewMatrix.top() = glm::mat4(1.0f);
+	Root::ProjectionMatrix.top() = glm::mat4(1.0f);
+	view->use3D(true);
+	camera->transform();
 	int x = event->x();
 	int y = event->y();
 	Root::inputManager->setMousePosition(x, y);
+	if (event->buttons() & Qt::LeftButton){
+		transformNoShaders();
+		Transformer::calculateTransform(x,y,Root::inputManager->isSpecialKeyDown(Qt::Key_Shift),Root::inputManager->isSpecialKeyDown(Qt::Key_Control));
+	} else {
+		Selection::calculateSelectedTransformer(x,y);
+		Transformer::dragPoint = Vector3(0.0);
+	}
 }
 
 void MainGraphicsWidget::wheelEvent(QWheelEvent *event) {

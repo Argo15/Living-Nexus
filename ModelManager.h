@@ -17,6 +17,7 @@ public:
     void Initialize();
 	void LoadModel(string filename);
 	void DrawModel(string name);
+	void DrawModelGeometry(string name);
 	void DeleteModel(string name);
 	void DeleteAllModels();
 

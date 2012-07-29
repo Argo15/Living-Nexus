@@ -107,7 +107,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;C:\Users\Bill\Desktop\CPP\My Projects\Living Nexus\Living Nexus&quot;;&quot;C:\bullet-2.79\src&quot;;.\GeneratedFiles;&quot;$(QTDIR)\include&quot;;&quot;.\GeneratedFiles\$(ConfigurationName)&quot;;&quot;$(QTDIR)\include\qtmain&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;.\"
+				AdditionalIncludeDirectories="C:\Users\Bill\Desktop\CPP\MyProjects\LivingNexus\LivingNexus;&quot;C:\bullet-2.79\src&quot;;.\GeneratedFiles;&quot;$(QTDIR)\include&quot;;&quot;.\GeneratedFiles\$(ConfigurationName)&quot;;&quot;$(QTDIR)\include\qtmain&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtOpenGL&quot;;.\"
 				PreprocessorDefinitions=",UNICODE,WIN32,QT_LARGEFILE_SUPPORT;QT_CORE_LIB;QT_GUI_LIB;QT_OPENGL_LIB"
 				RuntimeLibrary="3"
 				TreatWChar_tAsBuiltInType="false"
@@ -436,6 +436,18 @@
 					</FileConfiguration>
 				</File>
 				<File
+					RelativePath=".\GeneratedFiles\Release\moc_FileWidget.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath=".\GeneratedFiles\Release\moc_MainGraphicsWidget.cpp"
 					>
 					<FileConfiguration
@@ -466,6 +478,18 @@
 					</FileConfiguration>
 				</File>
 				<File
+					RelativePath=".\GeneratedFiles\Debug\moc_FileWidget.cpp"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_MainGraphicsWidget.cpp"
 					>
 					<FileConfiguration
@@ -482,14 +506,6 @@
 		<Filter
 			Name="Widgets"
 			>
-			<File
-				RelativePath=".\DockedWidget.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\DockedWidget.h"
-				>
-			</File>
 			<File
 				RelativePath=".\MainGraphicsWidget.cpp"
 				>
@@ -514,12 +530,54 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGL_LIB  &quot;-IC:\Users\Bill\Desktop\CPP\My Projects\Living Nexus\Living Nexus&quot; &quot;-IC:\bullet-2.79\src&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\qtmain&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtOpenGL&quot; &quot;-I.&quot; &quot;.\MainGraphicsWidget.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGL_LIB  &quot;-IC:\Users\Bill\Desktop\CPP\MyProjects\LivingNexus\LivingNexus&quot; &quot;-IC:\bullet-2.79\src&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\qtmain&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtOpenGL&quot; &quot;-I.&quot; &quot;.\MainGraphicsWidget.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
 				</FileConfiguration>
 			</File>
+			<Filter
+				Name="DockedWidget"
+				>
+				<File
+					RelativePath=".\DockedWidget.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\DockedWidget.h"
+					>
+				</File>
+				<File
+					RelativePath=".\FileWidget.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\FileWidget.h"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="Moc&apos;ing $(InputFileName)..."
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\qtmain&quot; &quot;-I$(QTDIR)\include\QtOpenGL&quot; &quot;-I.&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.\GeneratedFiles\$(ConfigurationName)\.&quot; -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_NO_DEBUG -DQT_OPENGL_LIB -DUNICODE -DWIN32&#x0D;&#x0A;"
+							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="Moc&apos;ing $(InputFileName)..."
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGL_LIB  &quot;-IC:\Users\Bill\Desktop\CPP\MyProjects\LivingNexus\LivingNexus&quot; &quot;-IC:\bullet-2.79\src&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\qtmain&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtOpenGL&quot; &quot;-I.&quot; &quot;.\FileWidget.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+						/>
+					</FileConfiguration>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Graphics"
@@ -542,6 +600,38 @@
 			</File>
 			<File
 				RelativePath=".\SceneManager.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Selection.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Selection.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Transformer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Transformer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Unproject.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Resouces"
+			>
+			<File
+				RelativePath=".\Data\Shaders\f_material.glsl"
+				>
+			</File>
+			<File
+				RelativePath=".\Data\Shaders\v_material.glsl"
 				>
 			</File>
 		</Filter>
@@ -569,7 +659,7 @@
 				<Tool
 					Name="VCCustomBuildTool"
 					Description="Moc&apos;ing $(InputFileName)..."
-					CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGL_LIB  &quot;-IC:\Users\Bill\Desktop\CPP\My Projects\Living Nexus\Living Nexus&quot; &quot;-IC:\bullet-2.79\src&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\qtmain&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtOpenGL&quot; &quot;-I.&quot; &quot;.\chunkeditor2.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+					CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGL_LIB  &quot;-IC:\Users\Bill\Desktop\CPP\MyProjects\LivingNexus\LivingNexus&quot; &quot;-IC:\bullet-2.79\src&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\qtmain&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtOpenGL&quot; &quot;-I.&quot; &quot;.\chunkeditor2.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 					AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 					Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 				/>

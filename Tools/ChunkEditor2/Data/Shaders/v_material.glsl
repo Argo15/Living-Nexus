@@ -4,6 +4,7 @@ uniform mat4 textureMatrix;
 uniform mat4 modelviewMatrix;
 uniform mat4 projectionMatrix;
 uniform mat3 normalMatrix;
+uniform bool curveGeometry;
 in vec3 v_vertex;
 in vec2 v_texture;
 in vec3 v_normal;
@@ -18,15 +19,17 @@ out vec2 texCoord;
 void main() {
 	worldPos = modelviewMatrix * vec4(v_vertex,1.0);
 	
-	float radius = 100;
-	vec3 center = vec3(0.0,-radius,0.0);
-	vec2 direction = worldPos.xz;
-	float distance = length(direction);
-	direction = normalize(direction);
-	float distFromCenter = radius+worldPos.y;
-	float angle = distance/radius;  // trust me this is correct
-	vec3 unitPosition = vec3(direction.x*sin(angle),cos(angle),direction.y*sin(angle));
-	worldPos = vec4(center+unitPosition*distFromCenter,1.0);
+	if (curveGeometry) {
+		float radius = 100;
+		vec3 center = vec3(0.0,-radius,0.0);
+		vec2 direction = worldPos.xz;
+		float distance = length(direction);
+		direction = normalize(direction);
+		float distFromCenter = radius+worldPos.y;
+		float angle = distance/radius;  // trust me this is correct
+		vec3 unitPosition = vec3(direction.x*sin(angle),cos(angle),direction.y*sin(angle));
+		worldPos = vec4(center+unitPosition*distFromCenter,1.0);
+	}
 	
 	gl_Position = projectionMatrix * worldPos;
 	texCoord = vec2(textureMatrix * vec4(v_texture,0.0,0.0));

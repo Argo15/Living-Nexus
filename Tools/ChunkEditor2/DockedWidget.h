@@ -4,7 +4,7 @@
 #include <QGLWidget>
 #include <QtGui>
 
-class DockedWidget : public QWidget {
+class DockedWidget : public QDockWidget {
 public:
 	DockedWidget();
 	~DockedWidget(){}

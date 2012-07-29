@@ -29,21 +29,25 @@ public:
 		glVertexAttrib3f(2,0.0,0.0,0.0);
 		glVertexAttrib3f(3,0.0,0.0,0.0);
 		glVertexAttrib3f(4,0.0,0.0,0.0);
-		glVertexAttrib3f(5,color[0],color[1],color[2]);
+		//glVertexAttrib3f(5,color[0],color[1],color[2]);
 		glColor3f(1.0,1.0,1.0);
 		for (int x=0;x<=width;x++){
 			float a = center[0]-u+(float)x;
-			glBegin(GL_LINES);
-				glVertex3f(a,0,center[1]+v);
-				glVertex3f(a,0,center[1]-v);
-			glEnd();
+			for (float i=-v; i<v-0.1; i+=0.1) {
+				glBegin(GL_LINES);
+					glVertex3f(a,0,center[1]+i);
+					glVertex3f(a,0,center[1]+i+0.1);
+				glEnd();
+			}
 		}
 		for (int y=0;y<=length;y++){
-			float b = center[1]-v+(float)y;
-			glBegin(GL_LINES);
-				glVertex3f(center[0]+u,0,b);
-				glVertex3f(center[0]-u,0,b);
-			glEnd();
+			for (float i=-u; i<u-0.1; i+=0.1) {
+				float b = center[1]-v+(float)y;
+				glBegin(GL_LINES);
+					glVertex3f(center[0]+i,0,b);
+					glVertex3f(center[0]+i+0.1,0,b);
+				glEnd();
+			}
 		}
 		glLineWidth(1.0);
 	}

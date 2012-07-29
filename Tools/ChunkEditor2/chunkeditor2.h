@@ -9,6 +9,7 @@ class ChunkEditor2 : public QMainWindow
 
 private:
 	QGLWidget *glWidget;
+	QDockWidget *dockedWidget;
 
 public:
 	ChunkEditor2(QWidget *parent = 0, Qt::WFlags flags = 0);

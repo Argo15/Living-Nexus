@@ -49,6 +49,8 @@ public:
 	float getRadius();
 	void addPhysicsToDynamicWorld(PhysicsManager *physicsManager);
 	int getTileMode(int x, int y);
+	Actor **getActors() {return actors;}
+	int getNumActors() {return numActors;}
 };
 
 #endif

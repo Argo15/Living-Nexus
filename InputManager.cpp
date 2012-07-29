@@ -18,6 +18,8 @@ void InputManager::registerKeyDown(int key)
 	if (key < 256) {
 		keys[key]=true;
 		keysPressedNotChecked[key]=true;
+	} else {
+		specialKeyPressed.insert(key);
 	}
 }
 
@@ -25,6 +27,8 @@ void InputManager::registerKeyUp(int key)
 {
 	if (key < 256) {
 		keys[key]=false;
+	} else {
+		specialKeyPressed.erase(key);
 	}
 }
 
@@ -32,6 +36,14 @@ bool InputManager::isKeyDown(int key)
 {
 	keysPressedNotChecked[key]=false; 
 	return keys[key];
+}
+
+bool InputManager::isSpecialKeyDown(int key)
+{
+	if (specialKeyPressed.find(key) == specialKeyPressed.end()) {
+		return false;
+	}
+	return true;
 }
 
 bool InputManager::isKeyDownOnce(int key)

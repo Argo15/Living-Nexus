@@ -1,11 +1,14 @@
 #ifndef INPUTMANAGER_H
 #define INPUTMANAGER_H
 
+#include <set>
+
 class InputManager {
 private:
 	bool keys[256];
 	bool keysPressedNotChecked[256];
 	bool mouseButtons[5];
+	std::set<int> specialKeyPressed;
 	int mouseX, mouseY;
 	bool mouseCentered;
 	bool mouseMoved;
@@ -17,6 +20,7 @@ public:
 	void registerKeyDown(int key);
 	void registerKeyUp(int key);
 	bool isKeyDown(int key);
+	bool isSpecialKeyDown(int key);
 	bool isKeyDownOnce(int key);
 
 	void registerMouseButtonDown(int mouse);

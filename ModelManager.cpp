@@ -46,6 +46,11 @@ void ModelManager::DrawModel(string name)
 	models[name]->draw();
 }
 
+void ModelManager::DrawModelGeometry(string name)
+{
+	models[name]->drawGeometry();
+}
+
 void ModelManager::DeleteModel(string name)
 {
 	if (models.find(name) == models.end()){

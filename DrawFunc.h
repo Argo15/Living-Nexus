@@ -23,3 +23,13 @@ static void drawScreenShader(float x1, float y1, float x2, float y2)
 		glVertexAttrib2f(1,0,1.0f);		glVertexAttrib2f(0,x1,y2);
 	glEnd();
 }
+
+static void transformNoShaders()
+{
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMultMatrixf(&Root::ProjectionMatrix.top()[0][0]);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glMultMatrixf(&Root::ModelviewMatrix.top()[0][0]);
+}

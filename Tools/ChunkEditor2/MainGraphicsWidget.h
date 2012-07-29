@@ -6,6 +6,7 @@
 #include "View.h"
 #include "Camera.h"
 #include "TileManager.h"
+#include "grid.h"
 
 class MainGraphicsWidget : public QGLWidget
 {
@@ -16,6 +17,8 @@ private:
 	View *view;
 	Camera *camera;
 	TileManager *tileManager;
+	grid *myGrid;
+
 
 protected:
     void initializeGL();

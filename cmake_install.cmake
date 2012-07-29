@@ -29,7 +29,7 @@ ENDIF(NOT CMAKE_INSTALL_COMPONENT)
 
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  INCLUDE("C:/Users/Bill/Desktop/CPP/My Projects/Living Nexus/Living Nexus/src/cmake_install.cmake")
+  INCLUDE("C:/Users/Bill/Desktop/CPP/MyProjects/LivingNexus/LivingNexus/src/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 
@@ -39,7 +39,7 @@ ELSE(CMAKE_INSTALL_COMPONENT)
   SET(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 ENDIF(CMAKE_INSTALL_COMPONENT)
 
-FILE(WRITE "C:/Users/Bill/Desktop/CPP/My Projects/Living Nexus/Living Nexus/${CMAKE_INSTALL_MANIFEST}" "")
+FILE(WRITE "C:/Users/Bill/Desktop/CPP/MyProjects/LivingNexus/LivingNexus/${CMAKE_INSTALL_MANIFEST}" "")
 FOREACH(file ${CMAKE_INSTALL_MANIFEST_FILES})
-  FILE(APPEND "C:/Users/Bill/Desktop/CPP/My Projects/Living Nexus/Living Nexus/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+  FILE(APPEND "C:/Users/Bill/Desktop/CPP/MyProjects/LivingNexus/LivingNexus/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
 ENDFOREACH(file)

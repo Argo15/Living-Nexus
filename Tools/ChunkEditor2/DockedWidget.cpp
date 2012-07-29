@@ -1,13 +1,18 @@
 #include "DockedWidget.h"
+#include "FileWidget.h"
 
 DockedWidget::DockedWidget() 
-	: QWidget(0)
+	: QDockWidget(0)
 {
+	QWidget *mainWidget = new QWidget();
 	QVBoxLayout *mainLayout = new QVBoxLayout;
 
-	setLayout(mainLayout);
-	layout()->setContentsMargins(0,0,0,0);
+	mainLayout->addWidget(FileWidget::getInstance());
+	mainLayout->setContentsMargins(0,0,0,0);
 
-	setFixedHeight(sizeHint().height());
-	setFixedWidth(sizeHint().width());
+	mainWidget->setLayout(mainLayout);
+	mainWidget->setFixedHeight(mainWidget->sizeHint().height());
+	mainWidget->setFixedWidth(300);
+
+	setWidget(mainWidget);
 }

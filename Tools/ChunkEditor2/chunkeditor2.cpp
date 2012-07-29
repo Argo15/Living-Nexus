@@ -1,6 +1,8 @@
 #include <QtGui>
 #include "chunkeditor2.h"
 #include "MainGraphicsWidget.h"
+#include "DockedWidget.h"
+#include "NoState.h"
 
 ChunkEditor2::ChunkEditor2(QWidget *parent, Qt::WFlags flags)
 	: QMainWindow(parent, flags)
@@ -11,6 +13,10 @@ ChunkEditor2::ChunkEditor2(QWidget *parent, Qt::WFlags flags)
 	glWidget = new MainGraphicsWidget(fmt,this);
 	setCentralWidget(glWidget);
 	startTimer(0);
+
+	dockedWidget = new DockedWidget();
+
+	addDockWidget(Qt::RightDockWidgetArea, dockedWidget);
 }
 
 ChunkEditor2::~ChunkEditor2()
