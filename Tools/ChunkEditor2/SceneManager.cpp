@@ -30,6 +30,11 @@ void SceneManager::removeActor(int actorId) {
 	actors->erase(actorId);
 }
 
+void SceneManager::removeSelected() {
+	removeActor(selectedActorId);
+	selectedActorId = -1;
+}
+
 void SceneManager::addChunk(Chunk *chunk) {
 	Actor **chunkActors = chunk->getActors();
 	int numActors = chunk->getNumActors();

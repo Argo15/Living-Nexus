@@ -37,6 +37,46 @@ void MaterialManager::LoadMaterial(string filename)
 	}
 }
 
+/* returns a string that is not currently being used */
+string MaterialManager::getSafeName(string baseName)
+{
+	if (!hasMaterial(baseName))
+	{
+		return baseName;
+	} 
+	else
+	{
+		int nNum = 1;
+		while (true) {
+			char buff[10];
+			itoa(nNum, buff, 10);
+			string sNum = string(buff);
+			string newName = baseName + sNum;
+			if (!hasMaterial(newName)) {
+				return newName;
+			}
+			nNum++;
+		}
+	}
+}
+
+/* returns the name of the material */
+string MaterialManager::AddMaterialSafe(Material *material)
+{
+	string matName = getSafeName(*(material->getName()));
+	material->setName(matName);
+	materials[matName] = material;
+	return matName;
+}
+
+bool MaterialManager::hasMaterial(string name)
+{
+	if (materials.find(name) != materials.end()) {
+		return true;
+	}
+	return false;
+}
+
 void MaterialManager::DeleteMaterial(string name)
 {
 	if (materials.find(name) != materials.end()) {
@@ -48,4 +88,13 @@ void MaterialManager::DeleteMaterial(string name)
 void MaterialManager::DeleteAllMaterials()
 {
 	materials.clear();
+}
+
+void MaterialManager::SaveAllMaterials()
+{
+	for (std::map<std::string, Material *>::iterator it = materials.begin(); it != materials.end(); it++) {
+		Material *mat = (*it).second;
+		string filename = "Data/Materials/" + (*it).first + ".amtl";
+		mat->saveMaterial(filename.c_str());
+	}
 }

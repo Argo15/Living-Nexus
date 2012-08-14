@@ -3,6 +3,7 @@
 uniform mat4 textureMatrix;
 uniform mat4 modelviewMatrix;
 uniform mat4 projectionMatrix;
+uniform mat4 inverseCameraMatrix;
 uniform mat3 normalMatrix;
 uniform bool curveGeometry;
 in vec3 v_vertex;
@@ -17,7 +18,7 @@ out vec3 bitangent;
 out vec2 texCoord;
 
 void main() {
-	worldPos = modelviewMatrix * vec4(v_vertex,1.0);
+	worldPos = modelviewMatrix * inverseCameraMatrix * vec4(v_vertex,1.0);
 	
 	if (curveGeometry) {
 		float radius = 100;
@@ -31,7 +32,7 @@ void main() {
 		worldPos = vec4(center+unitPosition*distFromCenter,1.0);
 	}
 	
-	gl_Position = projectionMatrix * worldPos;
+	gl_Position = projectionMatrix * modelviewMatrix * vec4(v_vertex,1.0);;
 	texCoord = vec2(textureMatrix * vec4(v_texture,0.0,0.0));
 	normal = normalMatrix * normalize(v_normal);
 	tangent = normalMatrix * normalize(v_tangent);

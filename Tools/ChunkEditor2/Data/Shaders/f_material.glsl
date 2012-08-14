@@ -12,6 +12,9 @@ struct Material
 {
 	bool normalenabled;
 	vec3 color;
+	vec3 emission;
+	float specular;
+	float shininess;
 };
 
 uniform sampler2D tex;
@@ -41,6 +44,15 @@ void main() {
 	vec3 viewVector = normalize(vec3(worldPos.xyz/worldPos.w)-cameraPos);
 	vec3 lightDir = normalize(light.direction);
 	vec4 texcolor = texture2D(tex,texCoord);
-	vec4 lightcolor = clamp(vec4(light.color,1.0) * (light.ambient+light.diffuse*clamp(dot(_normal,-lightDir),0.0,1.0)),0.0,1.0);
-	fragColor = vec4(material.color,1.0)*lightcolor*texcolor;
+	
+	vec3 look = normalize(worldPos.xyz-cameraPos);
+	vec3 reflectedLight = reflect(lightDir,_normal);
+	reflectedLight = normalize(reflectedLight);
+	float lightDotLook = dot(reflectedLight,-look);
+	lightDotLook = clamp(lightDotLook,0.0,1.0);
+	float spec = pow(lightDotLook,material.shininess*128.0)*material.specular;
+	
+	
+	vec4 lightcolor = clamp(vec4(light.color,1.0) * (light.ambient+light.diffuse*clamp(dot(_normal,-lightDir),0.0,1.0)),0.0,1.0) + spec + vec4(material.emission,1.0);
+	fragColor = vec4(material.color,1.0)*lightcolor*texcolor + spec;
 } 

@@ -53,7 +53,7 @@ bool Chunk::loadChunk(string filename)
 
 		for(int i=0; i<numActors; i++) {
 			string *model = Root::modelManager->getModel(loadActors[i].model)->getName();
-			string *mat = Root::materialManager->getMaterial(loadActors[i].material)->getName();
+			string *mat = new string(loadActors[i].material);
 			actors[i] = new Actor(model, mat);
 			actors[i]->setName(loadActors[i].name);
 			actors[i]->setTranslate(loadActors[i].translation[0],loadActors[i].translation[1],loadActors[i].translation[2]);

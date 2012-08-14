@@ -12,7 +12,7 @@ public:
 	Entity(string *name = 0) {this->name = name;}
 
 	string *getName() {return name;}
-	void setName(string newName) {if (name != 0) *name=newName; else name = new string(newName);}
+	void setName(string newName) {name = new string(newName);}
 };
 
 #endif

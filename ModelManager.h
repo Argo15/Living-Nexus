@@ -21,7 +21,9 @@ public:
 	void DeleteModel(string name);
 	void DeleteAllModels();
 
-	Model *getModel(string name) { return models[name]; }
+	Model *getModel(string name) { 
+		return models[name]; 
+	}
 	map<string,Model *> *getModels() {return &models;}		
 };
 

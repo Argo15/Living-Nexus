@@ -12,7 +12,6 @@ FileWidget::FileWidget()
 	addChunkToSceneBtn = new QPushButton("Add Chunk");
 
 	tileCmb = new QComboBox();
-	tileCmb->addItem("Test");
 	addTileToSceneBtn = new QPushButton("Add Tile");
 
 	saveAsChunkBtn = new QPushButton("Save as Chunk");
@@ -49,7 +48,7 @@ FileWidget::FileWidget()
 	connect(saveAsTileBtn, SIGNAL(clicked()),this, SLOT(saveTile()));
 
 	setFixedHeight(sizeHint().height());
-	setFixedWidth(300);
+	setFixedWidth(400);
 }
 
 FileWidget *FileWidget::getInstance() {

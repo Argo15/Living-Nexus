@@ -4,6 +4,7 @@
 #include "QtCamera.h"
 #include "SceneManager.h"
 #include "FileWidget.h"
+#include "ModelWidget.h"
 #include "DrawFunc.h"
 
 MainGraphicsWidget::MainGraphicsWidget(QGLFormat fmt, QWidget *parent)
@@ -48,8 +49,6 @@ void MainGraphicsWidget::initializeGL() {
 	camera->setUp(0,1,0);
 
 	FileWidget::getInstance()->refresh();
-	SceneManager::getInstance()->addTile("Tree");
-	SceneManager::getInstance()->addChunk("Flat Chunk");
 
 	myGrid = new grid(10, 10);
 	myGrid->setColor(1.0, 1.0 ,1.0);
@@ -94,6 +93,12 @@ void MainGraphicsWidget::render() {
 	glslProgram->sendUniform("modelviewMatrix", &Root::ModelviewMatrix.top()[0][0]);
 	glslProgram->sendUniform("curveGeometry", false);
 
+	glm::mat4 cameraInverse = glm::mat4(1.0);
+	camera->transformToMatrix(&cameraInverse);
+	cameraInverse = glm::inverse(cameraInverse);
+	glslProgram->sendUniform("inverseCameraMatrix", &cameraInverse[0][0]);
+	glslProgram->sendUniform("cameraPos", camera->geteyeX(), camera->geteyeY(), camera->geteyeZ());
+
 	Root::materialManager->getMaterial("Default")->sendToShader("Basic");
 	myGrid->draw();
 
@@ -107,6 +112,9 @@ void MainGraphicsWidget::render() {
 
 void MainGraphicsWidget::keyPressEvent (QKeyEvent *event) {
 	Root::inputManager->registerKeyDown(event->key());
+	if (event->key() == Qt::Key_Delete) {
+		SceneManager::getInstance()->removeSelected();
+	}
 }
 
 void MainGraphicsWidget::keyReleaseEvent (QKeyEvent *event) {

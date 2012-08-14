@@ -6,7 +6,7 @@
 
 class DockedWidget : public QDockWidget {
 public:
-	DockedWidget();
+	DockedWidget(QGLWidget *glWidget);
 	~DockedWidget(){}
 };
 

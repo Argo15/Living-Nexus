@@ -55,7 +55,7 @@ void Material::sendToShader(string shader)
 	glslProgram->sendUniform("normalmap", 1);
 	glslProgram->sendUniform("material.normalenabled", normalEnabled);
 	glslProgram->sendUniform("material.color", color[0],color[1],color[2]);
-	if (shader == "GBuffer") {
+	if (shader == "GBuffer" || shader == "Basic") {
 		glslProgram->sendUniform("material.emission", emission[0],emission[1],emission[2]);
 		glslProgram->sendUniform("material.specular", specular);
 		glslProgram->sendUniform("material.shininess", (float)shininess/128.0f);
@@ -96,4 +96,32 @@ bool Material::loadMaterial(const char* filename)
 	textureName = new string(load.textureName);
 	normalName = new string(load.normalName);
 	return true;
+}
+
+void Material::saveMaterial(const char *filename)
+{
+	SaveMat save;
+	for (int i=0; i<3; i++) {
+		save.color[i] = color[i];
+		save.emission[i] = emission[i];
+	}
+	for (int i=0; i<2; i++) {
+		save.texOffset[i] = texOffset[i];
+		save.texScale[i] = texScale[i];
+	}
+	save.specular = specular;
+	save.shininess = shininess;
+	save.texRotate = texRotate;
+	save.normalEnabled = normalEnabled;
+
+	strcpy(save.name, name->c_str());
+	strcpy(save.textureName, textureName->c_str());
+	strcpy(save.normalName, normalName->c_str());
+
+	ofstream file(filename, ios::out|ios::binary|ios::ate);
+	if (file.is_open())
+	{ 
+		file.write((char*)&save,sizeof(save));
+	}
+	file.close();
 }

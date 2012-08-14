@@ -80,6 +80,7 @@ public:
 	bool normalsEnabled() {return normalEnabled;}
 
 	bool loadMaterial(const char* filename);
+	void saveMaterial(const char* filename);
 };
 
 #endif

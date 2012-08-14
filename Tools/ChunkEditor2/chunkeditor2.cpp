@@ -3,6 +3,12 @@
 #include "MainGraphicsWidget.h"
 #include "DockedWidget.h"
 #include "NoState.h"
+#include "SceneManager.h"
+#include "ModelWidget.h"
+#include "TextureWidget.h"
+#include "MaterialWidget.h"
+
+bool postInit = true;
 
 ChunkEditor2::ChunkEditor2(QWidget *parent, Qt::WFlags flags)
 	: QMainWindow(parent, flags)
@@ -14,8 +20,8 @@ ChunkEditor2::ChunkEditor2(QWidget *parent, Qt::WFlags flags)
 	setCentralWidget(glWidget);
 	startTimer(0);
 
-	dockedWidget = new DockedWidget();
-
+	dockedWidget = new DockedWidget(glWidget);
+	
 	addDockWidget(Qt::RightDockWidgetArea, dockedWidget);
 }
 
@@ -26,6 +32,12 @@ ChunkEditor2::~ChunkEditor2()
 
 void ChunkEditor2::timerEvent(QTimerEvent *event)
 {
+	if (postInit) {
+		ModelWidget::getInstance()->refresh();
+		TextureWidget::getInstance()->refresh();
+		MaterialWidget::getInstance()->refresh();
+		postInit = false;
+	}
 	glWidget->repaint();
 }
 

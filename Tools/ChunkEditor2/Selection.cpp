@@ -8,6 +8,11 @@ void Selection::calculateSelection(int mouseX, int mouseY)
 
 	std::map<int, Actor *> *actors = SceneManager::getInstance()->getActors();
 
+	glActiveTexture(GL_TEXTURE0);
+	glDisable(GL_TEXTURE_2D);
+	glActiveTexture(GL_TEXTURE1);
+	glDisable(GL_TEXTURE_2D);
+	glActiveTexture(GL_TEXTURE2);
 	glDisable(GL_TEXTURE_2D);
     glDisable(GL_LIGHTING);
 

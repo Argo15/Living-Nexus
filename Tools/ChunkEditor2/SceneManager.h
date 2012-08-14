@@ -21,10 +21,13 @@ private:
 	int selectedActorId;
 	SceneManager();
 
+	QGLWidget *glWidget;
+
 public:
 	static SceneManager *getInstance();
 	int addActor(Actor *actor);			// returns an actorId
 	void removeActor(int actorId);
+	void removeSelected();
 	void addChunk(Chunk *chunk);
 	void addChunk(string chunk);
 	void addTile(string tile);
@@ -37,6 +40,9 @@ public:
 
 	TileManager *getTileManager() {return tileManager;}
 	ChunkManager *getChunkManager() {return chunkManager;}
+
+	void setGLWidget(QGLWidget *widget) {glWidget = widget;}
+	QGLWidget *getGLWidget() {return glWidget;}
 };
 
 #endif
