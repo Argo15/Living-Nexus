@@ -35,7 +35,7 @@ void ChunkEditor2::timerEvent(QTimerEvent *event)
 	if (postInit) {
 		ModelWidget::getInstance()->refresh();
 		TextureWidget::getInstance()->refresh();
-		MaterialWidget::getInstance()->refresh();
+		MaterialWidget::getInstance()->refresh("Default");
 		postInit = false;
 	}
 	glWidget->repaint();

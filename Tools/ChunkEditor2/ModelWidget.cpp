@@ -72,8 +72,8 @@ void ModelWidget::refresh() {
 		matCmb->addItem((*it).first.c_str());
 	}
 
-	currentModelChanged(modelCmb->currentText());
-	currentMatChanged(matCmb->currentText());
+	modelView->setModel(modelCmb->currentText().toStdString());
+	modelView->setMaterial(matCmb->currentText().toStdString());
 
 	repaint();
 }

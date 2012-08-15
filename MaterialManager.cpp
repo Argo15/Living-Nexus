@@ -77,6 +77,16 @@ bool MaterialManager::hasMaterial(string name)
 	return false;
 }
 
+string MaterialManager::renameMaterial(string currentName, string newName) 
+{
+	Material *mat = materials[currentName];
+	materials.erase(currentName);
+	newName = getSafeName(newName);
+	mat->setName(newName);
+	materials[newName] = mat;
+	return newName;
+}
+
 void MaterialManager::DeleteMaterial(string name)
 {
 	if (materials.find(name) != materials.end()) {

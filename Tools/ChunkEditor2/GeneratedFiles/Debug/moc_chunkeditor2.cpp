@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'chunkeditor2.h'
 **
-** Created: Tue Aug 14 12:24:53 2012
+** Created: Tue Aug 14 17:14:48 2012
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!

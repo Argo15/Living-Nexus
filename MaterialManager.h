@@ -20,6 +20,7 @@ public:
 	string AddMaterialSafe(Material *material);
 	void UseMaterial(string name) {materials[name]->use();}
 	bool hasMaterial(string name);
+	string renameMaterial(string currentName, string newName);
 	void DeleteMaterial(string name);
 	void DeleteAllMaterials();
 

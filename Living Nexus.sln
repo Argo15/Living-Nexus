@@ -82,6 +82,7 @@ Global
 		{CD65FE23-00A7-407A-8F69-C7FF0175CB0C}.MinSizeRel|Win32.ActiveCfg = Debug|Win32
 		{CD65FE23-00A7-407A-8F69-C7FF0175CB0C}.MinSizeRel|Win32.Build.0 = Debug|Win32
 		{CD65FE23-00A7-407A-8F69-C7FF0175CB0C}.Release|Win32.ActiveCfg = Release|Win32
+		{CD65FE23-00A7-407A-8F69-C7FF0175CB0C}.Release|Win32.Build.0 = Release|Win32
 		{CD65FE23-00A7-407A-8F69-C7FF0175CB0C}.RelWithDebInfo|Win32.ActiveCfg = Release|Win32
 		{CD65FE23-00A7-407A-8F69-C7FF0175CB0C}.RelWithDebInfo|Win32.Build.0 = Release|Win32
 	EndGlobalSection

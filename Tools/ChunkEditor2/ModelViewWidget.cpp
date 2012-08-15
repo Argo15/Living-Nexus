@@ -62,13 +62,16 @@ void ModelViewWidget::paintGL()
 	glslProgram->sendUniform("inverseCameraMatrix", &cameraInverse[0][0]);
 	glslProgram->sendUniform("cameraPos", camera->geteyeX(), camera->geteyeY(), camera->geteyeZ());
 
-	Root::ModelviewMatrix.push(Root::ModelviewMatrix.top());
-	Root::NormalMatrix.push(Root::NormalMatrix.top());
-		actor->transformToMatrix(&Root::ModelviewMatrix.top());
-		actor->transformToMatrix(&Root::NormalMatrix.top());
-		actor->drawActor("Basic");
-	Root::ModelviewMatrix.pop();
-	Root::NormalMatrix.pop();
+	if (Root::materialManager->hasMaterial(*(actor->getMaterial())))
+	{
+		Root::ModelviewMatrix.push(Root::ModelviewMatrix.top());
+		Root::NormalMatrix.push(Root::NormalMatrix.top());
+			actor->transformToMatrix(&Root::ModelviewMatrix.top());
+			actor->transformToMatrix(&Root::NormalMatrix.top());
+			actor->drawActor("Basic");
+		Root::ModelviewMatrix.pop();
+		Root::NormalMatrix.pop();
+	}
 
 	glslProgram->disable();
 }

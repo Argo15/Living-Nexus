@@ -85,7 +85,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)/Tools/ChunkEditor/$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			>
@@ -262,10 +262,6 @@
 			</File>
 			<File
 				RelativePath="..\..\LoggerHelper.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\main.cpp"
 				>
 			</File>
 			<File
