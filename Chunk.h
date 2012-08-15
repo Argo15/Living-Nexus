@@ -35,7 +35,7 @@ protected:
 	PhysicsShape **physics;
 	int orientation;
 	float radius;
-	int tileModes[10][10];
+	int tileModes[10][10];  // 0=green, 1=red, 2=yellow
 	virtual void drawExtra(string shader) {}
 
 public:

@@ -1,5 +1,6 @@
 #include "SceneManager.h"
 #include "DrawFunc.h"
+#include "ActorWidget.h"
 
 SceneManager* SceneManager::m_pInstance = 0;
 
@@ -11,6 +12,14 @@ SceneManager::SceneManager() {
 	tileManager->Initialize();
 	chunkManager->Initialize();
 	selectedActorId = -1;
+
+	sceneTiles = new SceneTiles();
+
+	displayScene = true;
+	displayPhysics = false;
+	displayTiles = false;
+
+	editMode = 0;
 }
 
 SceneManager *SceneManager::getInstance() {
@@ -22,7 +31,7 @@ SceneManager *SceneManager::getInstance() {
 
 int SceneManager::addActor(Actor *actor) {
 	actors[0][nextActorId] = actor;
-	selectedActorId = nextActorId;
+	setSelectedActor(nextActorId);
 	return nextActorId++;
 }
 
@@ -32,7 +41,7 @@ void SceneManager::removeActor(int actorId) {
 
 void SceneManager::removeSelected() {
 	removeActor(selectedActorId);
-	selectedActorId = -1;
+	setSelectedActor(-1);
 }
 
 void SceneManager::addChunk(Chunk *chunk) {
@@ -42,6 +51,11 @@ void SceneManager::addChunk(Chunk *chunk) {
 		Actor *newActor = new Actor();
 		*newActor = *chunkActors[i];
 		addActor(newActor);
+	}
+	for (int i=0; i<10; i++) {
+		for (int j=0; j<10; j++) {
+			sceneTiles->setTileMode(i,j,chunk->getTileMode(i,j));
+		}
 	}
 }
 
@@ -55,20 +69,30 @@ void SceneManager::addTile(string tile) {
 
 void SceneManager::clear() {
 	actors->clear();
-	selectedActorId = -1;
+	setSelectedActor(-1);
 }
 
 void SceneManager::draw() {
-	for (map<int,Actor*>::iterator it = actors->begin() ; it != actors->end(); it++ ) {
-		Actor *actor = (*it).second;
-		Root::ModelviewMatrix.push(Root::ModelviewMatrix.top());
-		Root::NormalMatrix.push(Root::NormalMatrix.top());
-			actor->transformToMatrix(&Root::ModelviewMatrix.top());
-			actor->transformToMatrix(&Root::NormalMatrix.top());
-			actor->drawActor("Basic");
-		Root::ModelviewMatrix.pop();
-		Root::NormalMatrix.pop();
+	if (displayScene) {
+		for (map<int,Actor*>::iterator it = actors->begin() ; it != actors->end(); it++ ) {
+			Actor *actor = (*it).second;
+			Root::ModelviewMatrix.push(Root::ModelviewMatrix.top());
+			Root::NormalMatrix.push(Root::NormalMatrix.top());
+				actor->transformToMatrix(&Root::ModelviewMatrix.top());
+				actor->transformToMatrix(&Root::NormalMatrix.top());
+				actor->drawActor("Basic");
+			Root::ModelviewMatrix.pop();
+			Root::NormalMatrix.pop();
+		}
 	}
+	if (displayTiles) {
+		sceneTiles->draw();
+	}
+}
+
+void SceneManager::setSelectedActor(int id) {
+	selectedActorId = id;
+	ActorWidget::getInstance()->refresh();
 }
 
 Actor *SceneManager::getSelectedActor() {

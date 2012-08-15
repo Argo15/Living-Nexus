@@ -1,5 +1,6 @@
 #include "FileWidget.h"
 #include "SceneManager.h"
+#include "SaveChunk.h"
 
 FileWidget* FileWidget::m_pInstance = 0;
 
@@ -23,11 +24,9 @@ FileWidget::FileWidget()
 		QHBoxLayout *saveLayout = new QHBoxLayout;
 
 	chunkLayout->addWidget(chunkCmb);
-	chunkLayout->addStretch();
 	chunkLayout->addWidget(addChunkToSceneBtn);
 
 	tileLayout->addWidget(tileCmb);
-	tileLayout->addStretch();
 	tileLayout->addWidget(addTileToSceneBtn);
 
 	saveLayout->addWidget(saveAsChunkBtn);
@@ -48,7 +47,7 @@ FileWidget::FileWidget()
 	connect(saveAsTileBtn, SIGNAL(clicked()),this, SLOT(saveTile()));
 
 	setFixedHeight(sizeHint().height());
-	setFixedWidth(400);
+	setFixedWidth(250);
 }
 
 FileWidget *FileWidget::getInstance() {
@@ -88,9 +87,17 @@ void FileWidget::addTile() {
 }
 
 void FileWidget::saveChunk() {
-
+	QString filename =  QFileDialog::getSaveFileName(this, "Save Tile","Data/Chunks",tr("*.achk"));
+	if (!filename.isEmpty()){
+		SaveChunk save;
+		save.save(qPrintable(filename));
+	}
 }
 
 void FileWidget::saveTile() {
-
+	QString filename =  QFileDialog::getSaveFileName(this, "Save Tile","Data/Tiles",tr("*.atl"));
+	if (!filename.isEmpty()){
+		SaveChunk save;
+		save.save(qPrintable(filename));
+	}
 }

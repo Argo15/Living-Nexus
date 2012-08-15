@@ -11,7 +11,7 @@
 class WorldComponent {
 public:
 	WorldComponent() {}
-	std::string getWorldTile();
+	virtual std::string getWorldTile();
 };
 
 #endif

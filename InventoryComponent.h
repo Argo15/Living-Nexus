@@ -12,7 +12,7 @@
 class InventoryComponent {
 public:
 	InventoryComponent() {}
-	std::string getInventoryTexture();
+	virtual std::string getInventoryTexture();
 };
 
 #endif

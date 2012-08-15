@@ -1,12 +1,12 @@
 #ifndef PHYSICSSHAPE_H
 #define PHYSICSSHAPE_H
 
-#include "Transformable.h"
 #include "btBulletDynamicsCommon.h"
+#include "Actor.h"
 
 enum PhysicsShapeType {BOX, CYLINDER, SPHERE};
 
-class PhysicsShape : public Transformable {
+class PhysicsShape : public Actor {
 private:
 	PhysicsShapeType type;
 

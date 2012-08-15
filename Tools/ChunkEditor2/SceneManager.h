@@ -8,6 +8,7 @@
 #include "ChunkManager.h"
 #include "Logger.h"
 #include "Transformer.h"
+#include "SceneTiles.h"
 
 class Transformer;
 
@@ -20,6 +21,11 @@ private:
 	ChunkManager *chunkManager;
 	int selectedActorId;
 	SceneManager();
+
+	SceneTiles *sceneTiles;
+	int editMode;
+
+	bool displayScene, displayPhysics, displayTiles;
 
 	QGLWidget *glWidget;
 
@@ -34,7 +40,7 @@ public:
 	void clear();
 	void draw();
 	void drawTransformers();
-	void setSelectedActor(int id) {selectedActorId = id;}
+	void setSelectedActor(int id);
 	Actor *getSelectedActor();
 	std::map<int, Actor *> *getActors() {return actors;}
 
@@ -43,6 +49,18 @@ public:
 
 	void setGLWidget(QGLWidget *widget) {glWidget = widget;}
 	QGLWidget *getGLWidget() {return glWidget;}
+
+	void setDisplayScene(bool value) {displayScene = value;}
+	void setDisplayPhysics(bool value) {displayPhysics = value;}
+	void setDisplayTiles(bool value) {displayTiles = value;}
+	bool getDisplayScene() {return displayScene;}
+	bool getDisplayPhysics() {return displayPhysics;}
+	bool getDisplayTiles() {return displayTiles;}
+
+	void setEditMode(int value) {editMode = value;}
+	int getEditMode() {return editMode;}
+
+	SceneTiles *getSceneTiles() {return sceneTiles;}
 };
 
 #endif

@@ -12,7 +12,7 @@
 class GroundComponent {
 public:
 	GroundComponent() {}
-	std::string getGroundTile();
+	virtual std::string getGroundTile();
 };
 
 #endif

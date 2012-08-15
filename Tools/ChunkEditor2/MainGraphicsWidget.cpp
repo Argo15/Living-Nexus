@@ -131,7 +131,9 @@ void MainGraphicsWidget::mousePressEvent(QMouseEvent *event) {
 		Root::ProjectionMatrix.top() = glm::mat4(1.0f);
 		view->use3D(true);
 		camera->transform();
-		Selection::calculateSelection(x,y);
+		if (SceneManager::getInstance()->getEditMode() != 2) {
+			Selection::calculateSelection(x,y);
+		}
 	}
 	Root::inputManager->registerMouseButtonDown(event->button());
 }
@@ -150,10 +152,15 @@ void MainGraphicsWidget::mouseMoveEvent(QMouseEvent *event) {
 	Root::inputManager->setMousePosition(x, y);
 	if (event->buttons() & Qt::LeftButton){
 		transformNoShaders();
-		Transformer::calculateTransform(x,y,Root::inputManager->isSpecialKeyDown(Qt::Key_Shift),Root::inputManager->isSpecialKeyDown(Qt::Key_Control));
+		if (SceneManager::getInstance()->getEditMode() == 0) {
+			Transformer::calculateTransform(x,y,Root::inputManager->isSpecialKeyDown(Qt::Key_Shift),Root::inputManager->isSpecialKeyDown(Qt::Key_Control));
+		} else {
+			SceneManager::getInstance()->getSceneTiles()->updateTiles();
+		}
 	} else {
 		Selection::calculateSelectedTransformer(x,y);
 		Transformer::dragPoint = Vector3(0.0);
+		SceneManager::getInstance()->getSceneTiles()->clearUpdatables();
 	}
 }
 
