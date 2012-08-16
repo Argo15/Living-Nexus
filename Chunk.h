@@ -51,6 +51,9 @@ public:
 	int getTileMode(int x, int y);
 	Actor **getActors() {return actors;}
 	int getNumActors() {return numActors;}
+
+	PhysicsShape **getPhysics() {return physics;}
+	int getNumPhysics() {return numPhysics;}
 };
 
 #endif

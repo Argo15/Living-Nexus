@@ -29,18 +29,21 @@ void Selection::calculateSelection(int mouseX, int mouseY)
 	for (std::map<int, Actor *>::iterator it = actors->begin(); it != actors->end(); ++it){
 		currentID = it->first;
 		Actor *actor = it->second;
-		glPushMatrix();
-		Root::ModelviewMatrix.push(Root::ModelviewMatrix.top());
-			actor->transformToMatrix(&Root::ModelviewMatrix.top());
-			actor->transformToMatrix(&Root::NormalMatrix.top());
-			getColorFromID(currentID,color);
-			glColor3f(color[0],color[1],color[2]);
-			actor->transform();
+		if ((!SceneManager::getInstance()->isPhysicsObject((*it).first) && SceneManager::getInstance()->getEditMode() == 0) || 
+			(SceneManager::getInstance()->isPhysicsObject((*it).first) && SceneManager::getInstance()->getEditMode() == 1)) {
 			glPushMatrix();
-			transformNoShaders();
-			Root::modelManager->DrawModelGeometry(*actor->getModel());
-			glPopMatrix();
-		Root::ModelviewMatrix.pop();
+			Root::ModelviewMatrix.push(Root::ModelviewMatrix.top());
+				actor->transformToMatrix(&Root::ModelviewMatrix.top());
+				actor->transformToMatrix(&Root::NormalMatrix.top());
+				getColorFromID(currentID,color);
+				glColor3f(color[0],color[1],color[2]);
+				actor->transform();
+				glPushMatrix();
+				transformNoShaders();
+				Root::modelManager->DrawModelGeometry(*actor->getModel());
+				glPopMatrix();
+			Root::ModelviewMatrix.pop();
+		}
 	}
 
 	unsigned char readcolor[3];

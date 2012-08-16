@@ -7,6 +7,7 @@ SceneManager* SceneManager::m_pInstance = 0;
 SceneManager::SceneManager() {
 	nextActorId = 1;
 	actors = new std::map<int, Actor *>();
+	physicsShapes = new std::map<int, PhysicsShape *>();
 	tileManager = new TileManager();
 	chunkManager = new ChunkManager();
 	tileManager->Initialize();
@@ -35,6 +36,12 @@ int SceneManager::addActor(Actor *actor) {
 	return nextActorId++;
 }
 
+int SceneManager::addPhysicsShape(PhysicsShape *physicsShape) {
+	int id = addActor(physicsShape);
+	physicsShapes[0][id] = physicsShape;
+	return id;
+}
+
 void SceneManager::removeActor(int actorId) {
 	actors->erase(actorId);
 }
@@ -52,6 +59,23 @@ void SceneManager::addChunk(Chunk *chunk) {
 		*newActor = *chunkActors[i];
 		addActor(newActor);
 	}
+
+	PhysicsShape **chunkPhysics = chunk->getPhysics();
+	int numPhysics = chunk->getNumPhysics();
+	for (int i=0; i<numPhysics; i++) {
+		PhysicsShape *newPhysics = new PhysicsShape(BOX);
+		*newPhysics = *chunkPhysics[i];
+		if (newPhysics->getShapeType() == BOX) {
+			newPhysics->setModel(new string("Cube"));
+		} else if (newPhysics->getShapeType() == SPHERE) {
+			newPhysics->setModel(new string("Sphere"));
+		} else if (newPhysics->getShapeType() == CYLINDER) {
+			newPhysics->setModel(new string("Cylinder"));
+		}
+		newPhysics->setMaterial(new string("Physics"));
+		addPhysicsShape(newPhysics);
+	}
+
 	for (int i=0; i<10; i++) {
 		for (int j=0; j<10; j++) {
 			sceneTiles->setTileMode(i,j,chunk->getTileMode(i,j));
@@ -73,8 +97,8 @@ void SceneManager::clear() {
 }
 
 void SceneManager::draw() {
-	if (displayScene) {
-		for (map<int,Actor*>::iterator it = actors->begin() ; it != actors->end(); it++ ) {
+	for (map<int,Actor*>::iterator it = actors->begin() ; it != actors->end(); it++ ) {
+		if ((!isPhysicsObject((*it).first) && displayScene) || (isPhysicsObject((*it).first) && displayPhysics)) {
 			Actor *actor = (*it).second;
 			Root::ModelviewMatrix.push(Root::ModelviewMatrix.top());
 			Root::NormalMatrix.push(Root::NormalMatrix.top());

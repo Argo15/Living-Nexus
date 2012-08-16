@@ -38,7 +38,7 @@ DisplayWidget::DisplayWidget()
 	mainLayout->addStretch();
 
 	setLayout(mainLayout);
-	layout()->setContentsMargins(0,0,0,0);
+	layout()->setContentsMargins(5,0,0,0);
 
 	connect(sceneChk, SIGNAL(clicked()),this, SLOT(sceneChecked()));
 	connect(physicsChk, SIGNAL(clicked()),this, SLOT(physicsChecked()));

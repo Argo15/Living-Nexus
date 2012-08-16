@@ -10,50 +10,37 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ALL_BUILD", "ALL_BUILD.vcpr
 		{DA39F37C-18F4-410B-8121-2442A1D7AF90} = {DA39F37C-18F4-410B-8121-2442A1D7AF90}
 		{1E5506A2-972D-4A13-8ECB-7DEB4AF58938} = {1E5506A2-972D-4A13-8ECB-7DEB4AF58938}
 		{75EDD423-2A36-4C69-BCA4-AA75AEE2B0E7} = {75EDD423-2A36-4C69-BCA4-AA75AEE2B0E7}
-		{C986D643-2173-45EA-AE01-07CD5FA984E5} = {C986D643-2173-45EA-AE01-07CD5FA984E5}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BulletCollision", "src\BulletCollision\BulletCollision.vcproj", "{1DF55A92-A50E-4135-BB79-56A4014E9477}"
 	ProjectSection(ProjectDependencies) = postProject
-		{C986D643-2173-45EA-AE01-07CD5FA984E5} = {C986D643-2173-45EA-AE01-07CD5FA984E5}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BulletDynamics", "src\BulletDynamics\BulletDynamics.vcproj", "{831E5AC8-6043-4581-BB13-DC49DECC1885}"
 	ProjectSection(ProjectDependencies) = postProject
-		{C986D643-2173-45EA-AE01-07CD5FA984E5} = {C986D643-2173-45EA-AE01-07CD5FA984E5}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BulletMultiThreaded", "src\BulletMultiThreaded\BulletMultiThreaded.vcproj", "{A473ADA2-9647-4AF6-A071-9A125708785A}"
 	ProjectSection(ProjectDependencies) = postProject
-		{C986D643-2173-45EA-AE01-07CD5FA984E5} = {C986D643-2173-45EA-AE01-07CD5FA984E5}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BulletSoftBody", "src\BulletSoftBody\BulletSoftBody.vcproj", "{0B3D5BE4-217B-4177-AE1C-1F9255E0453B}"
 	ProjectSection(ProjectDependencies) = postProject
-		{C986D643-2173-45EA-AE01-07CD5FA984E5} = {C986D643-2173-45EA-AE01-07CD5FA984E5}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BulletSoftBodySolvers_CPU", "src\BulletMultiThreaded\GpuSoftBodySolvers\CPU\BulletSoftBodySolvers_CPU.vcproj", "{3B99CC96-2F77-4371-BD40-67B06CBF3FDC}"
 	ProjectSection(ProjectDependencies) = postProject
-		{C986D643-2173-45EA-AE01-07CD5FA984E5} = {C986D643-2173-45EA-AE01-07CD5FA984E5}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BulletSoftBodySolvers_OpenCL_Mini", "src\BulletMultiThreaded\GpuSoftBodySolvers\OpenCL\MiniCL\BulletSoftBodySolvers_OpenCL_Mini.vcproj", "{DA39F37C-18F4-410B-8121-2442A1D7AF90}"
 	ProjectSection(ProjectDependencies) = postProject
-		{C986D643-2173-45EA-AE01-07CD5FA984E5} = {C986D643-2173-45EA-AE01-07CD5FA984E5}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LinearMath", "src\LinearMath\LinearMath.vcproj", "{1E5506A2-972D-4A13-8ECB-7DEB4AF58938}"
 	ProjectSection(ProjectDependencies) = postProject
-		{C986D643-2173-45EA-AE01-07CD5FA984E5} = {C986D643-2173-45EA-AE01-07CD5FA984E5}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MiniCL", "src\MiniCL\MiniCL.vcproj", "{75EDD423-2A36-4C69-BCA4-AA75AEE2B0E7}"
-	ProjectSection(ProjectDependencies) = postProject
-		{C986D643-2173-45EA-AE01-07CD5FA984E5} = {C986D643-2173-45EA-AE01-07CD5FA984E5}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZERO_CHECK", "ZERO_CHECK.vcproj", "{C986D643-2173-45EA-AE01-07CD5FA984E5}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
@@ -133,14 +120,6 @@ Global
 		{75EDD423-2A36-4C69-BCA4-AA75AEE2B0E7}.MinSizeRel|Win32.Build.0 = MinSizeRel|Win32
 		{75EDD423-2A36-4C69-BCA4-AA75AEE2B0E7}.RelWithDebInfo|Win32.ActiveCfg = RelWithDebInfo|Win32
 		{75EDD423-2A36-4C69-BCA4-AA75AEE2B0E7}.RelWithDebInfo|Win32.Build.0 = RelWithDebInfo|Win32
-		{C986D643-2173-45EA-AE01-07CD5FA984E5}.Debug|Win32.ActiveCfg = Debug|Win32
-		{C986D643-2173-45EA-AE01-07CD5FA984E5}.Debug|Win32.Build.0 = Debug|Win32
-		{C986D643-2173-45EA-AE01-07CD5FA984E5}.Release|Win32.ActiveCfg = Release|Win32
-		{C986D643-2173-45EA-AE01-07CD5FA984E5}.Release|Win32.Build.0 = Release|Win32
-		{C986D643-2173-45EA-AE01-07CD5FA984E5}.MinSizeRel|Win32.ActiveCfg = MinSizeRel|Win32
-		{C986D643-2173-45EA-AE01-07CD5FA984E5}.MinSizeRel|Win32.Build.0 = MinSizeRel|Win32
-		{C986D643-2173-45EA-AE01-07CD5FA984E5}.RelWithDebInfo|Win32.ActiveCfg = RelWithDebInfo|Win32
-		{C986D643-2173-45EA-AE01-07CD5FA984E5}.RelWithDebInfo|Win32.Build.0 = RelWithDebInfo|Win32
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

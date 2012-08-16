@@ -5,14 +5,19 @@
 #include "MaterialWidget.h"
 #include "ActorWidget.h"
 #include "DisplayWidget.h"
+#include "PhysicsWidget.h"
 
 DockedWidget::DockedWidget(QGLWidget *glWidget) 
 	: QDockWidget(0)
 {
 	QWidget *mainWidget = new QWidget();
 	QVBoxLayout *mainLayout = new QVBoxLayout;
+		QHBoxLayout *filePhysicsLayout = new QHBoxLayout;
 		QHBoxLayout *modelTextureLayout = new QHBoxLayout;
 		QHBoxLayout *actorDisplayLayout = new QHBoxLayout;
+
+	filePhysicsLayout->addWidget(FileWidget::getInstance());
+	filePhysicsLayout->addWidget(PhysicsWidget::getInstance());
 
 	modelTextureLayout->addWidget(ModelWidget::getInstance(glWidget));
 	modelTextureLayout->addWidget(TextureWidget::getInstance(glWidget));
@@ -20,8 +25,7 @@ DockedWidget::DockedWidget(QGLWidget *glWidget)
 	actorDisplayLayout->addWidget(ActorWidget::getInstance());
 	actorDisplayLayout->addWidget(DisplayWidget::getInstance());
 
-	mainLayout->addWidget(FileWidget::getInstance());
-	mainLayout->addWidget(new QSplitter(Qt::Vertical));
+	mainLayout->addLayout(filePhysicsLayout);
 	mainLayout->addLayout(modelTextureLayout);
 	mainLayout->addWidget(MaterialWidget::getInstance(glWidget));
 	mainLayout->addLayout(actorDisplayLayout);

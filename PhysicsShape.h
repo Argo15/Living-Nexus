@@ -1,8 +1,8 @@
 #ifndef PHYSICSSHAPE_H
 #define PHYSICSSHAPE_H
 
-#include "btBulletDynamicsCommon.h"
 #include "Actor.h"
+#include "btBulletDynamicsCommon.h"
 
 enum PhysicsShapeType {BOX, CYLINDER, SPHERE};
 
@@ -20,6 +20,7 @@ public:
 	~PhysicsShape() {}
 
 	btCollisionShape *getCollisionShape();
+	PhysicsShapeType getShapeType() {return type;}
 	glm::mat4 matrix;
 };
 

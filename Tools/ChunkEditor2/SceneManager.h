@@ -9,13 +9,15 @@
 #include "Logger.h"
 #include "Transformer.h"
 #include "SceneTiles.h"
+#include "PhysicsShape.h"
 
 class Transformer;
 
 class SceneManager {
 private:
 	static SceneManager *m_pInstance;
-	std::map<int, Actor *> *actors;		// ActorId -> Actor
+	std::map<int, Actor *> *actors;				// ActorId -> Actor
+	std::map<int, PhysicsShape *> *physicsShapes;	// ActorId -> Actor
 	int nextActorId;
 	TileManager *tileManager;
 	ChunkManager *chunkManager;
@@ -32,6 +34,7 @@ private:
 public:
 	static SceneManager *getInstance();
 	int addActor(Actor *actor);			// returns an actorId
+	int addPhysicsShape(PhysicsShape *physicsShape);	// returns an actorId
 	void removeActor(int actorId);
 	void removeSelected();
 	void addChunk(Chunk *chunk);
@@ -43,6 +46,7 @@ public:
 	void setSelectedActor(int id);
 	Actor *getSelectedActor();
 	std::map<int, Actor *> *getActors() {return actors;}
+	std::map<int, PhysicsShape *> *getPhysics() {return physicsShapes;}
 
 	TileManager *getTileManager() {return tileManager;}
 	ChunkManager *getChunkManager() {return chunkManager;}
@@ -61,6 +65,8 @@ public:
 	int getEditMode() {return editMode;}
 
 	SceneTiles *getSceneTiles() {return sceneTiles;}
+
+	bool isPhysicsObject(int id) {return physicsShapes->find(id) != physicsShapes->end();}
 };
 
 #endif
