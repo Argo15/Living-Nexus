@@ -834,6 +834,10 @@
 						>
 					</File>
 				</Filter>
+				<Filter
+					Name="Fruit"
+					>
+				</Filter>
 			</Filter>
 		</Filter>
 		<File

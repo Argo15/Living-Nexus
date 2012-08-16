@@ -11,7 +11,7 @@
  * Generic object that can be placed in your inventory, placed on the ground, or placed in the world/house as an interactive object.
  */
 class Object {
-private:
+protected:
 	WorldComponent *worldComponent;
 	InventoryComponent *inventoryComponent;
 	GroundComponent *groundComponent;
