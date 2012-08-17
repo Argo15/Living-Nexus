@@ -569,14 +569,6 @@
 						RelativePath=".\TileManager.h"
 						>
 					</File>
-					<File
-						RelativePath=".\Tree.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\Tree.h"
-						>
-					</File>
 				</Filter>
 				<Filter
 					Name="Chunks"
@@ -806,6 +798,14 @@
 					RelativePath=".\Object.h"
 					>
 				</File>
+				<File
+					RelativePath=".\Tree.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Tree.h"
+					>
+				</File>
 				<Filter
 					Name="Components"
 					>
@@ -837,6 +837,86 @@
 				<Filter
 					Name="Fruit"
 					>
+					<File
+						RelativePath=".\Fruit.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Fruit.h"
+						>
+					</File>
+					<File
+						RelativePath=".\FruitFactory.h"
+						>
+					</File>
+					<File
+						RelativePath=".\WorldFruitComponent.h"
+						>
+					</File>
+					<Filter
+						Name="Apple"
+						>
+						<File
+							RelativePath=".\Apple.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\Apple.h"
+							>
+						</File>
+						<File
+							RelativePath=".\WorldAppleComponent.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="Orange"
+						>
+						<File
+							RelativePath=".\Orange.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\Orange.h"
+							>
+						</File>
+						<File
+							RelativePath=".\WorldOrangeComponent.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="Pear"
+						>
+						<File
+							RelativePath=".\Pear.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\Pear.h"
+							>
+						</File>
+						<File
+							RelativePath=".\WorldPearComponent.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="Cherry"
+						>
+						<File
+							RelativePath=".\Cherry.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\Cherry.h"
+							>
+						</File>
+						<File
+							RelativePath=".\WorldCherryComponent.h"
+							>
+						</File>
+					</Filter>
 				</Filter>
 			</Filter>
 		</Filter>

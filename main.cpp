@@ -75,7 +75,7 @@ void keyDown(unsigned char key, int xx, int yy) {
 		exit(0);
 	}
 	Root::inputManager->registerKeyDown((int)key);
-	if (key >= '0' && key <= '9') 
+	if (key >= '1' && key <= '9') 
 		Root::RENDERSTATE = (RenderState)((int)key-(int)'0');
 }
 
