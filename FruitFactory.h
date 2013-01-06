@@ -1,22 +1,33 @@
 #ifndef FRUITFACTORY_H
 #define FRUITFACTORY_H
 
-#include "Apple.h"
-#include "Orange.h"
-#include "Pear.h"
-#include "Cherry.h"
+#include "Fruit.h"
+
+static std::string S_APPLE_TILE		= "Apple";
+static std::string S_ORANGE_TILE	= "Orange";
+static std::string S_PEAR_TILE		= "Pear";
+static std::string S_CHERRY_TILE	= "Cherry";
+static std::string S_FRUIT_TEXTURE	= "cobble";
 
 enum FruitType {NONE, APPLE, ORANGE, PEAR, CHERRY};
 
-class FruitFactory {
+class FruitFactory 
+{
 public:
-	static Fruit *buildFruit(FruitType type) {
-		switch (type) {
-			case NONE: return 0;
-			case APPLE: return new Apple();
-			case ORANGE: return new Orange();
-			case PEAR: return new Pear();
-			case CHERRY: return new Cherry();
+	static Fruit *buildFruit(FruitType type) 
+	{
+		switch (type) 
+		{
+			case NONE: 
+				return 0;
+			case APPLE: 
+				return new Fruit(S_APPLE_TILE, S_FRUIT_TEXTURE, S_APPLE_TILE);
+			case ORANGE: 
+				return new Fruit(S_ORANGE_TILE, S_FRUIT_TEXTURE, S_ORANGE_TILE);
+			case PEAR: 
+				return new Fruit(S_PEAR_TILE, S_FRUIT_TEXTURE, S_PEAR_TILE);
+			case CHERRY: 
+				return new Fruit(S_CHERRY_TILE, S_FRUIT_TEXTURE, S_CHERRY_TILE);
 		}
 	}
 };

@@ -1,6 +1,8 @@
 #include "Fruit.h"
 
-Fruit::Fruit() : Object()
+Fruit::Fruit(std::string sWorldTile, std::string sInventoryTexture, std::string sGroundTile) : Object()
 {
-	worldComponent = new WorldFruitComponent();
+	setWorldTile(sWorldTile);
+	setInventoryTexture(sInventoryTexture);
+	setGroundTile(sGroundTile);
 }

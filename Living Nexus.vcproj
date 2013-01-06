@@ -807,34 +807,6 @@
 					>
 				</File>
 				<Filter
-					Name="Components"
-					>
-					<File
-						RelativePath=".\GroundComponent.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\GroundComponent.h"
-						>
-					</File>
-					<File
-						RelativePath=".\InventoryComponent.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\InventoryComponent.h"
-						>
-					</File>
-					<File
-						RelativePath=".\WorldComponent.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\WorldComponent.h"
-						>
-					</File>
-				</Filter>
-				<Filter
 					Name="Fruit"
 					>
 					<File
@@ -849,74 +821,6 @@
 						RelativePath=".\FruitFactory.h"
 						>
 					</File>
-					<File
-						RelativePath=".\WorldFruitComponent.h"
-						>
-					</File>
-					<Filter
-						Name="Apple"
-						>
-						<File
-							RelativePath=".\Apple.cpp"
-							>
-						</File>
-						<File
-							RelativePath=".\Apple.h"
-							>
-						</File>
-						<File
-							RelativePath=".\WorldAppleComponent.h"
-							>
-						</File>
-					</Filter>
-					<Filter
-						Name="Orange"
-						>
-						<File
-							RelativePath=".\Orange.cpp"
-							>
-						</File>
-						<File
-							RelativePath=".\Orange.h"
-							>
-						</File>
-						<File
-							RelativePath=".\WorldOrangeComponent.h"
-							>
-						</File>
-					</Filter>
-					<Filter
-						Name="Pear"
-						>
-						<File
-							RelativePath=".\Pear.cpp"
-							>
-						</File>
-						<File
-							RelativePath=".\Pear.h"
-							>
-						</File>
-						<File
-							RelativePath=".\WorldPearComponent.h"
-							>
-						</File>
-					</Filter>
-					<Filter
-						Name="Cherry"
-						>
-						<File
-							RelativePath=".\Cherry.cpp"
-							>
-						</File>
-						<File
-							RelativePath=".\Cherry.h"
-							>
-						</File>
-						<File
-							RelativePath=".\WorldCherryComponent.h"
-							>
-						</File>
-					</Filter>
 				</Filter>
 			</Filter>
 		</Filter>

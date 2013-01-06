@@ -22,7 +22,7 @@ void Tree::drawExtra(std::string shader) {
 		if (fruit[i] != 0) {
 			Root::ModelviewMatrix.push(Root::ModelviewMatrix.top());
 			Root::NormalMatrix.push(Root::NormalMatrix.top());
-				std::string sFruitTile = fruit[i]->getWorldComponent()->getWorldTile();
+				std::string sFruitTile = fruit[i]->getWorldTile();
 				Tile *fruitTile = worldState->getTileManager()->getTile(sFruitTile);
 				fruitTransforms[i]->transformToMatrix(&Root::ModelviewMatrix.top());
 				fruitTransforms[i]->transformToMatrix(&Root::NormalMatrix.top());
