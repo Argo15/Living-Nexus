@@ -3,6 +3,7 @@
 #include <assert.h>
 #include "Logger.h"
 #include "Profiler.h"
+#include "GameState.h"
 
 LightBuffer::LightBuffer(int width, int height)
 {
@@ -57,7 +58,7 @@ void LightBuffer::drawToBuffer(GLuint normalTex, GLuint depthTex, GLuint glowTex
 	glPushAttrib( GL_VIEWPORT_BIT );
 	glViewport( 0, 0, getWidth(), getHeight());
 
-	WorldState *worldState = (WorldState *) Root::GAMESTATE;
+	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 
 	Root::ModelviewMatrix.top() = glm::mat4(1.0f);
 	Root::ProjectionMatrix.top() = glm::mat4(1.0f);

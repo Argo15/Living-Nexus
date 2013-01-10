@@ -2,6 +2,7 @@
 #include "GBuffer.h"
 #include "Logger.h"
 #include "Profiler.h"
+#include "GameState.h"
 
 GBuffer::GBuffer(int width, int height)
 {
@@ -118,7 +119,7 @@ void GBuffer::drawToBuffer(View *view)
 	glBindAttribLocation(glslProgram->getHandle(), 3, "v_tangent");
 	glBindAttribLocation(glslProgram->getHandle(), 4, "v_bitangent");
 
-	WorldState *worldState = (WorldState *) Root::GAMESTATE;
+	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 	Camera *camera = worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera();
 	camera->transformToMatrix(&Root::ProjectionMatrix.top());
 	glslProgram->sendUniform("projectionCameraMatrix", &Root::ProjectionMatrix.top()[0][0]);

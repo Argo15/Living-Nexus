@@ -1,6 +1,7 @@
 #include "BulletManager.h"
 #include "WorldState.h"
 #include "Profiler.h"
+#include "GameState.h"
 
 BulletManager::BulletManager()
 {
@@ -49,7 +50,7 @@ void BulletManager::clearDynamicsWorld()
 void BulletManager::createPlayerBody()
 {
 	btCollisionShape* bodyShape = new btCapsuleShape(.3f,2.0f);
-	WorldState *worldState = (WorldState *) Root::GAMESTATE;
+	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 	Camera *camera = worldState->getPhysicsManager()->getWorldCameras()->getPlayerCamera();
 	btTransform bodyTransform;
 	bodyTransform.setIdentity();
@@ -70,7 +71,7 @@ void BulletManager::updateDynamicsWorld(float speed)
 {
 	Profiler::getInstance()->startProfile("Update Dynamics World");
 	// move camera
-	WorldState *worldState = (WorldState *) Root::GAMESTATE;
+	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 	WorldCamera *camera = worldState->getPhysicsManager()->getWorldCameras()->getPlayerCamera();
 	float oldEye[3];
 	oldEye[0] = camera->geteyeX();

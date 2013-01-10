@@ -1,0 +1,8 @@
+#ifndef RENDER_STATE_H
+#define RENDER_STATE_H
+
+enum RenderState {FORWARD, FINAL, POSITION, NORMAL, COLOR, LIGHTING, SSAO, SPECULAR, MOTION};
+
+static RenderState RENDERSTATE = FINAL;
+
+#endif

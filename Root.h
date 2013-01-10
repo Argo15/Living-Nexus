@@ -7,13 +7,8 @@
 #include "InputManager.h"
 #include "ShaderManager.h"
 
-enum RenderState {FORWARD, FINAL, POSITION, NORMAL, COLOR, LIGHTING, SSAO, SPECULAR, MOTION};
-
 class Root {
 public:
-	static GameState *GAMESTATE;
-	static RenderState RENDERSTATE;
-	static TextureManager *textureManager;
 	static ModelManager *modelManager;
 	static MaterialManager *materialManager;
 	static InputManager *inputManager;

@@ -9,11 +9,12 @@ using namespace std;
 
 class TextureManager {
 private:
+	static TextureManager *m_pInstance;
 	map<string,Texture *> textures;
 
-public:
 	TextureManager();
-	~TextureManager(){}
+public:
+	static TextureManager *getInstance();
 
     void Initialize();
 	void LoadTexture(string filename);

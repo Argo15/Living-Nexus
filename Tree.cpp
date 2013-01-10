@@ -1,6 +1,7 @@
 #include "Tree.h"
 #include "WorldState.h"
 #include "FruitFactory.h"
+#include "GameState.h"
 
 Tree::Tree() : Tile() {
 	int fruitType = (rand()%5);
@@ -17,7 +18,7 @@ Tree::Tree() : Tile() {
 }
 
 void Tree::drawExtra(std::string shader) {
-	WorldState *worldState = (WorldState *)Root::GAMESTATE;
+	WorldState *worldState = (WorldState *)GameState::GAMESTATE;
 	for (int i=0; i<3; i++) {
 		if (fruit[i] != 0) {
 			Root::ModelviewMatrix.push(Root::ModelviewMatrix.top());

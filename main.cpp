@@ -8,6 +8,8 @@
 #include "Config.h"
 #include "Profiler.h"
 #include "UserSession.h"
+#include "RenderState.h"
+#include "GameState.h"
 
 int currentTime = 0;
 int vsync = 0;
@@ -24,8 +26,7 @@ void init() {
 
 	Root::inputManager = new InputManager();
 
-	Root::textureManager = new TextureManager();
-	Root::textureManager->Initialize();
+	TextureManager::getInstance()->Initialize();
 	Root::modelManager = new ModelManager();
 	Root::modelManager->Initialize();
 	Root::materialManager = new MaterialManager();
@@ -35,11 +36,11 @@ void init() {
 
 	UserSession::getInstance()->startUserSession("Argo");
 
-	Root::GAMESTATE = new WorldState();
+	GameState::GAMESTATE = new WorldState();
 }
 
 void resize(int w, int h) {
-	Root::GAMESTATE->resize(w,h);
+	GameState::GAMESTATE->resize(w,h);
 	sizeX = w;
 	sizeY = h;
 }
@@ -62,7 +63,7 @@ void render(void) {
 		string title = string("Living Nexus - FPS: ") + string(buffer);
 		glutSetWindowTitle(title.c_str());
 		
-		Root::GAMESTATE->tick((int)fps);
+		GameState::GAMESTATE->tick((int)fps);
 		counter++;
 	}
 	
@@ -76,7 +77,7 @@ void keyDown(unsigned char key, int xx, int yy) {
 	}
 	Root::inputManager->registerKeyDown((int)key);
 	if (key >= '1' && key <= '9') 
-		Root::RENDERSTATE = (RenderState)((int)key-(int)'0');
+		RENDERSTATE = (RenderState)((int)key-(int)'0');
 }
 
 void keyUp(unsigned char key, int xx, int yy) {

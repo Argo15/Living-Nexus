@@ -1,5 +1,6 @@
 #include "WorldCamera.h"
 #include "WorldState.h"
+#include "GameState.h"
 
 WorldCamera::WorldCamera() : Camera() 
 {
@@ -12,7 +13,7 @@ WorldCamera::WorldCamera() : Camera()
 
 void WorldCamera::move(float speed)
 {
-	WorldState *worldState = (WorldState *) Root::GAMESTATE;
+	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 	worldState->getPhysicsManager()->getBulletManager()->updateDynamicsWorld(speed);
 
 	mouseRotate();

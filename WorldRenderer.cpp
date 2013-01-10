@@ -1,6 +1,8 @@
 #include "WorldRenderer.h"
 #include "WorldState.h"
 #include "DrawFunc.h"
+#include "GameState.h"
+#include "RenderState.h"
 
 WorldRenderer::WorldRenderer()
 {
@@ -45,7 +47,7 @@ void WorldRenderer::forwardRender()
 	Root::NormalMatrix.top() = glm::mat3(1.0f);
 	view->use3D(true);
 
-	WorldState *worldState = (WorldState *) Root::GAMESTATE;
+	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 	Camera *camera = worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera();
 	camera->transform();
 	GLSLProgram *glslProgram = Root::shaderManager->getShader("Basic");
@@ -93,13 +95,13 @@ void WorldRenderer::defferedRender()
     glLoadIdentity();
 	
 	glBindTexture(GL_TEXTURE_2D, 0);
-	if (Root::RENDERSTATE == FINAL)		motionBlurBuffer->bindBlurTex();
-	if (Root::RENDERSTATE == POSITION)	gBuffer->bindPositionTex();
-	if (Root::RENDERSTATE == NORMAL)	gBuffer->bindNormalTex();
-	if (Root::RENDERSTATE == COLOR)		atmosphereBuffer->bindColorTex();
-	if (Root::RENDERSTATE == LIGHTING)	lightBuffer->bindLightTex();
-	if (Root::RENDERSTATE == SPECULAR)	lightBuffer->bindGlowTex();
-	if (Root::RENDERSTATE == MOTION)	gBuffer->bindMotionTex();
+	if (RENDERSTATE == FINAL)		motionBlurBuffer->bindBlurTex();
+	if (RENDERSTATE == POSITION)	gBuffer->bindPositionTex();
+	if (RENDERSTATE == NORMAL)	gBuffer->bindNormalTex();
+	if (RENDERSTATE == COLOR)		atmosphereBuffer->bindColorTex();
+	if (RENDERSTATE == LIGHTING)	lightBuffer->bindLightTex();
+	if (RENDERSTATE == SPECULAR)	lightBuffer->bindGlowTex();
+	if (RENDERSTATE == MOTION)	gBuffer->bindMotionTex();
 	drawScreen(0.0,0.0,1.0,1.0);
 }
 
@@ -107,10 +109,10 @@ void WorldRenderer::render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	WorldState *worldState = (WorldState *) Root::GAMESTATE;
+	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 	frustum->getFrustum(worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera(),view);
 	
-	if (Root::RENDERSTATE == FORWARD) {
+	if (RENDERSTATE == FORWARD) {
 		forwardRender();
 	} else {
 		defferedRender();

@@ -1,7 +1,8 @@
-#include "Camera.h"
-#include "Root.h"
 #include <GL/freeglut.h>
 #include <math.h>
+#include "Camera.h"
+#include "Root.h"
+#include "GameState.h"
 
 #define PI (3.141592653589793)
 
@@ -43,7 +44,7 @@ void Camera::mouseRotate()
 	lastMouseX = mouseX;
 	lastMouseY = mouseY;
 	
-	if (Root::GAMESTATE->mouseHidden()) {
+	if (GameState::GAMESTATE->mouseHidden()) {
 		if (mouseX>500) {
 			glutWarpPointer(300, mouseY);
 			lastMouseX = 300;

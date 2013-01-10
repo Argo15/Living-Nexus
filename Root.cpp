@@ -1,8 +1,5 @@
 #include "Root.h"
 
-GameState *Root::GAMESTATE = 0;
-RenderState Root::RENDERSTATE = FINAL;
-TextureManager *Root::textureManager = 0;
 ModelManager *Root::modelManager = 0;
 MaterialManager *Root::materialManager = 0;
 InputManager *Root::inputManager = 0;

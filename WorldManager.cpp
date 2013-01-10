@@ -2,6 +2,7 @@
 #include "Root.h"
 #include "WorldState.h"
 #include "Camera.h"
+#include "GameState.h"
 
 static Vector3 V_SUN_QUATERNION(2.0f,0.0f,-1.0f);
 
@@ -16,7 +17,7 @@ void WorldManager::tick(int fps)
 {
 	updateSunToGameTime(TimeManager::getInstance()->getGameTime());
 	if(Root::inputManager->isKeyDownOnce('r')) {
-		WorldState *worldState = (WorldState *) Root::GAMESTATE;
+		WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 		worldState->getPhysicsManager()->getBulletManager()->clearDynamicsWorld();
 		worldChunks->generateChunks(chunks, worldState->getPhysicsManager());
 		worldTiles->initializeFromChunks(worldChunks, tiles, worldState->getPhysicsManager());
@@ -38,7 +39,7 @@ void WorldManager::generateNewWorld(ChunkManager *chunks, TileManager *tiles, Ph
 
 void WorldManager::renderWorld(string shader, Frustum *frustum)
 {
-	WorldState *worldState = (WorldState *) Root::GAMESTATE;
+	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 	if (frustum == 0)
 		frustum = worldState->getRenderer()->getFrustum();
 	vector<Chunk *> *visChunks = worldChunks->getVisibleChunks(frustum);

@@ -3,6 +3,9 @@
 
 class GameState {
 public:
+	static GameState *GAMESTATE;
+
+public:
 	GameState() {}
 	~GameState() {}
 

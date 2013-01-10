@@ -3,6 +3,7 @@
 #include <assert.h>
 #include "Logger.h"
 #include "Profiler.h"
+#include "GameState.h"
 
 static Vector3 DEFAULT_SKY_NEAR_COLOR(77, 153, 204);
 static Vector3 DEFAULT_SKY_AWAY_COLOR(26, 52, 204);
@@ -61,7 +62,7 @@ void AtmosphereBuffer::drawToBuffer(GLuint colorBuf, GLuint glowBuf, GLuint dept
 	glPushAttrib( GL_VIEWPORT_BIT );
 	glViewport( 0, 0, getWidth(), getHeight());
 
-	WorldState *worldState = (WorldState *) Root::GAMESTATE;
+	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 
 	Root::ModelviewMatrix.top() = glm::mat4(1.0f);
 	Root::ProjectionMatrix.top() = glm::mat4(1.0f);
@@ -94,7 +95,7 @@ void AtmosphereBuffer::drawToBuffer(GLuint colorBuf, GLuint glowBuf, GLuint dept
 	glActiveTexture(GL_TEXTURE2); 
 	glBindTexture(GL_TEXTURE_2D, depthBuf);
 	glActiveTexture(GL_TEXTURE3); 
-	Root::textureManager->BindTexture("Cloud");
+	TextureManager::getInstance()->BindTexture("Cloud");
 	glslProgram->sendUniform("colorTex",0);
 	glslProgram->sendUniform("glowTex",1);
 	glslProgram->sendUniform("depthTex",2);

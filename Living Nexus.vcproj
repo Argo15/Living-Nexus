@@ -706,6 +706,10 @@
 					RelativePath=".\GameState.h"
 					>
 				</File>
+				<File
+					RelativePath=".\RenderState.h"
+					>
+				</File>
 				<Filter
 					Name="World"
 					>
