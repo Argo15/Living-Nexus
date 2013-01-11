@@ -10,16 +10,16 @@ Actor::Actor(string *model, string *material) : Transformable()
 
 float Actor::getScaledRadius()
 {
-	return Root::modelManager->getModel(*model)->getRadius()*max(max(scale[0],scale[1]),scale[2]);
+	return ModelManager::getInstance()->getModel(*model)->getRadius()*max(max(scale[0],scale[1]),scale[2]);
 }
 
 void Actor::drawActor(string shader)
 {
-	GLSLProgram *glslProgram = Root::shaderManager->getShader(shader);
+	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader(shader);
 	glslProgram->sendUniform("modelviewMatrix", &Root::ModelviewMatrix.top()[0][0]);
 	if (shader == "Basic" || shader == "GBuffer") {
 		glslProgram->sendUniform("normalMatrix", &Root::NormalMatrix.top()[0][0],false,3);
-		Root::materialManager->getMaterial(*material)->sendToShader(shader);
+		MaterialManager::getInstance()->getMaterial(*material)->sendToShader(shader);
 	}
-	Root::modelManager->getModel(*model)->draw();
+	ModelManager::getInstance()->getModel(*model)->draw();
 }

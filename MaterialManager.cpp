@@ -7,8 +7,18 @@
 #include "dirent.h"
 #include "Logger.h"
 
+MaterialManager* MaterialManager::m_pInstance = 0;
+
 MaterialManager::MaterialManager()
 {
+	
+}
+
+MaterialManager *MaterialManager::getInstance() {
+	if (m_pInstance == 0) {
+		m_pInstance = new MaterialManager();
+	}
+	return m_pInstance;
 }
 
 void MaterialManager::Initialize()

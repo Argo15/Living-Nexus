@@ -50,7 +50,7 @@ void WorldRenderer::forwardRender()
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 	Camera *camera = worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera();
 	camera->transform();
-	GLSLProgram *glslProgram = Root::shaderManager->getShader("Basic");
+	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("Basic");
 	glslProgram->use();
 
 	glBindFragDataLocation(glslProgram->getHandle(), 0, "fragColor");
@@ -95,13 +95,20 @@ void WorldRenderer::defferedRender()
     glLoadIdentity();
 	
 	glBindTexture(GL_TEXTURE_2D, 0);
-	if (RENDERSTATE == FINAL)		motionBlurBuffer->bindBlurTex();
-	if (RENDERSTATE == POSITION)	gBuffer->bindPositionTex();
-	if (RENDERSTATE == NORMAL)	gBuffer->bindNormalTex();
-	if (RENDERSTATE == COLOR)		atmosphereBuffer->bindColorTex();
-	if (RENDERSTATE == LIGHTING)	lightBuffer->bindLightTex();
-	if (RENDERSTATE == SPECULAR)	lightBuffer->bindGlowTex();
-	if (RENDERSTATE == MOTION)	gBuffer->bindMotionTex();
+	if (RenderStateManager::RENDERSTATE == FINAL)		
+		motionBlurBuffer->bindBlurTex();
+	if (RenderStateManager::RENDERSTATE == POSITION)	
+		gBuffer->bindPositionTex();
+	if (RenderStateManager::RENDERSTATE == NORMAL)		
+		gBuffer->bindNormalTex();
+	if (RenderStateManager::RENDERSTATE == COLOR)		
+		atmosphereBuffer->bindColorTex();
+	if (RenderStateManager::RENDERSTATE == LIGHTING)	
+		lightBuffer->bindLightTex();
+	if (RenderStateManager::RENDERSTATE == SPECULAR)	
+		lightBuffer->bindGlowTex();
+	if (RenderStateManager::RENDERSTATE == MOTION)		
+		gBuffer->bindMotionTex();
 	drawScreen(0.0,0.0,1.0,1.0);
 }
 
@@ -112,7 +119,7 @@ void WorldRenderer::render()
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 	frustum->getFrustum(worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera(),view);
 	
-	if (RENDERSTATE == FORWARD) {
+	if (RenderStateManager::RENDERSTATE == FORWARD) {
 		forwardRender();
 	} else {
 		defferedRender();

@@ -77,13 +77,13 @@ void BulletManager::updateDynamicsWorld(float speed)
 	oldEye[0] = camera->geteyeX();
 	oldEye[1] = camera->geteyeY();
 	oldEye[2] = camera->geteyeZ();
-	if (Root::inputManager->isKeyDown('w'))
+	if (InputManager::getInstance()->isKeyDown('w'))
 		camera->moveForward(speed*0.1f);
-	if (Root::inputManager->isKeyDown('s'))
+	if (InputManager::getInstance()->isKeyDown('s'))
 		camera->moveBackward(speed*0.1f);
-	if (Root::inputManager->isKeyDown('a'))
+	if (InputManager::getInstance()->isKeyDown('a'))
 		camera->moveLeft(speed*0.1f);
-	if (Root::inputManager->isKeyDown('d'))
+	if (InputManager::getInstance()->isKeyDown('d'))
 		camera->moveRight(speed*0.1f);
 	float *newEye = camera->getEye();
 	playerBody->activate(true);

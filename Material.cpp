@@ -44,7 +44,7 @@ void Material::use()
 
 void Material::sendToShader(string shader)
 {
-	GLSLProgram *glslProgram = Root::shaderManager->getShader(shader);
+	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader(shader);
 	glActiveTextureARB(GL_TEXTURE0);
 	glEnable(GL_TEXTURE_2D);
 	TextureManager::getInstance()->BindTexture(*textureName);

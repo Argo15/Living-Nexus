@@ -714,6 +714,10 @@
 					Name="World"
 					>
 					<File
+						RelativePath=".\RenderState.cpp"
+						>
+					</File>
+					<File
 						RelativePath=".\WorldCamera.cpp"
 						>
 					</File>

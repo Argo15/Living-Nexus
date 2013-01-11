@@ -8,11 +8,12 @@ using namespace std;
 
 class ModelManager {
 private:
+	static ModelManager *m_pInstance;
 	map<string,Model *> models;
 
-public:
 	ModelManager();
-	~ModelManager(){}
+public:
+	static ModelManager *getInstance();
 
     void Initialize();
 	void LoadModel(string filename);

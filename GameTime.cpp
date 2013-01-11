@@ -9,16 +9,16 @@ GameTime::GameTime() {
 void GameTime::updateToSystemTime() {
 	time_t t = time(0);
 	struct tm * now = localtime( & t );
-    if (Root::inputManager->isKeyDownOnce('-')) {
+    if (InputManager::getInstance()->isKeyDownOnce('-')) {
 		m_nHourOffset -= 1;
 	}
-	if (Root::inputManager->isKeyDownOnce('=')) {
+	if (InputManager::getInstance()->isKeyDownOnce('=')) {
 		m_nHourOffset += 1;
 	}
-	if (Root::inputManager->isKeyDown('[')) {
+	if (InputManager::getInstance()->isKeyDown('[')) {
 		m_nMinuteOffset -= 1.0;
 	}
-	if (Root::inputManager->isKeyDown(']')) {
+	if (InputManager::getInstance()->isKeyDown(']')) {
 		m_nMinuteOffset += 1.0;
 	}
 

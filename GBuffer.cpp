@@ -93,7 +93,7 @@ GBuffer::GBuffer(int width, int height)
 void GBuffer::drawToBuffer(View *view)
 {
 	Profiler::getInstance()->startProfile("Draw GBuffer");
-	GLSLProgram *glslProgram = Root::shaderManager->getShader("GBuffer");
+	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("GBuffer");
 	glslProgram->use();
 
 	bind();

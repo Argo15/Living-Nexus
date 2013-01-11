@@ -37,7 +37,7 @@ void WorldState::resize(int w, int h)
 
 void WorldState::tick(int fps)
 {
-	if (Root::inputManager->isKeyDownOnce((int)'t')) {
+	if (InputManager::getInstance()->isKeyDownOnce((int)'t')) {
 		mouseHide = !mouseHide;
 		if (mouseHide)
 			glutSetCursor(GLUT_CURSOR_NONE);

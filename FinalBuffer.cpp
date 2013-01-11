@@ -38,7 +38,7 @@ FinalBuffer::FinalBuffer(int width, int height)
 void FinalBuffer::drawToBuffer(GLuint colorTex, GLuint lightTex, GLuint glowTex, View *view)
 {
 	Profiler::getInstance()->startProfile("Draw Final");
-	GLSLProgram *glslProgram = Root::shaderManager->getShader("Final");
+	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("Final");
 	glslProgram->use();
 
 	bind();

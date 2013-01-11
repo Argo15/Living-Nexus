@@ -16,7 +16,7 @@ WorldManager::WorldManager()
 void WorldManager::tick(int fps)
 {
 	updateSunToGameTime(TimeManager::getInstance()->getGameTime());
-	if(Root::inputManager->isKeyDownOnce('r')) {
+	if(InputManager::getInstance()->isKeyDownOnce('r')) {
 		WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 		worldState->getPhysicsManager()->getBulletManager()->clearDynamicsWorld();
 		worldChunks->generateChunks(chunks, worldState->getPhysicsManager());

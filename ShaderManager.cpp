@@ -2,9 +2,18 @@
 #include <assert.h>
 #include "Logger.h"
 
+ShaderManager* ShaderManager::m_pInstance = 0;
+
 ShaderManager::ShaderManager()
 {
 
+}
+
+ShaderManager *ShaderManager::getInstance() {
+	if (m_pInstance == 0) {
+		m_pInstance = new ShaderManager();
+	}
+	return m_pInstance;
 }
 
 void ShaderManager::compileProgram(GLSLProgram *program, string shaderName)

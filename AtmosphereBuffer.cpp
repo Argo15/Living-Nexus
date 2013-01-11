@@ -52,7 +52,7 @@ AtmosphereBuffer::AtmosphereBuffer(int width, int height)
 void AtmosphereBuffer::drawToBuffer(GLuint colorBuf, GLuint glowBuf, GLuint depthBuf, View *view)
 {
 	Profiler::getInstance()->startProfile("Draw Atmosphere");
-	GLSLProgram *glslProgram = Root::shaderManager->getShader("Atmosphere");
+	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("Atmosphere");
 	glslProgram->use();
 
 	bind();

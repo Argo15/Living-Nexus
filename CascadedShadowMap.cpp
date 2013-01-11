@@ -49,7 +49,7 @@ void CascadedShadowMap::buildShadowMaps()
 		glm::mat4 cameraMat = glm::mat4(1.0f);
 		lightCamera->transformToMatrix(&cameraMat);
 		lightMatrix[i] = Root::ProjectionMatrix.top() * cameraMat;
-		GLSLProgram *glslProgram = Root::shaderManager->getShader("SunShadow");
+		GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("SunShadow");
 		glslProgram->use();
 		Root::ProjectionMatrix.top() *= cameraMat;
 		glslProgram->sendUniform("projectionCameraMatrix",&Root::ProjectionMatrix.top()[0][0]);
@@ -168,7 +168,7 @@ View *CascadedShadowMap::createLightView(float slice1, float slice2, Camera *cam
 
 void CascadedShadowMap::sendToShader(string shader)
 {
-	GLSLProgram *glslProgram = Root::shaderManager->getShader(shader);
+	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader(shader);
 	glActiveTexture(GL_TEXTURE4);
 	glBindTexture(GL_TEXTURE_2D,shadowMaps[0]->getTexture());
 	glslProgram->sendUniform("shadowMap[0]",4);

@@ -9,12 +9,13 @@ using namespace std;
 
 class ShaderManager {
 private:
+	static ShaderManager *m_pInstance;
 	map<string,GLSLProgram *> shaders;
 	void compileProgram(GLSLProgram *program, string shaderName);
 
-public:
 	ShaderManager();
-	~ShaderManager(){}
+public:
+	static ShaderManager *getInstance();
 
     void Initialize();
 	void LoadShader(string name, string vertexShader, string fragmentShader);

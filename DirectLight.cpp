@@ -24,7 +24,7 @@ void DirectLight::setDirection(float x, float y, float z)
 
 void DirectLight::sendToShader(string shader)
 {
-	GLSLProgram *glslProgram = Root::shaderManager->getShader(shader);
+	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader(shader);
 	glslProgram->use();
 
 	Vector3 dir = getDirection();

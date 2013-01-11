@@ -3,6 +3,10 @@
 
 enum RenderState {FORWARD, FINAL, POSITION, NORMAL, COLOR, LIGHTING, SSAO, SPECULAR, MOTION};
 
-static RenderState RENDERSTATE = FINAL;
+class RenderStateManager
+{
+public:
+	static RenderState RENDERSTATE;
+};
 
 #endif

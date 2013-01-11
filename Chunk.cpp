@@ -52,7 +52,7 @@ bool Chunk::loadChunk(string filename)
 		file.read((char*)loadActors,sizeof(SaveActor)*numActors);
 
 		for(int i=0; i<numActors; i++) {
-			string *model = Root::modelManager->getModel(loadActors[i].model)->getName();
+			string *model = ModelManager::getInstance()->getModel(loadActors[i].model)->getName();
 			string *mat = new string(loadActors[i].material);
 			actors[i] = new Actor(model, mat);
 			actors[i]->setName(loadActors[i].name);

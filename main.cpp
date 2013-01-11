@@ -24,15 +24,10 @@ void init() {
 	Root::ProjectionMatrix.push(glm::mat4(1.0f));
 	Root::NormalMatrix.push(glm::mat3(1.0f));
 
-	Root::inputManager = new InputManager();
-
 	TextureManager::getInstance()->Initialize();
-	Root::modelManager = new ModelManager();
-	Root::modelManager->Initialize();
-	Root::materialManager = new MaterialManager();
-	Root::materialManager->Initialize();
-	Root::shaderManager = new ShaderManager();
-	Root::shaderManager->Initialize();	
+	ModelManager::getInstance()->Initialize();
+	MaterialManager::getInstance()->Initialize();
+	ShaderManager::getInstance()->Initialize();	
 
 	UserSession::getInstance()->startUserSession("Argo");
 
@@ -75,28 +70,28 @@ void keyDown(unsigned char key, int xx, int yy) {
 		Profiler::getInstance()->logProfile();
 		exit(0);
 	}
-	Root::inputManager->registerKeyDown((int)key);
+	InputManager::getInstance()->registerKeyDown((int)key);
 	if (key >= '1' && key <= '9') 
-		RENDERSTATE = (RenderState)((int)key-(int)'0');
+		RenderStateManager::RENDERSTATE = (RenderState)((int)key-(int)'0');
 }
 
 void keyUp(unsigned char key, int xx, int yy) {
-	Root::inputManager->registerKeyUp((int)key);
+	InputManager::getInstance()->registerKeyUp((int)key);
 }
 
 void mousePress(int button, int state, int x, int y) {
 	if (state == GLUT_DOWN)
-		Root::inputManager->registerMouseButtonDown(button);
+		InputManager::getInstance()->registerMouseButtonDown(button);
 	else
-		Root::inputManager->registerMouseButtonUp(button);
+		InputManager::getInstance()->registerMouseButtonUp(button);
 }
 
 void mousePressedMove(int x, int y) {
-	Root::inputManager->setMousePosition(x,y);
+	InputManager::getInstance()->setMousePosition(x,y);
 }
 
 void mouseReleasedMove(int x, int y) {
-	Root::inputManager->setMousePosition(x,y);
+	InputManager::getInstance()->setMousePosition(x,y);
 }
 
 void specialKeyDown(int key, int xx, int yy)

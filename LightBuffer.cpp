@@ -48,7 +48,7 @@ LightBuffer::LightBuffer(int width, int height)
 void LightBuffer::drawToBuffer(GLuint normalTex, GLuint depthTex, GLuint glowTex, View *view)
 {
 	Profiler::getInstance()->startProfile("Draw Light");
-	GLSLProgram *glslProgram = Root::shaderManager->getShader("DirectLight");
+	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("DirectLight");
 	glslProgram->use();
 
 	bind();

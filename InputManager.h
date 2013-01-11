@@ -5,6 +5,7 @@
 
 class InputManager {
 private:
+	static InputManager *m_pInstance;
 	bool keys[256];
 	bool keysPressedNotChecked[256];
 	bool mouseButtons[5];
@@ -13,9 +14,9 @@ private:
 	bool mouseCentered;
 	bool mouseMoved;
 
-public:
 	InputManager();
-	~InputManager() {}
+public:
+	static InputManager *getInstance();
 
 	void registerKeyDown(int key);
 	void registerKeyUp(int key);

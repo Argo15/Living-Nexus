@@ -1,5 +1,14 @@
 #include "InputManager.h"
 
+InputManager* InputManager::m_pInstance = 0;
+
+InputManager *InputManager::getInstance() {
+	if (m_pInstance == 0) {
+		m_pInstance = new InputManager();
+	}
+	return m_pInstance;
+}
+
 InputManager::InputManager()
 {
 	for (int i=0; i<256; i++) {
