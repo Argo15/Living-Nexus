@@ -3,6 +3,8 @@
 #include "DrawFunc.h"
 #include "GameState.h"
 #include "RenderState.h"
+#include "MatrixManager.h"
+#include "ShaderManager.h"
 
 WorldRenderer::WorldRenderer()
 {
@@ -42,9 +44,9 @@ void WorldRenderer::resize(int w, int h)
 
 void WorldRenderer::forwardRender()
 {
-	Root::ModelviewMatrix.top() = glm::mat4(1.0f);
-	Root::ProjectionMatrix.top() = glm::mat4(1.0f);
-	Root::NormalMatrix.top() = glm::mat3(1.0f);
+	MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::mat4(1.0f)); 
+	MatrixManager::getInstance()->putMatrix4(PROJECTION, glm::mat4(1.0f)); 
+	MatrixManager::getInstance()->putMatrix3(NORMAL, glm::mat3(1.0f)); 
 	view->use3D(true);
 
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
@@ -64,7 +66,7 @@ void WorldRenderer::forwardRender()
 	glslProgram->sendUniform("light.color", 1.0f,1.0f,1.0f);
 	glslProgram->sendUniform("light.ambient", 0.7f);
 	glslProgram->sendUniform("light.diffuse", 0.6f);
-	glslProgram->sendUniform("projectionMatrix", &Root::ProjectionMatrix.top()[0][0]);
+	glslProgram->sendUniform("projectionMatrix", &MatrixManager::getInstance()->getMatrix4(PROJECTION)[0][0]);
 
 	worldState->getWorldManager()->renderWorld("Basic");
 
@@ -99,7 +101,7 @@ void WorldRenderer::defferedRender()
 		motionBlurBuffer->bindBlurTex();
 	if (RenderStateManager::RENDERSTATE == POSITION)	
 		gBuffer->bindPositionTex();
-	if (RenderStateManager::RENDERSTATE == NORMAL)		
+	if (RenderStateManager::RENDERSTATE == NORMALMAP)		
 		gBuffer->bindNormalTex();
 	if (RenderStateManager::RENDERSTATE == COLOR)		
 		atmosphereBuffer->bindColorTex();

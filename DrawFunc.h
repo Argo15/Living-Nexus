@@ -3,6 +3,7 @@
 #undef __glxext_h_
 #undef __gl_h_
 #include <GL/GLee.h>
+#include "MatrixManager.h"
 
 static void drawScreen(float x1, float y1, float x2, float y2)
 {
@@ -28,8 +29,8 @@ static void transformNoShaders()
 {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glMultMatrixf(&Root::ProjectionMatrix.top()[0][0]);
+	glMultMatrixf(&MatrixManager::getInstance()->getMatrix4(PROJECTION)[0][0]);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glMultMatrixf(&Root::ModelviewMatrix.top()[0][0]);
+	glMultMatrixf(&MatrixManager::getInstance()->getMatrix4(MODELVIEW)[0][0]);
 }

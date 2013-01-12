@@ -1,5 +1,5 @@
 #include "WorldCameraManager.h"
-#include "Root.h"
+#include "InputManager.h"
 
 WorldCameraManager::WorldCameraManager()
 {

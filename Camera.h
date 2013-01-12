@@ -5,7 +5,7 @@
 #include <Gl/gl.h>
 #include <GL/glu.h>
 #include "Matrix.h"
-#include "Root.h"
+#include "MatrixManager.h"
 
 class Camera {
 protected:
@@ -29,14 +29,14 @@ public:
 	void setRight(float x, float y, float z) {right[0]=x;right[1]=y;right[2]=z;}
 	void setRotSpeed(float speed) {rotSpeed=speed;}
 	void transform() {
-		Root::ModelviewMatrix.top() = glm::lookAt(
+		MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::lookAt(
 			glm::vec3(eyePos[0],eyePos[1],eyePos[2]),
 			glm::vec3(lookAt[0],lookAt[1],lookAt[2]),
 			glm::vec3(up[0],up[1],up[2])
-		);
+		));
 	}
-	void transformToMatrix(glm::mat4 *matrix) {
-		*matrix = *matrix * glm::lookAt(
+	glm::mat4 transformToMatrix(glm::mat4 matrix) {
+		return matrix * glm::lookAt(
 			glm::vec3(eyePos[0],eyePos[1],eyePos[2]),
 			glm::vec3(lookAt[0],lookAt[1],lookAt[2]),
 			glm::vec3(up[0],up[1],up[2])

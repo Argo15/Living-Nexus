@@ -4,6 +4,9 @@
 #include "Logger.h"
 #include "Profiler.h"
 #include "GameState.h"
+#include "MatrixManager.h"
+#include "ShaderManager.h"
+#include "TextureManager.h"
 
 static Vector3 DEFAULT_SKY_NEAR_COLOR(77, 153, 204);
 static Vector3 DEFAULT_SKY_AWAY_COLOR(26, 52, 204);
@@ -64,22 +67,22 @@ void AtmosphereBuffer::drawToBuffer(GLuint colorBuf, GLuint glowBuf, GLuint dept
 
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 
-	Root::ModelviewMatrix.top() = glm::mat4(1.0f);
-	Root::ProjectionMatrix.top() = glm::mat4(1.0f);
+	MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::mat4(1.0f)); 
+	MatrixManager::getInstance()->putMatrix4(PROJECTION, glm::mat4(1.0f)); 
 	Camera *camera = worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera();
 	camera->transform();
 	view->use3D(true);
-	glm::mat4 invMVP = Root::ProjectionMatrix.top() * Root::ModelviewMatrix.top();
+	glm::mat4 invMVP = MatrixManager::getInstance()->getMatrix4(PROJECTION) * MatrixManager::getInstance()->getMatrix4(MODELVIEW);
 	invMVP = glm::inverse(invMVP);
-	Root::ModelviewMatrix.top() = glm::mat4(1.0f);
-	Root::ProjectionMatrix.top() = glm::mat4(1.0f);
+	MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::mat4(1.0f));
+	MatrixManager::getInstance()->putMatrix4(PROJECTION, glm::mat4(1.0f));
 	view->use3D(false);
 
 	glBindFragDataLocation(glslProgram->getHandle(), 0, "colorBuffer");
 	glBindFragDataLocation(glslProgram->getHandle(), 1, "glowBuffer");
 	glBindAttribLocation(glslProgram->getHandle(), 0, "v_vertex");
 	glBindAttribLocation(glslProgram->getHandle(), 1, "v_texture");
-	glslProgram->sendUniform("projectionMatrix", &Root::ProjectionMatrix.top()[0][0]);
+	glslProgram->sendUniform("projectionMatrix", &MatrixManager::getInstance()->getMatrix4(PROJECTION)[0][0]);
 	glslProgram->sendUniform("inverseMVPMatrix", &invMVP[0][0]);
 	glslProgram->sendUniform("cameraPos",camera->geteyeX(),camera->geteyeY(),camera->geteyeZ());
 	Vector3 sunDir = worldState->getWorldManager()->getSun()->getDirection();

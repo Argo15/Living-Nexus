@@ -4,6 +4,7 @@
 #include "Logger.h"
 #include "Profiler.h"
 #include "GameState.h"
+#include "ShaderManager.h"
 
 MotionBlurBuffer::MotionBlurBuffer(int width, int height)
 {
@@ -49,15 +50,15 @@ void MotionBlurBuffer::drawToBuffer(GLuint texture, GLuint velocityTex, int numS
 
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 
-	Root::ModelviewMatrix.top() = glm::mat4(1.0f);
-	Root::ProjectionMatrix.top() = glm::mat4(1.0f);
+	MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::mat4(1.0f));
+	MatrixManager::getInstance()->putMatrix4(PROJECTION, glm::mat4(1.0f));
 	view->use3D(false);
 
 	glBindFragDataLocation(glslProgram->getHandle(), 0, "blurBuffer");
 	glBindAttribLocation(glslProgram->getHandle(), 0, "v_vertex");
 	glBindAttribLocation(glslProgram->getHandle(), 1, "v_texture");
 
-	glslProgram->sendUniform("projectionMatrix", &Root::ProjectionMatrix.top()[0][0]);
+	glslProgram->sendUniform("projectionMatrix", &MatrixManager::getInstance()->getMatrix4(PROJECTION)[0][0]);
 
 	glActiveTexture(GL_TEXTURE0); 
 	glBindTexture(GL_TEXTURE_2D, texture);

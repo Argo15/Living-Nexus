@@ -3,6 +3,7 @@
 #include "Logger.h"
 #include "Profiler.h"
 #include "GameState.h"
+#include "ShaderManager.h"
 
 GBuffer::GBuffer(int width, int height)
 {
@@ -103,9 +104,9 @@ void GBuffer::drawToBuffer(View *view)
 	glPushAttrib( GL_VIEWPORT_BIT );
 	glViewport( 0, 0, getWidth(), getHeight());
 
-	Root::ModelviewMatrix.top() = glm::mat4(1.0f);
-	Root::ProjectionMatrix.top() = glm::mat4(1.0f);
-	Root::NormalMatrix.top() = glm::mat3(1.0f);
+	MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::mat4(1.0f));
+	MatrixManager::getInstance()->putMatrix4(PROJECTION, glm::mat4(1.0f));
+	MatrixManager::getInstance()->putMatrix3(NORMAL, glm::mat3(1.0f));
 	view->use3D(true);
 
 	glBindFragDataLocation(glslProgram->getHandle(), 0, "normalBuffer");
@@ -121,8 +122,8 @@ void GBuffer::drawToBuffer(View *view)
 
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 	Camera *camera = worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera();
-	camera->transformToMatrix(&Root::ProjectionMatrix.top());
-	glslProgram->sendUniform("projectionCameraMatrix", &Root::ProjectionMatrix.top()[0][0]);
+	MatrixManager::getInstance()->putMatrix4(PROJECTION, camera->transformToMatrix(MatrixManager::getInstance()->getMatrix4(PROJECTION)));
+	glslProgram->sendUniform("projectionCameraMatrix", &MatrixManager::getInstance()->getMatrix4(PROJECTION)[0][0]);
 	glslProgram->sendUniform("camPos",camera->geteyeX(),camera->geteyeY(),camera->geteyeZ());
 	
 	glslProgram->sendUniform("projectionLastCameraMatrix", &lastCameraProj[0][0]);
@@ -133,7 +134,7 @@ void GBuffer::drawToBuffer(View *view)
 	glslProgram->disable();
 	unbind();
 
-	lastCameraProj = Root::ProjectionMatrix.top();
+	lastCameraProj = MatrixManager::getInstance()->getMatrix4(PROJECTION);
 	lastCamera = *camera;
 	Profiler::getInstance()->endProfile();
 }

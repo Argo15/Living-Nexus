@@ -1,5 +1,5 @@
 #include "Chunk.h"
-#include "Root.h"
+#include "MatrixManager.h"
 #include "WorldState.h"
 
 Chunk::Chunk() : Transformable()
@@ -17,27 +17,23 @@ Chunk::Chunk() : Transformable()
 
 void Chunk::drawChunk(string shader) 
 {
-	Root::ModelviewMatrix.push(Root::ModelviewMatrix.top());
-	Root::NormalMatrix.push(Root::NormalMatrix.top());
-		transformToMatrix(&Root::ModelviewMatrix.top());
-		transformToMatrix(&Root::NormalMatrix.top());
-		glm::mat4 normMat(Root::NormalMatrix.top());
+	MatrixManager::getInstance()->pushMatrix4(MODELVIEW, transformToMatrix(MatrixManager::getInstance()->getMatrix4(MODELVIEW)));
+	MatrixManager::getInstance()->pushMatrix3(NORMAL, transformToMatrix(MatrixManager::getInstance()->getMatrix3(NORMAL)));
+		glm::mat4 normMat(MatrixManager::getInstance()->getMatrix3(NORMAL));
 		normMat[3] = glm::vec4(0,0,0,1.0f);
-		Root::ModelviewMatrix.top() = glm::rotate(Root::ModelviewMatrix.top(), 90.0f*orientation, glm::vec3(0,1.0f,0));
+		MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::rotate(MatrixManager::getInstance()->getMatrix4(MODELVIEW), 90.0f*orientation, glm::vec3(0,1.0f,0)));
 		normMat = glm::rotate(normMat, 90.0f*orientation, glm::vec3(0,1.0f,0));
-		Root::NormalMatrix.top() = glm::mat3(normMat);
+		MatrixManager::getInstance()->putMatrix3(NORMAL, glm::mat3(normMat));
 		for (int i=0; i<numActors; i++) {
-			Root::ModelviewMatrix.push(Root::ModelviewMatrix.top());
-			Root::NormalMatrix.push(Root::NormalMatrix.top());
-				actors[i]->transformToMatrix(&Root::ModelviewMatrix.top());
-				actors[i]->transformToMatrix(&Root::NormalMatrix.top());
-				actors[i]->drawActor(shader);
-			Root::ModelviewMatrix.pop();
-			Root::NormalMatrix.pop();
+			MatrixManager::getInstance()->pushMatrix4(MODELVIEW, actors[i]->transformToMatrix(MatrixManager::getInstance()->getMatrix4(MODELVIEW)));
+			MatrixManager::getInstance()->pushMatrix3(NORMAL, actors[i]->transformToMatrix(MatrixManager::getInstance()->getMatrix3(NORMAL)));
+			actors[i]->drawActor(shader);
+			MatrixManager::getInstance()->popMatrix4(MODELVIEW);
+			MatrixManager::getInstance()->popMatrix3(NORMAL);
 		}
 		drawExtra(shader);
-	Root::ModelviewMatrix.pop();
-	Root::NormalMatrix.pop();
+	MatrixManager::getInstance()->popMatrix4(MODELVIEW);
+	MatrixManager::getInstance()->popMatrix3(NORMAL);
 }
 
 bool Chunk::loadChunk(string filename)
@@ -101,7 +97,7 @@ void Chunk::addPhysicsToDynamicWorld(PhysicsManager *physicsManager)
 	for (int i=0; i<numPhysics; i++) {
 		PhysicsShape physicsShape = *physics[i];
 		physicsShape.matrix = glm::mat4(1.0f);
-		transformToMatrix(&physicsShape.matrix);
+		physicsShape.matrix = transformToMatrix(physicsShape.matrix);
 		physicsShape.matrix = glm::rotate(physicsShape.matrix, 90.0f*orientation, glm::vec3(0,1.0f,0));
 		glm::mat4 mat = glm::mat4(1.0f);
 		mat = glm::translate(mat, glm::vec3(physicsShape.getTranslate()[0],physicsShape.getTranslate()[1],physicsShape.getTranslate()[2]));

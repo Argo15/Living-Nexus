@@ -2,6 +2,7 @@
 #include "WorldState.h"
 #include "FruitFactory.h"
 #include "GameState.h"
+#include "MatrixManager.h"
 
 Tree::Tree() : Tile() {
 	int fruitType = (rand()%5);
@@ -21,15 +22,13 @@ void Tree::drawExtra(std::string shader) {
 	WorldState *worldState = (WorldState *)GameState::GAMESTATE;
 	for (int i=0; i<3; i++) {
 		if (fruit[i] != 0) {
-			Root::ModelviewMatrix.push(Root::ModelviewMatrix.top());
-			Root::NormalMatrix.push(Root::NormalMatrix.top());
-				std::string sFruitTile = fruit[i]->getWorldTile();
-				Tile *fruitTile = worldState->getTileManager()->getTile(sFruitTile);
-				fruitTransforms[i]->transformToMatrix(&Root::ModelviewMatrix.top());
-				fruitTransforms[i]->transformToMatrix(&Root::NormalMatrix.top());
-				fruitTile->drawTile(shader);
-			Root::ModelviewMatrix.pop();
-			Root::NormalMatrix.pop();
+			std::string sFruitTile = fruit[i]->getWorldTile();
+			Tile *fruitTile = worldState->getTileManager()->getTile(sFruitTile);
+			MatrixManager::getInstance()->pushMatrix4(MODELVIEW, fruitTransforms[i]->transformToMatrix(MatrixManager::getInstance()->getMatrix4(MODELVIEW)));
+			MatrixManager::getInstance()->pushMatrix3(NORMAL, fruitTransforms[i]->transformToMatrix(MatrixManager::getInstance()->getMatrix3(NORMAL)));
+			fruitTile->drawTile(shader);
+			MatrixManager::getInstance()->popMatrix4(MODELVIEW);
+			MatrixManager::getInstance()->popMatrix3(NORMAL);
 		}
 	}
 }

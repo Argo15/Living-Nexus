@@ -7,7 +7,6 @@
 #include <GL/glu.h>
 #include "Renderer.h"
 #include "View.h"
-#include "Root.h"
 #include "WorldCamera.h"
 #include "Frustum.h"
 #include "GBuffer.h"

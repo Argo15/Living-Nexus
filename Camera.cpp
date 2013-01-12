@@ -1,8 +1,8 @@
 #include <GL/freeglut.h>
 #include <math.h>
 #include "Camera.h"
-#include "Root.h"
 #include "GameState.h"
+#include "InputManager.h"
 
 #define PI (3.141592653589793)
 

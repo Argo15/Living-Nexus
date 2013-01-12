@@ -1,5 +1,5 @@
 #include "Material.h"
-#include "Root.h"
+#include "TextureManager.h"
 #include <fstream>
 
 Material::Material()

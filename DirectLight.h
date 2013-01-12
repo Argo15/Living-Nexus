@@ -5,7 +5,6 @@
 #include "Transformable.h"
 #include "Light.h"
 #include "GLSLProgram.h"
-#include "Root.h"
 using namespace std;
 
 class DirectLight : public Light, public Transformable {

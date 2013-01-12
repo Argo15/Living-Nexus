@@ -1,5 +1,5 @@
 #include "GameTime.h"
-#include "Root.h"
+#include "InputManager.h"
 
 GameTime::GameTime() {
 	m_nHourOffset = 0;

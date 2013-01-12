@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <windows.h>
 #include <GL/freeglut.h>
-#include "Root.h"
 #include "WorldState.h"
 #include "TimeManager.h"
 #include "Config.h"
@@ -10,6 +9,9 @@
 #include "UserSession.h"
 #include "RenderState.h"
 #include "GameState.h"
+#include "InputManager.h"
+#include "MaterialManager.h"
+#include "TextureManager.h"y
 
 int currentTime = 0;
 int vsync = 0;
@@ -19,10 +21,6 @@ int counter = 0;
 
 void init() {
 	Config::getInstance();
-
-	Root::ModelviewMatrix.push(glm::mat4(1.0f)); 
-	Root::ProjectionMatrix.push(glm::mat4(1.0f));
-	Root::NormalMatrix.push(glm::mat3(1.0f));
 
 	TextureManager::getInstance()->Initialize();
 	ModelManager::getInstance()->Initialize();

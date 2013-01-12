@@ -1,6 +1,7 @@
 #include "DirectLight.h"
 #include <windows.h>
 #include <gl/glee.h>
+#include "ShaderManager.h"
 
 DirectLight::DirectLight()
 {

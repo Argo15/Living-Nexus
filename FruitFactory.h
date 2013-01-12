@@ -28,6 +28,8 @@ public:
 				return new Fruit(S_PEAR_TILE, S_FRUIT_TEXTURE, S_PEAR_TILE);
 			case CHERRY: 
 				return new Fruit(S_CHERRY_TILE, S_FRUIT_TEXTURE, S_CHERRY_TILE);
+			default:
+				return 0;
 		}
 	}
 };

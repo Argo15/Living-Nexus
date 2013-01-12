@@ -24,8 +24,8 @@ public:
 	Vector3 getTranslateV() {return Vector3(translations[0],translations[1],translations[2]);}
 
 	void transform();
-	void transformToMatrix(glm::mat4 *matrix);
-	void transformToMatrix(glm::mat3 *matrix);
+	glm::mat4 transformToMatrix(glm::mat4 matrix);
+	glm::mat3 transformToMatrix(glm::mat3 matrix);
 };
 
 #endif

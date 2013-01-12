@@ -1,6 +1,8 @@
 #include "CascadedShadowMap.h"
 #include "Profiler.h"
 #include "GameState.h"
+#include "MatrixManager.h"
+#include "ShaderManager.h"
 
 #define ANG2RAD 3.14159265358979323846/180.0
 
@@ -36,8 +38,8 @@ void CascadedShadowMap::buildShadowMaps()
 		Frustum *lightFrustum = new Frustum();
 		lightFrustum->getOrthoFrustum(lightCamera,lightView);
 
-		Root::ModelviewMatrix.push(glm::mat4(1.0f)); 
-		Root::ProjectionMatrix.push(glm::mat4(1.0f));
+		MatrixManager::getInstance()->pushMatrix4(MODELVIEW, glm::mat4(1.0f));
+		MatrixManager::getInstance()->pushMatrix4(PROJECTION, glm::mat4(1.0f));
 		
 		shadowMaps[i]->bind();
 		glClearDepth(1.0);
@@ -47,12 +49,12 @@ void CascadedShadowMap::buildShadowMaps()
 		glViewport( 0, 0, size, size);
 		lightView->use3D(false);
 		glm::mat4 cameraMat = glm::mat4(1.0f);
-		lightCamera->transformToMatrix(&cameraMat);
-		lightMatrix[i] = Root::ProjectionMatrix.top() * cameraMat;
+		cameraMat = lightCamera->transformToMatrix(cameraMat);
+		lightMatrix[i] = MatrixManager::getInstance()->getMatrix4(PROJECTION) * cameraMat;
 		GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("SunShadow");
 		glslProgram->use();
-		Root::ProjectionMatrix.top() *= cameraMat;
-		glslProgram->sendUniform("projectionCameraMatrix",&Root::ProjectionMatrix.top()[0][0]);
+		MatrixManager::getInstance()->multMatrix4(PROJECTION, cameraMat);
+		glslProgram->sendUniform("projectionCameraMatrix",&MatrixManager::getInstance()->getMatrix4(PROJECTION)[0][0]);
 		glslProgram->sendUniform("camPos",camera->geteyeX(),camera->geteyeY(),camera->geteyeZ());
 		glBindAttribLocation(glslProgram->getHandle(), 0, "v_vertex");
 
@@ -128,7 +130,7 @@ View *CascadedShadowMap::createLightView(float slice1, float slice2, Camera *cam
 	// calculate the actual bounds for the ortho projection
 	glm::mat4 lightMVP;
 	lightMVP = glm::ortho(-1,1,-1,1,0,1);
-	lightCamera->transformToMatrix(&lightMVP);
+	lightMVP = lightCamera->transformToMatrix(lightMVP);
 
 	float left, right, up, down, back;
 

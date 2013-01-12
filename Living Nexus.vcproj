@@ -411,6 +411,14 @@
 					>
 				</File>
 				<File
+					RelativePath=".\MatrixManager.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\MatrixManager.h"
+					>
+				</File>
+				<File
 					RelativePath=".\Quaternion.cpp"
 					>
 				</File>
@@ -444,14 +452,6 @@
 				</File>
 				<File
 					RelativePath=".\Profiler.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Root.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Root.h"
 					>
 				</File>
 				<File

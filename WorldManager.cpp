@@ -1,8 +1,8 @@
 #include "WorldManager.h"
-#include "Root.h"
 #include "WorldState.h"
 #include "Camera.h"
 #include "GameState.h"
+#include "InputManager.h"
 
 static Vector3 V_SUN_QUATERNION(2.0f,0.0f,-1.0f);
 

@@ -2,6 +2,7 @@
 #include "WorldState.h"
 #include "Profiler.h"
 #include "GameState.h"
+#include "InputManager.h"
 
 BulletManager::BulletManager()
 {

@@ -4,6 +4,7 @@
 #include "Logger.h"
 #include "Profiler.h"
 #include "GameState.h"
+#include "ShaderManager.h"
 
 LightBuffer::LightBuffer(int width, int height)
 {
@@ -60,15 +61,15 @@ void LightBuffer::drawToBuffer(GLuint normalTex, GLuint depthTex, GLuint glowTex
 
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 
-	Root::ModelviewMatrix.top() = glm::mat4(1.0f);
-	Root::ProjectionMatrix.top() = glm::mat4(1.0f);
+	MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::mat4(1.0f));
+	MatrixManager::getInstance()->putMatrix4(PROJECTION, glm::mat4(1.0f));
 	Camera *camera = worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera();
 	camera->transform();
 	view->use3D(true);
-	glm::mat4 invMVP = Root::ProjectionMatrix.top() * Root::ModelviewMatrix.top();
+	glm::mat4 invMVP = MatrixManager::getInstance()->getMatrix4(PROJECTION) * MatrixManager::getInstance()->getMatrix4(MODELVIEW);
 	invMVP = glm::inverse(invMVP);
-	Root::ModelviewMatrix.top() = glm::mat4(1.0f);
-	Root::ProjectionMatrix.top() = glm::mat4(1.0f);
+	MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::mat4(1.0f));
+	MatrixManager::getInstance()->putMatrix4(PROJECTION, glm::mat4(1.0f));
 	view->use3D(false);
 
 	glBindFragDataLocation(glslProgram->getHandle(), 0, "lightBuffer");
@@ -78,7 +79,7 @@ void LightBuffer::drawToBuffer(GLuint normalTex, GLuint depthTex, GLuint glowTex
 
 	worldState->getWorldManager()->getSun()->sendToShader("DirectLight");
 
-	glslProgram->sendUniform("projectionMatrix", &Root::ProjectionMatrix.top()[0][0]);
+	glslProgram->sendUniform("projectionMatrix", &MatrixManager::getInstance()->getMatrix4(PROJECTION)[0][0]);
 	glslProgram->sendUniform("inverseMVPMatrix", &invMVP[0][0]);
 	glslProgram->sendUniform("near", (float)view->getNear());
 	glslProgram->sendUniform("far", (float)view->getFar());

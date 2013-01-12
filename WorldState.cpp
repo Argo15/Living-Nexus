@@ -1,6 +1,7 @@
 #include "WorldState.h"
 #include "Matrix.h"
 #include "TimeManager.h"
+#include "InputManager.h"
 
 WorldState::WorldState(const char *filename)
 { 
