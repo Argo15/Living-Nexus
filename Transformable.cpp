@@ -2,7 +2,8 @@
 
 Transformable::Transformable()
 {
-	for (int i=0;i<3;i++){
+	for (int i=0;i<3;i++)
+	{
 		translations[i]=0;
 		scale[i]=1.0;
 	}

@@ -55,7 +55,8 @@ Matrix4 Quaternion::getMatrix()
 
 float &Quaternion::operator [](unsigned int i)
 {
-	switch (i) {
+	switch (i)
+	{
 		case 0:
 			return s_data;
 		case 1:
@@ -76,8 +77,12 @@ Quaternion	&Quaternion::operator *=(Quaternion &q)
 bool Quaternion::operator ==(Quaternion &q)
 {
 	for (int i=0;i<4;i++)
+	{
 		if ((*this)[i]!=q[i])
+		{
 			return false;
+		}
+	}
 
 	return true;
 }

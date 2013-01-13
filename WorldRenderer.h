@@ -21,7 +21,8 @@ class FinalBuffer;
 class MotionBlurBuffer;
 class AtmosphereBuffer;
 
-class WorldRenderer : public Renderer{
+class WorldRenderer : public Renderer
+{
 private:
 	View *view;
 	WorldCamera *camera;
@@ -37,14 +38,19 @@ private:
 
 public:
 	WorldRenderer();
-	~WorldRenderer() {}
 
 	void init();
 	void resize(int w, int h);
 	void render();
 
-	View *getView() {return view;}
-	Frustum *getFrustum() {return frustum;}
+	View *getView()
+	{
+		return view;
+	}
+	Frustum *getFrustum()
+	{
+		return frustum;
+	}
 };
 
 #endif

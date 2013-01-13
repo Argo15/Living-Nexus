@@ -1,6 +1,7 @@
 #include <string>
 
-namespace ConfigNames {
+namespace ConfigNames 
+{
 	// TIME_CYCLE
 	static std::string MORNING_HOUR = "MORNING_HOUR";
 	static std::string EVENING_HOUR = "EVENING_HOUR";

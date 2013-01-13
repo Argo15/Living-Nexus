@@ -3,7 +3,8 @@
 
 #include <set>
 
-class InputManager {
+class InputManager 
+{
 private:
 	static InputManager *m_pInstance;
 	bool keys[256];
@@ -28,10 +29,22 @@ public:
 	void registerMouseButtonUp(int mouse);
 	void setMousePosition(int x, int y);
 	void setMouseCentered(int x, int y);
-	bool isMouseButtonDown(int mouse) {return mouseButtons[mouse];}
-	int getMouseX() {return mouseX;}
-	int getMouseY() {return mouseY;}
-	bool isMouseMoved() {return mouseMoved;}
+	bool isMouseButtonDown(int mouse) 
+	{
+		return mouseButtons[mouse];
+	}
+	int getMouseX() 
+	{
+		return mouseX;
+	}
+	int getMouseY() 
+	{
+		return mouseY;
+	}
+	bool isMouseMoved() 
+	{
+		return mouseMoved;
+	}
 };
 
 #endif

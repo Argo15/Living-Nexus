@@ -8,7 +8,8 @@
 
 CascadedShadowMap::CascadedShadowMap(int size, float slice1, float slice2, float slice3)
 {
-	for (int i=0;i<4;i++) {
+	for (int i=0;i<4;i++)
+	{
 		shadowMaps[i] = new DepthBuffer(size,size);
 	}
 	slices[0] = slice1;
@@ -32,7 +33,8 @@ void CascadedShadowMap::buildShadowMaps()
 	glClearDepth(1.0);
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glDisable(GL_CULL_FACE);
-	for (int i=0; i<4; i++) {
+	for (int i=0; i<4; i++)
+	{
 		Camera *lightCamera = createLightCamera(slice[i],slice[i+1],camera,view,sun);
 		View *lightView = createLightView(slice[i],slice[i+1],camera,lightCamera,view,frustum);
 		Frustum *lightFrustum = new Frustum();
@@ -138,7 +140,8 @@ View *CascadedShadowMap::createLightView(float slice1, float slice2, Camera *cam
 							glm::vec4(ftl,1.0f), glm::vec4(ftr,1.0f), glm::vec4(fbl,1.0f), glm::vec4(fbr,1.0f)};
 
 	// get the projected positions of the corners
-	for (int i=0; i<8; i++){
+	for (int i=0; i<8; i++)
+	{
 		corners[i]=lightMVP*corners[i];
 	}
 
@@ -150,17 +153,28 @@ View *CascadedShadowMap::createLightView(float slice1, float slice2, Camera *cam
 	back  = corners[0][2];
 
 	// determine the bounds
-	for (int i=1; i<8; i++){
+	for (int i=1; i<8; i++)
+	{
 		if (corners[i][0]<left)
+		{
 			left=corners[i][0];
+		}
 		if (corners[i][0]>right)
+		{
 			right=corners[i][0];
+		}
 		if (corners[i][1]<down)
+		{
 			down=corners[i][1];
+		}
 		if (corners[i][1]>up)
+		{
 			up=corners[i][1];
+		}
 		if (corners[i][2]>back)
+		{
 			back=corners[i][2];
+		}
 	}
 
 	View *lightView = new View();

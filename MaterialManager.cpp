@@ -14,8 +14,10 @@ MaterialManager::MaterialManager()
 	
 }
 
-MaterialManager *MaterialManager::getInstance() {
-	if (m_pInstance == 0) {
+MaterialManager *MaterialManager::getInstance() 
+{
+	if (m_pInstance == 0) 
+	{
 		m_pInstance = new MaterialManager();
 	}
 	return m_pInstance;
@@ -39,15 +41,20 @@ void MaterialManager::Initialize()
 void MaterialManager::LoadMaterial(string filename)
 {
 	Material *newMaterial = new Material();
-	if (newMaterial->loadMaterial(filename.c_str())) {
+	if (newMaterial->loadMaterial(filename.c_str())) 
+	{
 		string *name = newMaterial->getName();
 		materials[*name] = newMaterial;
-	} else {
+	} 
+	else 
+	{
 		Logging::GRAPHICS->error("Material failed to load: " + filename);
 	}
 }
 
-/* returns a string that is not currently being used */
+/* 
+ * returns a string that is not currently being used
+ */
 string MaterialManager::getSafeName(string baseName)
 {
 	if (!hasMaterial(baseName))
@@ -57,12 +64,14 @@ string MaterialManager::getSafeName(string baseName)
 	else
 	{
 		int nNum = 1;
-		while (true) {
+		while (true)
+		{
 			char buff[10];
 			itoa(nNum, buff, 10);
 			string sNum = string(buff);
 			string newName = baseName + sNum;
-			if (!hasMaterial(newName)) {
+			if (!hasMaterial(newName)) 
+			{
 				return newName;
 			}
 			nNum++;
@@ -81,7 +90,8 @@ string MaterialManager::AddMaterialSafe(Material *material)
 
 bool MaterialManager::hasMaterial(string name)
 {
-	if (materials.find(name) != materials.end()) {
+	if (materials.find(name) != materials.end()) 
+	{
 		return true;
 	}
 	return false;
@@ -99,7 +109,8 @@ string MaterialManager::renameMaterial(string currentName, string newName)
 
 void MaterialManager::DeleteMaterial(string name)
 {
-	if (materials.find(name) != materials.end()) {
+	if (materials.find(name) != materials.end()) 
+	{
 		delete materials[name];
 		materials.erase(name);
 	}
@@ -112,7 +123,8 @@ void MaterialManager::DeleteAllMaterials()
 
 void MaterialManager::SaveAllMaterials()
 {
-	for (std::map<std::string, Material *>::iterator it = materials.begin(); it != materials.end(); it++) {
+	for (std::map<std::string, Material *>::iterator it = materials.begin(); it != materials.end(); it++)
+	{
 		Material *mat = (*it).second;
 		string filename = "Data/Materials/" + (*it).first + ".amtl";
 		mat->saveMaterial(filename.c_str());

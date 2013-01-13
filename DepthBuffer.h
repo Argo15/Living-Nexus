@@ -12,9 +12,21 @@ protected:
 
 public:
 	DepthBuffer(int width, int height);
-	void bind() {glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, buffer);}
-	void unbind() {glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);}
-	GLuint getBuffer() {return buffer;}
-	GLuint getTexture() {return texture;}
+	void bind()
+	{
+		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, buffer);
+	}
+	void unbind()
+	{
+		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+	}
+	GLuint getBuffer()
+	{
+		return buffer;
+	}
+	GLuint getTexture()
+	{
+		return texture;
+	}
 };
 #endif

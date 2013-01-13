@@ -4,15 +4,25 @@
 #include <string>
 using namespace std;
 
-class Entity {
+class Entity
+{
 protected:
 	string *name;
 
 public:
-	Entity(string *name = 0) {this->name = name;}
+	Entity(string *name = 0) 
+	{
+		this->name = name;
+	}
 
-	string *getName() {return name;}
-	void setName(string newName) {name = new string(newName);}
+	string *getName() 
+	{
+		return name;
+	}
+	void setName(string newName) 
+	{
+		name = new string(newName);
+	}
 };
 
 #endif

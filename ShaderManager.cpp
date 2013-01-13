@@ -9,8 +9,10 @@ ShaderManager::ShaderManager()
 
 }
 
-ShaderManager *ShaderManager::getInstance() {
-	if (m_pInstance == 0) {
+ShaderManager *ShaderManager::getInstance() 
+{
+	if (m_pInstance == 0) 
+	{
 		m_pInstance = new ShaderManager();
 	}
 	return m_pInstance;
@@ -19,11 +21,13 @@ ShaderManager *ShaderManager::getInstance() {
 void ShaderManager::compileProgram(GLSLProgram *program, string shaderName)
 {
 	std::string log;
-	if (!program->vertex_->isCompiled()){
+	if (!program->vertex_->isCompiled())
+	{
 		program->vertex_->getShaderLog(log);
 		Logging::GRAPHICS->error("Vertex shader failed to compile: " + shaderName + "\n" + log);
 	}
-	if (!program->fragment_->isCompiled()){	
+	if (!program->fragment_->isCompiled())
+	{	
 		program->fragment_->getShaderLog(log);
 		Logging::GRAPHICS->error("Fragment shader failed to compile " + shaderName + "\n" + log);
 	}

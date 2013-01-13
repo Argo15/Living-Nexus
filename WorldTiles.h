@@ -8,9 +8,11 @@
 #include "Frustum.h"
 using namespace std;
 
-class WorldTiles {
+class WorldTiles
+{
 private:
-	struct TileData {
+	struct TileData
+	{
 		int tileMode; // 0=green, 1=red, 2=yellow
 		vector<Tile *> *tiles;
 	};
@@ -21,16 +23,20 @@ private:
 
 public:
 	WorldTiles(int w, int h);
-	~WorldTiles() {}
 
 	void init();
 	void initializeFromChunks(WorldChunks *chunks, TileManager *manager, PhysicsManager *physicsManager);
 	bool addTile(int x, int y, Tile *tile, PhysicsManager *physicsManager);
 	vector<Tile *> *getAllTiles();
 	vector<Tile *> *getVisibleTiles(Frustum *frustum);
-	int getWidth() {return width;}
-	int getHeight() {return height;}
-
+	int getWidth()
+	{
+		return width;
+	}
+	int getHeight()
+	{
+		return height;
+	}
 };
 
 #endif

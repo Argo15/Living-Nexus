@@ -52,9 +52,13 @@ GLSLProgram::GLSLProgram(const std::string &vertexShader, const std::string &fra
 GLSLProgram::~GLSLProgram()
 {
 	if(vertex_)
+	{
 	    delete vertex_;
+	}
 	if(fragment_)
+	{
 		delete fragment_;
+	}
 
 	glDeleteProgram(handle_);
 }
@@ -86,9 +90,13 @@ bool GLSLProgram::IsValidProgram() const
 	GLint status;
 	getParameter(GL_VALIDATE_STATUS,&status);
 	if(!status)
+	{
 		return false;
+	}
 	else
+	{
 		return true;
+	}
 }
 void GLSLProgram::getParameter(GLenum param, GLint *data) const
 {
@@ -278,7 +286,9 @@ void GLSLProgram::getAttributeInfo(GLuint location, std::string &name, GLenum &d
 	glGetActiveAttrib(handle_,location,length,&copiedsize,&size,&datatype,&nametmp[0]);
 
 	if(0 == copiedsize)
+	{
 		return;
+	}
 
 	name.assign(&nametmp[0]);
 }
@@ -294,7 +304,9 @@ void GLSLProgram::getUniformInfo(GLuint location, std::string &name, GLenum &dat
 	glGetActiveUniform(handle_,location,length,&copiedsize,&size,&datatype,&nametmp[0]);
 
 	if(0 == copiedsize)
+	{
 		return;
+	}
 
 	name.assign(&nametmp[0]);
 }
@@ -307,6 +319,7 @@ void GLSLProgram::getAttachedShaders(std::vector<GLuint> &shaderhandles)
 	shaderhandles.resize(number);
 	glGetAttachedShaders(handle_,number,NULL, &shaderhandles[0]);
 }
+
 namespace {
 
 	struct shaderconstuctor
@@ -348,7 +361,9 @@ int GLSLProgram::getLoc(const std::string &name)
 		uniforms_.insert(uniformmap::value_type(name,loc));
 	}
 	else
+	{
 		loc = it->second;
+	}
 
 	return loc;
 }

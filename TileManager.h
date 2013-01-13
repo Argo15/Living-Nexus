@@ -6,13 +6,13 @@
 #include "Tile.h"
 using namespace std;
 
-class TileManager {
+class TileManager 
+{
 private:
 	map<string,Tile *> tiles;
 
 public:
 	TileManager();
-	~TileManager(){}
 
     void Initialize();
 	void LoadTile(string filename);
@@ -20,8 +20,14 @@ public:
 	void DeleteTile(string name);
 	void DeleteAllTiles();
 
-	Tile *getTile(string name) { return tiles[name]; }
-	map<string,Tile *> *getTiles() {return &tiles;}
+	Tile *getTile(string name) 
+	{ 
+		return tiles[name]; 
+	}
+	map<string,Tile *> *getTiles() 
+	{
+		return &tiles;
+	}
 };
 
 #endif

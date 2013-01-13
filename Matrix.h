@@ -57,17 +57,11 @@ public:
 	Matrix4 &setAsModelViewProjection();
 	Matrix4 &setAsModelViewMatrix();
 	Matrix4 &setAsProjectionMatrix();
-	void multiplyToCurrent() {glMultMatrixf(data);}
+	void multiplyToCurrent()
+	{
+		glMultMatrixf(data);
+	}
 };
-
-
-
-
-
-
-
-
-
 
 
 class Matrix3
@@ -105,15 +99,6 @@ public:
 	Matrix3 &identity();
 	Matrix3 &transpose();
 };
-
-
-
-
-
-
-
-
-
 
 
 class Vector4
@@ -154,14 +139,6 @@ public:
 	float dot(Vector4 &v);
 	void rotate(float angle, float x, float y, float z);
 };
-
-
-
-
-
-
-
-
 
 
 class Vector3
@@ -218,10 +195,10 @@ public:
 	Quaternion normalize();
 	Matrix4 getMatrix();
 
-	float			&operator [] (unsigned int i);
+	float		&operator [] (unsigned int i);
 	Quaternion	&operator *= (Quaternion &q);
-	bool			operator ==  (Quaternion &q);
-	bool			operator !=  (Quaternion &q);
+	bool		operator ==  (Quaternion &q);
+	bool		operator !=  (Quaternion &q);
 	Quaternion  operator *	 (Quaternion &q);
 };
 

@@ -8,7 +8,8 @@
 #include "DirectLight.h"
 #include "WorldState.h"
 
-class CascadedShadowMap {
+class CascadedShadowMap
+{
 private:
 	DepthBuffer *shadowMaps[4];
 	glm::mat4 lightMatrix[4];
@@ -19,12 +20,17 @@ private:
 	View *createLightView(float slice1, float slice2, Camera *camera, Camera *lightCamera, View *view, Frustum *frustum);
 
 public:
-	CascadedShadowMap() {CascadedShadowMap(1024);}
+	CascadedShadowMap()
+	{
+		CascadedShadowMap(1024);
+	}
 	CascadedShadowMap(int size, float slice1 = 0.15, float slice2 = 0.3, float slice3 = 0.6);
-	~CascadedShadowMap() {}
 
 	void buildShadowMaps();
-	void bindShadowMap(int map) {glBindTexture(GL_TEXTURE_2D,shadowMaps[map]->getTexture());}
+	void bindShadowMap(int map)
+	{
+		glBindTexture(GL_TEXTURE_2D,shadowMaps[map]->getTexture());
+	}
 	void sendToShader(string shader);
 
 	void drawShadowMaps();

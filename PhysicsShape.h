@@ -6,21 +6,26 @@
 
 enum PhysicsShapeType {BOX, CYLINDER, SPHERE};
 
-class PhysicsShape : public Actor {
+class PhysicsShape : public Actor 
+{
 private:
 	PhysicsShapeType type;
 
 	btCollisionShape *getBoxShape();
 	btCollisionShape *getSphereShape();
 	btCollisionShape *getCylinderShape();
-	
 
 public:
-	PhysicsShape(PhysicsShapeType type) {this->type=type;}
-	~PhysicsShape() {}
+	PhysicsShape(PhysicsShapeType type) 
+	{
+		this->type=type;
+	}
 
 	btCollisionShape *getCollisionShape();
-	PhysicsShapeType getShapeType() {return type;}
+	PhysicsShapeType getShapeType() 
+	{
+		return type;
+	}
 	glm::mat4 matrix;
 };
 

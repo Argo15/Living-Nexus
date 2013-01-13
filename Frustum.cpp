@@ -62,7 +62,9 @@ void Frustum::getFrustum(Camera *camera, View *view)
 	plane[F_DOWN].normal.normalize();
 
 	for (int i=0; i<6; i++)
+	{
 		plane[i].d=(plane[i].point.dot(plane[i].normal));
+	}
 }
 
 void Frustum::getOrthoFrustum(Camera *camera, View *view)
@@ -87,15 +89,19 @@ void Frustum::getOrthoFrustum(Camera *camera, View *view)
 	plane[F_DOWN].point=center-up*(view->getOrthoHeight()/2.0);
 
 	for (int i=0; i<6; i++)
+	{
 		plane[i].d=(plane[i].point.dot(plane[i].normal));
+	}
 }
 
 bool Frustum::isInFrustum(Vector3 center, float radius)
 {
 	bool inFrustum=true;
-	for (int i=0; i<6; i++){
+	for (int i=0; i<6; i++)
+	{
 		float dist = plane[i].distance(&center);
-		if (dist>=radius){
+		if (dist>=radius)
+		{
 			inFrustum=false;
 		}
 	}

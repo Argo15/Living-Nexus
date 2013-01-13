@@ -110,12 +110,14 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/wd4996"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="&quot;C:\bullet-2.79\src&quot;;C:\boost_1_49_0"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
-				WarningLevel="3"
+				WarningLevel="2"
+				WarnAsError="false"
 				DebugInformationFormat="3"
 			/>
 			<Tool
@@ -193,6 +195,10 @@
 			</File>
 			<File
 				RelativePath=".\Data\Shaders\f_motionBlur.glsl"
+				>
+			</File>
+			<File
+				RelativePath=".\Living Nexus.rc"
 				>
 			</File>
 			<File

@@ -26,7 +26,8 @@ void TgaTexture::SwapRedblue()
 				source[pixel].b = source[pixel].r;
 				source[pixel].r = temp;
 			}
-		} break;
+		} 
+		break;
 	case 24:
 		{
 			unsigned char temp;
@@ -38,7 +39,8 @@ void TgaTexture::SwapRedblue()
 				source[pixel].b = source[pixel].r;
 				source[pixel].r = temp;
 			}
-		} break;
+		} 
+		break;
 	default:
 		// ignore other color depths
 		break;
@@ -50,7 +52,9 @@ bool TgaTexture::load(const char *filename)
 	FILE *pFile = fopen(filename, "rb");
 
 	if (!pFile)
+	{
 		return false;
+	}
 
 	tgaheader_t tgaHeader;
 
@@ -87,7 +91,9 @@ bool TgaTexture::load(const char *filename)
 
 	// skip past the id if there is one
 	if (tgaHeader.idLength > 0)
+	{
 		fseek(pFile, SEEK_CUR, tgaHeader.idLength);
+	}
 
 	// read image data
 	if (tgaHeader.imageTypeCode == TGA_RGB || tgaHeader.imageTypeCode == TGA_GRAYSCALE)
@@ -118,7 +124,9 @@ bool TgaTexture::load(const char *filename)
 				color.r = (unsigned char)fgetc(pFile);
 
 				if (colorMode == 4)
+				{
 					color.a = (unsigned char)fgetc(pFile);
+				}
 
 				// save everything in this run
 				while (length > 0)
@@ -145,14 +153,18 @@ bool TgaTexture::load(const char *filename)
 					color.r = (unsigned char)fgetc(pFile);
 
 					if (colorMode == 4)
+					{
 						color.a = (unsigned char)fgetc(pFile);
+					}
 
 					m_pImageData[i++] = color.b;
 					m_pImageData[i++] = color.g;
 					m_pImageData[i++] = color.r;
 
 					if (colorMode == 4)
+					{
 						m_pImageData[i++] = color.a;
+					}
 
 					--length;
 				}
@@ -189,19 +201,26 @@ bool TgaTexture::load(const char *filename)
 	}
 
 	if ((tgaHeader.imageDesc & TOP_LEFT) == TOP_LEFT)
+	{
 		FlipVertical();
+	}
 
 	// swap the red and blue components in the image data
 	SwapRedblue();
 
-	if(m_pImageData != NULL){
+	if(m_pImageData != NULL)
+	{
 		glGenTextures(1, &textureID);
 		glBindTexture(GL_TEXTURE_2D, textureID);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		if (colorMode==3)
+		{
 			gluBuild2DMipmaps(GL_TEXTURE_2D, 3, m_width, m_height, GL_RGB, GL_UNSIGNED_BYTE, m_pImageData);
+		}
 		else
+		{
 			gluBuild2DMipmaps(GL_TEXTURE_2D, 3, m_width, m_height, GL_RGBA, GL_UNSIGNED_BYTE, m_pImageData);
+		}
 	}
 
 	return (m_pImageData != NULL);
@@ -211,13 +230,17 @@ bool TgaTexture::load(const char *filename)
 bool TgaTexture::FlipVertical()
 {
 	if (!m_pImageData)
+	{
 		return false;
+	}
 
 	if (m_colorDepth == 32)
 	{
 		rgba_t* tmpbits = new rgba_t[m_width];
 		if (!tmpbits)
+		{
 			return false;
+		}
 
 		int lineWidth = m_width * 4;
 
@@ -241,7 +264,9 @@ bool TgaTexture::FlipVertical()
 	{
 		rgb_t* tmpbits = new rgb_t[m_width];
 		if (!tmpbits)
+		{
 			return false;
+		}
 
 		int lineWidth = m_width * 3;
 

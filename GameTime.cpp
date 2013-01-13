@@ -1,24 +1,30 @@
 #include "GameTime.h"
 #include "InputManager.h"
 
-GameTime::GameTime() {
+GameTime::GameTime() 
+{
 	m_nHourOffset = 0;
 	m_nMinuteOffset = 0;
 }
 
-void GameTime::updateToSystemTime() {
+void GameTime::updateToSystemTime() 
+{
 	time_t t = time(0);
 	struct tm * now = localtime( & t );
-    if (InputManager::getInstance()->isKeyDownOnce('-')) {
+    if (InputManager::getInstance()->isKeyDownOnce('-')) 
+	{
 		m_nHourOffset -= 1;
 	}
-	if (InputManager::getInstance()->isKeyDownOnce('=')) {
+	if (InputManager::getInstance()->isKeyDownOnce('=')) 
+	{
 		m_nHourOffset += 1;
 	}
-	if (InputManager::getInstance()->isKeyDown('[')) {
+	if (InputManager::getInstance()->isKeyDown('[')) 
+	{
 		m_nMinuteOffset -= 1.0;
 	}
-	if (InputManager::getInstance()->isKeyDown(']')) {
+	if (InputManager::getInstance()->isKeyDown(']')) 
+	{
 		m_nMinuteOffset += 1.0;
 	}
 

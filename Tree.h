@@ -6,7 +6,8 @@
 #include "Object.h"
 #include "Transformable.h"
 
-class Tree : public Tile {
+class Tree : public Tile 
+{
 private:
 	Transformable *fruitTransforms[3];
 	Object *fruit[3];

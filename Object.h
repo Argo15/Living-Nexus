@@ -8,7 +8,8 @@
  * Date: 7/14/2012
  * Generic object that can be placed in your inventory, placed on the ground, or placed in the world/house as an interactive object.
  */
-class Object {
+class Object
+{
 private:
 	std::string m_sWorldTile;
 	std::string m_sInventoryTexture;

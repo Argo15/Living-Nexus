@@ -4,7 +4,7 @@
 #include "GameState.h"
 #include "InputManager.h"
 
-#define PI (3.141592653589793)
+#define PI 3.141592653589793
 
 Camera::Camera()
 {
@@ -22,7 +22,8 @@ void Camera::mouseRotate()
 	int mouseX=InputManager::getInstance()->getMouseX();
 	int mouseY=InputManager::getInstance()->getMouseY();
 
-	if (lastMouseX == -1) {
+	if (lastMouseX == -1)
+	{
 		lastMouseX = mouseX;
 		lastMouseY = mouseY;
 		return;
@@ -35,29 +36,38 @@ void Camera::mouseRotate()
 	vAngle+=(float)dy*rotSpeed*0.005f;
 
 	if (vAngle>0.999f*PI/2.0f)
+	{
         vAngle=0.999f*(float)PI/2.0f;
+	}
     if (vAngle<-0.999f*PI/2.0f)
+	{
         vAngle=-0.999f*(float)PI/2.0f;
+	}
 
 	recalculate();
 
 	lastMouseX = mouseX;
 	lastMouseY = mouseY;
 	
-	if (GameState::GAMESTATE->mouseHidden()) {
-		if (mouseX>500) {
+	if (GameState::GAMESTATE->mouseHidden()) 
+	{
+		if (mouseX>500) 
+		{
 			glutWarpPointer(300, mouseY);
 			lastMouseX = 300;
 		}
-		if (mouseX<300) {
+		if (mouseX<300) 
+		{
 			glutWarpPointer(500, mouseY);
 			lastMouseX = 500;
 		}
-		if (mouseY>500) {
+		if (mouseY>500) 
+		{
 			glutWarpPointer(mouseX, 300);
 			lastMouseY = 300;
 		}
-		if (mouseY<300) {
+		if (mouseY<300) 
+		{
 			glutWarpPointer(mouseX, 500);
 			lastMouseY = 500;
 		}
@@ -67,17 +77,29 @@ void Camera::mouseRotate()
 void Camera::move(float speed)
 {
 	if (InputManager::getInstance()->isKeyDown('w'))
+	{
 		moveForward(speed*0.1f);
+	}
 	if (InputManager::getInstance()->isKeyDown('s'))
+	{
 		moveBackward(speed*0.1f);
+	}
 	if (InputManager::getInstance()->isKeyDown('a'))
+	{
 		moveLeft(speed*0.1f);
+	}
 	if (InputManager::getInstance()->isKeyDown('d'))
+	{
 		moveRight(speed*0.1f);
+	}
 	if (InputManager::getInstance()->isKeyDown('e'))
+	{
 		moveUp(speed*0.1f);
+	}
 	if (InputManager::getInstance()->isKeyDown('q'))
+	{
 		moveDown(speed*0.1f);
+	}
 
 	mouseRotate();
 }

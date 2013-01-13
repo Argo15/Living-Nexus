@@ -1,18 +1,20 @@
 #include <math.h>
 #include "Matrix.h"
 
-	
-
 Vector4::Vector4()
 {
 	for (int i=0;i<4;i++)
+	{
 		data[i]=0;
+	}
 }
 
 Vector4::Vector4(float v)
 {
 	for (int i=0;i<4;i++)
+	{
 		data[i]=v;
+	}
 }
 
 Vector4::Vector4(float x,float y,float z,float w)
@@ -42,14 +44,18 @@ float &Vector4::operator [](unsigned int i)
 Vector4	&Vector4::operator =(Vector4 &v)
 {
 	for (int i=0;i<4;i++)
+	{
 		data[i]=v[i];
+	}
 	return *this;
 }
 
 Vector4	&Vector4::operator =(Vector3 &v)
 {
 	for (int i=0;i<3;i++)
+	{
 		data[i]=v[i];
+	}
 	data[3]=0;
 	return *this;
 }
@@ -91,8 +97,12 @@ Vector4	&Vector4::operator *=(float f)
 bool Vector4::operator ==(Vector4 &v)
 {
 	for (int i=0;i<4;i++)
+	{
 		if (data[i]!=v[i])
+		{
 			return false;
+		}
+	}
 
 	return true;
 }
@@ -106,7 +116,9 @@ Vector4  Vector4::operator +(Vector4 &v)
 {
 	Vector4 ret = *this;
 	for (int i=0;i<4;i++)
+	{
 		ret[i]=ret[i]+v[i];
+	}
 	return ret;
 }
 
@@ -114,7 +126,9 @@ Vector4  Vector4::operator -(Vector4 &v)
 {
 	Vector4 ret = *this;
 	for (int i=0;i<4;i++)
+	{
 		ret[i]=ret[i]-v[i];
+	}
 	return ret;
 }
 
@@ -122,7 +136,9 @@ Vector4  Vector4::operator /(Vector4 &v)
 {
 	Vector4 ret = *this;
 	for (int i=0;i<4;i++)
+	{
 		ret[i]=ret[i]/v[i];
+	}
 	return ret;
 }
 
@@ -130,7 +146,9 @@ Vector4  Vector4::operator *(Vector4 &v)
 {
 	Vector4 ret = *this;
 	for (int i=0;i<4;i++)
+	{
 		ret[i]=ret[i]*v[i];
+	}
 	return ret;
 }
 
@@ -138,7 +156,9 @@ Vector4  Vector4::operator *(float f)
 {
 	Vector4 ret = *this;
 	for (int i=0;i<4;i++)
+	{
 		ret[i]=ret[i]*f;
+	}
 	return ret;
 }
 
@@ -165,7 +185,9 @@ Vector4 &Vector4::normalize()
 {
 	float length = this->length();
 	for (int i=0;i<4;i++)
+	{
 		data[i]/=length;
+	}
 	return *this;
 }
 

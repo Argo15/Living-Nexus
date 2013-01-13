@@ -10,10 +10,14 @@ WorldCameraManager::WorldCameraManager()
 
 void WorldCameraManager::tick(int fps)
 {
-	if (InputManager::getInstance()->isKeyDownOnce('c')) {
-		if (current == worldCamera) {
+	if (InputManager::getInstance()->isKeyDownOnce('c'))
+	{
+		if (current == worldCamera)
+		{
 			current = freeRoamCamera;
-		} else {
+		} 
+		else
+		{
 			current = worldCamera;
 		}
 	}

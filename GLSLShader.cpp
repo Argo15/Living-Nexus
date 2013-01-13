@@ -29,13 +29,18 @@ GLSLShader::GLSLShader(const std::string &filename, GLenum shaderType) : compile
   
   delete [] source;
 }
+
 GLSLShader::GLSLShader(GLenum shaderType)
 {
 	
 	if(shaderType == GL_VERTEX_SHADER || shaderType == GL_FRAGMENT_SHADER)
+	{
 		handle_ = glCreateShader(shaderType);
+	}
 	else
+	{
 		handle_ = shaderType;
+	}
 }
 
 
@@ -51,9 +56,13 @@ void GLSLShader::compile()
   glCompileShader(handle_);
   getParameter(GL_COMPILE_STATUS, &compiled);
   if(!compiled)
+  {
 	  compiled_ = false;
+  }
   else
+  {
 	  compiled_ = true;
+  }
 }
 bool GLSLShader::isCompiled() const
 {

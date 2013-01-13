@@ -8,19 +8,31 @@
 #include "Transformable.h"
 #include "GLSLProgram.h"
 
-class Actor : public Entity, public Transformable {
+class Actor : public Entity, public Transformable 
+{
 private:
 	string *model;
 	string *material;
 	
 public:
 	Actor(string *model = 0, string *material = 0);
-	~Actor(){}
 
-	void setModel(string *model) {this->model = model;}
-	string *getModel() {return model;}
-	void setMaterial(string *material) {this->material = material;}
-	string *getMaterial() {return material;}
+	void setModel(string *model) 
+	{
+		this->model = model;
+	}
+	string *getModel() 
+	{
+		return model;
+	}
+	void setMaterial(string *material) 
+	{
+		this->material = material;
+	}
+	string *getMaterial() 
+	{
+		return material;
+	}
 
 	float getScaledRadius();
 

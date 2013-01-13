@@ -1,13 +1,16 @@
 #include "Tile.h"
 
-Tile::Tile() : Chunk() {
+Tile::Tile() : Chunk() 
+{
 
 }
 
-bool Tile::loadTile(string filename) {
+bool Tile::loadTile(string filename) 
+{
 	return loadChunk(filename);
 }
 
-void Tile::drawTile(string shader) {
+void Tile::drawTile(string shader) 
+{
 	drawChunk(shader);
 }

@@ -16,7 +16,8 @@ WorldManager::WorldManager()
 void WorldManager::tick(int fps)
 {
 	updateSunToGameTime(TimeManager::getInstance()->getGameTime());
-	if(InputManager::getInstance()->isKeyDownOnce('r')) {
+	if(InputManager::getInstance()->isKeyDownOnce('r'))
+	{
 		WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 		worldState->getPhysicsManager()->getBulletManager()->clearDynamicsWorld();
 		worldChunks->generateChunks(chunks, worldState->getPhysicsManager());
@@ -41,13 +42,17 @@ void WorldManager::renderWorld(string shader, Frustum *frustum)
 {
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 	if (frustum == 0)
+	{
 		frustum = worldState->getRenderer()->getFrustum();
+	}
 	vector<Chunk *> *visChunks = worldChunks->getVisibleChunks(frustum);
-	for (vector<Chunk *>::iterator i = visChunks->begin(); i != visChunks->end(); i++) {
+	for (vector<Chunk *>::iterator i = visChunks->begin(); i != visChunks->end(); i++)
+	{
 		(*i)->drawChunk(shader);
 	}
 	vector<Tile *> *visTiles = worldTiles->getVisibleTiles(frustum);
-	for (vector<Tile *>::iterator i = visTiles->begin(); i != visTiles->end(); i++) {
+	for (vector<Tile *>::iterator i = visTiles->begin(); i != visTiles->end(); i++)
+	{
 		(*i)->drawTile(shader);
 	}
 }

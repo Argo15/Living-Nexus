@@ -15,9 +15,12 @@ WorldState::WorldState(const char *filename)
 	glutSetCursor(GLUT_CURSOR_NONE);
 
 	worldManager = new WorldManager();
-	if (filename == 0) {
-		worldManager->generateNewWorld(chunkManager,tileManager,physicsManager);
-	} else {
+	if (filename == 0)
+	{
+		worldManager->generateNewWorld(chunkManager, tileManager, physicsManager);
+	}
+	else
+	{
 		worldManager->loadWorld(string(filename));
 	}
 
@@ -38,12 +41,17 @@ void WorldState::resize(int w, int h)
 
 void WorldState::tick(int fps)
 {
-	if (InputManager::getInstance()->isKeyDownOnce((int)'t')) {
+	if (InputManager::getInstance()->isKeyDownOnce((int)'t'))
+	{
 		mouseHide = !mouseHide;
 		if (mouseHide)
+		{
 			glutSetCursor(GLUT_CURSOR_NONE);
+		}
 		else
+		{
 			glutSetCursor(GLUT_CURSOR_RIGHT_ARROW);
+		}
 	}
 
 	physicsManager->tick(fps);

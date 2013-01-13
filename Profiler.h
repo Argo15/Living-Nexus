@@ -5,7 +5,8 @@
 #include <boost/unordered_map.hpp>
 #include <boost/foreach.hpp>
 
-class Profiler {
+class Profiler 
+{
 private:
 	static Profiler *m_pInstance;
 	std::string lastSection;

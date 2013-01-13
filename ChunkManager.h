@@ -6,13 +6,13 @@
 #include "Chunk.h"
 using namespace std;
 
-class ChunkManager {
+class ChunkManager 
+{
 private:
 	map<string,Chunk *> chunks;
 
 public:
 	ChunkManager();
-	~ChunkManager(){}
 
     void Initialize();
 	void LoadChunk(string filename);
@@ -20,8 +20,14 @@ public:
 	void DeleteChunk(string name);
 	void DeleteAllChunks();
 
-	Chunk *getChunk(string name) { return chunks[name]; }
-	map<string,Chunk *> *getChunks() {return &chunks;}
+	Chunk *getChunk(string name) 
+	{ 
+		return chunks[name]; 
+	}
+	map<string,Chunk *> *getChunks() 
+	{
+		return &chunks;
+	}
 };
 
 #endif

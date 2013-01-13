@@ -10,7 +10,8 @@
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/foreach.hpp>
 
-class Config {
+class Config 
+{
 private:
 	static Config *m_pInstance;
 	boost::unordered_map<std::string, std::string> hmConfigFields;

@@ -25,9 +25,13 @@ DepthBuffer::DepthBuffer(int width, int height)
 	// check FbO status
 	GLenum FBOstatus = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
 	if(FBOstatus != GL_FRAMEBUFFER_COMPLETE_EXT)
+	{
 		Logging::GRAPHICS->error("GL_FRAMEBUFFER_COMPLETE failed, CANNOT use FBO. " + FBOstatus);
+	}
 	else
+	{
 		Logging::GRAPHICS->info("Depth buffer Done");
+	}
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 }

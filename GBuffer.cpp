@@ -84,9 +84,13 @@ GBuffer::GBuffer(int width, int height)
 	// check FbO status
 	GLenum FBOstatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 	if(FBOstatus != GL_FRAMEBUFFER_COMPLETE)
+	{
 		Logging::GRAPHICS->error("GL_FRAMEBUFFER_COMPLETE failed, CANNOT use FBO. " + FBOstatus);
+	}
 	else
+	{
 		Logging::GRAPHICS->info("gBuffer Done");
+	}
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }

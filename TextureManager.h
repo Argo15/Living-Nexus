@@ -7,7 +7,8 @@
 #include "PerlinNoise.h"
 using namespace std;
 
-class TextureManager {
+class TextureManager 
+{
 private:
 	static TextureManager *m_pInstance;
 	map<string,Texture *> textures;
@@ -22,8 +23,14 @@ public:
 	void DeleteTexture(string name);
 	void DeleteAllTextures();
 
-	Texture *getTexture(string name) { return textures[name]; }
-	map<string,Texture *> *getTextures() {return &textures;}	
+	Texture *getTexture(string name) 
+	{ 
+		return textures[name]; 
+	}
+	map<string,Texture *> *getTextures() 
+	{
+		return &textures;
+	}	
 };
 
 #endif

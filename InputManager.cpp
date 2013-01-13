@@ -2,8 +2,10 @@
 
 InputManager* InputManager::m_pInstance = 0;
 
-InputManager *InputManager::getInstance() {
-	if (m_pInstance == 0) {
+InputManager *InputManager::getInstance() 
+{
+	if (m_pInstance == 0) 
+	{
 		m_pInstance = new InputManager();
 	}
 	return m_pInstance;
@@ -11,12 +13,15 @@ InputManager *InputManager::getInstance() {
 
 InputManager::InputManager()
 {
-	for (int i=0; i<256; i++) {
+	for (int i=0; i<256; i++) 
+	{
 		keysPressedNotChecked[i]=false;
 		keys[i]=false;
 	}
 	for (int i=0; i<5; i++)
+	{
 		mouseButtons[i] = false;
+	}
 	mouseX = 0;
 	mouseY = 0;
 	mouseCentered = false;
@@ -24,19 +29,25 @@ InputManager::InputManager()
 
 void InputManager::registerKeyDown(int key)
 {
-	if (key < 256) {
+	if (key < 256) 
+	{
 		keys[key]=true;
 		keysPressedNotChecked[key]=true;
-	} else {
+	} 
+	else 
+	{
 		specialKeyPressed.insert(key);
 	}
 }
 
 void InputManager::registerKeyUp(int key)
 {
-	if (key < 256) {
+	if (key < 256) 
+	{
 		keys[key]=false;
-	} else {
+	}
+	else 
+	{
 		specialKeyPressed.erase(key);
 	}
 }
@@ -49,7 +60,8 @@ bool InputManager::isKeyDown(int key)
 
 bool InputManager::isSpecialKeyDown(int key)
 {
-	if (specialKeyPressed.find(key) == specialKeyPressed.end()) {
+	if (specialKeyPressed.find(key) == specialKeyPressed.end()) 
+	{
 		return false;
 	}
 	return true;
@@ -57,7 +69,8 @@ bool InputManager::isSpecialKeyDown(int key)
 
 bool InputManager::isKeyDownOnce(int key)
 {
-	if(keysPressedNotChecked[key]){
+	if(keysPressedNotChecked[key])
+	{
 		keysPressedNotChecked[key]=false;
 		return true;
 	}

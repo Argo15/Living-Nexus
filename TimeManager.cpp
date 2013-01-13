@@ -2,23 +2,28 @@
 
 TimeManager* TimeManager::m_pInstance = 0;
 
-TimeManager::TimeManager() {
+TimeManager::TimeManager() 
+{
 	gameTime.updateToSystemTime();
 	timestamp = gameTime.getSecondsSinceMidnight();
 }
 
-TimeManager *TimeManager::getInstance() {
-	if (m_pInstance == 0) {
+TimeManager *TimeManager::getInstance() 
+{
+	if (m_pInstance == 0) 
+	{
 		m_pInstance = new TimeManager();
 	}
 	return m_pInstance;
 }
 
-void TimeManager::tick() {
+void TimeManager::tick() 
+{
 	gameTime.updateToSystemTime();
 }
 
-std::string TimeManager::toString() {
+std::string TimeManager::toString() 
+{
 	char buff[100];
 	sprintf(buff, "%d:%d:%d %d/%d/%d", 
 		gameTime.getHours(), gameTime.getMinutes(), gameTime.getSeconds(),
@@ -27,6 +32,7 @@ std::string TimeManager::toString() {
 	return sTime;
 }
 
-GameTime TimeManager::getGameTime() {
+GameTime TimeManager::getGameTime() 
+{
 	return gameTime;
 }

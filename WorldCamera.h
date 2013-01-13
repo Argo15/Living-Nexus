@@ -3,13 +3,13 @@
 
 #include "Camera.h"
 
-class WorldCamera : public Camera {
+class WorldCamera : public Camera
+{
 private:
 	float speedFactor;
 
 public:
 	WorldCamera();
-	~WorldCamera() {}
 
 	void move(float speed);
 	void moveForward(float speed);

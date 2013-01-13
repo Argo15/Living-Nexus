@@ -19,7 +19,8 @@ int sizeX = 0;
 int sizeY = 0;
 int counter = 0;
 
-void init() {
+void init() 
+{
 	Config::getInstance();
 
 	TextureManager::getInstance()->Initialize();
@@ -32,23 +33,28 @@ void init() {
 	GameState::GAMESTATE = new WorldState();
 }
 
-void resize(int w, int h) {
+void resize(int w, int h) 
+{
 	GameState::GAMESTATE->resize(w,h);
 	sizeX = w;
 	sizeY = h;
 }
 
-void render(void) {
+void render(void) 
+{
 	int lastTime = currentTime;
 	currentTime = glutGet( GLUT_ELAPSED_TIME );
 	int elapsedTime = currentTime - lastTime;
 	vsync += elapsedTime;
 	
-	if (vsync > (1000/60)){
+	if (vsync > (1000/60))
+	{
 		TimeManager::getInstance()->tick();
 		float fps = 1000.0f/elapsedTime;
 		if (fps > 60)
+		{
 			fps=60;
+		}
 		vsync = 0;
 
 		char buffer[5];
@@ -62,33 +68,45 @@ void render(void) {
 	
 }
 
-void keyDown(unsigned char key, int xx, int yy) {
-	if (key == 27) { 
+void keyDown(unsigned char key, int xx, int yy) 
+{
+	if (key == 27) 
+	{ 
 		UserSession::getInstance()->endUserSession();
 		Profiler::getInstance()->logProfile();
 		exit(0);
 	}
 	InputManager::getInstance()->registerKeyDown((int)key);
 	if (key >= '1' && key <= '9') 
+	{
 		RenderStateManager::RENDERSTATE = (RenderState)((int)key-(int)'0');
+	}
 }
 
-void keyUp(unsigned char key, int xx, int yy) {
+void keyUp(unsigned char key, int xx, int yy) 
+{
 	InputManager::getInstance()->registerKeyUp((int)key);
 }
 
-void mousePress(int button, int state, int x, int y) {
+void mousePress(int button, int state, int x, int y) 
+{
 	if (state == GLUT_DOWN)
+	{
 		InputManager::getInstance()->registerMouseButtonDown(button);
+	}
 	else
+	{
 		InputManager::getInstance()->registerMouseButtonUp(button);
+	}
 }
 
-void mousePressedMove(int x, int y) {
+void mousePressedMove(int x, int y) 
+{
 	InputManager::getInstance()->setMousePosition(x,y);
 }
 
-void mouseReleasedMove(int x, int y) {
+void mouseReleasedMove(int x, int y) 
+{
 	InputManager::getInstance()->setMousePosition(x,y);
 }
 
@@ -101,7 +119,8 @@ void mouseWheel(int button, int dir, int x, int y)
 {
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv) 
+{
 	// init GLUT and create window
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);

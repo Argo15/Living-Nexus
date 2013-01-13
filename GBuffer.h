@@ -31,29 +31,80 @@ private:
 
 public:
 	GBuffer(int width, int height);
-	~GBuffer(){glDeleteFramebuffers(1,&buffer);}
+	~GBuffer()
+	{
+		glDeleteFramebuffers(1,&buffer);
+	}
 
 	void drawToBuffer(View *view);
 
-	void bind() {glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, buffer);}
-	void unbind() {glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);}
+	void bind() 
+	{
+		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, buffer);
+	}
+	void unbind() 
+	{
+		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+	}
 
-	void bindDepthTex() {glBindTexture(GL_TEXTURE_2D, depthTex);}
-	void bindNormalTex() {glBindTexture(GL_TEXTURE_2D, normalTex);}
-	void bindColorTex() {glBindTexture(GL_TEXTURE_2D, colorTex);}
-	void bindPositionTex() {glBindTexture(GL_TEXTURE_2D, worldPosTex);}
-	void bindGlowTex() {glBindTexture(GL_TEXTURE_2D, glowTex);}
-	void bindMotionTex() {glBindTexture(GL_TEXTURE_2D, motionTex);}
+	void bindDepthTex() 
+	{
+		glBindTexture(GL_TEXTURE_2D, depthTex);
+	}
+	void bindNormalTex() 
+	{
+		glBindTexture(GL_TEXTURE_2D, normalTex);
+	}
+	void bindColorTex() 
+	{
+		glBindTexture(GL_TEXTURE_2D, colorTex);
+	}
+	void bindPositionTex() 
+	{
+		glBindTexture(GL_TEXTURE_2D, worldPosTex);
+	}
+	void bindGlowTex() 
+	{
+		glBindTexture(GL_TEXTURE_2D, glowTex);
+	}
+	void bindMotionTex() 
+	{
+		glBindTexture(GL_TEXTURE_2D, motionTex);
+	}
 
-	GLuint getGlowTex() {return glowTex;}
-	GLuint getDepthTex() {return depthTex;}
-	GLuint getColorTex() {return colorTex;}
-	GLuint getNormalTex() {return normalTex;}
-	GLuint getWorldPosTex() {return worldPosTex;}
-	GLuint getMotionTex() {return motionTex;}
+	GLuint getGlowTex() 
+	{
+		return glowTex;
+	}
+	GLuint getDepthTex() 
+	{
+		return depthTex;
+	}
+	GLuint getColorTex() 
+	{
+		return colorTex;
+	}
+	GLuint getNormalTex()
+	{
+		return normalTex;
+	}
+	GLuint getWorldPosTex() 
+	{
+		return worldPosTex;
+	}
+	GLuint getMotionTex() 
+	{
+		return motionTex;
+	}
 
-	int getWidth() {return width;}
-	int getHeight() {return height;}
+	int getWidth() 
+	{
+		return width;
+	}
+	int getHeight() 
+	{
+		return height;
+	}
 };
 
 #endif

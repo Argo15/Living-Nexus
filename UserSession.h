@@ -4,13 +4,14 @@
 #include <string>
 #include "User.h"
 
-
 /*
+ * Allows access to the current user, enforces that only one user is active at any given time.
+ *
  * author wcrane
  * date 7/14/2012
- * Allows access to the current user, enforces that only one user is active at any given time.
  */
-class UserSession {
+class UserSession 
+{
 private:
 	static UserSession *m_pInstance;
 	User *activeUser;

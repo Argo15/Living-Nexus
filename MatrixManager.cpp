@@ -14,8 +14,10 @@ MatrixManager::MatrixManager()
 	pushMatrix3(NORMAL, glm::mat3(1.0f)); 
 }
 
-MatrixManager *MatrixManager::getInstance() {
-	if (m_pInstance == 0) {
+MatrixManager *MatrixManager::getInstance()
+{
+	if (m_pInstance == 0)
+	{
 		m_pInstance = new MatrixManager();
 	}
 	return m_pInstance;

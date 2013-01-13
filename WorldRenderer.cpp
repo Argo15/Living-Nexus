@@ -35,7 +35,9 @@ void WorldRenderer::init()
 void WorldRenderer::resize(int w, int h)
 {
 	if(h == 0)
+	{
 		h = 1;
+	}
 	GLfloat aspect = GLfloat(w) / h;
 	view->viewport(0, 0, w, h);
 	view->set3D(45.0f,aspect,0.01,50);
@@ -97,20 +99,34 @@ void WorldRenderer::defferedRender()
     glLoadIdentity();
 	
 	glBindTexture(GL_TEXTURE_2D, 0);
-	if (RenderStateManager::RENDERSTATE == FINAL)		
+	if (RenderStateManager::RENDERSTATE == FINAL)
+	{
 		motionBlurBuffer->bindBlurTex();
-	if (RenderStateManager::RENDERSTATE == POSITION)	
+	}
+	if (RenderStateManager::RENDERSTATE == POSITION)
+	{
 		gBuffer->bindPositionTex();
-	if (RenderStateManager::RENDERSTATE == NORMALMAP)		
+	}
+	if (RenderStateManager::RENDERSTATE == NORMALMAP)	
+	{
 		gBuffer->bindNormalTex();
-	if (RenderStateManager::RENDERSTATE == COLOR)		
+	}
+	if (RenderStateManager::RENDERSTATE == COLOR)	
+	{
 		atmosphereBuffer->bindColorTex();
-	if (RenderStateManager::RENDERSTATE == LIGHTING)	
+	}
+	if (RenderStateManager::RENDERSTATE == LIGHTING)
+	{
 		lightBuffer->bindLightTex();
-	if (RenderStateManager::RENDERSTATE == SPECULAR)	
+	}
+	if (RenderStateManager::RENDERSTATE == SPECULAR)
+	{
 		lightBuffer->bindGlowTex();
-	if (RenderStateManager::RENDERSTATE == MOTION)		
+	}
+	if (RenderStateManager::RENDERSTATE == MOTION)	
+	{
 		gBuffer->bindMotionTex();
+	}
 	drawScreen(0.0,0.0,1.0,1.0);
 }
 
@@ -121,9 +137,12 @@ void WorldRenderer::render()
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 	frustum->getFrustum(worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera(),view);
 	
-	if (RenderStateManager::RENDERSTATE == FORWARD) {
+	if (RenderStateManager::RENDERSTATE == FORWARD)
+	{
 		forwardRender();
-	} else {
+	}
+	else
+	{
 		defferedRender();
 	}
 

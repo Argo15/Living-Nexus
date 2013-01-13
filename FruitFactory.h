@@ -9,7 +9,14 @@ static std::string S_PEAR_TILE		= "Pear";
 static std::string S_CHERRY_TILE	= "Cherry";
 static std::string S_FRUIT_TEXTURE	= "cobble";
 
-enum FruitType {NONE, APPLE, ORANGE, PEAR, CHERRY};
+enum FruitType 
+{
+	NONE, 
+	APPLE, 
+	ORANGE, 
+	PEAR, 
+	CHERRY
+};
 
 class FruitFactory 
 {

@@ -6,18 +6,22 @@ typedef boost::unordered_map<std::string, std::string>::value_type string_value;
 
 Config* Config::m_pInstance = 0;
 
-Config::Config() {
+Config::Config() 
+{
 	initializeConfig();
 }
 
-Config *Config::getInstance() {
-	if (m_pInstance == 0) {
+Config *Config::getInstance() 
+{
+	if (m_pInstance == 0) 
+	{
 		m_pInstance = new Config();
 	}
 	return m_pInstance;
 }
 
-void Config::initializeConfig() {
+void Config::initializeConfig() 
+{
 	std::string line;
 	std::ifstream configFile(S_COMMON_INI_PATH.c_str());
 	if (configFile.is_open())
@@ -36,21 +40,26 @@ void Config::initializeConfig() {
 	}
 }
 
-std::string Config::getFieldString(std::string field) {
+std::string Config::getFieldString(std::string field) 
+{
 	return hmConfigFields[field];
 }
 
-int Config::getFieldInt(std::string field) {
+int Config::getFieldInt(std::string field) 
+{
 	return atoi(hmConfigFields[field].c_str());
 }
 
-void Config::setField(std::string key, std::string value) {
+void Config::setField(std::string key, std::string value) 
+{
 	hmConfigFields[key] = value;
 }
 
-std::string Config::toString() {
+std::string Config::toString() 
+{
 	std::string fieldList;
-	BOOST_FOREACH(string_value i, hmConfigFields) {
+	BOOST_FOREACH(string_value i, hmConfigFields) 
+	{
 		fieldList = fieldList + i.first + " = " + i.second + "\n";
 	}
 	return fieldList;

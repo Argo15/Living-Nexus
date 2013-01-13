@@ -26,21 +26,48 @@ private:
 
 public:
 	LightBuffer(int width, int height);
-	~LightBuffer(){glDeleteFramebuffers(1,&buffer);}
+	~LightBuffer()
+	{
+		glDeleteFramebuffers(1,&buffer);
+	}
 
 	void drawToBuffer(GLuint normalTex, GLuint depthTex, GLuint glowTex, View *view);
 
-	void bind() {glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, buffer);}
-	void unbind() {glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);}
+	void bind() 
+	{
+		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, buffer);
+	}
+	void unbind() 
+	{
+		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+	}
 
-	void bindLightTex() {glBindTexture(GL_TEXTURE_2D, lightTex);}
-	void bindGlowTex() {glBindTexture(GL_TEXTURE_2D, glowTex);}
+	void bindLightTex() 
+	{
+		glBindTexture(GL_TEXTURE_2D, lightTex);
+	}
+	void bindGlowTex() 
+	{
+		glBindTexture(GL_TEXTURE_2D, glowTex);
+	}
 
-	GLuint getLightTex() {return lightTex;}
-	GLuint getGlowTex() {return glowTex;}
+	GLuint getLightTex() 
+	{
+		return lightTex;
+	}
+	GLuint getGlowTex() 
+	{
+		return glowTex;
+	}
 
-	int getWidth() {return width;}
-	int getHeight() {return height;}
+	int getWidth() 
+	{
+		return width;
+	}
+	int getHeight() 
+	{
+		return height;
+	}
 };
 
 #endif

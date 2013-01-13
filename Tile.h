@@ -3,10 +3,10 @@
 
 #include "Chunk.h"
 
-class Tile : public Chunk {
+class Tile : public Chunk 
+{
 public:
 	Tile();
-	~Tile() {}
 
 	bool loadTile(string filename);
 	void drawTile(string shader);

@@ -11,7 +11,8 @@
 #include "GameTime.h"
 using namespace std;
 
-class WorldManager {
+class WorldManager
+{
 private:
 	WorldChunks *worldChunks;
 	WorldTiles *worldTiles;
@@ -21,7 +22,6 @@ private:
 
 public:
 	WorldManager();
-	~WorldManager() {}
 
 	void tick(int fps);
 	void loadWorld(string filename);
@@ -29,8 +29,14 @@ public:
 	void renderWorld(string shader, Frustum *frustum = 0);
 	void updateSunToGameTime(GameTime time);
 
-	WorldChunks *getWorldChunks() {return worldChunks;}
-	DirectLight *getSun() {return sun;}
+	WorldChunks *getWorldChunks()
+	{
+		return worldChunks;
+	}
+	DirectLight *getSun()
+	{
+		return sun;
+	}
 };
 
 #endif

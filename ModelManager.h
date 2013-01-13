@@ -6,7 +6,8 @@
 #include "AObjModel.h"
 using namespace std;
 
-class ModelManager {
+class ModelManager
+{
 private:
 	static ModelManager *m_pInstance;
 	map<string,Model *> models;
@@ -22,10 +23,14 @@ public:
 	void DeleteModel(string name);
 	void DeleteAllModels();
 
-	Model *getModel(string name) { 
+	Model *getModel(string name)
+	{ 
 		return models[name]; 
 	}
-	map<string,Model *> *getModels() {return &models;}		
+	map<string,Model *> *getModels() 
+	{
+		return &models;
+	}		
 };
 
 #endif

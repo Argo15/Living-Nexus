@@ -1,13 +1,15 @@
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
 
-class GameState {
+class GameState
+{
 public:
 	static GameState *GAMESTATE;
 
 public:
-	GameState() {}
-	~GameState() {}
+	GameState()
+	{
+	}
 
 	virtual void resize(int w, int h) = 0;
 	virtual void tick(int fps) = 0;

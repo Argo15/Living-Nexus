@@ -4,7 +4,8 @@
 #include <string>
 #include <fstream>
 
-class LoggerHelper {
+class LoggerHelper 
+{
 private:
 	std::string m_sFileName;
 	std::string m_sLoggingType;

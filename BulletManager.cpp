@@ -18,14 +18,18 @@ BulletManager::BulletManager()
 void BulletManager::tick(int fps)
 {
 	if (playerBody == 0)
+	{
 		createPlayerBody();
+	}
 }
 
 void BulletManager::addPhysicsShape(PhysicsShape *shape)
 {
 	btCollisionShape* bodyShape = shape->getCollisionShape();
 	if (bodyShape == 0) 
+	{
 		return;
+	}
 	btTransform bodyTransform;
 	bodyTransform.setIdentity();
 	bodyTransform.setFromOpenGLMatrix(&shape->matrix[0][0]);
@@ -64,7 +68,6 @@ void BulletManager::createPlayerBody()
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,bodyShape,localInertia);
 	playerBody = new btRigidBody(rbInfo);
 	playerBody->setAngularFactor(0);
-	//playerBody->setFriction(btScalar(0.0));
 	dynamicsWorld->addRigidBody(playerBody);
 }
 
@@ -79,13 +82,21 @@ void BulletManager::updateDynamicsWorld(float speed)
 	oldEye[1] = camera->geteyeY();
 	oldEye[2] = camera->geteyeZ();
 	if (InputManager::getInstance()->isKeyDown('w'))
+	{
 		camera->moveForward(speed*0.1f);
+	}
 	if (InputManager::getInstance()->isKeyDown('s'))
+	{
 		camera->moveBackward(speed*0.1f);
+	}
 	if (InputManager::getInstance()->isKeyDown('a'))
+	{
 		camera->moveLeft(speed*0.1f);
+	}
 	if (InputManager::getInstance()->isKeyDown('d'))
+	{
 		camera->moveRight(speed*0.1f);
+	}
 	float *newEye = camera->getEye();
 	playerBody->activate(true);
 	playerBody->setLinearVelocity(100*btVector3(newEye[0]-oldEye[0],-0.04,newEye[2]-oldEye[2]));

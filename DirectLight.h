@@ -7,13 +7,13 @@
 #include "GLSLProgram.h"
 using namespace std;
 
-class DirectLight : public Light, public Transformable {
+class DirectLight : public Light, public Transformable
+{
 private:
 	float direction[4];
 
 public:
 	DirectLight();
-	~DirectLight(){}
 
 	void sendToShader(string shader);
 	void setDirection(float x, float y, float z);

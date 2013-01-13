@@ -92,7 +92,10 @@ public:
 	bool FlipVertical();
 
 	// returns the current image data
-	unsigned char *GetImage() { return m_pImageData; }
+	unsigned char *GetImage() 
+	{ 
+		return m_pImageData; 
+	}
 };
 
 #endif

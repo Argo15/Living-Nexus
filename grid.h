@@ -12,13 +12,43 @@ private:
 	int length,width;
 	float center[2];
 public:
-	grid() {width=16;length=16;color[0]=0;color[1]=0;color[2]=0;center[0]=0;center[1]=0;}
-	grid(int l, int w) {length=l;width=w;color[0]=0;color[1]=0;color[2]=0;center[0]=0;center[1]=0;}
-	~grid() {}
+	grid()
+	{
+		width=16;
+		length=16;
+		color[0]=0;
+		color[1]=0;
+		color[2]=0;
+		center[0]=0;
+		center[1]=0;
+	}
+	grid(int l, int w)
+	{
+		length=l;
+		width=w;
+		color[0]=0;
+		color[1]=0;
+		color[2]=0;
+		center[0]=0;
+		center[1]=0;
+	}
 
-	void setColor(float r, float g, float b) { color[0]=r;color[1]=g;color[2]=b;}
-	void setSize(int l, int w) {length=l;width=w;}
-	void setCenter(float x, float y) {center[0]=x;center[1]=y;}
+	void setColor(float r, float g, float b)
+	{
+		color[0]=r;
+		color[1]=g;
+		color[2]=b;
+	}
+	void setSize(int l, int w)
+	{
+		length=l;
+		width=w;
+	}
+	void setCenter(float x, float y)
+	{
+		center[0]=x;
+		center[1]=y;
+	}
 
 	void draw()
 	{
@@ -31,17 +61,21 @@ public:
 		glVertexAttrib3f(4,0.0,0.0,0.0);
 		//glVertexAttrib3f(5,color[0],color[1],color[2]);
 		glColor3f(1.0,1.0,1.0);
-		for (int x=0;x<=width;x++){
+		for (int x=0;x<=width;x++)
+		{
 			float a = center[0]-u+(float)x;
-			for (float i=-v; i<v-0.1; i+=0.1) {
+			for (float i=-v; i<v-0.1; i+=0.1)
+			{
 				glBegin(GL_LINES);
 					glVertex3f(a,0,center[1]+i);
 					glVertex3f(a,0,center[1]+i+0.1);
 				glEnd();
 			}
 		}
-		for (int y=0;y<=length;y++){
-			for (float i=-u; i<u-0.1; i+=0.1) {
+		for (int y=0;y<=length;y++)
+		{
+			for (float i=-u; i<u-0.1; i+=0.1)
+			{
 				float b = center[1]-v+(float)y;
 				glBegin(GL_LINES);
 					glVertex3f(center[0]+i,0,b);

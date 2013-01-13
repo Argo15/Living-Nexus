@@ -10,7 +10,8 @@
 #undef __gl_h_
 #include <GL/GLee.h>
 
-class PerlinNoise : public Texture {
+class PerlinNoise : public Texture
+{
 private:
 	float map32[32 * 32];
 	float map256[256 * 256];

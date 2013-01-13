@@ -2,13 +2,15 @@
 #include "TimeManager.h"
 #include <direct.h>
 
-LoggerHelper::LoggerHelper(std::string sFileName, std::string sLoggingType) {
+LoggerHelper::LoggerHelper(std::string sFileName, std::string sLoggingType) 
+{
 	m_sFileName = std::string(sFileName);
 	m_sLoggingType = std::string(sLoggingType);
 	year = 0;
 }
 
-std::string LoggerHelper::getLogDir() {
+std::string LoggerHelper::getLogDir() 
+{
 	char cPath[100];
 	sprintf(cPath, "Logs/%i/", year);
 	_mkdir(cPath);
@@ -19,8 +21,10 @@ std::string LoggerHelper::getLogDir() {
 	return std::string(cPath);
 }
 
-void LoggerHelper::commonLogError(std::string sMessage, std::string sMessageType) {
-	if (year == 0) {
+void LoggerHelper::commonLogError(std::string sMessage, std::string sMessageType) 
+{
+	if (year == 0) 
+	{
 		year = TimeManager::getInstance()->getGameTime().getYear();
 		month = TimeManager::getInstance()->getGameTime().getMonth();
 		day = TimeManager::getInstance()->getGameTime().getDay();\
@@ -41,14 +45,17 @@ void LoggerHelper::commonLogError(std::string sMessage, std::string sMessageType
 	}
 }
 
-void LoggerHelper::info(std::string sMessage) {
+void LoggerHelper::info(std::string sMessage) 
+{
 	commonLogError(sMessage, "INFO");
 }
 
-void LoggerHelper::warn(std::string sMessage) {
+void LoggerHelper::warn(std::string sMessage) 
+{
 	commonLogError(sMessage, "WARNING");
 }
 
-void LoggerHelper::error(std::string sMessage) {
+void LoggerHelper::error(std::string sMessage) 
+{
 	commonLogError(sMessage, "ERROR");
 }

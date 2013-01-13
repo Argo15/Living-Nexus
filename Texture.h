@@ -14,7 +14,6 @@ protected:
 
 public:
 	Texture();
-	~Texture() {}
 
 	virtual bool load(const char *filename) = 0;
 	void use();

@@ -5,7 +5,8 @@
 Material::Material()
 	: Entity()
 {
-	for (int i=0;i<3;i++){
+	for (int i=0;i<3;i++)
+	{
 		color[i]=1.0;
 		emission[i]=0.0;
 	}
@@ -55,7 +56,8 @@ void Material::sendToShader(string shader)
 	glslProgram->sendUniform("normalmap", 1);
 	glslProgram->sendUniform("material.normalenabled", normalEnabled);
 	glslProgram->sendUniform("material.color", color[0],color[1],color[2]);
-	if (shader == "GBuffer" || shader == "Basic") {
+	if (shader == "GBuffer" || shader == "Basic")
+	{
 		glslProgram->sendUniform("material.emission", emission[0],emission[1],emission[2]);
 		glslProgram->sendUniform("material.specular", specular);
 		glslProgram->sendUniform("material.shininess", (float)shininess/128.0f);
@@ -76,14 +78,20 @@ bool Material::loadMaterial(const char* filename)
 	{ 
 		file.seekg (0, ios::beg);
 		file.read((char*)&load,sizeof(load));
-	} else { return false; }
+	} 
+	else 
+	{ 
+		return false; 
+	}
 	file.close();
 
-	for (int i=0; i<3; i++) {
+	for (int i=0; i<3; i++) 
+	{
 		color[i] = load.color[i];
 		emission[i] = load.emission[i];
 	}
-	for (int i=0; i<2; i++) {
+	for (int i=0; i<2; i++) 
+	{
 		texOffset[i] = load.texOffset[i];
 		texScale[i] = load.texScale[i];
 	}
@@ -101,11 +109,13 @@ bool Material::loadMaterial(const char* filename)
 void Material::saveMaterial(const char *filename)
 {
 	SaveMat save;
-	for (int i=0; i<3; i++) {
+	for (int i=0; i<3; i++) 
+	{
 		save.color[i] = color[i];
 		save.emission[i] = emission[i];
 	}
-	for (int i=0; i<2; i++) {
+	for (int i=0; i<2; i++) 
+	{
 		save.texOffset[i] = texOffset[i];
 		save.texScale[i] = texScale[i];
 	}

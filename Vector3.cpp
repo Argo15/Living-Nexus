@@ -39,14 +39,18 @@ float &Vector3::operator [](unsigned int i)
 Vector3	&Vector3::operator =(Vector3 &v)
 {
 	for (int i=0;i<3;i++)
+	{
 		data[i]=v[i];
+	}
 	return *this;
 }
 
 Vector3	&Vector3::operator =(Vector4 &v)
 {
 	for (int i=0;i<3;i++)
+	{
 		data[i]=v[i];
+	}
 	return *this;
 }
 
@@ -86,8 +90,12 @@ Vector3	&Vector3::operator *=(float f)
 bool Vector3::operator ==(Vector3 &v)
 {
 	for (int i=0;i<3;i++)
+	{
 		if (data[i]!=v[i])
+		{
 			return false;
+		}
+	}
 
 	return true;
 }
@@ -101,7 +109,9 @@ Vector3  Vector3::operator +(Vector3 &v)
 {
 	Vector3 ret = *this;
 	for (int i=0;i<3;i++)
+	{
 		ret[i]=ret[i]+v[i];
+	}
 	return ret;
 }
 
@@ -109,7 +119,9 @@ Vector3  Vector3::operator -(Vector3 &v)
 {
 	Vector3 ret = *this;
 	for (int i=0;i<3;i++)
+	{
 		ret[i]=ret[i]-v[i];
+	}
 	return ret;
 }
 
@@ -117,7 +129,9 @@ Vector3  Vector3::operator /(Vector3 &v)
 {
 	Vector3 ret = *this;
 	for (int i=0;i<3;i++)
+	{
 		ret[i]=ret[i]/v[i];
+	}
 	return ret;
 }
 
@@ -125,7 +139,9 @@ Vector3  Vector3::operator *(Vector3 &v)
 {
 	Vector3 ret = *this;
 	for (int i=0;i<3;i++)
+	{
 		ret[i]=ret[i]*v[i];
+	}
 	return ret;
 }
 
@@ -133,7 +149,9 @@ Vector3  Vector3::operator *(float f)
 {
 	Vector3 ret = *this;
 	for (int i=0;i<3;i++)
+	{
 		ret[i]=ret[i]*f;
+	}
 	return ret;
 }
 
@@ -159,7 +177,9 @@ Vector3 &Vector3::normalize()
 {
 	float length = this->length();
 	for (int i=0;i<3;i++)
+	{
 		data[i]/=length;
+	}
 	return *this;
 }
 

@@ -13,7 +13,8 @@ void PerlinNoise::SetNoise(float  *map)
 	float temp[34][34];
 	int random=rand() % 5000;
 
-	for (int y=1; y<33; y++) {
+	for (int y=1; y<33; y++)
+	{
 		for (int x=1; x<33; x++)
 		{
 			temp[x][y] = 128.0f + Noise(x,  y,  random)*128.0f;
@@ -31,7 +32,8 @@ void PerlinNoise::SetNoise(float  *map)
 	temp[0][33] = temp[32][1];
 	temp[33][0] = temp[1][32];
 
-	for (int y=1; y<33; y++) {
+	for (int y=1; y<33; y++)
+	{
 		for (int x=1; x<33; x++)
 		{
 			float center = temp[x][y]/4.0f;
@@ -66,8 +68,10 @@ void PerlinNoise::OverlapOctaves(float  *map32, float  *map256)
 	{
 		map256[x] = 0;
 	}
-	for (int octave=0; octave<4; octave++) {
-		for (int x=0; x<256; x++) {
+	for (int octave=0; octave<4; octave++)
+	{
+		for (int x=0; x<256; x++)
+		{
 			for (int y=0; y<256; y++)
 			{
 				float scale = 1 / pow(2.0, 3-octave);
@@ -91,7 +95,8 @@ void PerlinNoise::ExpFilter(float  *map)
   }
 }
 
-bool PerlinNoise::load(const char *name) {
+bool PerlinNoise::load(const char *name)
+{
 	srand ( time(NULL) );
 	SetNoise(map32);
 	OverlapOctaves(map32, map256);
@@ -99,7 +104,8 @@ bool PerlinNoise::load(const char *name) {
 
 	char texture[256][256][3];       //Temporary array to hold texture RGB values 
 
-	for(int i=0; i<256; i++) {       //Set cloud color value to temporary array
+	for(int i=0; i<256; i++)       //Set cloud color value to temporary array
+	{
 		for(int j=0; j<256; j++) 
 		{
 			float color = map256[i*256+j]; 

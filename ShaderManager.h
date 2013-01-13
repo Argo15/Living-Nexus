@@ -7,7 +7,8 @@
 #include "GLSLShader.h"
 using namespace std;
 
-class ShaderManager {
+class ShaderManager 
+{
 private:
 	static ShaderManager *m_pInstance;
 	map<string,GLSLProgram *> shaders;
@@ -24,8 +25,14 @@ public:
 	void DeleteShader(string name);
 	void DeleteAllShaders();
 
-	GLSLProgram *getShader(string name) { return shaders[name]; }
-	map<string,GLSLProgram *> *getShaders() {return &shaders;}	
+	GLSLProgram *getShader(string name) 
+	{ 
+		return shaders[name]; 
+	}
+	map<string,GLSLProgram *> *getShaders() 
+	{
+		return &shaders;
+	}
 };
 
 #endif

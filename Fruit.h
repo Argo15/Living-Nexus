@@ -9,7 +9,8 @@
  * Date: 1/6/2013
  * Fruit object created by FruitFactory, appears on trees.
  */
-class Fruit : public Object {
+class Fruit : public Object
+{
 public:
 	Fruit(std::string sWorldTile, std::string sInventoryTexture, std::string sGroundTile);
 };
