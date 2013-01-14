@@ -41,6 +41,12 @@ FinalBuffer::FinalBuffer(int width, int height)
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 }
 
+FinalBuffer::~FinalBuffer()
+{
+	glDeleteFramebuffers(1,&buffer);
+}
+
+
 void FinalBuffer::drawToBuffer(GLuint colorTex, GLuint lightTex, GLuint glowTex, View *view)
 {
 	Profiler::getInstance()->startProfile("Draw Final");
@@ -79,4 +85,34 @@ void FinalBuffer::drawToBuffer(GLuint colorTex, GLuint lightTex, GLuint glowTex,
 	glslProgram->disable();
 	unbind();	
 	Profiler::getInstance()->endProfile();
+}
+
+void FinalBuffer::bind() 
+{
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, buffer);
+}
+	
+void FinalBuffer::unbind() 
+{
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+}
+
+void FinalBuffer::bindFinalTex() 
+{
+	glBindTexture(GL_TEXTURE_2D, finalTex);
+}
+
+GLuint FinalBuffer::getFinalTex() 
+{
+	return finalTex;
+}
+
+int FinalBuffer::getWidth() 
+{
+	return width;
+}
+	
+int FinalBuffer::getHeight() 
+{
+	return height;
 }

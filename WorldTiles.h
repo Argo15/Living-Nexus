@@ -8,12 +8,19 @@
 #include "Frustum.h"
 using namespace std;
 
+enum TileMode
+{
+	GREEN,
+	RED,
+	YELLOW
+};
+
 class WorldTiles
 {
 private:
 	struct TileData
 	{
-		int tileMode; // 0=green, 1=red, 2=yellow
+		TileMode tileMode; 
 		vector<Tile *> *tiles;
 	};
 
@@ -29,14 +36,8 @@ public:
 	bool addTile(int x, int y, Tile *tile, PhysicsManager *physicsManager);
 	vector<Tile *> *getAllTiles();
 	vector<Tile *> *getVisibleTiles(Frustum *frustum);
-	int getWidth()
-	{
-		return width;
-	}
-	int getHeight()
-	{
-		return height;
-	}
+	int getWidth();
+	int getHeight();
 };
 
 #endif

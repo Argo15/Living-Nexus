@@ -30,3 +30,43 @@ void GameTime::updateToSystemTime()
 
 	datetime = boost::posix_time::second_clock::local_time() + boost::posix_time::hours(m_nHourOffset) + boost::posix_time::minutes(m_nMinuteOffset);
 }
+
+int GameTime::getYear() 
+{ 
+	return datetime.date().year();
+}
+
+int GameTime::getMonth() 
+{ 
+	return datetime.date().month();
+}
+
+int GameTime::getDay() 
+{ 
+	return datetime.date().day();
+}
+
+int GameTime::getHours() 
+{ 
+	return datetime.time_of_day().hours();
+}
+
+int GameTime::getMinutes() 
+{ 
+	return datetime.time_of_day().minutes();
+}
+
+int GameTime::getSeconds() 
+{ 
+	return datetime.time_of_day().seconds();
+}
+
+int GameTime::getMilliseconds() 
+{ 
+	return datetime.time_of_day().total_milliseconds();
+}
+
+int GameTime::getSecondsSinceMidnight() 
+{
+	return getHours()*60*60+getMinutes()*60+getSeconds();
+}

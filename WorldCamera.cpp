@@ -50,3 +50,13 @@ void WorldCamera::moveRight(float speed)
 	lookAt[2]-=cos(hAngle)*speed*speedFactor;
 	lookAt[0]-=sin(hAngle)*speed*speedFactor;
 }
+
+void WorldCamera::moveUp(float speed)
+{
+
+}
+	
+void WorldCamera::moveDown(float speed) 
+{
+
+}

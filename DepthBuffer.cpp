@@ -30,8 +30,28 @@ DepthBuffer::DepthBuffer(int width, int height)
 	}
 	else
 	{
-		Logging::GRAPHICS->info("Depth buffer Done");
+		Logging::GRAPHICS->info("Depth Buffer Done");
 	}
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+}
+
+void DepthBuffer::bind()
+{
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, buffer);
+}
+	
+void DepthBuffer::unbind()
+{
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+}
+	
+GLuint DepthBuffer::getBuffer()
+{
+	return buffer;
+}
+	
+GLuint DepthBuffer::getTexture()
+{
+	return texture;
 }

@@ -31,9 +31,6 @@ void main() {
 		float lightDotLook = dot(eyeDir,sun);
 		lightDotLook = clamp(lightDotLook,0.0,1.0);
 		float sunIntensity = pow(lightDotLook,120.0);
-		//if (sunIntensity < 0.75) {
-		//	sunIntensity = 0.0;
-		//}
 		float skyBrightness = 1-acos(dot(eyeDir,sun))/3.14;
 		vec3 skyColor = skyBrightness*nearSunColor+(1.0-skyBrightness)*awaySunColor;
 		

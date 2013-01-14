@@ -23,14 +23,8 @@ public:
 	void DeleteModel(string name);
 	void DeleteAllModels();
 
-	Model *getModel(string name)
-	{ 
-		return models[name]; 
-	}
-	map<string,Model *> *getModels() 
-	{
-		return &models;
-	}		
+	Model *getModel(string name);
+	map<string,Model *> *getModels();
 };
 
 #endif

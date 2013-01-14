@@ -23,14 +23,8 @@ public:
 	void DeleteTexture(string name);
 	void DeleteAllTextures();
 
-	Texture *getTexture(string name) 
-	{ 
-		return textures[name]; 
-	}
-	map<string,Texture *> *getTextures() 
-	{
-		return &textures;
-	}	
+	Texture *getTexture(string name);
+	map<string,Texture *> *getTextures();
 };
 
 #endif

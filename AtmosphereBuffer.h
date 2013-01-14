@@ -32,48 +32,17 @@ private:
 
 public:
 	AtmosphereBuffer(int width, int height);
-	~AtmosphereBuffer()
-	{
-		glDeleteFramebuffers(1,&buffer);
-	}
+	~AtmosphereBuffer();
 
 	void drawToBuffer(GLuint colorBuf, GLuint glowBuf, GLuint depthBuf, View *view);
-
-	void bind() 
-	{
-		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, buffer);
-	}
-	void unbind() 
-	{
-		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
-	}
-
-	void bindColorTex() 
-	{
-		glBindTexture(GL_TEXTURE_2D, colorTex);
-	}
-	void bindGlowTex() 
-	{
-		glBindTexture(GL_TEXTURE_2D, glowTex);
-	}
-
-	GLuint getGlowTex() 
-	{
-		return glowTex;
-	}
-	GLuint getColorTex() 
-	{
-		return colorTex;
-	}
-
-	int getWidth() 
-	{
-		return width;
-	}
-	int getHeight() 
-	{
-		return height;
-	}
+	void bind();
+	void unbind();
+	void bindColorTex();
+	void bindGlowTex();
+	GLuint getGlowTex();
+	GLuint getColorTex();
+	int getWidth();
+	int getHeight();
 	
 	Vector3 getNearSunColor();
 	Vector3 getAwaySunColor();

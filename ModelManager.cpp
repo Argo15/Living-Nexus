@@ -82,3 +82,13 @@ void ModelManager::DeleteAllModels()
 {
 	models.clear();
 }
+
+Model *ModelManager::getModel(string name)
+{ 
+	return models[name]; 
+}
+
+map<string,Model *> *ModelManager::getModels() 
+{
+	return &models;
+}	

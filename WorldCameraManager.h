@@ -14,14 +14,8 @@ public:
 	WorldCameraManager();
 
 	void tick(int fps);
-	WorldCamera *getPlayerCamera()
-	{
-		return worldCamera;
-	}
-	Camera *getCurrentCamera()
-	{
-		return current;
-	}
+	WorldCamera *getPlayerCamera();
+	Camera *getCurrentCamera();
 };
 
 #endif

@@ -12,61 +12,20 @@ protected:
 public:
 	Transformable();
 
-	void Translate(float x, float y, float z) 
-	{
-		translations[0]+=x;
-		translations[1]+=y;
-		translations[2]+=z;
-	}
-	void Rotate(Quaternion quat) 
-	{
-		rotation=quat*rotation;
-	}
-	void Scale(float x, float y, float z) 
-	{
-		scale[0]+=x;
-		scale[1]+=y;
-		scale[2]+=z;
-	}
-	void setTranslate(float x, float y, float z) 
-	{
-		translations[0]=x;
-		translations[1]=y;
-		translations[2]=z;
-	}
-	void setRotate(Quaternion quat) 
-	{
-		rotation = quat;
-	}
-	void setScale(float x, float y, float z) 
-	{
-		scale[0]=x;
-		scale[1]=y;
-		scale[2]=z;
-	}
-	float *getTranslate() 
-	{
-		float *pTranslate = translations; 
-		return pTranslate;
-	}
-	Quaternion getRotate() 
-	{
-		return rotation;
-	}
-	float *getScale() 
-	{
-		float *pScale;
-		pScale=scale; 
-		return pScale;
-	}
-	Vector3 getTranslateV() 
-	{
-		return Vector3(translations[0],translations[1],translations[2]);
-	}
-
 	void transform();
 	glm::mat4 transformToMatrix(glm::mat4 matrix);
 	glm::mat3 transformToMatrix(glm::mat3 matrix);
+
+	void Translate(float x, float y, float z);
+	void Rotate(Quaternion quat);
+	void Scale(float x, float y, float z);
+	void setTranslate(float x, float y, float z);
+	void setRotate(Quaternion quat);
+	void setScale(float x, float y, float z);
+	float *getTranslate();
+	Quaternion getRotate();
+	float *getScale();
+	Vector3 getTranslateV();
 };
 
 #endif

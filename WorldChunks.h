@@ -20,19 +20,9 @@ public:
 	void generateChunks(ChunkManager *chunks, PhysicsManager *physicsManager);
 	vector<Chunk *> *getAllChunks();
 	vector<Chunk *> *getVisibleChunks(Frustum *frustum);
-	Chunk *getChunk(int x, int y)
-	{
-		return worldChunks[x][y];
-	}
-
-	int getWidth()
-	{
-		return width;
-	}
-	int getHeight()
-	{
-		return height;
-	}
+	Chunk *getChunk(int x, int y);
+	int getWidth();
+	int getHeight();
 };
 
 #endif

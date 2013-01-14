@@ -56,6 +56,11 @@ AtmosphereBuffer::AtmosphereBuffer(int width, int height)
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 }
 
+AtmosphereBuffer::~AtmosphereBuffer()
+{
+	glDeleteFramebuffers(1,&buffer);
+}
+
 void AtmosphereBuffer::drawToBuffer(GLuint colorBuf, GLuint glowBuf, GLuint depthBuf, View *view)
 {
 	Profiler::getInstance()->startProfile("Draw Atmosphere");
@@ -180,4 +185,44 @@ Vector3 AtmosphereBuffer::getCloudColor()
 		vColor = vColor + timeColors[i] * timeWeights[i];
 	}
 	return vColor;
+}
+
+void AtmosphereBuffer::bind() 
+{
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, buffer);
+}
+	
+void AtmosphereBuffer::unbind() 
+{
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+}
+
+void AtmosphereBuffer::bindColorTex() 
+{
+	glBindTexture(GL_TEXTURE_2D, colorTex);
+}
+	
+void AtmosphereBuffer::bindGlowTex() 
+{
+	glBindTexture(GL_TEXTURE_2D, glowTex);
+}
+
+GLuint AtmosphereBuffer::getGlowTex() 
+{
+	return glowTex;
+}
+	
+GLuint AtmosphereBuffer::getColorTex() 
+{
+	return colorTex;
+}
+
+int AtmosphereBuffer::getWidth() 
+{
+	return width;
+}
+	
+int AtmosphereBuffer::getHeight() 
+{
+	return height;
 }

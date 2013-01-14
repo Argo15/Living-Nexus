@@ -20,14 +20,8 @@ public:
 	void DeleteTile(string name);
 	void DeleteAllTiles();
 
-	Tile *getTile(string name) 
-	{ 
-		return tiles[name]; 
-	}
-	map<string,Tile *> *getTiles() 
-	{
-		return &tiles;
-	}
+	Tile *getTile(string name);
+	map<string,Tile *> *getTiles();
 };
 
 #endif

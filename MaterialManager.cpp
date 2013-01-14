@@ -130,3 +130,18 @@ void MaterialManager::SaveAllMaterials()
 		mat->saveMaterial(filename.c_str());
 	}
 }
+
+void MaterialManager::UseMaterial(string name) 
+{
+	materials[name]->use();
+}
+
+Material *MaterialManager::getMaterial(string name) 
+{
+	return materials[name];
+}
+
+map<string,Material *> *MaterialManager::getMaterials() 
+{
+	return &materials;
+}

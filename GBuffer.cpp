@@ -95,6 +95,11 @@ GBuffer::GBuffer(int width, int height)
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
+GBuffer::~GBuffer()
+{
+	glDeleteFramebuffers(1,&buffer);
+}
+
 void GBuffer::drawToBuffer(View *view)
 {
 	Profiler::getInstance()->startProfile("Draw GBuffer");
@@ -141,4 +146,84 @@ void GBuffer::drawToBuffer(View *view)
 	lastCameraProj = MatrixManager::getInstance()->getMatrix4(PROJECTION);
 	lastCamera = *camera;
 	Profiler::getInstance()->endProfile();
+}
+
+void GBuffer::bind() 
+{
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, buffer);
+}
+
+void GBuffer::unbind() 
+{
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+}
+
+void GBuffer::bindDepthTex() 
+{
+	glBindTexture(GL_TEXTURE_2D, depthTex);
+}
+
+void GBuffer::bindNormalTex() 
+{
+	glBindTexture(GL_TEXTURE_2D, normalTex);
+}
+
+void GBuffer::bindColorTex() 
+{
+	glBindTexture(GL_TEXTURE_2D, colorTex);
+}
+
+void GBuffer::bindPositionTex() 
+{
+	glBindTexture(GL_TEXTURE_2D, worldPosTex);
+}
+
+void GBuffer::bindGlowTex() 
+{
+	glBindTexture(GL_TEXTURE_2D, glowTex);
+}
+
+void GBuffer::bindMotionTex() 
+{
+	glBindTexture(GL_TEXTURE_2D, motionTex);
+}
+
+GLuint GBuffer::getGlowTex() 
+{
+	return glowTex;
+}
+
+GLuint GBuffer::getDepthTex() 
+{
+	return depthTex;
+}
+
+GLuint GBuffer::getColorTex() 
+{
+	return colorTex;
+}
+
+GLuint GBuffer::getNormalTex()
+{
+	return normalTex;
+}
+
+GLuint GBuffer::getWorldPosTex() 
+{
+	return worldPosTex;
+}
+
+GLuint GBuffer::getMotionTex() 
+{
+	return motionTex;
+}
+
+int GBuffer::getWidth() 
+{
+	return width;
+}
+
+int GBuffer::getHeight() 
+{
+	return height;
 }

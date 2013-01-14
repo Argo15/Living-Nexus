@@ -32,34 +32,13 @@ public:
 	virtual void resize(int w, int h);
 	virtual void tick(int fps);
 
-	virtual bool mouseHidden()
-	{
-		return mouseHide;
-	}
+	virtual bool mouseHidden();
 
-	ChunkManager *getChunkManager()
-	{
-		return chunkManager;
-	}
-	PhysicsManager *getPhysicsManager()
-	{
-		return physicsManager;
-	}
-	WorldManager *getWorldManager()
-	{
-		return worldManager;
-	}
-	WorldRenderer *getRenderer()
-	{
-		return renderer;
-	}
-	ShadowMapManager *getShadowMapManager()
-	{
-		return shadowMapManager;
-	}
-	TileManager *getTileManager()
-	{
-		return tileManager;
-	}
+	ChunkManager *getChunkManager();
+	PhysicsManager *getPhysicsManager();
+	WorldManager *getWorldManager();
+	WorldRenderer *getRenderer();
+	ShadowMapManager *getShadowMapManager();
+	TileManager *getTileManager();
 };
 #endif

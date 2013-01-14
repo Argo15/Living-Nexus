@@ -36,3 +36,18 @@ GameTime TimeManager::getGameTime()
 {
 	return gameTime;
 }
+
+int TimeManager::getTimeStamp() 
+{
+	return timestamp;
+}
+
+int TimeManager::getTimeInMilliseconds() 
+{
+	return boost::posix_time::microsec_clock::local_time().time_of_day().total_milliseconds();
+}
+
+int TimeManager::getTimeInMicroseconds() 
+{
+	return boost::posix_time::microsec_clock::local_time().time_of_day().total_microseconds();
+}

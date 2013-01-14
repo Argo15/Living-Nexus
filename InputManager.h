@@ -29,22 +29,10 @@ public:
 	void registerMouseButtonUp(int mouse);
 	void setMousePosition(int x, int y);
 	void setMouseCentered(int x, int y);
-	bool isMouseButtonDown(int mouse) 
-	{
-		return mouseButtons[mouse];
-	}
-	int getMouseX() 
-	{
-		return mouseX;
-	}
-	int getMouseY() 
-	{
-		return mouseY;
-	}
-	bool isMouseMoved() 
-	{
-		return mouseMoved;
-	}
+	bool isMouseButtonDown(int mouse);
+	int getMouseX();
+	int getMouseY();
+	bool isMouseMoved();
 };
 
 #endif

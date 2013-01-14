@@ -59,3 +59,38 @@ void WorldState::tick(int fps)
 	shadowMapManager->tick(fps);
 	renderer->render();
 }
+
+bool WorldState::mouseHidden()
+{
+	return mouseHide;
+}
+
+ChunkManager *WorldState::getChunkManager()
+{
+	return chunkManager;
+}
+	
+PhysicsManager *WorldState::getPhysicsManager()
+{
+	return physicsManager;
+}
+	
+WorldManager *WorldState::getWorldManager()
+{
+	return worldManager;
+}
+	
+WorldRenderer *WorldState::getRenderer()
+{
+	return renderer;
+}
+	
+ShadowMapManager *WorldState::getShadowMapManager()
+{
+	return shadowMapManager;
+}
+	
+TileManager *WorldState::getTileManager()
+{
+	return tileManager;
+}

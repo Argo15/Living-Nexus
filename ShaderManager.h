@@ -25,14 +25,8 @@ public:
 	void DeleteShader(string name);
 	void DeleteAllShaders();
 
-	GLSLProgram *getShader(string name) 
-	{ 
-		return shaders[name]; 
-	}
-	map<string,GLSLProgram *> *getShaders() 
-	{
-		return &shaders;
-	}
+	GLSLProgram *getShader(string name);
+	map<string,GLSLProgram *> *getShaders();
 };
 
 #endif

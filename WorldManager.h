@@ -29,14 +29,8 @@ public:
 	void renderWorld(string shader, Frustum *frustum = 0);
 	void updateSunToGameTime(GameTime time);
 
-	WorldChunks *getWorldChunks()
-	{
-		return worldChunks;
-	}
-	DirectLight *getSun()
-	{
-		return sun;
-	}
+	WorldChunks *getWorldChunks();
+	DirectLight *getSun();
 };
 
 #endif

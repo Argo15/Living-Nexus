@@ -67,3 +67,13 @@ void ChunkManager::DeleteAllChunks()
 {
 	chunks.clear();
 }
+
+Chunk *ChunkManager::getChunk(string name) 
+{ 
+	return chunks[name]; 
+}
+
+map<string,Chunk *> *ChunkManager::getChunks() 
+{
+	return &chunks;
+}

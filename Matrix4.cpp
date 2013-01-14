@@ -405,3 +405,8 @@ Matrix4 &Matrix4::setAsProjectionMatrix()
 	*this=proj;
 	return *this;
 }
+
+void Matrix4::multiplyToCurrent()
+{
+	glMultMatrixf(data);
+}

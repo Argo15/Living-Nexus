@@ -17,26 +17,13 @@ private:
 public:
 	Actor(string *model = 0, string *material = 0);
 
-	void setModel(string *model) 
-	{
-		this->model = model;
-	}
-	string *getModel() 
-	{
-		return model;
-	}
-	void setMaterial(string *material) 
-	{
-		this->material = material;
-	}
-	string *getMaterial() 
-	{
-		return material;
-	}
-
-	float getScaledRadius();
-
 	void drawActor(string shader);
+	float getScaledRadius();
+	void setModel(string *model);
+	string *getModel();
+	void setMaterial(string *material);
+	string *getMaterial();
+
 };
 
 #endif

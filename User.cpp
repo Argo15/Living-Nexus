@@ -16,3 +16,8 @@ User::~User()
 {
 
 }
+
+std::string User::getName() 
+{ 
+	return username; 
+}

@@ -9,3 +9,8 @@ void ShadowMapManager::tick(int fps)
 {
 	sunShadow->buildShadowMaps();
 }
+
+CascadedShadowMap *ShadowMapManager::getSunShadow()
+{
+	return sunShadow;
+}

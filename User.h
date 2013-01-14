@@ -20,10 +20,7 @@ public:
 	User(std::string name);
 	~User();
 
-	std::string getName() 
-	{ 
-		return username; 
-	}
+	std::string getName();
 };
 
 #endif

@@ -25,40 +25,16 @@ private:
 
 public:
 	FinalBuffer(int width, int height);
-	~FinalBuffer()
-	{
-		glDeleteFramebuffers(1,&buffer);
-	}
+	~FinalBuffer();
 
 	void drawToBuffer(GLuint colorTex, GLuint lightTex, GLuint glowTex, View *view);
 
-	void bind() 
-	{
-		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, buffer);
-	}
-	void unbind() 
-	{
-		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
-	}
-
-	void bindFinalTex() 
-	{
-		glBindTexture(GL_TEXTURE_2D, finalTex);
-	}
-
-	GLuint getFinalTex() 
-	{
-		return finalTex;
-	}
-
-	int getWidth() 
-	{
-		return width;
-	}
-	int getHeight() 
-	{
-		return height;
-	}
+	void bind();
+	void unbind();
+	void bindFinalTex();
+	GLuint getFinalTex();
+	int getWidth();
+	int getHeight();
 };
 
 #endif

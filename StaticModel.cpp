@@ -35,3 +35,8 @@ void StaticModel::drawGeometry()
 
 	glDisableVertexAttribArray(0);
 }
+
+void StaticModel::remove() 
+{ 
+	glDeleteBuffersARB(1, &bufferID); 
+}

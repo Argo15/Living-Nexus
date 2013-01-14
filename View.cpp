@@ -31,3 +31,60 @@ void View::set2D(GLdouble _left, GLdouble _right, GLdouble _bottom, GLdouble _to
         front=_front;
         back=_back;
 }
+
+void View::viewport() 
+{
+	glViewport(0,0,width,height);
+}
+
+void View::viewport(int x, int y, int width, int height) 
+{
+	this->width = width; 
+	this->height = height; 
+	glViewport(x,y,width,height);
+}
+
+double View::getFOV() 
+{
+	return fovy;
+}
+
+double View::getAspect() 
+{
+	return aspect;
+}
+
+double View::getNear() 
+{
+	return zNear;
+}
+
+double View::getFar() 
+{
+	return zFar;
+}
+
+double View::getOrthoWidth() 
+{
+	return right-left;
+}
+
+double View::getOrthoHeight() 
+{
+	return top-bottom;
+}
+
+double View::getOrthoDepth() 
+{
+	return back-front;
+}
+
+double View::getOrthoNear()
+{
+	return front;
+}
+
+double View::getOrthoFar() 
+{
+	return back;
+}

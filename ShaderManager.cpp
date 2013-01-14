@@ -72,3 +72,13 @@ void ShaderManager::DeleteAllShaders()
 {
 	shaders.clear();
 }
+
+GLSLProgram *ShaderManager::getShader(string name) 
+{ 
+	return shaders[name]; 
+}
+
+map<string,GLSLProgram *> *ShaderManager::getShaders() 
+{
+	return &shaders;
+}

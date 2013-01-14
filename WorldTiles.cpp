@@ -16,7 +16,7 @@ void WorldTiles::init()
 		for (int j=0; j<height; j++)
 		{
 			worldTiles[i][j] = new TileData();
-			worldTiles[i][j]->tileMode = 0;
+			worldTiles[i][j]->tileMode = GREEN;
 			worldTiles[i][j]->tiles = new vector<Tile *>();
 		}
 	}
@@ -35,7 +35,7 @@ void WorldTiles::initializeFromChunks(WorldChunks *chunks, TileManager *manager,
 			{
 				for (int y=0; y<10; y++)
 				{
-					worldTiles[i*10+x][j*10+y]->tileMode = chunk->getTileMode(x,y);
+					worldTiles[i*10+x][j*10+y]->tileMode = (TileMode) chunk->getTileMode(x,y);
 				}
 			}
 		}
@@ -79,11 +79,12 @@ bool WorldTiles::addTile(int x, int y, Tile *tile, PhysicsManager *physicsManage
 		for (int j = 0; j < 10; j++) {
 			int worldX = x+i-5;
 			int worldY = y+j-5;
-			int tileTileMode = tile->getTileMode(i,j); // tile's local tile modes
+			int tileTileMode = (TileMode) tile->getTileMode(i,j); // tile's local tile modes
 			if (worldX >=0 && worldX < 100 && worldY >= 0 && worldY < 100) // inside the tileable zone
 			{
-				int worldTileMode = worldTiles[worldX][worldY]->tileMode;
-				if (tileTileMode >= 1 && worldTileMode >= 1)	// red and yellow can't hit red or yellow
+				int worldTileMode = (TileMode) worldTiles[worldX][worldY]->tileMode;
+				// red and yellow can't hit red or yellow
+				if ((tileTileMode == RED || tileTileMode == YELLOW) && (worldTileMode >= RED || worldTileMode == YELLOW))	
 				{
 					return false;
 				}
@@ -110,7 +111,7 @@ bool WorldTiles::addTile(int x, int y, Tile *tile, PhysicsManager *physicsManage
 			{ 
 				if (worldTiles[worldX][worldY]->tileMode == 0)
 				{
-					worldTiles[worldX][worldY]->tileMode=tileTileMode; // green -> yellow/red
+					worldTiles[worldX][worldY]->tileMode = (TileMode) tileTileMode; // green -> yellow/red
 				}
 				// red stays red
 				// yellow can only update to red
@@ -118,7 +119,7 @@ bool WorldTiles::addTile(int x, int y, Tile *tile, PhysicsManager *physicsManage
 				{
 					if (tileTileMode == 1)
 					{
-						worldTiles[worldX][worldY]->tileMode=tileTileMode; // yellow -> red
+						worldTiles[worldX][worldY]->tileMode = (TileMode) tileTileMode; // yellow -> red
 					}
 				}
 			}
@@ -128,4 +129,14 @@ bool WorldTiles::addTile(int x, int y, Tile *tile, PhysicsManager *physicsManage
 	allTiles->push_back(tile);
 	tile->addPhysicsToDynamicWorld(physicsManager);
 	return true;
+}
+
+int WorldTiles::getWidth()
+{
+	return width;
+}
+
+int WorldTiles::getHeight()
+{
+	return height;
 }

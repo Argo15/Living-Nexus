@@ -14,14 +14,8 @@ public:
 	PhysicsManager();
 
 	void tick(int fps);
-	WorldCameraManager *getWorldCameras() 
-	{
-		return worldCameras;
-	}
-	BulletManager *getBulletManager() 
-	{
-		return bulletManager;
-	}
+	WorldCameraManager *getWorldCameras();
+	BulletManager *getBulletManager();
 };
 
 #endif

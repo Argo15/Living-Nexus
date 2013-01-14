@@ -19,16 +19,16 @@ public:
     void Initialize();
 	void LoadMaterial(string filename);
 	string AddMaterialSafe(Material *material);
-	void UseMaterial(string name) {materials[name]->use();}
 	bool hasMaterial(string name);
 	string renameMaterial(string currentName, string newName);
 	void DeleteMaterial(string name);
 	void DeleteAllMaterials();
 
-	Material *getMaterial(string name) {return materials[name];}
-	map<string,Material *> *getMaterials() {return &materials;}
-
 	void SaveAllMaterials();
+
+	void UseMaterial(string name);
+	Material *getMaterial(string name);
+	map<string,Material *> *getMaterials();
 };
 
 #endif

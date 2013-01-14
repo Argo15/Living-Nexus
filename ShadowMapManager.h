@@ -13,11 +13,7 @@ public:
 	ShadowMapManager();
 
 	void tick(int fps);
-
-	CascadedShadowMap *getSunShadow()
-	{
-		return sunShadow;
-	}
+	CascadedShadowMap *getSunShadow();
 };
 
 #endif

@@ -128,3 +128,23 @@ void Frustum::calcFarPlane(Camera *camera, View *view)
 	fbl = fc - Y * fh - X * fw;
 	fbr = fc - Y * fh + X * fw;
 }
+
+float Frustum::getHNear() 
+{
+	return Hnear;
+}
+
+float Frustum::getWNear() 
+{
+	return Wnear;
+}
+
+float Frustum::getHFar() 
+{
+	return Hfar;
+}
+
+float Frustum::getWFar() 
+{
+	return Wfar;
+}

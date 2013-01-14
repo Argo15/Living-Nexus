@@ -25,40 +25,16 @@ private:
 
 public:
 	MotionBlurBuffer(int width, int height);
-	~MotionBlurBuffer()
-	{
-		glDeleteFramebuffers(1,&buffer);
-	}
+	~MotionBlurBuffer();
 
 	void drawToBuffer(GLuint texture, GLuint velocityTex, int numSamples, View *view);
 
-	void bind() 
-	{
-		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, buffer);
-	}
-	void unbind() 
-	{
-		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
-	}
-
-	void bindBlurTex() 
-	{
-		glBindTexture(GL_TEXTURE_2D, blurTex);
-	}
-
-	GLuint getBlurTex() 
-	{
-		return blurTex;
-	}
-
-	int getWidth() 
-	{
-		return width;
-	}
-	int getHeight() 
-	{
-		return height;
-	}
+	void bind();
+	void unbind();
+	void bindBlurTex();
+	GLuint getBlurTex();
+	int getWidth();
+	int getHeight();
 };
 
 #endif

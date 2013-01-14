@@ -21,6 +21,12 @@ Material::Material()
 	normalEnabled=false;
 }
 
+Material::Material(Material *copyMaterial)
+{
+	*this=*copyMaterial;
+}
+
+
 void Material::use()
 {
 	float spec[] = {specular, specular, specular};
@@ -134,4 +140,130 @@ void Material::saveMaterial(const char *filename)
 		file.write((char*)&save,sizeof(save));
 	}
 	file.close();
+}
+
+void Material::setColor(float r, float g, float b) 
+{
+	color[0]=r;
+	color[1]=g;
+	color[2]=b;
+}
+
+void Material::setEmission(float r, float g, float b) 
+{
+	emission[0]=r;
+	emission[1]=g;
+	emission[2]=b;
+}
+
+void Material::setSpecular(float i) 
+{
+	specular=i;
+}
+
+void Material::setShine(int shine) 
+{
+	shininess=shine;
+}
+
+void Material::setTexOffset(float x, float y) 
+{
+	texOffset[0]=x; 
+	texOffset[1]=y;
+}
+
+void Material::setUTexOffset(float value) 
+{
+	texOffset[0]=value;
+}
+
+void Material::setVTexOffset(float value) 
+{
+	texOffset[1]=value;
+}
+
+void Material::setTexScale(float x, float y) 
+{
+	texScale[0]=x; 
+	texScale[1]=y;
+}
+
+void Material::setUTexScale(float value) 
+{
+	texScale[0]=value;
+}
+
+void Material::setVTexScale(float value) 
+{
+	texScale[1]=value;
+}
+
+void Material::setTexRotate(float rotate) 
+{
+	texRotate=rotate;
+}
+
+float *Material::getColor() 
+{
+	return color;
+}
+
+float *Material::getEmission() 
+{
+	return emission;
+}
+
+float Material::getSpecular() 
+{
+	return specular;
+}
+
+int Material::getShine() 
+{
+	return shininess;
+}
+
+float *Material::getTexOffset() 
+{
+	return texOffset;
+}
+
+float *Material::getTexScale() 
+{
+	return texScale;
+}
+
+float Material::getTexRotate()
+{
+	return texRotate;
+}
+
+void Material::setTexture(string *newTextureName) 
+{
+	textureName=newTextureName;
+}
+
+string *Material::getTexture()
+{
+	return textureName;
+}
+
+void Material::setNormal(string *newNormalName) 
+{
+	normalName=newNormalName;
+}
+
+string *Material::getNormal() 
+{
+	return normalName;
+}
+
+void Material::enableNormal(bool enabled) 
+{
+	normalEnabled=enabled;
+}
+
+bool Material::normalsEnabled()
+{
+	return normalEnabled;
 }

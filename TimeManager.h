@@ -19,9 +19,9 @@ public:
 	std::string toString();
 	void tick();
 	GameTime getGameTime();
-	int getTimeStamp() {return timestamp;}
-	int getTimeInMilliseconds() {return boost::posix_time::microsec_clock::local_time().time_of_day().total_milliseconds();}
-	int getTimeInMicroseconds() {return boost::posix_time::microsec_clock::local_time().time_of_day().total_microseconds();}
+	int getTimeStamp();
+	int getTimeInMilliseconds();
+	int getTimeInMicroseconds();
 };
 
 #endif

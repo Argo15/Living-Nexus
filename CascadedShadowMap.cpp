@@ -6,6 +6,11 @@
 
 #define ANG2RAD 3.14159265358979323846/180.0
 
+CascadedShadowMap::CascadedShadowMap()
+{
+	CascadedShadowMap(1024);
+}
+
 CascadedShadowMap::CascadedShadowMap(int size, float slice1, float slice2, float slice3)
 {
 	for (int i=0;i<4;i++)
@@ -219,4 +224,9 @@ void CascadedShadowMap::sendToShader(string shader)
 void CascadedShadowMap::drawShadowMaps()
 {
 
+}
+
+void CascadedShadowMap::bindShadowMap(int map)
+{
+	glBindTexture(GL_TEXTURE_2D,shadowMaps[map]->getTexture());
 }

@@ -8,7 +8,8 @@
 #include <GL/glee.h>
 #include "Entity.h"
 
-class Texture : public Entity {
+class Texture : public Entity
+{
 protected:
 	GLuint textureID;
 

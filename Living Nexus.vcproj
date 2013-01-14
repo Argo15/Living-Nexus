@@ -17,7 +17,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="$(ProjectDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="2"
@@ -198,10 +198,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Living Nexus.rc"
-				>
-			</File>
-			<File
 				RelativePath=".\Data\Shaders\v_dShadow.glsl"
 				>
 			</File>
@@ -242,6 +238,10 @@
 				</File>
 				<File
 					RelativePath=".\Actor.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Entity.cpp"
 					>
 				</File>
 				<File
@@ -316,7 +316,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\grid.h"
+						RelativePath=".\grid.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Grid.h"
 						>
 					</File>
 					<File
@@ -381,6 +385,10 @@
 					</File>
 					<File
 						RelativePath=".\DirectLight.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Light.cpp"
 						>
 					</File>
 					<File
@@ -533,6 +541,10 @@
 					</File>
 					<File
 						RelativePath=".\AObjModel.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Model.cpp"
 						>
 					</File>
 					<File

@@ -17,26 +17,14 @@ protected:
 	float radius;
 
 public:
-	Model()
-	{
-	}
 	virtual bool load(string filename) = 0;
 	virtual void draw() = 0;
 	virtual void drawGeometry() = 0;
 	virtual void remove() = 0;
 
-	int getNumTriangles()
-	{
-		return numTriangles;
-	}
-	float *getCenter() 
-	{
-		return center;
-	}
-	float getRadius() 
-	{
-		return radius;
-	}
+	int getNumTriangles();
+	float *getCenter();
+	float getRadius();
 	
 };
 

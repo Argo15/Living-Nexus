@@ -40,6 +40,11 @@ MotionBlurBuffer::MotionBlurBuffer(int width, int height)
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 }
 
+MotionBlurBuffer::~MotionBlurBuffer()
+{
+	glDeleteFramebuffers(1,&buffer);
+}
+
 void MotionBlurBuffer::drawToBuffer(GLuint texture, GLuint velocityTex, int numSamples, View *view)
 {
 	Profiler::getInstance()->startProfile("Draw Motion Blur");
@@ -76,4 +81,34 @@ void MotionBlurBuffer::drawToBuffer(GLuint texture, GLuint velocityTex, int numS
 	glslProgram->disable();
 	unbind();	
 	Profiler::getInstance()->endProfile();
+}
+
+void MotionBlurBuffer::bind() 
+{
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, buffer);
+}
+
+void MotionBlurBuffer::unbind() 
+{
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+}
+
+void MotionBlurBuffer::bindBlurTex() 
+{
+	glBindTexture(GL_TEXTURE_2D, blurTex);
+}
+
+GLuint MotionBlurBuffer::getBlurTex() 
+{
+	return blurTex;
+}
+
+int MotionBlurBuffer::getWidth() 
+{
+	return width;
+}
+
+int MotionBlurBuffer::getHeight() 
+{
+	return height;
 }

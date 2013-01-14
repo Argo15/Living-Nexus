@@ -164,3 +164,96 @@ void Camera::recalculate()
 	right[1]=vRight[1];
 	right[2]=vRight[2];
 }
+
+void Camera::transform()
+{
+	MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::lookAt(
+		glm::vec3(eyePos[0],eyePos[1],eyePos[2]),
+		glm::vec3(lookAt[0],lookAt[1],lookAt[2]),
+		glm::vec3(up[0],up[1],up[2])
+	));
+}
+
+glm::mat4 Camera::transformToMatrix(glm::mat4 matrix)
+{
+	return matrix * glm::lookAt(
+		glm::vec3(eyePos[0],eyePos[1],eyePos[2]),
+		glm::vec3(lookAt[0],lookAt[1],lookAt[2]),
+		glm::vec3(up[0],up[1],up[2])
+	);
+}
+
+
+void Camera::setPosition(float x, float y, float z)
+{
+	eyePos[0]=x;
+	eyePos[1]=y;
+	eyePos[2]=z;
+}
+
+void Camera::setLookAt(float x, float y, float z) 
+{
+	lookAt[0]=x;
+	lookAt[1]=y;
+	lookAt[2]=z;
+}
+
+void Camera::setUp(float x, float y, float z) 
+{
+	up[0]=x;
+	up[1]=y;
+	up[2]=z;
+}
+
+void Camera::setRight(float x, float y, float z) 
+{
+	right[0]=x;
+	right[1]=y;
+	right[2]=z;
+}
+
+void Camera::setRotSpeed(float speed) 
+{
+	rotSpeed=speed;
+}
+
+float Camera::geteyeX() 
+{
+	return eyePos[0];
+}
+
+float Camera::geteyeY() 
+{
+	return eyePos[1];
+}
+
+float Camera::geteyeZ() 
+{
+	return eyePos[2];
+}
+
+float *Camera::getEye() 
+{
+	float *peye = eyePos; 
+	return peye;
+}
+
+Vector3 Camera::geteyeV() 
+{
+	return Vector3(eyePos[0],eyePos[1],eyePos[2]);
+}
+
+Vector3 Camera::getLookAt() 
+{
+	return Vector3(lookAt[0],lookAt[1],lookAt[2]);
+}
+
+Vector3 Camera::getUp() 
+{
+	return Vector3(up[0],up[1],up[2]);
+}
+
+Vector3 Camera::getRight() 
+{
+	return Vector3(right[0],right[1],right[2]);
+}

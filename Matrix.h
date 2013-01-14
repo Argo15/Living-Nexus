@@ -57,10 +57,7 @@ public:
 	Matrix4 &setAsModelViewProjection();
 	Matrix4 &setAsModelViewMatrix();
 	Matrix4 &setAsProjectionMatrix();
-	void multiplyToCurrent()
-	{
-		glMultMatrixf(data);
-	}
+	void multiplyToCurrent();
 };
 
 

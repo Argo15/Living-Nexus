@@ -66,3 +66,13 @@ void TileManager::DeleteAllTiles()
 {
 	tiles.clear();
 }
+
+Tile *TileManager::getTile(string name) 
+{ 
+	return tiles[name]; 
+}
+
+map<string,Tile *> *TileManager::getTiles() 
+{
+	return &tiles;
+}

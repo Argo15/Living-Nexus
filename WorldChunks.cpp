@@ -276,3 +276,18 @@ vector<Chunk *> *WorldChunks::getVisibleChunks(Frustum *frustum)
 	}
 	return chunks;
 }
+
+Chunk *WorldChunks::getChunk(int x, int y)
+{
+	return worldChunks[x][y];
+}
+
+int WorldChunks::getWidth()
+{
+	return width;
+}
+
+int WorldChunks::getHeight()
+{
+	return height;
+}

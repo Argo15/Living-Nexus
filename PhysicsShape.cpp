@@ -1,5 +1,9 @@
 #include "PhysicsShape.h"
 
+PhysicsShape::PhysicsShape(PhysicsShapeType type) 
+{
+	this->type=type;
+}
 
 btCollisionShape *PhysicsShape::getBoxShape()
 {
@@ -31,4 +35,9 @@ btCollisionShape *PhysicsShape::getCollisionShape()
 		default:
 			return 0;
 	}
+}
+
+PhysicsShapeType PhysicsShape::getShapeType() 
+{
+	return type;
 }

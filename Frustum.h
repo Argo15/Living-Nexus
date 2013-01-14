@@ -42,22 +42,10 @@ public:
 	void calcFarPlane(Camera *camera, View *view);
 	bool isInFrustum(Vector3 center, float radius);
 
-	float getHNear() 
-	{
-		return Hnear;
-	}
-	float getWNear() 
-	{
-		return Wnear;
-	}
-	float getHFar() 
-	{
-		return Hfar;
-	}
-	float getWFar() 
-	{
-		return Wfar;
-	}
+	float getHNear();
+	float getWNear();
+	float getHFar();
+	float getWFar();
 };
 
 #endif

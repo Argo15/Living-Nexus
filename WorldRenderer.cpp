@@ -8,6 +8,7 @@
 
 WorldRenderer::WorldRenderer()
 {
+
 }
 
 void WorldRenderer::init()
@@ -147,4 +148,14 @@ void WorldRenderer::render()
 	}
 
 	glutSwapBuffers();
+}
+
+View *WorldRenderer::getView()
+{	
+	return view;
+}
+	
+Frustum *WorldRenderer::getFrustum()
+{
+	return frustum;
 }

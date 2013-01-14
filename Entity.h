@@ -10,19 +10,10 @@ protected:
 	string *name;
 
 public:
-	Entity(string *name = 0) 
-	{
-		this->name = name;
-	}
+	Entity(string *name = 0);
 
-	string *getName() 
-	{
-		return name;
-	}
-	void setName(string newName) 
-	{
-		name = new string(newName);
-	}
+	string *getName();
+	void setName(string newName);
 };
 
 #endif

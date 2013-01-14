@@ -43,14 +43,8 @@ public:
 	void resize(int w, int h);
 	void render();
 
-	View *getView()
-	{
-		return view;
-	}
-	Frustum *getFrustum()
-	{
-		return frustum;
-	}
+	View *getView();
+	Frustum *getFrustum();
 };
 
 #endif

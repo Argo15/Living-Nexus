@@ -10,14 +10,8 @@ class StaticModel : public Model
 protected:
 	GLuint bufferID;
 public:
-	StaticModel()
-	{
-	}
 	virtual bool load(string filename) = 0;
-	void remove() 
-	{ 
-		glDeleteBuffersARB(1, &bufferID); 
-	}
+	void remove();
 	void draw();
 	void drawGeometry();
 	void drawSelection();

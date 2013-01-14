@@ -7,9 +7,7 @@ public:
 	static GameState *GAMESTATE;
 
 public:
-	GameState()
-	{
-	}
+	GameState();
 
 	virtual void resize(int w, int h) = 0;
 	virtual void tick(int fps) = 0;

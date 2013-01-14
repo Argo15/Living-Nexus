@@ -23,3 +23,13 @@ void WorldCameraManager::tick(int fps)
 	}
 	current->move(120.0/(float)fps);
 }
+
+WorldCamera *WorldCameraManager::getPlayerCamera()
+{
+	return worldCamera;
+}
+
+Camera *WorldCameraManager::getCurrentCamera()
+{
+	return current;
+}

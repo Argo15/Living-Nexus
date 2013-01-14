@@ -39,6 +39,11 @@ void Chunk::drawChunk(string shader)
 	MatrixManager::getInstance()->popMatrix3(NORMAL);
 }
 
+void Chunk::drawExtra(string shader)
+{
+
+}
+
 bool Chunk::loadChunk(string filename)
 {
 	ifstream file(filename.c_str(), ios::in|ios::binary|ios::ate);
@@ -93,6 +98,16 @@ bool Chunk::loadChunk(string filename)
 	return false;
 }
 
+void Chunk::setOrientation(int ori) 
+{
+	orientation = ori;
+}
+
+int Chunk::getOrientation() 
+{
+	return orientation;
+}
+
 float Chunk::getRadius()
 {
 	return radius;
@@ -136,4 +151,24 @@ int Chunk::getTileMode(int x, int y)
 		worldY = x;
 	}
 	return tileModes[worldX][worldY];
+}
+
+Actor **Chunk::getActors() 
+{
+	return actors;
+}
+
+int Chunk::getNumActors() 
+{
+	return numActors;
+}
+
+PhysicsShape **Chunk::getPhysics() 
+{
+	return physics;
+}
+
+int Chunk::getNumPhysics() 
+{
+	return numPhysics;
 }

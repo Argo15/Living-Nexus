@@ -11,3 +11,13 @@ void PhysicsManager::tick(int fps)
 	bulletManager->tick(fps);
 	worldCameras->tick(fps);
 }
+
+WorldCameraManager *PhysicsManager::getWorldCameras() 
+{
+	return worldCameras;
+}
+
+BulletManager *PhysicsManager::getBulletManager() 
+{
+	return bulletManager;
+}

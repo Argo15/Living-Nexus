@@ -80,3 +80,13 @@ void TextureManager::DeleteAllTextures()
 {
 	textures.clear();
 }
+
+Texture *TextureManager::getTexture(string name) 
+{ 
+	return textures[name]; 
+}
+
+map<string,Texture *> *TextureManager::getTextures() 
+{
+	return &textures;
+}

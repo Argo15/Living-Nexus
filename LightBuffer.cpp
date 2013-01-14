@@ -50,6 +50,11 @@ LightBuffer::LightBuffer(int width, int height)
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 }
 
+LightBuffer::~LightBuffer()
+{
+	glDeleteFramebuffers(1,&buffer);
+}
+
 void LightBuffer::drawToBuffer(GLuint normalTex, GLuint depthTex, GLuint glowTex, View *view)
 {
 	Profiler::getInstance()->startProfile("Draw Light");
@@ -105,4 +110,44 @@ void LightBuffer::drawToBuffer(GLuint normalTex, GLuint depthTex, GLuint glowTex
 	glslProgram->disable();
 	unbind();	
 	Profiler::getInstance()->endProfile();
+}
+
+void LightBuffer::bind() 
+{
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, buffer);
+}
+
+void LightBuffer::unbind() 
+{
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+}
+
+void LightBuffer::bindLightTex() 
+{
+	glBindTexture(GL_TEXTURE_2D, lightTex);
+}
+
+void LightBuffer::bindGlowTex() 
+{
+	glBindTexture(GL_TEXTURE_2D, glowTex);
+}
+
+GLuint LightBuffer::getLightTex() 
+{
+	return lightTex;
+}
+
+GLuint LightBuffer::getGlowTex() 
+{
+	return glowTex;
+}
+
+int LightBuffer::getWidth() 
+{
+	return width;
+}
+
+int LightBuffer::getHeight() 
+{
+	return height;
 }

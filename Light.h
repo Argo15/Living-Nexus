@@ -14,51 +14,16 @@ protected:
 	bool enabled;
 
 public:
-	void setAmbient(float amt)
-	{
-		ambient=amt;
-	}
-	void setDiffuse(float amt)
-	{
-		diffuse=amt;
-	}
-	void setSpecular(float amt)
-	{
-		specular=amt;
-	}
-	float getDiffuse()
-	{
-		return diffuse;
-	}
-	float getAmbient()
-	{
-		return ambient;
-	}
-	float getSpecular() 
-	{
-		return specular;
-	}
-
-	void setColor(float r, float g, float b) 
-	{
-		color[0]=r; 
-		color[1]=g; 
-		color[2]=b;
-	}
-	float *getColor() 
-	{
-		return color;
-	}
-
-	bool isenabled() 
-	{
-		return enabled;
-	}
-	void setEnabled(bool enabled) 
-	{
-		this->enabled=enabled;
-	}
-
+	void setAmbient(float amt);
+	void setDiffuse(float amt);
+	void setSpecular(float amt);
+	float getDiffuse();
+	float getAmbient();
+	float getSpecular();
+	void setColor(float r, float g, float b);
+	float *getColor();
+	bool isenabled();
+	void setEnabled(bool enabled);
 	virtual void sendToShader(string shader) = 0;
 };
 

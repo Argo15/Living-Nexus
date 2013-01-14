@@ -16,16 +16,11 @@ private:
 	btCollisionShape *getCylinderShape();
 
 public:
-	PhysicsShape(PhysicsShapeType type) 
-	{
-		this->type=type;
-	}
+	PhysicsShape(PhysicsShapeType type);
 
 	btCollisionShape *getCollisionShape();
-	PhysicsShapeType getShapeType() 
-	{
-		return type;
-	}
+	PhysicsShapeType getShapeType();
+
 	glm::mat4 matrix;
 };
 

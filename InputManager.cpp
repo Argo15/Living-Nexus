@@ -97,3 +97,23 @@ void InputManager::setMouseCentered(int x, int y)
 {
 	mouseCentered = true;
 }
+
+bool InputManager::isMouseButtonDown(int mouse) 
+{
+	return mouseButtons[mouse];
+}
+
+int InputManager::getMouseX() 
+{
+	return mouseX;
+}
+
+int InputManager::getMouseY() 
+{
+	return mouseY;
+}
+
+bool InputManager::isMouseMoved() 
+{
+	return mouseMoved;
+}

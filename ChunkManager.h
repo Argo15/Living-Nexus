@@ -20,14 +20,8 @@ public:
 	void DeleteChunk(string name);
 	void DeleteAllChunks();
 
-	Chunk *getChunk(string name) 
-	{ 
-		return chunks[name]; 
-	}
-	map<string,Chunk *> *getChunks() 
-	{
-		return &chunks;
-	}
+	Chunk *getChunk(string name);
+	map<string,Chunk *> *getChunks();
 };
 
 #endif

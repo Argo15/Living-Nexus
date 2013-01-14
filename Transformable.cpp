@@ -35,3 +35,64 @@ glm::mat3 Transformable::transformToMatrix(glm::mat3 matrix)
 	mat = mat * glm::mat3_cast(rot);
 	return matrix * mat;
 }
+
+void Transformable::Translate(float x, float y, float z) 
+{
+	translations[0]+=x;
+	translations[1]+=y;
+	translations[2]+=z;
+}
+
+void Transformable::Rotate(Quaternion quat) 
+{
+	rotation=quat*rotation;
+}
+
+void Transformable::Scale(float x, float y, float z) 
+{
+	scale[0]+=x;
+	scale[1]+=y;
+	scale[2]+=z;
+}
+
+void Transformable::setTranslate(float x, float y, float z) 
+{
+	translations[0]=x;
+	translations[1]=y;
+	translations[2]=z;
+}
+
+void Transformable::setRotate(Quaternion quat) 
+{
+	rotation = quat;
+}
+
+void Transformable::setScale(float x, float y, float z) 
+{
+	scale[0]=x;
+	scale[1]=y;
+	scale[2]=z;
+}
+
+float *Transformable::getTranslate() 
+{
+	float *pTranslate = translations; 
+	return pTranslate;
+}
+
+Quaternion Transformable::getRotate() 
+{
+	return rotation;
+}
+
+float *Transformable::getScale() 
+{
+	float *pScale;
+	pScale=scale; 
+	return pScale;
+}
+
+Vector3 Transformable::getTranslateV() 
+{
+	return Vector3(translations[0],translations[1],translations[2]);
+}
