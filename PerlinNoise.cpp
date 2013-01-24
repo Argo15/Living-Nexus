@@ -109,9 +109,9 @@ bool PerlinNoise::load(const char *sName)
 		for(int j=0; j<256; j++) 
 		{
 			float color = m_nMap256[i*256+j]; 
-			texture[i][j][0]=color;
-			texture[i][j][1]=color;
-			texture[i][j][2]=color;
+			texture[i][j][0]=(char)color;
+			texture[i][j][1]=(char)color;
+			texture[i][j][2]=(char)color;
 		}
 	}
                   

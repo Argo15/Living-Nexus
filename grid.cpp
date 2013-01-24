@@ -54,7 +54,7 @@ void Grid::draw()
 	for (int x=0;x<=m_nWidth;x++)
 	{
 		float a = m_nCenter[0]-nU+(float)x;
-		for (float i=-nV; i<nV-0.1; i+=0.1)
+		for (float i=-nV; i<nV-0.1; i+=0.1f)
 		{
 			glBegin(GL_LINES);
 				glVertex3f(a,0,m_nCenter[1]+i);
@@ -64,7 +64,7 @@ void Grid::draw()
 	}
 	for (int y=0;y<=m_nLength;y++)
 	{
-		for (float i=-nU; i<nU-0.1; i+=0.1)
+		for (float i=-nU; i<nU-0.1; i+=0.1f)
 		{
 			float b = m_nCenter[1]-nV+(float)y;
 			glBegin(GL_LINES);

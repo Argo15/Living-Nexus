@@ -46,7 +46,7 @@ void WorldTiles::initializeFromChunks(WorldChunks *chunks, TileManager *manager,
 		{
 			Tile *blockTile = new Tree();
 			*blockTile = *(Tree*)manager->getTile("Tree");
-			blockTile->translate(i-5, 0, j-5);
+			blockTile->translate(i-5.0f, 0, j-5.0f);
 			if (rand() % 50 == 1)
 			{
 				addTile(i,j,blockTile,physicsManager);

@@ -64,8 +64,7 @@ float &Quaternion::operator [](unsigned int i)
 		case 3:
 			return v_data[i-1];
 	}
-	float ret = 0;
-	return ret;
+	return s_data;
 }
 
 Quaternion	&Quaternion::operator *=(Quaternion &q)

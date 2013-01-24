@@ -43,7 +43,7 @@ void Profiler::endProfile()
 		if (changeInTime > 0) 
 		{
 			m_hmSectionCounts[m_sLastSection] = m_hmSectionCounts[m_sLastSection] + 1;
-			m_hmSectionAverages[m_sLastSection] = (float)(changeInTime + (m_hmSectionCounts[m_sLastSection]-1) * m_hmSectionAverages[m_sLastSection] ) / (float)m_hmSectionCounts[m_sLastSection];
+			m_hmSectionAverages[m_sLastSection] = (int)((float)(changeInTime + (m_hmSectionCounts[m_sLastSection]-1) * m_hmSectionAverages[m_sLastSection] ) / (float)m_hmSectionCounts[m_sLastSection]);
 			if (changeInTime < m_hmSectionMinimum[m_sLastSection]) 
 			{
 				m_hmSectionMinimum[m_sLastSection] = changeInTime;

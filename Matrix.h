@@ -53,7 +53,7 @@ public:
 	// methods
 	Matrix4 &identity();
 	Matrix4 &transpose();
-	Matrix4 &inverse();
+	Matrix4 inverse();
 	Matrix4 &setAsModelViewProjection();
 	Matrix4 &setAsModelViewMatrix();
 	Matrix4 &setAsProjectionMatrix();

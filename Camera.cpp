@@ -12,7 +12,7 @@ Camera::Camera()
     m_nVAngle=(float)PI/4.0f;
 	m_nEyePos[0]=5.0; m_nEyePos[1]=5.0; m_nEyePos[2]=5.0; 
 	recalculate();
-	m_nRotSpeed=0.8;
+	m_nRotSpeed=0.8f;
 	m_nLastMouseX = -1;
 	m_nLastMouseY = -1;
 }

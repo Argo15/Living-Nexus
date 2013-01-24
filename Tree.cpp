@@ -13,11 +13,11 @@ Tree::Tree() : Tile()
 		m_fruitTransforms[i] = new Transformable();
 	}
 	Quaternion rot;
-	rot.createQuaternion(3.1414/2.0, 0, 1, 0);
-	m_fruitTransforms[0]->setTranslate(0.8,2.0,0.3);
-	m_fruitTransforms[1]->setTranslate(0.0,2.0,0.1);
+	rot.createQuaternion(3.1414f/2.0f, 0, 1.0f, 0);
+	m_fruitTransforms[0]->setTranslate(0.8f,2.0f,0.3f);
+	m_fruitTransforms[1]->setTranslate(0.0f,2.0f,0.1f);
 	m_fruitTransforms[1]->setRotate(rot);
-	m_fruitTransforms[2]->setTranslate(-0.8,2.0,0.3);
+	m_fruitTransforms[2]->setTranslate(-0.8f,2.0f,0.3f);
 }
 
 void Tree::drawExtra(std::string sShader) 

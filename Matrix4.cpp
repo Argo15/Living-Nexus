@@ -202,7 +202,7 @@ Matrix4 &Matrix4::transpose()
 	return *this;
 }
 
-Matrix4 &Matrix4::inverse()
+Matrix4 Matrix4::inverse()
 {
 	// using RReF
 	/*| 0  4  8   12 |

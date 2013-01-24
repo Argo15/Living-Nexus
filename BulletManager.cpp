@@ -99,7 +99,7 @@ void BulletManager::updateDynamicsWorld(float nSpeed)
 	}
 	float *nNewEye = camera->getEye();
 	m_playerBody->activate(true);
-	m_playerBody->setLinearVelocity(100*btVector3(nNewEye[0]-nOldEye[0],-0.04,nNewEye[2]-nOldEye[2]));
+	m_playerBody->setLinearVelocity(100.0f*btVector3(nNewEye[0]-nOldEye[0],-0.04f,nNewEye[2]-nOldEye[2]));
 
 	// check physics
 	m_dynamicsWorld->stepSimulation(1.f/60.f,10);

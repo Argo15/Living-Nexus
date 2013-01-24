@@ -28,7 +28,7 @@ void GameTime::updateToSystemTime()
 		m_nMinuteOffset += 1.0;
 	}
 
-	m_datetime = boost::posix_time::second_clock::local_time() + boost::posix_time::hours(m_nHourOffset) + boost::posix_time::minutes(m_nMinuteOffset);
+	m_datetime = boost::posix_time::second_clock::local_time() + boost::posix_time::hours(m_nHourOffset) + boost::posix_time::minutes((long)m_nMinuteOffset);
 }
 
 int GameTime::getYear() 
