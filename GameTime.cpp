@@ -28,42 +28,42 @@ void GameTime::updateToSystemTime()
 		m_nMinuteOffset += 1.0;
 	}
 
-	datetime = boost::posix_time::second_clock::local_time() + boost::posix_time::hours(m_nHourOffset) + boost::posix_time::minutes(m_nMinuteOffset);
+	m_datetime = boost::posix_time::second_clock::local_time() + boost::posix_time::hours(m_nHourOffset) + boost::posix_time::minutes(m_nMinuteOffset);
 }
 
 int GameTime::getYear() 
 { 
-	return datetime.date().year();
+	return m_datetime.date().year();
 }
 
 int GameTime::getMonth() 
 { 
-	return datetime.date().month();
+	return m_datetime.date().month();
 }
 
 int GameTime::getDay() 
 { 
-	return datetime.date().day();
+	return m_datetime.date().day();
 }
 
 int GameTime::getHours() 
 { 
-	return datetime.time_of_day().hours();
+	return m_datetime.time_of_day().hours();
 }
 
 int GameTime::getMinutes() 
 { 
-	return datetime.time_of_day().minutes();
+	return m_datetime.time_of_day().minutes();
 }
 
 int GameTime::getSeconds() 
 { 
-	return datetime.time_of_day().seconds();
+	return m_datetime.time_of_day().seconds();
 }
 
 int GameTime::getMilliseconds() 
 { 
-	return datetime.time_of_day().total_milliseconds();
+	return m_datetime.time_of_day().total_milliseconds();
 }
 
 int GameTime::getSecondsSinceMidnight() 

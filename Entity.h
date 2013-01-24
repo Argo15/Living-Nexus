@@ -7,13 +7,13 @@ using namespace std;
 class Entity
 {
 protected:
-	string *name;
+	string *m_sName;
 
 public:
-	Entity(string *name = 0);
+	Entity(string *sName = 0);
 
 	string *getName();
-	void setName(string newName);
+	void setName(string sName);
 };
 
 #endif

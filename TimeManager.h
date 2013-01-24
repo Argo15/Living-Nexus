@@ -9,8 +9,8 @@ class TimeManager
 {
 private:
 	static TimeManager *m_pInstance;
-	GameTime gameTime;
-	int timestamp;
+	GameTime m_gameTime;
+	int m_nTimestamp;
 
 	TimeManager();
 

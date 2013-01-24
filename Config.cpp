@@ -40,27 +40,27 @@ void Config::initializeConfig()
 	}
 }
 
-std::string Config::getFieldString(std::string field) 
+std::string Config::getFieldString(std::string sField) 
 {
-	return hmConfigFields[field];
+	return m_hmConfigFields[sField];
 }
 
-int Config::getFieldInt(std::string field) 
+int Config::getFieldInt(std::string sField) 
 {
-	return atoi(hmConfigFields[field].c_str());
+	return atoi(m_hmConfigFields[sField].c_str());
 }
 
-void Config::setField(std::string key, std::string value) 
+void Config::setField(std::string sKey, std::string sValue) 
 {
-	hmConfigFields[key] = value;
+	m_hmConfigFields[sKey] = sValue;
 }
 
 std::string Config::toString() 
 {
-	std::string fieldList;
-	BOOST_FOREACH(string_value i, hmConfigFields) 
+	std::string sFieldList;
+	BOOST_FOREACH(string_value i, m_hmConfigFields) 
 	{
-		fieldList = fieldList + i.first + " = " + i.second + "\n";
+		sFieldList = sFieldList + i.first + " = " + i.second + "\n";
 	}
-	return fieldList;
+	return sFieldList;
 }

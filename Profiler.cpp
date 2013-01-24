@@ -8,7 +8,7 @@ typedef boost::unordered_map<std::string, int>::value_type int_value;
 
 Profiler::Profiler()
 {
-	lastSection = "";
+	m_sLastSection = "";
 }
 
 Profiler *Profiler::getInstance() 
@@ -20,49 +20,49 @@ Profiler *Profiler::getInstance()
 	return m_pInstance;
 }
 
-void Profiler::startProfile(std::string section) 
+void Profiler::startProfile(std::string sSection) 
 {
 	int currentTime = TimeManager::getInstance()->getTimeInMicroseconds();
-	if (hmSectionCounts.find(section) == hmSectionCounts.end()) 
+	if (m_hmSectionCounts.find(sSection) == m_hmSectionCounts.end()) 
 	{
-		hmSectionCounts[section] = 0;
-		hmSectionAverages[section] = 0;
-		hmSectionMinimum[section] = 100000;
-		hmSectionMaximum[section] = -100;
+		m_hmSectionCounts[sSection] = 0;
+		m_hmSectionAverages[sSection] = 0;
+		m_hmSectionMinimum[sSection] = 100000;
+		m_hmSectionMaximum[sSection] = -100;
 	}
-	hmSectionLastTimes[section] = currentTime;
-	lastSection = section;
+	m_hmSectionLastTimes[sSection] = currentTime;
+	m_sLastSection = sSection;
 }
 
 void Profiler::endProfile() 
 {
-	if (lastSection != "") 
+	if (m_sLastSection != "") 
 	{
 		int currentTime = TimeManager::getInstance()->getTimeInMicroseconds();
-		int changeInTime = currentTime - hmSectionLastTimes[lastSection];
+		int changeInTime = currentTime - m_hmSectionLastTimes[m_sLastSection];
 		if (changeInTime > 0) 
 		{
-			hmSectionCounts[lastSection] = hmSectionCounts[lastSection] + 1;
-			hmSectionAverages[lastSection] = (float)(changeInTime + (hmSectionCounts[lastSection]-1) * hmSectionAverages[lastSection] ) / (float)hmSectionCounts[lastSection];
-			if (changeInTime < hmSectionMinimum[lastSection]) 
+			m_hmSectionCounts[m_sLastSection] = m_hmSectionCounts[m_sLastSection] + 1;
+			m_hmSectionAverages[m_sLastSection] = (float)(changeInTime + (m_hmSectionCounts[m_sLastSection]-1) * m_hmSectionAverages[m_sLastSection] ) / (float)m_hmSectionCounts[m_sLastSection];
+			if (changeInTime < m_hmSectionMinimum[m_sLastSection]) 
 			{
-				hmSectionMinimum[lastSection] = changeInTime;
+				m_hmSectionMinimum[m_sLastSection] = changeInTime;
 			}
-			if (changeInTime > hmSectionMaximum[lastSection]) 
+			if (changeInTime > m_hmSectionMaximum[m_sLastSection]) 
 			{
-				hmSectionMaximum[lastSection] = changeInTime;
+				m_hmSectionMaximum[m_sLastSection] = changeInTime;
 			}
 		}
 	}
-	lastSection = "";
+	m_sLastSection = "";
 }
 
 void Profiler::logProfile() 
 {
-	BOOST_FOREACH(int_value section, hmSectionAverages) 
+	BOOST_FOREACH(int_value section, m_hmSectionAverages) 
 	{
-		Logging::PROFILER->info(section.first + " avg: " + StringUtils::valueOf(hmSectionAverages[section.first]));
-		Logging::PROFILER->info(section.first + " min: " + StringUtils::valueOf(hmSectionMinimum[section.first]));
-		Logging::PROFILER->info(section.first + " max: " + StringUtils::valueOf(hmSectionMaximum[section.first]));
+		Logging::PROFILER->info(section.first + " avg: " + StringUtils::valueOf(m_hmSectionAverages[section.first]));
+		Logging::PROFILER->info(section.first + " min: " + StringUtils::valueOf(m_hmSectionMinimum[section.first]));
+		Logging::PROFILER->info(section.first + " max: " + StringUtils::valueOf(m_hmSectionMaximum[section.first]));
 	}
 }

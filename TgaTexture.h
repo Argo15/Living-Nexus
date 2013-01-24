@@ -85,7 +85,7 @@ public:
 	virtual ~TgaTexture();
 
 	// loading and unloading
-	bool load(const char *filename);
+	bool load(const char *sFilename);
 	void Release();
 
 	// flips image vertically

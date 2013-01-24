@@ -6,6 +6,9 @@
 #include "MatrixManager.h"
 #include "ShaderManager.h"
 
+static int N_FRAME_WIDTH = 1280;
+static int N_FRAME_HEIGHT = 720;
+
 WorldRenderer::WorldRenderer()
 {
 
@@ -22,27 +25,27 @@ void WorldRenderer::init()
 	glEnable(GL_NORMALIZE);
 	glEnable(GL_CULL_FACE);
 
-	view = new View();
-	camera = new WorldCamera();
-	frustum = new Frustum();
+	m_view = new View();
+	m_camera = new WorldCamera();
+	m_frustum = new Frustum();
 
-	gBuffer = new GBuffer(1280,720);
-	atmosphereBuffer = new AtmosphereBuffer(1280,720);
-	lightBuffer = new LightBuffer(1280,720);
-	finalBuffer = new FinalBuffer(1280,720);
-	motionBlurBuffer = new MotionBlurBuffer(1280,720);
+	m_gBuffer = new GBuffer(N_FRAME_WIDTH,N_FRAME_HEIGHT);
+	m_atmosphereBuffer = new AtmosphereBuffer(N_FRAME_WIDTH,N_FRAME_HEIGHT);
+	m_lightBuffer = new LightBuffer(N_FRAME_WIDTH,N_FRAME_HEIGHT);
+	m_finalBuffer = new FinalBuffer(N_FRAME_WIDTH,N_FRAME_HEIGHT);
+	m_motionBlurBuffer = new MotionBlurBuffer(N_FRAME_WIDTH,N_FRAME_HEIGHT);
 }
 
-void WorldRenderer::resize(int w, int h)
+void WorldRenderer::resize(int nWidth, int nHeight)
 {
-	if(h == 0)
+	if(nHeight == 0)
 	{
-		h = 1;
+		nHeight = 1;
 	}
-	GLfloat aspect = GLfloat(w) / h;
-	view->viewport(0, 0, w, h);
-	view->set3D(45.0f,aspect,0.01,50);
-	view->set2D(0,1,0,1,0,1);
+	GLfloat nAspect = GLfloat(nWidth) / nHeight;
+	m_view->viewport(0, 0, nWidth, nHeight);
+	m_view->set3D(45.0f,nAspect,0.01,50);
+	m_view->set2D(0,1,0,1,0,1);
 }
 
 void WorldRenderer::forwardRender()
@@ -50,11 +53,11 @@ void WorldRenderer::forwardRender()
 	MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::mat4(1.0f)); 
 	MatrixManager::getInstance()->putMatrix4(PROJECTION, glm::mat4(1.0f)); 
 	MatrixManager::getInstance()->putMatrix3(NORMAL, glm::mat3(1.0f)); 
-	view->use3D(true);
+	m_view->use3D(true);
 
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
-	Camera *camera = worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera();
-	camera->transform();
+	Camera *m_camera = worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera();
+	m_camera->transform();
 	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("Basic");
 	glslProgram->use();
 
@@ -78,11 +81,11 @@ void WorldRenderer::forwardRender()
 
 void WorldRenderer::defferedRender()
 {
-	gBuffer->drawToBuffer(view);
-	atmosphereBuffer->drawToBuffer(gBuffer->getColorTex(), gBuffer->getGlowTex(), gBuffer->getDepthTex(), view);
-	lightBuffer->drawToBuffer(gBuffer->getNormalTex(), gBuffer->getDepthTex(), atmosphereBuffer->getGlowTex(), view);
-	finalBuffer->drawToBuffer(atmosphereBuffer->getColorTex(), lightBuffer->getLightTex(), lightBuffer->getGlowTex(), view);
-	motionBlurBuffer->drawToBuffer(finalBuffer->getFinalTex(), gBuffer->getMotionTex(), 10, view);
+	m_gBuffer->drawToBuffer(m_view);
+	m_atmosphereBuffer->drawToBuffer(m_gBuffer->getColorTex(), m_gBuffer->getGlowTex(), m_gBuffer->getDepthTex(), m_view);
+	m_lightBuffer->drawToBuffer(m_gBuffer->getNormalTex(), m_gBuffer->getDepthTex(), m_atmosphereBuffer->getGlowTex(), m_view);
+	m_finalBuffer->drawToBuffer(m_atmosphereBuffer->getColorTex(), m_lightBuffer->getLightTex(), m_lightBuffer->getGlowTex(), m_view);
+	m_motionBlurBuffer->drawToBuffer(m_finalBuffer->getFinalTex(), m_gBuffer->getMotionTex(), 15, m_view);
 
 	glDisable(GL_LIGHTING);
 	glActiveTextureARB(GL_TEXTURE2);
@@ -95,38 +98,38 @@ void WorldRenderer::defferedRender()
 	glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluOrtho2D(0, 1.0, 0, 1.0);
-	view->viewport();
+	m_view->viewport();
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 	
 	glBindTexture(GL_TEXTURE_2D, 0);
 	if (RenderStateManager::RENDERSTATE == FINAL)
 	{
-		motionBlurBuffer->bindBlurTex();
+		m_motionBlurBuffer->bindBlurTex();
 	}
 	if (RenderStateManager::RENDERSTATE == POSITION)
 	{
-		gBuffer->bindPositionTex();
+		m_gBuffer->bindPositionTex();
 	}
 	if (RenderStateManager::RENDERSTATE == NORMALMAP)	
 	{
-		gBuffer->bindNormalTex();
+		m_gBuffer->bindNormalTex();
 	}
 	if (RenderStateManager::RENDERSTATE == COLOR)	
 	{
-		atmosphereBuffer->bindColorTex();
+		m_atmosphereBuffer->bindColorTex();
 	}
 	if (RenderStateManager::RENDERSTATE == LIGHTING)
 	{
-		lightBuffer->bindLightTex();
+		m_lightBuffer->bindLightTex();
 	}
 	if (RenderStateManager::RENDERSTATE == SPECULAR)
 	{
-		lightBuffer->bindGlowTex();
+		m_lightBuffer->bindGlowTex();
 	}
 	if (RenderStateManager::RENDERSTATE == MOTION)	
 	{
-		gBuffer->bindMotionTex();
+		m_gBuffer->bindMotionTex();
 	}
 	drawScreen(0.0,0.0,1.0,1.0);
 }
@@ -136,7 +139,7 @@ void WorldRenderer::render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
-	frustum->getFrustum(worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera(),view);
+	m_frustum->getFrustum(worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera(),m_view);
 	
 	if (RenderStateManager::RENDERSTATE == FORWARD)
 	{
@@ -152,10 +155,10 @@ void WorldRenderer::render()
 
 View *WorldRenderer::getView()
 {	
-	return view;
+	return m_view;
 }
 	
 Frustum *WorldRenderer::getFrustum()
 {
-	return frustum;
+	return m_frustum;
 }

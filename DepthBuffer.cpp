@@ -2,14 +2,14 @@
 #include "DepthBuffer.h"
 #include "Logger.h"
 
-DepthBuffer::DepthBuffer(int width, int height)
+DepthBuffer::DepthBuffer(int nWidth, int nHeight)
 {
 	glEnable(GL_TEXTURE_2D);
 
 	// Generate shadow map Texture
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
-	glTexImage2D( GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+	glGenTextures(1, &m_nTexture);
+	glBindTexture(GL_TEXTURE_2D, m_nTexture);
+	glTexImage2D( GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, nWidth, nHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
@@ -18,9 +18,9 @@ DepthBuffer::DepthBuffer(int width, int height)
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	// Create FbO
-	glGenFramebuffersEXT(1,&buffer);
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, buffer);
-	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT,GL_TEXTURE_2D, texture, 0);
+	glGenFramebuffersEXT(1,&m_FrameBuffer);
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_FrameBuffer);
+	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT,GL_TEXTURE_2D, m_nTexture, 0);
 
 	// check FbO status
 	GLenum FBOstatus = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
@@ -38,7 +38,7 @@ DepthBuffer::DepthBuffer(int width, int height)
 
 void DepthBuffer::bind()
 {
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, buffer);
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_FrameBuffer);
 }
 	
 void DepthBuffer::unbind()
@@ -48,10 +48,10 @@ void DepthBuffer::unbind()
 	
 GLuint DepthBuffer::getBuffer()
 {
-	return buffer;
+	return m_FrameBuffer;
 }
 	
 GLuint DepthBuffer::getTexture()
 {
-	return texture;
+	return m_nTexture;
 }

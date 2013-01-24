@@ -3,30 +3,30 @@
 #include "TimeManager.h"
 #include "InputManager.h"
 
-WorldState::WorldState(const char *filename)
+WorldState::WorldState(const char *sFilename)
 { 
-	physicsManager = new PhysicsManager();
-	chunkManager = new ChunkManager();
-	chunkManager->Initialize();
-	tileManager = new TileManager();
-	tileManager->Initialize();
-	renderer = new WorldRenderer();
-	renderer->init();
+	m_physicsManager = new PhysicsManager();
+	m_chunkManager = new ChunkManager();
+	m_chunkManager->initialize();
+	m_tileManager = new TileManager();
+	m_tileManager->initialize();
+	m_renderer = new WorldRenderer();
+	m_renderer->init();
 	glutSetCursor(GLUT_CURSOR_NONE);
 
-	worldManager = new WorldManager();
-	if (filename == 0)
+	m_worldManager = new WorldManager();
+	if (sFilename == 0)
 	{
-		worldManager->generateNewWorld(chunkManager, tileManager, physicsManager);
+		m_worldManager->generateNewWorld(m_chunkManager, m_tileManager, m_physicsManager);
 	}
 	else
 	{
-		worldManager->loadWorld(string(filename));
+		m_worldManager->loadWorld(string(sFilename));
 	}
 
-	shadowMapManager = new ShadowMapManager();
+	m_shadowMapManager = new ShadowMapManager();
 
-	mouseHide = true;
+	m_bMouseHide = true;
 }
 
 WorldState::~WorldState()
@@ -34,17 +34,17 @@ WorldState::~WorldState()
 
 }
 
-void WorldState::resize(int w, int h)
+void WorldState::resize(int nWidth, int nHeight)
 {
-	renderer->resize(w, h);
+	m_renderer->resize(nWidth, nHeight);
 }
 
-void WorldState::tick(int fps)
+void WorldState::tick(int nFps)
 {
 	if (InputManager::getInstance()->isKeyDownOnce((int)'t'))
 	{
-		mouseHide = !mouseHide;
-		if (mouseHide)
+		m_bMouseHide = !m_bMouseHide;
+		if (m_bMouseHide)
 		{
 			glutSetCursor(GLUT_CURSOR_NONE);
 		}
@@ -54,43 +54,43 @@ void WorldState::tick(int fps)
 		}
 	}
 
-	physicsManager->tick(fps);
-	worldManager->tick(fps);
-	shadowMapManager->tick(fps);
-	renderer->render();
+	m_physicsManager->tick(nFps);
+	m_worldManager->tick(nFps);
+	m_shadowMapManager->tick(nFps);
+	m_renderer->render();
 }
 
 bool WorldState::mouseHidden()
 {
-	return mouseHide;
+	return m_bMouseHide;
 }
 
 ChunkManager *WorldState::getChunkManager()
 {
-	return chunkManager;
+	return m_chunkManager;
 }
 	
 PhysicsManager *WorldState::getPhysicsManager()
 {
-	return physicsManager;
+	return m_physicsManager;
 }
 	
 WorldManager *WorldState::getWorldManager()
 {
-	return worldManager;
+	return m_worldManager;
 }
 	
 WorldRenderer *WorldState::getRenderer()
 {
-	return renderer;
+	return m_renderer;
 }
 	
 ShadowMapManager *WorldState::getShadowMapManager()
 {
-	return shadowMapManager;
+	return m_shadowMapManager;
 }
 	
 TileManager *WorldState::getTileManager()
 {
-	return tileManager;
+	return m_tileManager;
 }

@@ -11,65 +11,65 @@ CascadedShadowMap::CascadedShadowMap()
 	CascadedShadowMap(1024);
 }
 
-CascadedShadowMap::CascadedShadowMap(int size, float slice1, float slice2, float slice3)
+CascadedShadowMap::CascadedShadowMap(int nSize, float nSlice1, float nSlice2, float nSlice3)
 {
 	for (int i=0;i<4;i++)
 	{
-		shadowMaps[i] = new DepthBuffer(size,size);
+		m_shadowMaps[i] = new DepthBuffer(nSize,nSize);
 	}
-	slices[0] = slice1;
-	slices[1] = slice2;
-	slices[2] = slice3;
+	m_nSlices[0] = nSlice1;
+	m_nSlices[1] = nSlice2;
+	m_nSlices[2] = nSlice3;
 
-	this->size = size;
+	this->m_nSize = nSize;
 }
 
 void CascadedShadowMap::buildShadowMaps()
 {
 	Profiler::getInstance()->startProfile("Build Shadow Maps");
-	float slice[] = {0.0, slices[0], slices[1], slices[2], 1.0};
+	float nSlice[] = {0.0, m_nSlices[0], m_nSlices[1], m_nSlices[2], 1.0};
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 	Camera *camera = worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera();
 	View *view = worldState->getRenderer()->getView();
 	Frustum *frustum = worldState->getRenderer()->getFrustum();
 	DirectLight *sun = worldState->getWorldManager()->getSun();
 
-	shadowMaps[3]->bind();
+	m_shadowMaps[3]->bind();
 	glClearDepth(1.0);
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glDisable(GL_CULL_FACE);
 	for (int i=0; i<4; i++)
 	{
-		Camera *lightCamera = createLightCamera(slice[i],slice[i+1],camera,view,sun);
-		View *lightView = createLightView(slice[i],slice[i+1],camera,lightCamera,view,frustum);
+		Camera *lightCamera = createLightCamera(nSlice[i],nSlice[i+1],camera,view,sun);
+		View *lightView = createLightView(nSlice[i],nSlice[i+1],camera,lightCamera,view,frustum);
 		Frustum *lightFrustum = new Frustum();
 		lightFrustum->getOrthoFrustum(lightCamera,lightView);
 
 		MatrixManager::getInstance()->pushMatrix4(MODELVIEW, glm::mat4(1.0f));
 		MatrixManager::getInstance()->pushMatrix4(PROJECTION, glm::mat4(1.0f));
 		
-		shadowMaps[i]->bind();
+		m_shadowMaps[i]->bind();
 		glClearDepth(1.0);
 		glEnable(GL_DEPTH_TEST);
 		glClear(GL_DEPTH_BUFFER_BIT);
 		glPushAttrib( GL_VIEWPORT_BIT );
-		glViewport( 0, 0, size, size);
+		glViewport( 0, 0, m_nSize, m_nSize);
 		lightView->use3D(false);
 		glm::mat4 cameraMat = glm::mat4(1.0f);
 		cameraMat = lightCamera->transformToMatrix(cameraMat);
-		lightMatrix[i] = MatrixManager::getInstance()->getMatrix4(PROJECTION) * cameraMat;
+		m_m4LightMatrix[i] = MatrixManager::getInstance()->getMatrix4(PROJECTION) * cameraMat;
 		GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("SunShadow");
 		glslProgram->use();
 		MatrixManager::getInstance()->multMatrix4(PROJECTION, cameraMat);
 		glslProgram->sendUniform("projectionCameraMatrix",&MatrixManager::getInstance()->getMatrix4(PROJECTION)[0][0]);
-		glslProgram->sendUniform("camPos",camera->geteyeX(),camera->geteyeY(),camera->geteyeZ());
+		glslProgram->sendUniform("camPos",camera->getEyeX(),camera->getEyeY(),camera->getEyeZ());
 		glBindAttribLocation(glslProgram->getHandle(), 0, "v_vertex");
 
 		worldState->getWorldManager()->renderWorld("SunShadow",lightFrustum);
 		
 		glslProgram->disable();
 		glPopAttrib();
-		shadowMaps[i]->unbind();
+		m_shadowMaps[i]->unbind();
 
 
 		delete lightCamera;
@@ -80,15 +80,15 @@ void CascadedShadowMap::buildShadowMaps()
 	Profiler::getInstance()->endProfile();
 }
 
-Camera *CascadedShadowMap::createLightCamera(float slice1, float slice2, Camera *camera, View *view, DirectLight *dLight)
+Camera *CascadedShadowMap::createLightCamera(float nSlice1, float nSlice2, Camera *camera, View *view, DirectLight *dLight)
 {
 	Vector3 lightLookAt = dLight->getDirection();
 	Vector3 lightRight = dLight->getRight();
 	Vector3 lightUp = dLight->getUp();
-	float viewDepth = (float)(view->getNear()+(view->getFar()-view->getNear())*(slice2+slice1)/2.0);
-	Vector3 cameraDir = camera->getLookAt()-camera->geteyeV();
+	float viewDepth = (float)(view->getNear()+(view->getFar()-view->getNear())*(nSlice2+nSlice1)/2.0);
+	Vector3 cameraDir = camera->getLookAt()-camera->getEyeV();
 	cameraDir.normalize();
-	Vector3 lightLookPoint = camera->geteyeV()+cameraDir*viewDepth;
+	Vector3 lightLookPoint = camera->getEyeV()+cameraDir*viewDepth;
 	Vector3 lightPos = lightLookPoint-lightLookAt*25.0;
 	Camera *lightCamera = new Camera();
 	lightCamera->setPosition(lightPos[0],lightPos[1],lightPos[2]);
@@ -98,22 +98,22 @@ Camera *CascadedShadowMap::createLightCamera(float slice1, float slice2, Camera 
 	return lightCamera;
 }
 
-View *CascadedShadowMap::createLightView(float slice1, float slice2, Camera *camera, Camera *lightCamera, View *view, Frustum *frustum)
+View *CascadedShadowMap::createLightView(float nSlice1, float nSlice2, Camera *camera, Camera *lightCamera, View *view, Frustum *frustum)
 {
 	glm::vec3 ntl,ntr,nbl,nbr,ftl,ftr,fbl,fbr,nc,fc,X,Y,Z;
 
-	float nearDepth = (float)(view->getNear()+(view->getFar()-view->getNear())*slice1);
-	float farDepth = (float)(view->getNear()+(view->getFar()-view->getNear())*slice2);
+	float nearDepth = (float)(view->getNear()+(view->getFar()-view->getNear())*nSlice1);
+	float farDepth = (float)(view->getNear()+(view->getFar()-view->getNear())*nSlice2);
 
-	float nh = (frustum->getHNear()+(frustum->getHFar()-frustum->getHNear())*slice1)/2.0f;
-	float nw = (frustum->getWNear()+(frustum->getWFar()-frustum->getWNear())*slice1)/2.0f; 
-	float fh = (frustum->getHNear()+(frustum->getHFar()-frustum->getHNear())*slice2)/2.0f;
-	float fw = (frustum->getWNear()+(frustum->getWFar()-frustum->getWNear())*slice2)/2.0f;
+	float nh = (frustum->getHeightNear()+(frustum->getHeightFar()-frustum->getHeightNear())*nSlice1)/2.0f;
+	float nw = (frustum->getWidthNear()+(frustum->getWidthFar()-frustum->getWidthNear())*nSlice1)/2.0f; 
+	float fh = (frustum->getHeightNear()+(frustum->getHeightFar()-frustum->getHeightNear())*nSlice2)/2.0f;
+	float fw = (frustum->getWidthNear()+(frustum->getWidthFar()-frustum->getWidthNear())*nSlice2)/2.0f;
 
 	glm::vec3 cameraRight(camera->getRight()[0], camera->getRight()[1], camera->getRight()[2]);
 	glm::vec3 cameraUp(camera->getUp()[0], camera->getUp()[1], camera->getUp()[2]);
 	glm::vec3 cameraLookAt(camera->getLookAt()[0],camera->getLookAt()[1],camera->getLookAt()[2]);
-	glm::vec3 cameraEye(camera->geteyeV()[0],camera->geteyeV()[1],camera->geteyeV()[2]);
+	glm::vec3 cameraEye(camera->getEyeV()[0],camera->getEyeV()[1],camera->getEyeV()[2]);
 
 	X = cameraRight;
 	X = glm::normalize(X);
@@ -187,46 +187,41 @@ View *CascadedShadowMap::createLightView(float slice1, float slice2, Camera *cam
 	return lightView;
 }
 
-void CascadedShadowMap::sendToShader(string shader)
+void CascadedShadowMap::sendToShader(string sShader)
 {
-	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader(shader);
+	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader(sShader);
 	glActiveTexture(GL_TEXTURE4);
-	glBindTexture(GL_TEXTURE_2D,shadowMaps[0]->getTexture());
+	glBindTexture(GL_TEXTURE_2D,m_shadowMaps[0]->getTexture());
 	glslProgram->sendUniform("shadowMap[0]",4);
 	glActiveTexture(GL_TEXTURE5);
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D,shadowMaps[1]->getTexture());
+	glBindTexture(GL_TEXTURE_2D,m_shadowMaps[1]->getTexture());
 	glslProgram->sendUniform("shadowMap[1]",5);
 	glActiveTexture(GL_TEXTURE6);
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D,shadowMaps[2]->getTexture());
+	glBindTexture(GL_TEXTURE_2D,m_shadowMaps[2]->getTexture());
 	glslProgram->sendUniform("shadowMap[2]",6);
 	glActiveTexture(GL_TEXTURE7);
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D,shadowMaps[3]->getTexture());
+	glBindTexture(GL_TEXTURE_2D,m_shadowMaps[3]->getTexture());
 	glslProgram->sendUniform("shadowMap[3]",7);
 
-	glslProgram->sendUniform("slices[0]",slices[0]);
-	glslProgram->sendUniform("slices[1]",slices[1]);
-	glslProgram->sendUniform("slices[2]",slices[2]);
+	glslProgram->sendUniform("slices[0]",m_nSlices[0]);
+	glslProgram->sendUniform("slices[1]",m_nSlices[1]);
+	glslProgram->sendUniform("slices[2]",m_nSlices[2]);
 
-	lightMatrix[0] = glm::translate(glm::mat4(1.0f),glm::vec3(0.5f,0.5f,0.5f)) * glm::scale(glm::mat4(1.0f),glm::vec3(0.5f,0.5f,0.5f)) * lightMatrix[0];
-	lightMatrix[1] = glm::translate(glm::mat4(1.0f),glm::vec3(0.5f,0.5f,0.5f)) * glm::scale(glm::mat4(1.0f),glm::vec3(0.5f,0.5f,0.5f)) * lightMatrix[1];
-	lightMatrix[2] = glm::translate(glm::mat4(1.0f),glm::vec3(0.5f,0.5f,0.5f)) * glm::scale(glm::mat4(1.0f),glm::vec3(0.5f,0.5f,0.5f)) * lightMatrix[2];
-	lightMatrix[3] = glm::translate(glm::mat4(1.0f),glm::vec3(0.5f,0.5f,0.5f)) * glm::scale(glm::mat4(1.0f),glm::vec3(0.5f,0.5f,0.5f)) * lightMatrix[3];
+	m_m4LightMatrix[0] = glm::translate(glm::mat4(1.0f),glm::vec3(0.5f,0.5f,0.5f)) * glm::scale(glm::mat4(1.0f),glm::vec3(0.5f,0.5f,0.5f)) * m_m4LightMatrix[0];
+	m_m4LightMatrix[1] = glm::translate(glm::mat4(1.0f),glm::vec3(0.5f,0.5f,0.5f)) * glm::scale(glm::mat4(1.0f),glm::vec3(0.5f,0.5f,0.5f)) * m_m4LightMatrix[1];
+	m_m4LightMatrix[2] = glm::translate(glm::mat4(1.0f),glm::vec3(0.5f,0.5f,0.5f)) * glm::scale(glm::mat4(1.0f),glm::vec3(0.5f,0.5f,0.5f)) * m_m4LightMatrix[2];
+	m_m4LightMatrix[3] = glm::translate(glm::mat4(1.0f),glm::vec3(0.5f,0.5f,0.5f)) * glm::scale(glm::mat4(1.0f),glm::vec3(0.5f,0.5f,0.5f)) * m_m4LightMatrix[3];
 
-	glslProgram->sendUniform("lightMatrix[0]", &lightMatrix[0][0][0]);
-	glslProgram->sendUniform("lightMatrix[1]", &lightMatrix[1][0][0]);
-	glslProgram->sendUniform("lightMatrix[2]", &lightMatrix[2][0][0]);
-	glslProgram->sendUniform("lightMatrix[3]", &lightMatrix[3][0][0]);
+	glslProgram->sendUniform("lightMatrix[0]", &m_m4LightMatrix[0][0][0]);
+	glslProgram->sendUniform("lightMatrix[1]", &m_m4LightMatrix[1][0][0]);
+	glslProgram->sendUniform("lightMatrix[2]", &m_m4LightMatrix[2][0][0]);
+	glslProgram->sendUniform("lightMatrix[3]", &m_m4LightMatrix[3][0][0]);
 }
 
-void CascadedShadowMap::drawShadowMaps()
+void CascadedShadowMap::bindShadowMap(int nMap)
 {
-
-}
-
-void CascadedShadowMap::bindShadowMap(int map)
-{
-	glBindTexture(GL_TEXTURE_2D,shadowMaps[map]->getTexture());
+	glBindTexture(GL_TEXTURE_2D,m_shadowMaps[nMap]->getTexture());
 }

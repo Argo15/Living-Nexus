@@ -9,9 +9,9 @@ class LoggerHelper
 private:
 	std::string m_sFileName;
 	std::string m_sLoggingType;
-	int year;
-	int month;
-	int day;
+	int m_nYear;
+	int m_nMonth;
+	int m_nDay;
 
 	std::string getLogDir();
 	void commonLogError(std::string sMessage, std::string sMessageType);

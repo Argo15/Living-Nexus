@@ -22,7 +22,7 @@ ModelManager *ModelManager::getInstance()
 	return m_pInstance;
 }
 
-void ModelManager::Initialize()
+void ModelManager::initialize()
 {
 	Logging::GRAPHICS->info("Loading Models");
 	DIR *pDIR;
@@ -33,7 +33,7 @@ void ModelManager::Initialize()
 		{
 			if( strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0 )
 			{
-				LoadModel(string("./Data/Models/") + entry->d_name);
+				loadModel(string("./Data/Models/") + entry->d_name);
 			}
 		}
 		closedir(pDIR);
@@ -41,54 +41,54 @@ void ModelManager::Initialize()
 	Logging::GRAPHICS->info("Done Loading Models");
 }
 
-void ModelManager::LoadModel(string filename)
+void ModelManager::loadModel(string sFileName)
 {
-	Model *model = new AObjModel();
-	if (model->load(filename)) 
+	Model *pModel = new AObjModel();
+	if (pModel->load(sFileName)) 
 	{
-		int start_pos = filename.rfind("/")+1;
-		int end_pos = filename.rfind(".");
-		string name = filename.substr(start_pos,end_pos-start_pos);
-		model->setName(name);
-		models[name]=model;
+		int nStartPos = sFileName.rfind("/")+1;
+		int nEndPos = sFileName.rfind(".");
+		string sName = sFileName.substr(nStartPos,nEndPos-nStartPos);
+		pModel->setName(sName);
+		m_models[sName]=pModel;
 	} 
 	else 
 	{
-		Logging::GRAPHICS->error("Model failed to load: " + filename);
+		Logging::GRAPHICS->error("Model failed to load: " + sFileName);
 	}
 }
 
-void ModelManager::DrawModel(string name)
+void ModelManager::drawModel(string sName)
 {
-	models[name]->draw();
+	m_models[sName]->draw();
 }
 
-void ModelManager::DrawModelGeometry(string name)
+void ModelManager::drawModelGeometry(string sName)
 {
-	models[name]->drawGeometry();
+	m_models[sName]->drawGeometry();
 }
 
-void ModelManager::DeleteModel(string name)
+void ModelManager::deleteModel(string sName)
 {
-	if (models.find(name) == models.end())
+	if (m_models.find(sName) == m_models.end())
 	{
-		models[name]->remove();
-		delete models[name];
-		models.erase(name);
+		m_models[sName]->remove();
+		delete m_models[sName];
+		m_models.erase(sName);
 	}
 }
 
-void ModelManager::DeleteAllModels()
+void ModelManager::deleteAllModels()
 {
-	models.clear();
+	m_models.clear();
 }
 
-Model *ModelManager::getModel(string name)
+Model *ModelManager::getModel(string sName)
 { 
-	return models[name]; 
+	return m_models[sName]; 
 }
 
 map<string,Model *> *ModelManager::getModels() 
 {
-	return &models;
+	return &m_models;
 }	

@@ -9,7 +9,7 @@ enum PhysicsShapeType {BOX, CYLINDER, SPHERE};
 class PhysicsShape : public Actor 
 {
 private:
-	PhysicsShapeType type;
+	PhysicsShapeType m_type;
 
 	btCollisionShape *getBoxShape();
 	btCollisionShape *getSphereShape();

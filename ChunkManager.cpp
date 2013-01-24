@@ -12,7 +12,7 @@ ChunkManager::ChunkManager()
 	
 }
 
-void ChunkManager::Initialize()
+void ChunkManager::initialize()
 {
 	Logging::GRAPHICS->info("Loading Chunks");
 	DIR *pDIR;
@@ -23,7 +23,7 @@ void ChunkManager::Initialize()
 		{
 			if( strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0 )
 			{
-				LoadChunk(string("./Data/Chunks/") + entry->d_name);
+				loadChunk(string("./Data/Chunks/") + entry->d_name);
 			}
 		}
 		closedir(pDIR);
@@ -31,49 +31,49 @@ void ChunkManager::Initialize()
 	Logging::GRAPHICS->info("Done Loading Chunks");
 }
 
-void ChunkManager::LoadChunk(string filename)
+void ChunkManager::loadChunk(string sFileName)
 {
 	Chunk *chunk = new Chunk();
-	if (chunk->loadChunk(filename)) 
+	if (chunk->loadChunk(sFileName)) 
 	{
-		int start_pos = filename.rfind("/")+1;
-		int end_pos = filename.rfind(".");
-		string name = filename.substr(start_pos,end_pos-start_pos);
-		chunk->setName(name);
-		chunks[name]=chunk;
+		int start_pos = sFileName.rfind("/")+1;
+		int end_pos = sFileName.rfind(".");
+		string sName = sFileName.substr(start_pos,end_pos-start_pos);
+		chunk->setName(sName);
+		m_chunks[sName]=chunk;
 		return;
 	} 
 	else 
 	{
-		Logging::GRAPHICS->error("Chunk failed to load: " + filename);
+		Logging::GRAPHICS->error("Chunk failed to load: " + sFileName);
 	}
 }
 
-void ChunkManager::DrawChunk(string name, string shader)
+void ChunkManager::drawChunk(string sName, string sShader)
 {
-	chunks[name]->drawChunk(shader);
+	m_chunks[sName]->drawChunk(sShader);
 }
 
-void ChunkManager::DeleteChunk(string name)
+void ChunkManager::deleteChunk(string sName)
 {
-	if (chunks.find(name) == chunks.end())
+	if (m_chunks.find(sName) == m_chunks.end())
 	{
-		delete chunks[name];
-		chunks.erase(name);
+		delete m_chunks[sName];
+		m_chunks.erase(sName);
 	}
 }
 
-void ChunkManager::DeleteAllChunks()
+void ChunkManager::deleteAllChunks()
 {
-	chunks.clear();
+	m_chunks.clear();
 }
 
-Chunk *ChunkManager::getChunk(string name) 
+Chunk *ChunkManager::getChunk(string sName) 
 { 
-	return chunks[name]; 
+	return m_chunks[sName]; 
 }
 
 map<string,Chunk *> *ChunkManager::getChunks() 
 {
-	return &chunks;
+	return &m_chunks;
 }

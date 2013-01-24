@@ -4,95 +4,95 @@ Transformable::Transformable()
 {
 	for (int i=0;i<3;i++)
 	{
-		translations[i]=0;
-		scale[i]=1.0;
+		m_nTranslations[i]=0;
+		m_nScale[i]=1.0;
 	}
-	rotation = Quaternion();
+	m_qRotation = Quaternion();
 }
 
 void Transformable::transform()
 {
 	glMatrixMode(GL_MODELVIEW);
-	glTranslatef(translations[0],translations[1],translations[2]);
-	rotation.getMatrix().multiplyToCurrent();
-	glScalef(scale[0],scale[1],scale[2]);
+	glTranslatef(m_nTranslations[0],m_nTranslations[1],m_nTranslations[2]);
+	m_qRotation.getMatrix().multiplyToCurrent();
+	glScalef(m_nScale[0],m_nScale[1],m_nScale[2]);
 }
 
-glm::mat4 Transformable::transformToMatrix(glm::mat4 matrix)
+glm::mat4 Transformable::transformToMatrix(glm::mat4 m4Matrix)
 {
-	glm::mat4 mat = glm::mat4(1.0f);
-	mat = glm::translate(mat, glm::vec3(translations[0],translations[1],translations[2]));
-	glm::quat rot = glm::quat(rotation[0],rotation[1],rotation[2],rotation[3]);
-	mat = mat * glm::mat4_cast(rot);
-	mat = glm::scale(mat, glm::vec3(scale[0],scale[1],scale[2]));
-	return matrix * mat;
+	glm::mat4 m4Mat = glm::mat4(1.0f);
+	m4Mat = glm::translate(m4Mat, glm::vec3(m_nTranslations[0],m_nTranslations[1],m_nTranslations[2]));
+	glm::quat rot = glm::quat(m_qRotation[0],m_qRotation[1],m_qRotation[2],m_qRotation[3]);
+	m4Mat = m4Mat * glm::mat4_cast(rot);
+	m4Mat = glm::scale(m4Mat, glm::vec3(m_nScale[0],m_nScale[1],m_nScale[2]));
+	return m4Matrix * m4Mat;
 }
 
-glm::mat3 Transformable::transformToMatrix(glm::mat3 matrix)
+glm::mat3 Transformable::transformToMatrix(glm::mat3 m3Matrix)
 {
-	glm::mat3 mat = glm::mat3(1.0f);
-	glm::quat rot = glm::quat(rotation[0],rotation[1],rotation[2],rotation[3]);
-	mat = mat * glm::mat3_cast(rot);
-	return matrix * mat;
+	glm::mat3 m4Mat = glm::mat3(1.0f);
+	glm::quat rot = glm::quat(m_qRotation[0],m_qRotation[1],m_qRotation[2],m_qRotation[3]);
+	m4Mat = m4Mat * glm::mat3_cast(rot);
+	return m3Matrix * m4Mat;
 }
 
-void Transformable::Translate(float x, float y, float z) 
+void Transformable::translate(float nTransX, float nTransY, float nTransZ) 
 {
-	translations[0]+=x;
-	translations[1]+=y;
-	translations[2]+=z;
+	m_nTranslations[0] += nTransX;
+	m_nTranslations[1] += nTransY;
+	m_nTranslations[2] += nTransZ;
 }
 
-void Transformable::Rotate(Quaternion quat) 
+void Transformable::rotate(Quaternion quat) 
 {
-	rotation=quat*rotation;
+	m_qRotation = quat * m_qRotation;
 }
 
-void Transformable::Scale(float x, float y, float z) 
+void Transformable::scale(float nScaleX, float nScaleY, float nScaleZ) 
 {
-	scale[0]+=x;
-	scale[1]+=y;
-	scale[2]+=z;
+	m_nScale[0] += nScaleX;
+	m_nScale[1] += nScaleY;
+	m_nScale[2] += nScaleZ;
 }
 
-void Transformable::setTranslate(float x, float y, float z) 
+void Transformable::setTranslate(float nTransX, float nTransY, float nTransZ) 
 {
-	translations[0]=x;
-	translations[1]=y;
-	translations[2]=z;
+	m_nTranslations[0] = nTransX;
+	m_nTranslations[1] = nTransY;
+	m_nTranslations[2] = nTransZ;
 }
 
 void Transformable::setRotate(Quaternion quat) 
 {
-	rotation = quat;
+	m_qRotation = quat;
 }
 
-void Transformable::setScale(float x, float y, float z) 
+void Transformable::setScale(float nScaleX, float nScaleY, float nScaleZ) 
 {
-	scale[0]=x;
-	scale[1]=y;
-	scale[2]=z;
+	m_nScale[0] = nScaleX;
+	m_nScale[1] = nScaleY;
+	m_nScale[2] = nScaleZ;
 }
 
 float *Transformable::getTranslate() 
 {
-	float *pTranslate = translations; 
+	float *pTranslate = m_nTranslations; 
 	return pTranslate;
 }
 
 Quaternion Transformable::getRotate() 
 {
-	return rotation;
+	return m_qRotation;
 }
 
 float *Transformable::getScale() 
 {
-	float *pScale;
-	pScale=scale; 
-	return pScale;
+	float *pnScale;
+	pnScale=m_nScale; 
+	return pnScale;
 }
 
 Vector3 Transformable::getTranslateV() 
 {
-	return Vector3(translations[0],translations[1],translations[2]);
+	return Vector3(m_nTranslations[0], m_nTranslations[1], m_nTranslations[2]);
 }

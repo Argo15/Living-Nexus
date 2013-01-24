@@ -10,12 +10,12 @@ using namespace std;
 class WorldChunks
 {
 private:
-	int width, height;
-	Chunk ***worldChunks;
-	vector<Chunk *> *allChunks;
+	int m_nWidth, m_nHeight;
+	Chunk ***m_worldChunks;
+	vector<Chunk *> *m_allChunks;
 
 public:
-	WorldChunks(int w, int h);
+	WorldChunks(int nWidth, int nHeight);
 
 	void generateChunks(ChunkManager *chunks, PhysicsManager *physicsManager);
 	vector<Chunk *> *getAllChunks();

@@ -4,8 +4,8 @@ TimeManager* TimeManager::m_pInstance = 0;
 
 TimeManager::TimeManager() 
 {
-	gameTime.updateToSystemTime();
-	timestamp = gameTime.getSecondsSinceMidnight();
+	m_gameTime.updateToSystemTime();
+	m_nTimestamp = m_gameTime.getSecondsSinceMidnight();
 }
 
 TimeManager *TimeManager::getInstance() 
@@ -19,27 +19,27 @@ TimeManager *TimeManager::getInstance()
 
 void TimeManager::tick() 
 {
-	gameTime.updateToSystemTime();
+	m_gameTime.updateToSystemTime();
 }
 
 std::string TimeManager::toString() 
 {
 	char buff[100];
 	sprintf(buff, "%d:%d:%d %d/%d/%d", 
-		gameTime.getHours(), gameTime.getMinutes(), gameTime.getSeconds(),
-		gameTime.getMonth(), gameTime.getDay(), gameTime.getYear());
+		m_gameTime.getHours(), m_gameTime.getMinutes(), m_gameTime.getSeconds(),
+		m_gameTime.getMonth(), m_gameTime.getDay(), m_gameTime.getYear());
 	std::string sTime = buff;
 	return sTime;
 }
 
 GameTime TimeManager::getGameTime() 
 {
-	return gameTime;
+	return m_gameTime;
 }
 
 int TimeManager::getTimeStamp() 
 {
-	return timestamp;
+	return m_nTimestamp;
 }
 
 int TimeManager::getTimeInMilliseconds() 

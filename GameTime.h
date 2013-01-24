@@ -8,7 +8,7 @@
 class GameTime
 {
 private:
-	boost::posix_time::ptime datetime;
+	boost::posix_time::ptime m_datetime;
 
 	int m_nHourOffset;
 	float m_nMinuteOffset;

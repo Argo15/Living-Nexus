@@ -1,53 +1,53 @@
 #include "Light.h"
 
-void Light::setAmbient(float amt)
+void Light::setAmbient(float nAmt)
 {
-	ambient=amt;
+	m_nAmbient=nAmt;
 }
 
-void Light::setDiffuse(float amt)
+void Light::setDiffuse(float nAmt)
 {
-	diffuse=amt;
+	m_nDiffuse=nAmt;
 }
 
-void Light::setSpecular(float amt)
+void Light::setSpecular(float nAmt)
 {
-	specular=amt;
+	m_nSpecular=nAmt;
 }
 
 float Light::getDiffuse()
 {
-	return diffuse;
+	return m_nDiffuse;
 }
 
 float Light::getAmbient()
 {
-	return ambient;
+	return m_nAmbient;
 }
 
 float Light::getSpecular() 
 {
-	return specular;
+	return m_nSpecular;
 }
 
-void Light::setColor(float r, float g, float b) 
+void Light::setColor(float red, float green, float blue) 
 {
-	color[0]=r; 
-	color[1]=g; 
-	color[2]=b;
+	m_nColor[0]=red; 
+	m_nColor[1]=green; 
+	m_nColor[2]=blue;
 }
 
 float *Light::getColor() 
 {
-	return color;
+	return m_nColor;
 }
 
-bool Light::isenabled() 
+bool Light::isEnabled() 
 {
-	return enabled;
+	return m_bEnabled;
 }
 
-void Light::setEnabled(bool enabled) 
+void Light::setEnabled(bool bEnabled) 
 {
-	this->enabled=enabled;
+	this->m_bEnabled=bEnabled;
 }

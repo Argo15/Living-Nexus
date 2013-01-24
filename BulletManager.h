@@ -7,17 +7,17 @@
 class BulletManager 
 {
 private:
-	btDiscreteDynamicsWorld* dynamicsWorld;
-	btRigidBody *playerBody;
+	btDiscreteDynamicsWorld* m_dynamicsWorld;
+	btRigidBody *m_playerBody;
 
 public:
 	BulletManager();
 
-	void tick(int fps);
+	void tick(int nFps);
 	void addPhysicsShape(PhysicsShape *shape);
 	void clearDynamicsWorld();
 	void createPlayerBody();
-	void updateDynamicsWorld(float speed);
+	void updateDynamicsWorld(float nSpeed);
 };
 
 #endif

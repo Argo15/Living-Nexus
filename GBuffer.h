@@ -17,20 +17,20 @@ using namespace std;
 class GBuffer 
 {
 private:
-	GLuint depthTex;
-	GLuint normalTex;
-	GLuint colorTex;
-	GLuint worldPosTex;
-	GLuint glowTex;
-	GLuint motionTex;
-	GLuint buffer;
+	GLuint m_nDepthTex;
+	GLuint m_nNormalTex;
+	GLuint m_nColorTex;
+	GLuint m_nWorldPosTex;
+	GLuint m_nGlowTex;
+	GLuint m_nMotionTex;
+	GLuint m_nFrameBuffer;
 
-	int width,height;
-	Camera lastCamera;
-	glm::mat4 lastCameraProj;
+	int m_nWidth, m_nHeight;
+	Camera m_lastCamera;
+	glm::mat4 m_m4LastCameraProj;
 
 public:
-	GBuffer(int width, int height);
+	GBuffer(int nWidth, int nHeight);
 	~GBuffer();
 
 	void drawToBuffer(View *view);

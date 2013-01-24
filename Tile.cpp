@@ -5,12 +5,12 @@ Tile::Tile() : Chunk()
 
 }
 
-bool Tile::loadTile(string filename) 
+bool Tile::loadTile(string sFilename) 
 {
-	return loadChunk(filename);
+	return loadChunk(sFilename);
 }
 
-void Tile::drawTile(string shader) 
+void Tile::drawTile(string sShader) 
 {
-	drawChunk(shader);
+	drawChunk(sShader);
 }

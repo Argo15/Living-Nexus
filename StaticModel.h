@@ -8,9 +8,9 @@ using namespace std;
 class StaticModel : public Model
 {
 protected:
-	GLuint bufferID;
+	GLuint m_nBufferID;
 public:
-	virtual bool load(string filename) = 0;
+	virtual bool load(string sFilename) = 0;
 	void remove();
 	void draw();
 	void drawGeometry();

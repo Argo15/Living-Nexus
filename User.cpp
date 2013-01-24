@@ -1,14 +1,14 @@
 #include "User.h"
 #include "Config.h"
 
-User::User(std::string name) 
+User::User(std::string sName) 
 {
-	username = name;
+	m_sUsername = sName;
 	int numObjects = Config::getInstance()->getFieldInt("INVENTORY_SIZE");
-	objects = new Object*[numObjects];
+	m_objects = new Object*[numObjects];
 	for (int i = 0; i < numObjects; i++) 
 	{
-		objects[i] = new Object();
+		m_objects[i] = 0;
 	}
 }
 
@@ -19,5 +19,5 @@ User::~User()
 
 std::string User::getName() 
 { 
-	return username; 
+	return m_sUsername; 
 }

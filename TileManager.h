@@ -9,18 +9,18 @@ using namespace std;
 class TileManager 
 {
 private:
-	map<string,Tile *> tiles;
+	map<string,Tile *> m_tiles;
 
 public:
 	TileManager();
 
-    void Initialize();
-	void LoadTile(string filename);
-	void DrawTile(string name, string shader);
-	void DeleteTile(string name);
-	void DeleteAllTiles();
+    void initialize();
+	void loadTile(string sFileName);
+	void drawTile(string sName, string sShader);
+	void deleteTile(string sName);
+	void deleteAllTiles();
 
-	Tile *getTile(string name);
+	Tile *getTile(string sName);
 	map<string,Tile *> *getTiles();
 };
 

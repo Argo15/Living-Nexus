@@ -24,16 +24,16 @@ private:
 		vector<Tile *> *tiles;
 	};
 
-	int width, height;
-	TileData ***worldTiles;
-	vector<Tile *> *allTiles;
+	int m_nWidth, m_nHeight;
+	TileData ***m_worldTiles;
+	vector<Tile *> *m_allTiles;
 
 public:
-	WorldTiles(int w, int h);
+	WorldTiles(int nWidth, int nHeight);
 
 	void init();
 	void initializeFromChunks(WorldChunks *chunks, TileManager *manager, PhysicsManager *physicsManager);
-	bool addTile(int x, int y, Tile *tile, PhysicsManager *physicsManager);
+	bool addTile(int nPosX, int nPosY, Tile *tile, PhysicsManager *physicsManager);
 	vector<Tile *> *getAllTiles();
 	vector<Tile *> *getVisibleTiles(Frustum *frustum);
 	int getWidth();

@@ -5,23 +5,23 @@
 #include <GL/GLee.h>
 #include "MatrixManager.h"
 
-static void drawScreen(float x1, float y1, float x2, float y2)
+static void drawScreen(float nX1, float nY1, float nX2, float nY2)
 {
 	glBegin(GL_QUADS);
-		glTexCoord2f(0,0);		 glVertex2f(x1,y1);
-		glTexCoord2f(1.0f,0);	 glVertex2f(x2,y1);
-		glTexCoord2f(1.0f,1.0f); glVertex2f(x2,y2);
-		glTexCoord2f(0,1.0f);	 glVertex2f(x1,y2);
+		glTexCoord2f(0,0);		 glVertex2f(nX1,nY1);
+		glTexCoord2f(1.0f,0);	 glVertex2f(nX2,nY1);
+		glTexCoord2f(1.0f,1.0f); glVertex2f(nX2,nY2);
+		glTexCoord2f(0,1.0f);	 glVertex2f(nX1,nY2);
 	glEnd();
 }
 
-static void drawScreenShader(float x1, float y1, float x2, float y2)
+static void drawScreenShader(float nX1, float nY1, float nX2, float nY2)
 {
 	glBegin(GL_QUADS);
-		glVertexAttrib2f(1,0,0);		glVertexAttrib2f(0,x1,y1);
-		glVertexAttrib2f(1,1.0f,0);		glVertexAttrib2f(0,x2,y1);
-		glVertexAttrib2f(1,1.0f,1.0f);	glVertexAttrib2f(0,x2,y2);
-		glVertexAttrib2f(1,0,1.0f);		glVertexAttrib2f(0,x1,y2);
+		glVertexAttrib2f(1,0,0);		glVertexAttrib2f(0,nX1,nY1);
+		glVertexAttrib2f(1,1.0f,0);		glVertexAttrib2f(0,nX2,nY1);
+		glVertexAttrib2f(1,1.0f,1.0f);	glVertexAttrib2f(0,nX2,nY2);
+		glVertexAttrib2f(1,0,1.0f);		glVertexAttrib2f(0,nX1,nY2);
 	glEnd();
 }
 

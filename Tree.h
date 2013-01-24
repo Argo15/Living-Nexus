@@ -9,12 +9,12 @@
 class Tree : public Tile 
 {
 private:
-	Transformable *fruitTransforms[3];
-	Object *fruit[3];
+	Transformable *m_fruitTransforms[3];
+	Object *m_fruit[3];
 
 public:
 	Tree();
-	void drawExtra(std::string shader);
+	void drawExtra(std::string sShader);
 };
 
 #endif

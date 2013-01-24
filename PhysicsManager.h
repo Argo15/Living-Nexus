@@ -7,13 +7,13 @@
 class PhysicsManager 
 {
 private:
-	WorldCameraManager *worldCameras;
-	BulletManager *bulletManager;
+	WorldCameraManager *m_worldCameras;
+	BulletManager *m_worldBulletManager;
 
 public:
 	PhysicsManager();
 
-	void tick(int fps);
+	void tick(int nFps);
 	WorldCameraManager *getWorldCameras();
 	BulletManager *getBulletManager();
 };

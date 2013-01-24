@@ -12,12 +12,12 @@
 class Model : public Entity
 {
 protected:
-	int numTriangles;
-	float center[3];
-	float radius;
+	int m_nNumTriangles;
+	float m_nCenter[3];
+	float m_nRadius;
 
 public:
-	virtual bool load(string filename) = 0;
+	virtual bool load(string sFilename) = 0;
 	virtual void draw() = 0;
 	virtual void drawGeometry() = 0;
 	virtual void remove() = 0;

@@ -9,25 +9,25 @@ using namespace std;
 class MaterialManager {
 private:
 	static MaterialManager *m_pInstance;
-	map<string,Material *> materials;
+	map<string,Material *> m_materials;
 	string getSafeName(string baseName);
 
 	MaterialManager();
 public:
 	static MaterialManager *getInstance();
 
-    void Initialize();
-	void LoadMaterial(string filename);
-	string AddMaterialSafe(Material *material);
-	bool hasMaterial(string name);
-	string renameMaterial(string currentName, string newName);
-	void DeleteMaterial(string name);
-	void DeleteAllMaterials();
+    void initialize();
+	void loadMaterial(string sFileName);
+	string addMaterialSafe(Material *material);
+	bool hasMaterial(string sName);
+	string renameMaterial(string sCurrentName, string sNewName);
+	void deleteMaterial(string sName);
+	void deleteAllMaterials();
 
-	void SaveAllMaterials();
+	void saveAllMaterials();
 
-	void UseMaterial(string name);
-	Material *getMaterial(string name);
+	void useMaterial(string sName);
+	Material *getMaterial(string sName);
 	map<string,Material *> *getMaterials();
 };
 

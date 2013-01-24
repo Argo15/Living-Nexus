@@ -10,13 +10,13 @@ using namespace std;
 class DirectLight : public Light, public Transformable
 {
 private:
-	float direction[4];
+	float m_nDirection[4];
 
 public:
 	DirectLight();
 
-	void sendToShader(string shader);
-	void setDirection(float x, float y, float z);
+	void sendToShader(string sShader);
+	void setDirection(float nDirX, float nDirY, float nDirZ);
 	Vector3 getDirection();
 	Vector3 getUp();
 	Vector3 getRight();

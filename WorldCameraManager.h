@@ -6,14 +6,14 @@
 class WorldCameraManager
 {
 private:
-	WorldCamera *worldCamera;
-	Camera *freeRoamCamera;
-	Camera *current;
+	WorldCamera *m_worldCamera;
+	Camera *m_freeRoamCamera;
+	Camera *m_current;
 
 public:
 	WorldCameraManager();
 
-	void tick(int fps);
+	void tick(int nFps);
 	WorldCamera *getPlayerCamera();
 	Camera *getCurrentCamera();
 };

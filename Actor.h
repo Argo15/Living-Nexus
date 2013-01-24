@@ -11,17 +11,17 @@
 class Actor : public Entity, public Transformable 
 {
 private:
-	string *model;
-	string *material;
+	string *m_psModel;
+	string *m_psMaterial;
 	
 public:
-	Actor(string *model = 0, string *material = 0);
+	Actor(string *sModel = 0, string *sMaterial = 0);
 
-	void drawActor(string shader);
+	void drawActor(string sShader);
 	float getScaledRadius();
-	void setModel(string *model);
+	void setModel(string *sModel);
 	string *getModel();
-	void setMaterial(string *material);
+	void setMaterial(string *sMaterial);
 	string *getMaterial();
 
 };

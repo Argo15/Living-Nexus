@@ -24,14 +24,14 @@ using namespace std;
 class AtmosphereBuffer
 {
 private:
-	GLuint colorTex;
-	GLuint glowTex;
-	GLuint buffer;
+	GLuint m_nColorTex;
+	GLuint m_nGlowTex;
+	GLuint m_nFrameBuffer;
 
-	int width,height;
+	int m_nWidth, m_nHeight;
 
 public:
-	AtmosphereBuffer(int width, int height);
+	AtmosphereBuffer(int nWidth, int nHeight);
 	~AtmosphereBuffer();
 
 	void drawToBuffer(GLuint colorBuf, GLuint glowBuf, GLuint depthBuf, View *view);

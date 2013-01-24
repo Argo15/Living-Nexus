@@ -9,8 +9,8 @@ public:
 public:
 	GameState();
 
-	virtual void resize(int w, int h) = 0;
-	virtual void tick(int fps) = 0;
+	virtual void resize(int nWidth, int nHeight) = 0;
+	virtual void tick(int nFps) = 0;
 
 	virtual bool mouseHidden() = 0;
 };

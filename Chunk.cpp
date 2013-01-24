@@ -4,124 +4,124 @@
 
 Chunk::Chunk() : Transformable()
 {
-	numActors = 0;
-	actors = 0;
-	orientation = 0;
-	radius = 0;
+	m_nNumActors = 0;
+	m_actors = 0;
+	m_nOrientation = 0;
+	m_nRadius = 0;
 	for (int i=0; i<10; i++) 
 	{
 		for (int j=0; j<10; j++) 
 		{
-			tileModes[i][j] = 0;
+			m_nTileModes[i][j] = 0;
 		}
 	}
 }
 
-void Chunk::drawChunk(string shader) 
+void Chunk::drawChunk(string sShader) 
 {
 	MatrixManager::getInstance()->pushMatrix4(MODELVIEW, transformToMatrix(MatrixManager::getInstance()->getMatrix4(MODELVIEW)));
 	MatrixManager::getInstance()->pushMatrix3(NORMAL, transformToMatrix(MatrixManager::getInstance()->getMatrix3(NORMAL)));
 		glm::mat4 normMat(MatrixManager::getInstance()->getMatrix3(NORMAL));
 		normMat[3] = glm::vec4(0,0,0,1.0f);
-		MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::rotate(MatrixManager::getInstance()->getMatrix4(MODELVIEW), 90.0f*orientation, glm::vec3(0,1.0f,0)));
-		normMat = glm::rotate(normMat, 90.0f*orientation, glm::vec3(0,1.0f,0));
+		MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::rotate(MatrixManager::getInstance()->getMatrix4(MODELVIEW), 90.0f*m_nOrientation, glm::vec3(0,1.0f,0)));
+		normMat = glm::rotate(normMat, 90.0f*m_nOrientation, glm::vec3(0,1.0f,0));
 		MatrixManager::getInstance()->putMatrix3(NORMAL, glm::mat3(normMat));
-		for (int i=0; i<numActors; i++) 
+		for (int i=0; i<m_nNumActors; i++) 
 		{
-			MatrixManager::getInstance()->pushMatrix4(MODELVIEW, actors[i]->transformToMatrix(MatrixManager::getInstance()->getMatrix4(MODELVIEW)));
-			MatrixManager::getInstance()->pushMatrix3(NORMAL, actors[i]->transformToMatrix(MatrixManager::getInstance()->getMatrix3(NORMAL)));
-			actors[i]->drawActor(shader);
+			MatrixManager::getInstance()->pushMatrix4(MODELVIEW, m_actors[i]->transformToMatrix(MatrixManager::getInstance()->getMatrix4(MODELVIEW)));
+			MatrixManager::getInstance()->pushMatrix3(NORMAL, m_actors[i]->transformToMatrix(MatrixManager::getInstance()->getMatrix3(NORMAL)));
+			m_actors[i]->drawActor(sShader);
 			MatrixManager::getInstance()->popMatrix4(MODELVIEW);
 			MatrixManager::getInstance()->popMatrix3(NORMAL);
 		}
-		drawExtra(shader);
+		drawExtra(sShader);
 	MatrixManager::getInstance()->popMatrix4(MODELVIEW);
 	MatrixManager::getInstance()->popMatrix3(NORMAL);
 }
 
-void Chunk::drawExtra(string shader)
+void Chunk::drawExtra(string sShader)
 {
 
 }
 
-bool Chunk::loadChunk(string filename)
+bool Chunk::loadChunk(string sFileName)
 {
-	ifstream file(filename.c_str(), ios::in|ios::binary|ios::ate);
+	ifstream file(sFileName.c_str(), ios::in|ios::binary|ios::ate);
 	if (file.is_open())
 	{ 
 		file.seekg (0, ios::beg);
-		file.read((char*)&numActors,sizeof(numActors));
-		SaveActor *loadActors = new SaveActor[numActors];
-		actors = new Actor*[numActors];
-		file.read((char*)loadActors,sizeof(SaveActor)*numActors);
+		file.read((char*)&m_nNumActors,sizeof(m_nNumActors));
+		SaveActor *loadActors = new SaveActor[m_nNumActors];
+		m_actors = new Actor*[m_nNumActors];
+		file.read((char*)loadActors,sizeof(SaveActor)*m_nNumActors);
 
-		for(int i=0; i<numActors; i++) 
+		for(int i=0; i<m_nNumActors; i++) 
 		{
-			string *model = ModelManager::getInstance()->getModel(loadActors[i].model)->getName();
-			string *mat = new string(loadActors[i].material);
-			actors[i] = new Actor(model, mat);
-			actors[i]->setName(loadActors[i].name);
-			actors[i]->setTranslate(loadActors[i].translation[0],loadActors[i].translation[1],loadActors[i].translation[2]);
-			actors[i]->setRotate(Quaternion(loadActors[i].rotation[0],loadActors[i].rotation[1],loadActors[i].rotation[2],loadActors[i].rotation[3]));
-			actors[i]->setScale(loadActors[i].scale[0],loadActors[i].scale[1],loadActors[i].scale[2]);
-			float actorRadius = actors[i]->getTranslateV().length()+actors[i]->getScaledRadius();
-			if (actorRadius>radius)
+			string *sModel = ModelManager::getInstance()->getModel(loadActors[i].sModel)->getName();
+			string *mat = new string(loadActors[i].sMaterial);
+			m_actors[i] = new Actor(sModel, mat);
+			m_actors[i]->setName(loadActors[i].sName);
+			m_actors[i]->setTranslate(loadActors[i].nTranslation[0],loadActors[i].nTranslation[1],loadActors[i].nTranslation[2]);
+			m_actors[i]->setRotate(Quaternion(loadActors[i].nRotation[0],loadActors[i].nRotation[1],loadActors[i].nRotation[2],loadActors[i].nRotation[3]));
+			m_actors[i]->setScale(loadActors[i].nScale[0],loadActors[i].nScale[1],loadActors[i].nScale[2]);
+			float actorRadius = m_actors[i]->getTranslateV().length()+m_actors[i]->getScaledRadius();
+			if (actorRadius>m_nRadius)
 			{
-				radius=actorRadius;
+				m_nRadius=actorRadius;
 			}
 		}
 
-		file.read((char*)&numPhysics,sizeof(numPhysics));
-		SavePhysics *loadPhysics = new SavePhysics[numPhysics];
-		physics = new PhysicsShape*[numPhysics];
-		file.read((char*)loadPhysics,sizeof(SavePhysics)*numPhysics);
+		file.read((char*)&m_nNumPhysics,sizeof(m_nNumPhysics));
+		SavePhysics *loadPhysics = new SavePhysics[m_nNumPhysics];
+		m_physics = new PhysicsShape*[m_nNumPhysics];
+		file.read((char*)loadPhysics,sizeof(SavePhysics)*m_nNumPhysics);
 
-		for(int i=0; i<numPhysics; i++) 
+		for(int i=0; i<m_nNumPhysics; i++) 
 		{
-			physics[i] = new PhysicsShape(loadPhysics[i].physicsType);
-			physics[i]->setTranslate(loadPhysics[i].translation[0],loadPhysics[i].translation[1],loadPhysics[i].translation[2]);
-			physics[i]->setRotate(Quaternion(loadPhysics[i].rotation[0],loadPhysics[i].rotation[1],loadPhysics[i].rotation[2],loadPhysics[i].rotation[3]));
-			physics[i]->setScale(loadPhysics[i].scale[0],loadPhysics[i].scale[1],loadPhysics[i].scale[2]);
+			m_physics[i] = new PhysicsShape(loadPhysics[i].m_physicsType);
+			m_physics[i]->setTranslate(loadPhysics[i].nTranslation[0],loadPhysics[i].nTranslation[1],loadPhysics[i].nTranslation[2]);
+			m_physics[i]->setRotate(Quaternion(loadPhysics[i].nRotation[0],loadPhysics[i].nRotation[1],loadPhysics[i].nRotation[2],loadPhysics[i].nRotation[3]));
+			m_physics[i]->setScale(loadPhysics[i].nScale[0],loadPhysics[i].nScale[1],loadPhysics[i].nScale[2]);
 		}
 
-		file.read((char*)tileModes,sizeof(tileModes));
+		file.read((char*)m_nTileModes,sizeof(m_nTileModes));
 
 		file.close();
 
-		int start_pos = filename.rfind("/")+1;
-		int end_pos = filename.rfind(".");
-		string name = filename.substr(start_pos,end_pos-start_pos);
-		setName(name);
+		int start_pos = sFileName.rfind("/")+1;
+		int end_pos = sFileName.rfind(".");
+		string sName = sFileName.substr(start_pos,end_pos-start_pos);
+		setName(sName);
 
 		return true;
 	}
 	return false;
 }
 
-void Chunk::setOrientation(int ori) 
+void Chunk::setOrientation(int nOrientation) 
 {
-	orientation = ori;
+	m_nOrientation = nOrientation;
 }
 
 int Chunk::getOrientation() 
 {
-	return orientation;
+	return m_nOrientation;
 }
 
 float Chunk::getRadius()
 {
-	return radius;
+	return m_nRadius;
 }
 
 void Chunk::addPhysicsToDynamicWorld(PhysicsManager *physicsManager)
 {
 	BulletManager *bullet = physicsManager->getBulletManager();
-	for (int i=0; i<numPhysics; i++)
+	for (int i=0; i<m_nNumPhysics; i++)
 	{
-		PhysicsShape physicsShape = *physics[i];
+		PhysicsShape physicsShape = *m_physics[i];
 		physicsShape.matrix = glm::mat4(1.0f);
 		physicsShape.matrix = transformToMatrix(physicsShape.matrix);
-		physicsShape.matrix = glm::rotate(physicsShape.matrix, 90.0f*orientation, glm::vec3(0,1.0f,0));
+		physicsShape.matrix = glm::rotate(physicsShape.matrix, 90.0f*m_nOrientation, glm::vec3(0,1.0f,0));
 		glm::mat4 mat = glm::mat4(1.0f);
 		mat = glm::translate(mat, glm::vec3(physicsShape.getTranslate()[0],physicsShape.getTranslate()[1],physicsShape.getTranslate()[2]));
 		glm::quat rot = glm::quat(physicsShape.getRotate()[0],physicsShape.getRotate()[1],physicsShape.getRotate()[2],physicsShape.getRotate()[3]);
@@ -131,44 +131,46 @@ void Chunk::addPhysicsToDynamicWorld(PhysicsManager *physicsManager)
 	}
 }
 
-int Chunk::getTileMode(int x, int y)
+static int N_CHUNK_MAX_XY = 9; 
+
+int Chunk::getTileMode(int nPosX, int nPosY)
 {
-	int worldX = x;
-	int worldY = y;
-	if (orientation == 3)
+	int worldX = nPosX;
+	int worldY = nPosY;
+	if (m_nOrientation == 3)
 	{
-		worldX = y;
-		worldY = 9-x;
+		worldX = nPosY;
+		worldY = N_CHUNK_MAX_XY-nPosX;
 	}
-	if (orientation == 2)
+	if (m_nOrientation == 2)
 	{
-		worldX = 9-x;
-		worldY = 9-y;
+		worldX = N_CHUNK_MAX_XY-nPosX;
+		worldY = N_CHUNK_MAX_XY-nPosY;
 	}
-	if (orientation == 1)
+	if (m_nOrientation == 1)
 	{
-		worldX = 9-y;
-		worldY = x;
+		worldX = N_CHUNK_MAX_XY-nPosY;
+		worldY = nPosX;
 	}
-	return tileModes[worldX][worldY];
+	return m_nTileModes[worldX][worldY];
 }
 
 Actor **Chunk::getActors() 
 {
-	return actors;
+	return m_actors;
 }
 
 int Chunk::getNumActors() 
 {
-	return numActors;
+	return m_nNumActors;
 }
 
 PhysicsShape **Chunk::getPhysics() 
 {
-	return physics;
+	return m_physics;
 }
 
 int Chunk::getNumPhysics() 
 {
-	return numPhysics;
+	return m_nNumPhysics;
 }

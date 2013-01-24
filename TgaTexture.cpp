@@ -47,9 +47,9 @@ void TgaTexture::SwapRedblue()
 	}
 }
 
-bool TgaTexture::load(const char *filename)
+bool TgaTexture::load(const char *sFilename)
 {
-	FILE *pFile = fopen(filename, "rb");
+	FILE *pFile = fopen(sFilename, "rb");
 
 	if (!pFile)
 	{
@@ -210,8 +210,8 @@ bool TgaTexture::load(const char *filename)
 
 	if(m_pImageData != NULL)
 	{
-		glGenTextures(1, &textureID);
-		glBindTexture(GL_TEXTURE_2D, textureID);
+		glGenTextures(1, &m_nTextureID);
+		glBindTexture(GL_TEXTURE_2D, m_nTextureID);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		if (colorMode==3)
 		{
@@ -221,9 +221,13 @@ bool TgaTexture::load(const char *filename)
 		{
 			gluBuild2DMipmaps(GL_TEXTURE_2D, 3, m_width, m_height, GL_RGBA, GL_UNSIGNED_BYTE, m_pImageData);
 		}
+
+		delete[] m_pImageData;
+		return true;
 	}
 
-	return (m_pImageData != NULL);
+	delete[] m_pImageData;
+	return false;
 }
 
 

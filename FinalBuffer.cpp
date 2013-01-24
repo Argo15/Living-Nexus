@@ -7,25 +7,25 @@
 #include "MatrixManager.h"
 #include "ShaderManager.h"
 
-FinalBuffer::FinalBuffer(int width, int height)
+FinalBuffer::FinalBuffer(int nWidth, int nHeight)
 {
-	this->width=width;
-	this->height=height;
+	this->m_nWidth=nWidth;
+	this->m_nHeight=nHeight;
 
 	glEnable(GL_TEXTURE_2D);
 
-	glGenFramebuffersEXT(1,&buffer);
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, buffer);
+	glGenFramebuffersEXT(1,&m_nFrameBuffer);
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_nFrameBuffer);
 
-	glGenTextures(1, &finalTex);
-	glBindTexture(GL_TEXTURE_2D, finalTex);
+	glGenTextures(1, &m_nFinalTex);
+	glBindTexture(GL_TEXTURE_2D, m_nFinalTex);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_FLOAT, 0);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_nWidth, m_nHeight, 0, GL_RGBA, GL_FLOAT, 0);
 	glBindTexture(GL_TEXTURE_2D, 0);
-	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, finalTex, 0);
+	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, m_nFinalTex, 0);
 
 	// check FbO status
 	GLenum FBOstatus = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
@@ -43,11 +43,11 @@ FinalBuffer::FinalBuffer(int width, int height)
 
 FinalBuffer::~FinalBuffer()
 {
-	glDeleteFramebuffers(1,&buffer);
+	glDeleteFramebuffers(1,&m_nFrameBuffer);
 }
 
 
-void FinalBuffer::drawToBuffer(GLuint colorTex, GLuint lightTex, GLuint glowTex, View *view)
+void FinalBuffer::drawToBuffer(GLuint nColorTex, GLuint nLightTex, GLuint nGlowTex, View *view)
 {
 	Profiler::getInstance()->startProfile("Draw Final");
 	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("Final");
@@ -72,11 +72,11 @@ void FinalBuffer::drawToBuffer(GLuint colorTex, GLuint lightTex, GLuint glowTex,
 	glslProgram->sendUniform("projectionMatrix", &MatrixManager::getInstance()->getMatrix4(PROJECTION)[0][0]);
 
 	glActiveTexture(GL_TEXTURE0); 
-	glBindTexture(GL_TEXTURE_2D, colorTex);
+	glBindTexture(GL_TEXTURE_2D, nColorTex);
 	glActiveTexture(GL_TEXTURE1); 
-	glBindTexture(GL_TEXTURE_2D, lightTex);
+	glBindTexture(GL_TEXTURE_2D, nLightTex);
 	glActiveTexture(GL_TEXTURE2); 
-	glBindTexture(GL_TEXTURE_2D, glowTex);
+	glBindTexture(GL_TEXTURE_2D, nGlowTex);
 	glslProgram->sendUniform("colorTex",0);
 	glslProgram->sendUniform("lightTex",1);
 	glslProgram->sendUniform("glowTex",2);
@@ -89,7 +89,7 @@ void FinalBuffer::drawToBuffer(GLuint colorTex, GLuint lightTex, GLuint glowTex,
 
 void FinalBuffer::bind() 
 {
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, buffer);
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_nFrameBuffer);
 }
 	
 void FinalBuffer::unbind() 
@@ -99,20 +99,20 @@ void FinalBuffer::unbind()
 
 void FinalBuffer::bindFinalTex() 
 {
-	glBindTexture(GL_TEXTURE_2D, finalTex);
+	glBindTexture(GL_TEXTURE_2D, m_nFinalTex);
 }
 
 GLuint FinalBuffer::getFinalTex() 
 {
-	return finalTex;
+	return m_nFinalTex;
 }
 
 int FinalBuffer::getWidth() 
 {
-	return width;
+	return m_nWidth;
 }
 	
 int FinalBuffer::getHeight() 
 {
-	return height;
+	return m_nHeight;
 }

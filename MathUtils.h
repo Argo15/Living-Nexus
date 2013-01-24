@@ -3,9 +3,9 @@
 
 namespace MathUtils 
 {
-	static float clamp(float x, float a, float b)
+	static float clamp(float nNum, float nMin, float nMax)
 	{
-		return x < a ? a : (x > b ? b : x);
+		return nNum < nMin ? nMin : (nNum > nMax ? nMax : nNum);
 	}
 }
 

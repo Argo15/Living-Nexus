@@ -6,25 +6,25 @@
 #include "GameState.h"
 #include "ShaderManager.h"
 
-MotionBlurBuffer::MotionBlurBuffer(int width, int height)
+MotionBlurBuffer::MotionBlurBuffer(int nWidth, int nHeight)
 {
-	this->width=width;
-	this->height=height;
+	this->m_nWidth=nWidth;
+	this->m_nHeight=nHeight;
 
 	glEnable(GL_TEXTURE_2D);
 
-	glGenFramebuffersEXT(1,&buffer);
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, buffer);
+	glGenFramebuffersEXT(1,&m_nFrameBuffer);
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_nFrameBuffer);
 
-	glGenTextures(1, &blurTex);
-	glBindTexture(GL_TEXTURE_2D, blurTex);
+	glGenTextures(1, &m_nBlurTex);
+	glBindTexture(GL_TEXTURE_2D, m_nBlurTex);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_FLOAT, 0);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_nWidth, m_nHeight, 0, GL_RGBA, GL_FLOAT, 0);
 	glBindTexture(GL_TEXTURE_2D, 0);
-	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, blurTex, 0);
+	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, m_nBlurTex, 0);
 
 	// check FbO status
 	GLenum FBOstatus = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
@@ -42,10 +42,10 @@ MotionBlurBuffer::MotionBlurBuffer(int width, int height)
 
 MotionBlurBuffer::~MotionBlurBuffer()
 {
-	glDeleteFramebuffers(1,&buffer);
+	glDeleteFramebuffers(1,&m_nFrameBuffer);
 }
 
-void MotionBlurBuffer::drawToBuffer(GLuint texture, GLuint velocityTex, int numSamples, View *view)
+void MotionBlurBuffer::drawToBuffer(GLuint nTexture, GLuint nVelocityTex, int nNumSamples, View *view)
 {
 	Profiler::getInstance()->startProfile("Draw Motion Blur");
 	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("MotionBlur");
@@ -70,12 +70,12 @@ void MotionBlurBuffer::drawToBuffer(GLuint texture, GLuint velocityTex, int numS
 	glslProgram->sendUniform("projectionMatrix", &MatrixManager::getInstance()->getMatrix4(PROJECTION)[0][0]);
 
 	glActiveTexture(GL_TEXTURE0); 
-	glBindTexture(GL_TEXTURE_2D, texture);
+	glBindTexture(GL_TEXTURE_2D, nTexture);
 	glActiveTexture(GL_TEXTURE1); 
-	glBindTexture(GL_TEXTURE_2D, velocityTex);
+	glBindTexture(GL_TEXTURE_2D, nVelocityTex);
 	glslProgram->sendUniform("tex",0);
 	glslProgram->sendUniform("velTex",1);
-	glslProgram->sendUniform("numSamples",15.0f);
+	glslProgram->sendUniform("numSamples", (float)nNumSamples);
 
 	drawScreenShader(0,0,1.0f,1.0f);
 	glslProgram->disable();
@@ -85,7 +85,7 @@ void MotionBlurBuffer::drawToBuffer(GLuint texture, GLuint velocityTex, int numS
 
 void MotionBlurBuffer::bind() 
 {
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, buffer);
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_nFrameBuffer);
 }
 
 void MotionBlurBuffer::unbind() 
@@ -95,20 +95,20 @@ void MotionBlurBuffer::unbind()
 
 void MotionBlurBuffer::bindBlurTex() 
 {
-	glBindTexture(GL_TEXTURE_2D, blurTex);
+	glBindTexture(GL_TEXTURE_2D, m_nBlurTex);
 }
 
 GLuint MotionBlurBuffer::getBlurTex() 
 {
-	return blurTex;
+	return m_nBlurTex;
 }
 
 int MotionBlurBuffer::getWidth() 
 {
-	return width;
+	return m_nWidth;
 }
 
 int MotionBlurBuffer::getHeight() 
 {
-	return height;
+	return m_nHeight;
 }

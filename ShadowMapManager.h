@@ -7,12 +7,12 @@ class CascadedShadowMap;
 
 class ShadowMapManager {
 private:
-	CascadedShadowMap *sunShadow;
+	CascadedShadowMap *m_sunShadow;
 
 public:
 	ShadowMapManager();
 
-	void tick(int fps);
+	void tick(int m_nFps);
 	CascadedShadowMap *getSunShadow();
 };
 

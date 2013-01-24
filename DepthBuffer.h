@@ -7,11 +7,11 @@
 class DepthBuffer
 {
 protected:
-	GLuint texture;
-	GLuint buffer;
+	GLuint m_nTexture;
+	GLuint m_FrameBuffer;
 
 public:
-	DepthBuffer(int width, int height);
+	DepthBuffer(int nWidth, int nHeight);
 	void bind();
 	void unbind();
 	GLuint getBuffer();

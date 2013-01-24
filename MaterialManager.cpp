@@ -23,7 +23,7 @@ MaterialManager *MaterialManager::getInstance()
 	return m_pInstance;
 }
 
-void MaterialManager::Initialize()
+void MaterialManager::initialize()
 {
 	Logging::GRAPHICS->info("Loading Materials");
 	DIR *pDIR;
@@ -31,24 +31,24 @@ void MaterialManager::Initialize()
 	if( pDIR=opendir("./Data/Materials") ){
 		while(entry = readdir(pDIR)){
 			if( strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0 )
-				LoadMaterial(string("./Data/Materials/") + entry->d_name);
+				loadMaterial(string("./Data/Materials/") + entry->d_name);
 		}
 		closedir(pDIR);
 	}
 	Logging::GRAPHICS->info("Done Loading Materials");
 }
 
-void MaterialManager::LoadMaterial(string filename)
+void MaterialManager::loadMaterial(string sFileName)
 {
 	Material *newMaterial = new Material();
-	if (newMaterial->loadMaterial(filename.c_str())) 
+	if (newMaterial->loadMaterial(sFileName.c_str())) 
 	{
-		string *name = newMaterial->getName();
-		materials[*name] = newMaterial;
+		string *sName = newMaterial->getName();
+		m_materials[*sName] = newMaterial;
 	} 
 	else 
 	{
-		Logging::GRAPHICS->error("Material failed to load: " + filename);
+		Logging::GRAPHICS->error("Material failed to load: " + sFileName);
 	}
 }
 
@@ -80,68 +80,68 @@ string MaterialManager::getSafeName(string baseName)
 }
 
 /* returns the name of the material */
-string MaterialManager::AddMaterialSafe(Material *material)
+string MaterialManager::addMaterialSafe(Material *material)
 {
 	string matName = getSafeName(*(material->getName()));
 	material->setName(matName);
-	materials[matName] = material;
+	m_materials[matName] = material;
 	return matName;
 }
 
-bool MaterialManager::hasMaterial(string name)
+bool MaterialManager::hasMaterial(string sName)
 {
-	if (materials.find(name) != materials.end()) 
+	if (m_materials.find(sName) != m_materials.end()) 
 	{
 		return true;
 	}
 	return false;
 }
 
-string MaterialManager::renameMaterial(string currentName, string newName) 
+string MaterialManager::renameMaterial(string sCurrentName, string sNewName) 
 {
-	Material *mat = materials[currentName];
-	materials.erase(currentName);
-	newName = getSafeName(newName);
-	mat->setName(newName);
-	materials[newName] = mat;
-	return newName;
+	Material *mat = m_materials[sCurrentName];
+	m_materials.erase(sCurrentName);
+	sNewName = getSafeName(sNewName);
+	mat->setName(sNewName);
+	m_materials[sNewName] = mat;
+	return sNewName;
 }
 
-void MaterialManager::DeleteMaterial(string name)
+void MaterialManager::deleteMaterial(string sName)
 {
-	if (materials.find(name) != materials.end()) 
+	if (m_materials.find(sName) != m_materials.end()) 
 	{
-		delete materials[name];
-		materials.erase(name);
+		delete m_materials[sName];
+		m_materials.erase(sName);
 	}
 }
 
-void MaterialManager::DeleteAllMaterials()
+void MaterialManager::deleteAllMaterials()
 {
-	materials.clear();
+	m_materials.clear();
 }
 
-void MaterialManager::SaveAllMaterials()
+void MaterialManager::saveAllMaterials()
 {
-	for (std::map<std::string, Material *>::iterator it = materials.begin(); it != materials.end(); it++)
+	for (std::map<std::string, Material *>::iterator it = m_materials.begin(); it != m_materials.end(); it++)
 	{
 		Material *mat = (*it).second;
-		string filename = "Data/Materials/" + (*it).first + ".amtl";
-		mat->saveMaterial(filename.c_str());
+		string sFileName = "Data/Materials/" + (*it).first + ".amtl";
+		mat->saveMaterial(sFileName.c_str());
 	}
 }
 
-void MaterialManager::UseMaterial(string name) 
+void MaterialManager::useMaterial(string sName) 
 {
-	materials[name]->use();
+	m_materials[sName]->use();
 }
 
-Material *MaterialManager::getMaterial(string name) 
+Material *MaterialManager::getMaterial(string sName) 
 {
-	return materials[name];
+	return m_materials[sName];
 }
 
 map<string,Material *> *MaterialManager::getMaterials() 
 {
-	return &materials;
+	return &m_materials;
 }

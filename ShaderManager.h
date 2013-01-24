@@ -11,21 +11,21 @@ class ShaderManager
 {
 private:
 	static ShaderManager *m_pInstance;
-	map<string,GLSLProgram *> shaders;
-	void compileProgram(GLSLProgram *program, string shaderName);
+	map<string,GLSLProgram *> m_shaders;
+	void compileProgram(GLSLProgram *program, string sShaderName);
 
 	ShaderManager();
 public:
 	static ShaderManager *getInstance();
 
-    void Initialize();
-	void LoadShader(string name, string vertexShader, string fragmentShader);
-	void UseShader(string name);
-	void DisableShader(string name);
-	void DeleteShader(string name);
-	void DeleteAllShaders();
+    void initialize();
+	void loadShader(string sName, string sVertexShader, string sFragmentShader);
+	void useShader(string sName);
+	void disableShader(string sName);
+	void deleteShader(string sName);
+	void deleteAllShaders();
 
-	GLSLProgram *getShader(string name);
+	GLSLProgram *getShader(string sName);
 	map<string,GLSLProgram *> *getShaders();
 };
 

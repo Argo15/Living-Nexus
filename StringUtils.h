@@ -6,9 +6,9 @@
 
 namespace StringUtils 
 {
-	static std::string valueOf(int number) 
+	static std::string valueOf(int nNumber) 
 	{
-		return boost::lexical_cast<std::string>(number);
+		return boost::lexical_cast<std::string>(nNumber);
 	}
 };
 

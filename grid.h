@@ -9,16 +9,17 @@
 
 class Grid{
 private:
-	float color[3];
-	int length,width;
-	float center[2];
+	float m_nColor[3];
+	int m_nLength, m_nWidth;
+	float m_nCenter[2];
+
 public:
 	Grid();
-	Grid(int l, int w);
+	Grid(int nLength, int nWidth);
 
-	void setColor(float r, float g, float b);
-	void setSize(int l, int w);
-	void setCenter(float x, float y);
+	void setColor(float nRed, float nGreen, float nBlue);
+	void setSize(int nLength, int nWidth);
+	void setCenter(float nX, float nY);
 	void draw();
 };
 #endif

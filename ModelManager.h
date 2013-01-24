@@ -10,20 +10,20 @@ class ModelManager
 {
 private:
 	static ModelManager *m_pInstance;
-	map<string,Model *> models;
+	map<string,Model *> m_models;
 
 	ModelManager();
 public:
 	static ModelManager *getInstance();
 
-    void Initialize();
-	void LoadModel(string filename);
-	void DrawModel(string name);
-	void DrawModelGeometry(string name);
-	void DeleteModel(string name);
-	void DeleteAllModels();
+    void initialize();
+	void loadModel(string sFileName);
+	void drawModel(string sName);
+	void drawModelGeometry(string sName);
+	void deleteModel(string sName);
+	void deleteAllModels();
 
-	Model *getModel(string name);
+	Model *getModel(string sName);
 	map<string,Model *> *getModels();
 };
 

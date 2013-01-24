@@ -14,7 +14,7 @@ using namespace std;
 class AObjModel : public StaticModel
 {
 public:
-	bool load(string filename);
+	bool load(string sFileName);
 };
 
 #endif

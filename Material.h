@@ -11,59 +11,59 @@ using namespace std;
 
 struct SaveMat 
 {
-	float color[3];
-	float emission[3];
-	float specular;
-	int shininess;
+	float nColor[3];
+	float nEmission[3];
+	float nSpecular;
+	int nShininess;
 
-	float texOffset[2];
-	float texScale[2];
-	float texRotate;
+	float nTexOffset[2];
+	float nTexScale[2];
+	float nTexRotate;
 
-	char name[100];
-	char textureName[100];
-	char normalName[100];
+	char sName[100];
+	char sTextureName[100];
+	char sNormalName[100];
 
-	bool normalEnabled;
+	bool bNormalEnabled;
 };
 
 class Material : public Entity
 {
 private:
-	float color[3];
-	float emission[3];
-	float specular;
-	int shininess;
+	float m_nColor[3];
+	float m_nEmission[3];
+	float m_nSpecular;
+	int m_nShininess;
 
-	float texOffset[2];
-	float texScale[2];
-	float texRotate;
+	float m_nTexOffset[2];
+	float m_nTexScale[2];
+	float m_nTexRotate;
 
-	string *textureName;
-	string *normalName;
+	string *m_sTextureName;
+	string *m_sNormalName;
 
-	bool normalEnabled;
+	bool m_bNormalEnabled;
 public:
 	Material();
 	Material(Material *copyMaterial);
 
 	void use();
-	void sendToShader(string shader);
+	void sendToShader(string sShader);
 
-	bool loadMaterial(const char* filename);
-	void saveMaterial(const char* filename);
+	bool loadMaterial(const char* sFileName);
+	void saveMaterial(const char* sFileName);
 
-	void setColor(float r, float g, float b);
-	void setEmission(float r, float g, float b);
-	void setSpecular(float i);
-	void setShine(int shine);
-	void setTexOffset(float x, float y);
-	void setUTexOffset(float value);
-	void setVTexOffset(float value);
-	void setTexScale(float x, float y);
-	void setUTexScale(float value);
-	void setVTexScale(float value);
-	void setTexRotate(float rotate);
+	void setColor(float nRed, float nGreen, float nBlue);
+	void setEmission(float nRed, float nGreen, float nBlue);
+	void setSpecular(float nIntensity);
+	void setShine(int nShine);
+	void setTexOffset(float nX, float nY);
+	void setUTexOffset(float nValue);
+	void setVTexOffset(float nValue);
+	void setTexScale(float nX, float nY);
+	void setUTexScale(float nValue);
+	void setVTexScale(float nValue);
+	void setTexRotate(float nRotate);
 	float *getColor();
 	float *getEmission();
 	float getSpecular();
@@ -71,11 +71,11 @@ public:
 	float *getTexOffset();
 	float *getTexScale();
 	float getTexRotate();
-	void setTexture(string *newTextureName);
+	void setTexture(string *sTextureName);
 	string *getTexture();
-	void setNormal(string *newNormalName);
+	void setNormal(string *sNormalName);
 	string *getNormal();
-	void enableNormal(bool enabled);
+	void enableNormal(bool bEnabled);
 	bool normalsEnabled();
 };
 

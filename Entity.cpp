@@ -1,16 +1,16 @@
 #include "Entity.h"
 
-Entity::Entity(string *name) 
+Entity::Entity(string *sName) 
 {
-	this->name = name;
+	this->m_sName = sName;
 }
 
 string *Entity::getName() 
 {
-	return name;
+	return m_sName;
 }
 
-void Entity::setName(string newName) 
+void Entity::setName(string sName) 
 {
-	name = new string(newName);
+	m_sName = new string(sName);
 }

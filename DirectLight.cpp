@@ -5,59 +5,64 @@
 
 DirectLight::DirectLight()
 {
-	color[0]=1.0f; color[1]=1.0f; color[2]=1.0f;
-	ambient=0.5f;
-	diffuse=0.5f;
-	specular=1.0f;
-	direction[0]=0;direction[1]=-1.0f;direction[2]=0;direction[3]=0;
+	m_nColor[0]=1.0f;
+	m_nColor[1]=1.0f;
+	m_nColor[2]=1.0f;
+	m_nAmbient=0.5f;
+	m_nDiffuse=0.5f;
+	m_nSpecular=1.0f;
+	m_nDirection[0]=0;
+	m_nDirection[1]=-1.0f;
+	m_nDirection[2]=0;
+	m_nDirection[3]=0;
 	Quaternion quat;
 	quat.createQuaternion(0.9*(2*3.1415),2.0f,0.0f,-1.0f);
-	Rotate(quat);
-	enabled=true;
+	rotate(quat);
+	m_bEnabled=true;
 }
 
-void DirectLight::setDirection(float x, float y, float z)
+void DirectLight::setDirection(float nDirX, float nDirY, float nDirZ)
 {
-	direction[0]=x;
-	direction[1]=y;
-	direction[2]=z;
+	m_nDirection[0]=nDirX;
+	m_nDirection[1]=nDirY;
+	m_nDirection[2]=nDirZ;
 }
 
-void DirectLight::sendToShader(string shader)
+void DirectLight::sendToShader(string sShader)
 {
-	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader(shader);
+	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader(sShader);
 	glslProgram->use();
 
-	Vector3 dir = getDirection();
+	Vector3 vDir = getDirection();
 
-	glslProgram->sendUniform("light.direction", dir[0],dir[1],dir[2]);
-	glslProgram->sendUniform("light.color", color[0],color[1],color[2]);
-	glslProgram->sendUniform("light.ambient", ambient);
-	glslProgram->sendUniform("light.diffuse", diffuse);
-	glslProgram->sendUniform("light.specular", specular);
+	glslProgram->sendUniform("light.direction", vDir[0],vDir[1],vDir[2]);
+	glslProgram->sendUniform("light.color", m_nColor[0],m_nColor[1],m_nColor[2]);
+	glslProgram->sendUniform("light.ambient", m_nAmbient);
+	glslProgram->sendUniform("light.diffuse", m_nDiffuse);
+	glslProgram->sendUniform("light.specular", m_nSpecular);
 	glslProgram->sendUniform("lightenabled", true);
 }
 
 Vector3 DirectLight::getDirection()
 {
-	Vector4 dir(direction[0],direction[1],direction[2],direction[3]);
-	Matrix4 rot = this->getRotate().getMatrix();
-	Vector4 final = rot*dir;
-	return Vector3(final);
+	Vector4 vDir(m_nDirection[0],m_nDirection[1],m_nDirection[2],m_nDirection[3]);
+	Matrix4 m4Rot = this->getRotate().getMatrix();
+	Vector4 vFinal = m4Rot*vDir;
+	return Vector3(vFinal);
 }
 
 Vector3 DirectLight::getUp()
 {
-	Vector4 dir(1.0,0,0,0);
-	Matrix4 rot = this->getRotate().getMatrix();
-	Vector4 final = rot*dir;
-	return Vector3(final);
+	Vector4 vDir(1.0,0,0,0);
+	Matrix4 m4Rot = this->getRotate().getMatrix();
+	Vector4 vFinal = m4Rot*vDir;
+	return Vector3(vFinal);
 }
 
 Vector3 DirectLight::getRight()
 {
-	Vector4 dir(0,0,1.0,0);
-	Matrix4 rot = this->getRotate().getMatrix();
-	Vector4 final = rot*dir;
-	return Vector3(final);
+	Vector4 vDir(0,0,1.0,0);
+	Matrix4 m4Rot = this->getRotate().getMatrix();
+	Vector4 vFinal = m4Rot*vDir;
+	return Vector3(vFinal);
 }

@@ -10,28 +10,28 @@
 class Camera
 {
 protected:
-	float eyePos[3];
-	float lookAt[3];
-	float up[3];
-	float right[3];
-	float hAngle;
-	float vAngle;
-	int lastMouseX, lastMouseY;
+	float m_nEyePos[3];
+	float m_nLookAt[3];
+	float m_nUp[3];
+	float m_nRight[3];
+	float m_nHAngle;
+	float m_nVAngle;
+	int m_nLastMouseX, m_nLastMouseY;
 
-	float rotSpeed;
+	float m_nRotSpeed;
 
 public:
 	Camera();
 
 	void mouseRotate();
 
-	virtual void move(float speed);
-	virtual void moveForward(float speed);
-	virtual void moveBackward(float speed);
-	virtual void moveLeft(float speed);
-	virtual void moveRight(float speed);
-	virtual void moveUp(float speed);
-	virtual void moveDown(float speed);
+	virtual void move(float nSpeed);
+	virtual void moveForward(float nSpeed);
+	virtual void moveBackward(float nSpeed);
+	virtual void moveLeft(float nSpeed);
+	virtual void moveRight(float nSpeed);
+	virtual void moveUp(float nSpeed);
+	virtual void moveDown(float nSpeed);
 
 	void recalculate();
 
@@ -42,12 +42,12 @@ public:
 	void setLookAt(float x, float y, float z);
 	void setUp(float x, float y, float z);
 	void setRight(float x, float y, float z);
-	void setRotSpeed(float speed);
-	float geteyeX();
-	float geteyeY();
-	float geteyeZ();
+	void setRotSpeed(float nSpeed);
+	float getEyeX();
+	float getEyeY();
+	float getEyeZ();
 	float *getEye();
-	Vector3 geteyeV();
+	Vector3 getEyeV();
 	Vector3 getLookAt();
 	Vector3 getUp();
 	Vector3 getRight();

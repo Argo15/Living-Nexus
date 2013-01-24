@@ -8,8 +8,8 @@
 
    ========================================================================== */
    
-#ifndef GLSL_SHADeR
-#define GLSL_SHADeR
+#ifndef GLSL_SHADER
+#define GLSL_SHADER
 
 #include <windows.h>
 #include <gl\GLee.h>

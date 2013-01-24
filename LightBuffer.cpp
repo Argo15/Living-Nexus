@@ -6,35 +6,35 @@
 #include "GameState.h"
 #include "ShaderManager.h"
 
-LightBuffer::LightBuffer(int width, int height)
+LightBuffer::LightBuffer(int nWidth, int nHeight)
 {
-	this->width=width;
-	this->height=height;
+	this->m_nWidth=nWidth;
+	this->m_nHeight=nHeight;
 
 	glEnable(GL_TEXTURE_2D);
 
-	glGenFramebuffersEXT(1,&buffer);
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, buffer);
+	glGenFramebuffersEXT(1,&m_nFrameBuffer);
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_nFrameBuffer);
 
-	glGenTextures(1, &lightTex);
-	glBindTexture(GL_TEXTURE_2D, lightTex);
+	glGenTextures(1, &m_nLightTex);
+	glBindTexture(GL_TEXTURE_2D, m_nLightTex);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_FLOAT, 0);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_nWidth, m_nHeight, 0, GL_RGBA, GL_FLOAT, 0);
 	glBindTexture(GL_TEXTURE_2D, 0);
-	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, lightTex, 0);
+	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, m_nLightTex, 0);
 
-	glGenTextures(1, &glowTex);
-	glBindTexture(GL_TEXTURE_2D, glowTex);
+	glGenTextures(1, &m_nGlowTex);
+	glBindTexture(GL_TEXTURE_2D, m_nGlowTex);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_FLOAT, 0);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_nWidth, m_nHeight, 0, GL_RGBA, GL_FLOAT, 0);
 	glBindTexture(GL_TEXTURE_2D, 0);
-	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT1_EXT, GL_TEXTURE_2D, glowTex, 0);
+	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT1_EXT, GL_TEXTURE_2D, m_nGlowTex, 0);
 
 	// check FbO status
 	GLenum FBOstatus = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
@@ -52,10 +52,10 @@ LightBuffer::LightBuffer(int width, int height)
 
 LightBuffer::~LightBuffer()
 {
-	glDeleteFramebuffers(1,&buffer);
+	glDeleteFramebuffers(1,&m_nFrameBuffer);
 }
 
-void LightBuffer::drawToBuffer(GLuint normalTex, GLuint depthTex, GLuint glowTex, View *view)
+void LightBuffer::drawToBuffer(GLuint nNormalTex, GLuint nDepthTex, GLuint nGlowTex, View *view)
 {
 	Profiler::getInstance()->startProfile("Draw Light");
 	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("DirectLight");
@@ -75,8 +75,8 @@ void LightBuffer::drawToBuffer(GLuint normalTex, GLuint depthTex, GLuint glowTex
 	Camera *camera = worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera();
 	camera->transform();
 	view->use3D(true);
-	glm::mat4 invMVP = MatrixManager::getInstance()->getMatrix4(PROJECTION) * MatrixManager::getInstance()->getMatrix4(MODELVIEW);
-	invMVP = glm::inverse(invMVP);
+	glm::mat4 m4InvMVP = MatrixManager::getInstance()->getMatrix4(PROJECTION) * MatrixManager::getInstance()->getMatrix4(MODELVIEW);
+	m4InvMVP = glm::inverse(m4InvMVP);
 	MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::mat4(1.0f));
 	MatrixManager::getInstance()->putMatrix4(PROJECTION, glm::mat4(1.0f));
 	view->use3D(false);
@@ -89,17 +89,17 @@ void LightBuffer::drawToBuffer(GLuint normalTex, GLuint depthTex, GLuint glowTex
 	worldState->getWorldManager()->getSun()->sendToShader("DirectLight");
 
 	glslProgram->sendUniform("projectionMatrix", &MatrixManager::getInstance()->getMatrix4(PROJECTION)[0][0]);
-	glslProgram->sendUniform("inverseMVPMatrix", &invMVP[0][0]);
+	glslProgram->sendUniform("inverseMVPMatrix", &m4InvMVP[0][0]);
 	glslProgram->sendUniform("near", (float)view->getNear());
 	glslProgram->sendUniform("far", (float)view->getFar());
-	glslProgram->sendUniform("cameraPos",camera->geteyeX(),camera->geteyeY(),camera->geteyeZ());
+	glslProgram->sendUniform("cameraPos",camera->getEyeX(),camera->getEyeY(),camera->getEyeZ());
 
 	glActiveTexture(GL_TEXTURE0); 
-	glBindTexture(GL_TEXTURE_2D, normalTex);
+	glBindTexture(GL_TEXTURE_2D, nNormalTex);
 	glActiveTexture(GL_TEXTURE1); 
-	glBindTexture(GL_TEXTURE_2D, depthTex);
+	glBindTexture(GL_TEXTURE_2D, nDepthTex);
 	glActiveTexture(GL_TEXTURE2); 
-	glBindTexture(GL_TEXTURE_2D, glowTex);
+	glBindTexture(GL_TEXTURE_2D, nGlowTex);
 	glslProgram->sendUniform("normalTex",0);
 	glslProgram->sendUniform("depthTex",1);
 	glslProgram->sendUniform("glowTex",2);
@@ -114,7 +114,7 @@ void LightBuffer::drawToBuffer(GLuint normalTex, GLuint depthTex, GLuint glowTex
 
 void LightBuffer::bind() 
 {
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, buffer);
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_nFrameBuffer);
 }
 
 void LightBuffer::unbind() 
@@ -124,30 +124,30 @@ void LightBuffer::unbind()
 
 void LightBuffer::bindLightTex() 
 {
-	glBindTexture(GL_TEXTURE_2D, lightTex);
+	glBindTexture(GL_TEXTURE_2D, m_nLightTex);
 }
 
 void LightBuffer::bindGlowTex() 
 {
-	glBindTexture(GL_TEXTURE_2D, glowTex);
+	glBindTexture(GL_TEXTURE_2D, m_nGlowTex);
 }
 
 GLuint LightBuffer::getLightTex() 
 {
-	return lightTex;
+	return m_nLightTex;
 }
 
 GLuint LightBuffer::getGlowTex() 
 {
-	return glowTex;
+	return m_nGlowTex;
 }
 
 int LightBuffer::getWidth() 
 {
-	return width;
+	return m_nWidth;
 }
 
 int LightBuffer::getHeight() 
 {
-	return height;
+	return m_nHeight;
 }

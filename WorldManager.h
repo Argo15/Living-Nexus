@@ -14,19 +14,19 @@ using namespace std;
 class WorldManager
 {
 private:
-	WorldChunks *worldChunks;
-	WorldTiles *worldTiles;
-	ChunkManager *chunks;
-	TileManager *tiles;
-	DirectLight *sun;
+	WorldChunks *m_worldChunks;
+	WorldTiles *m_worldTiles;
+	ChunkManager *m_chunks;
+	TileManager *m_tiles;
+	DirectLight *m_sun;
 
 public:
 	WorldManager();
 
-	void tick(int fps);
-	void loadWorld(string filename);
+	void tick(int nFps);
+	void loadWorld(string sFilename);
 	void generateNewWorld(ChunkManager *chunks, TileManager *tiles, PhysicsManager *physicsManager);
-	void renderWorld(string shader, Frustum *frustum = 0);
+	void renderWorld(string sShader, Frustum *frustum = 0);
 	void updateSunToGameTime(GameTime time);
 
 	WorldChunks *getWorldChunks();

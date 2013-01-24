@@ -15,105 +15,105 @@ InputManager::InputManager()
 {
 	for (int i=0; i<256; i++) 
 	{
-		keysPressedNotChecked[i]=false;
-		keys[i]=false;
+		m_bKeysPressedNotChecked[i]=false;
+		m_bKeys[i]=false;
 	}
 	for (int i=0; i<5; i++)
 	{
-		mouseButtons[i] = false;
+		m_bMouseButtons[i] = false;
 	}
-	mouseX = 0;
-	mouseY = 0;
-	mouseCentered = false;
+	m_nMouseX = 0;
+	m_nMouseY = 0;
+	m_bMouseCentered = false;
 }
 
-void InputManager::registerKeyDown(int key)
+void InputManager::registerKeyDown(int nKey)
 {
-	if (key < 256) 
+	if (nKey < 256) 
 	{
-		keys[key]=true;
-		keysPressedNotChecked[key]=true;
+		m_bKeys[nKey]=true;
+		m_bKeysPressedNotChecked[nKey]=true;
 	} 
 	else 
 	{
-		specialKeyPressed.insert(key);
+		m_hsSpecialKeyPressed.insert(nKey);
 	}
 }
 
-void InputManager::registerKeyUp(int key)
+void InputManager::registerKeyUp(int nKey)
 {
-	if (key < 256) 
+	if (nKey < 256) 
 	{
-		keys[key]=false;
+		m_bKeys[nKey]=false;
 	}
 	else 
 	{
-		specialKeyPressed.erase(key);
+		m_hsSpecialKeyPressed.erase(nKey);
 	}
 }
 
-bool InputManager::isKeyDown(int key)
+bool InputManager::isKeyDown(int nKey)
 {
-	keysPressedNotChecked[key]=false; 
-	return keys[key];
+	m_bKeysPressedNotChecked[nKey]=false; 
+	return m_bKeys[nKey];
 }
 
-bool InputManager::isSpecialKeyDown(int key)
+bool InputManager::isSpecialKeyDown(int nKey)
 {
-	if (specialKeyPressed.find(key) == specialKeyPressed.end()) 
+	if (m_hsSpecialKeyPressed.find(nKey) == m_hsSpecialKeyPressed.end()) 
 	{
 		return false;
 	}
 	return true;
 }
 
-bool InputManager::isKeyDownOnce(int key)
+bool InputManager::isKeyDownOnce(int nKey)
 {
-	if(keysPressedNotChecked[key])
+	if(m_bKeysPressedNotChecked[nKey])
 	{
-		keysPressedNotChecked[key]=false;
+		m_bKeysPressedNotChecked[nKey]=false;
 		return true;
 	}
 	return false;
 }
 
-void InputManager::registerMouseButtonDown(int mouse)
+void InputManager::registerMouseButtonDown(int nMouse)
 {
-	mouseButtons[mouse] = true;
+	m_bMouseButtons[nMouse] = true;
 }
 
-void InputManager::registerMouseButtonUp(int mouse)
+void InputManager::registerMouseButtonUp(int nMouse)
 {
-	mouseButtons[mouse] = false;
+	m_bMouseButtons[nMouse] = false;
 }
 
-void InputManager::setMousePosition(int x, int y)
+void InputManager::setMousePosition(int nPosX, int nPosY)
 {
-	mouseX = x;
-	mouseY = y;
+	m_nMouseX = nPosX;
+	m_nMouseY = nPosY;
 }
 
-void InputManager::setMouseCentered(int x, int y)
+void InputManager::setMouseCentered(int nPosX, int nPosY)
 {
-	mouseCentered = true;
+	m_bMouseCentered = true;
 }
 
-bool InputManager::isMouseButtonDown(int mouse) 
+bool InputManager::isMouseButtonDown(int nMouse) 
 {
-	return mouseButtons[mouse];
+	return m_bMouseButtons[nMouse];
 }
 
 int InputManager::getMouseX() 
 {
-	return mouseX;
+	return m_nMouseX;
 }
 
 int InputManager::getMouseY() 
 {
-	return mouseY;
+	return m_nMouseY;
 }
 
 bool InputManager::isMouseMoved() 
 {
-	return mouseMoved;
+	return m_bMouseMoved;
 }

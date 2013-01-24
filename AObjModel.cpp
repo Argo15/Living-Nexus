@@ -1,35 +1,41 @@
 #include "AObjModel.h"
 
-bool AObjModel::load(string filename)
+bool AObjModel::load(string sFileName)
 {
-	ifstream file(filename.c_str(), ios::in|ios::binary|ios::ate);
+	ifstream file(sFileName.c_str(), ios::in|ios::binary|ios::ate);
 	if (file.is_open())
 	{
-		float version=0;
+		float nVersion=0;
 		file.seekg (0, ios::beg);
-		file.read((char*)&version,sizeof(version));
-		file.read((char*)&numTriangles,sizeof(numTriangles));
-		float *vertex = new float[numTriangles*9];
-		float *texture = new float[numTriangles*6];
-		float *normal = new float[numTriangles*9];
-		float *tangentbuf = new float[numTriangles*9];
-		float *bitangentbuf = new float[numTriangles*9];
-		file.read((char*)vertex,sizeof(float)*9*numTriangles);
-		file.read((char*)texture,sizeof(float)*6*numTriangles);
-		file.read((char*)normal,sizeof(float)*9*numTriangles);
-		file.read((char*)tangentbuf,sizeof(float)*9*numTriangles);
-		file.read((char*)bitangentbuf,sizeof(float)*9*numTriangles);
-		file.read((char*)&radius,sizeof(radius));
-		file.read((char*)&center,sizeof(center));
+		file.read((char*)&nVersion,sizeof(nVersion));
+		file.read((char*)&m_nNumTriangles,sizeof(m_nNumTriangles));
+		float *nVertex = new float[m_nNumTriangles*9];
+		float *nTexture = new float[m_nNumTriangles*6];
+		float *nNormal = new float[m_nNumTriangles*9];
+		float *nTangentbuf = new float[m_nNumTriangles*9];
+		float *nBitangentbuf = new float[m_nNumTriangles*9];
+		file.read((char*)nVertex,sizeof(float)*9*m_nNumTriangles);
+		file.read((char*)nTexture,sizeof(float)*6*m_nNumTriangles);
+		file.read((char*)nNormal,sizeof(float)*9*m_nNumTriangles);
+		file.read((char*)nTangentbuf,sizeof(float)*9*m_nNumTriangles);
+		file.read((char*)nBitangentbuf,sizeof(float)*9*m_nNumTriangles);
+		file.read((char*)&m_nRadius,sizeof(m_nRadius));
+		file.read((char*)&m_nCenter,sizeof(m_nCenter));
 
-		glGenBuffers(1,&bufferID);
-		glBindBuffer(GL_ARRAY_BUFFER,bufferID);
-		glBufferData(GL_ARRAY_BUFFER,numTriangles*42*sizeof(GLfloat), NULL,GL_STATIC_DRAW);
-		glBufferSubData(GL_ARRAY_BUFFER,0,numTriangles*9*sizeof(GLfloat),vertex);
-		glBufferSubData(GL_ARRAY_BUFFER,numTriangles*9*sizeof(GLfloat),numTriangles*6*sizeof(GLfloat),texture);
-		glBufferSubData(GL_ARRAY_BUFFER,numTriangles*15*sizeof(GLfloat),numTriangles*9*sizeof(GLfloat),normal);
-		glBufferSubData(GL_ARRAY_BUFFER,numTriangles*24*sizeof(GLfloat),numTriangles*9*sizeof(GLfloat),tangentbuf);
-		glBufferSubData(GL_ARRAY_BUFFER,numTriangles*33*sizeof(GLfloat),numTriangles*9*sizeof(GLfloat),bitangentbuf);
+		glGenBuffers(1,&m_nBufferID);
+		glBindBuffer(GL_ARRAY_BUFFER,m_nBufferID);
+		glBufferData(GL_ARRAY_BUFFER,m_nNumTriangles*42*sizeof(GLfloat), NULL,GL_STATIC_DRAW);
+		glBufferSubData(GL_ARRAY_BUFFER,0,m_nNumTriangles*9*sizeof(GLfloat),nVertex);
+		glBufferSubData(GL_ARRAY_BUFFER,m_nNumTriangles*9*sizeof(GLfloat),m_nNumTriangles*6*sizeof(GLfloat),nTexture);
+		glBufferSubData(GL_ARRAY_BUFFER,m_nNumTriangles*15*sizeof(GLfloat),m_nNumTriangles*9*sizeof(GLfloat),nNormal);
+		glBufferSubData(GL_ARRAY_BUFFER,m_nNumTriangles*24*sizeof(GLfloat),m_nNumTriangles*9*sizeof(GLfloat),nTangentbuf);
+		glBufferSubData(GL_ARRAY_BUFFER,m_nNumTriangles*33*sizeof(GLfloat),m_nNumTriangles*9*sizeof(GLfloat),nBitangentbuf);
+
+		delete[] nVertex;
+		delete[] nTexture;
+		delete[] nNormal;
+		delete[] nTangentbuf;
+		delete[] nBitangentbuf;
 
 		return true;
 	}

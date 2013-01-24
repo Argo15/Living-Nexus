@@ -13,57 +13,57 @@
 #include "MaterialManager.h"
 #include "TextureManager.h"y
 
-int currentTime = 0;
-int vsync = 0;
-int sizeX = 0;
-int sizeY = 0;
-int counter = 0;
+int nCurrentTime = 0;
+int nVsync = 0;
+int nSizeX = 0;
+int nSizeY = 0;
+int nCounter = 0;
 
 void init() 
 {
 	Config::getInstance();
 
-	TextureManager::getInstance()->Initialize();
-	ModelManager::getInstance()->Initialize();
-	MaterialManager::getInstance()->Initialize();
-	ShaderManager::getInstance()->Initialize();	
+	TextureManager::getInstance()->initialize();
+	ModelManager::getInstance()->initialize();
+	MaterialManager::getInstance()->initialize();
+	ShaderManager::getInstance()->initialize();	
 
 	UserSession::getInstance()->startUserSession("Argo");
 
 	GameState::GAMESTATE = new WorldState();
 }
 
-void resize(int w, int h) 
+void resize(int nWidth, int nHeight) 
 {
-	GameState::GAMESTATE->resize(w,h);
-	sizeX = w;
-	sizeY = h;
+	GameState::GAMESTATE->resize(nWidth, nHeight);
+	nSizeX = nWidth;
+	nSizeY = nHeight;
 }
 
 void render(void) 
 {
-	int lastTime = currentTime;
-	currentTime = glutGet( GLUT_ELAPSED_TIME );
-	int elapsedTime = currentTime - lastTime;
-	vsync += elapsedTime;
+	int nLastTime = nCurrentTime;
+	nCurrentTime = glutGet( GLUT_ELAPSED_TIME );
+	int nElapsedTime = nCurrentTime - nLastTime;
+	nVsync += nElapsedTime;
 	
-	if (vsync > (1000/60))
+	if (nVsync > 0*(1000/60))
 	{
 		TimeManager::getInstance()->tick();
-		float fps = 1000.0f/elapsedTime;
-		if (fps > 60)
+		float nFps = 1000.0f/nElapsedTime;
+		if (nFps > 60)
 		{
-			fps=60;
+			nFps=60;
 		}
-		vsync = 0;
+		nVsync = 0;
 
 		char buffer[5];
-		_itoa((int)fps, buffer, 10);
-		string title = string("Living Nexus - FPS: ") + string(buffer);
+		_itoa((int)nFps, buffer, 10);
+		string title = string("LiNex - FPS: ") + string(buffer);
 		glutSetWindowTitle(title.c_str());
 		
-		GameState::GAMESTATE->tick((int)fps);
-		counter++;
+		GameState::GAMESTATE->tick((int)nFps);
+		nCounter++;
 	}
 	
 }
@@ -126,7 +126,7 @@ int main(int argc, char **argv)
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowPosition(300,0);
 	glutInitWindowSize(1600,900);
-	glutCreateWindow("Living Nexus");
+	glutCreateWindow("LiNex");
 
 	// register callbacks
 	glutDisplayFunc(render);

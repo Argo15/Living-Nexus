@@ -12,7 +12,7 @@ TileManager::TileManager()
 	
 }
 
-void TileManager::Initialize()
+void TileManager::initialize()
 {
 	Logging::GRAPHICS->info("Loading Tiles");
 	DIR *pDIR;
@@ -23,7 +23,7 @@ void TileManager::Initialize()
 		{
 			if( strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0 )
 			{
-				LoadTile(string("./Data/Tiles/") + entry->d_name);
+				loadTile(string("./Data/Tiles/") + entry->d_name);
 			}
 		}
 		closedir(pDIR);
@@ -31,48 +31,48 @@ void TileManager::Initialize()
 	Logging::GRAPHICS->info("Done Loading Tiles");
 }
 
-void TileManager::LoadTile(string filename)
+void TileManager::loadTile(string sFileName)
 {
 	Tile *tile = new Tile();
-	if (tile->loadTile(filename)) 
+	if (tile->loadTile(sFileName)) 
 	{
-		int start_pos = filename.rfind("/")+1;
-		int end_pos = filename.rfind(".");
-		string name = filename.substr(start_pos,end_pos-start_pos);
-		tile->setName(name);
-		tiles[name]=tile;
+		int start_pos = sFileName.rfind("/")+1;
+		int end_pos = sFileName.rfind(".");
+		string sName = sFileName.substr(start_pos,end_pos-start_pos);
+		tile->setName(sName);
+		m_tiles[sName]=tile;
 	} 
 	else 
 	{
-		Logging::GRAPHICS->error("Tile failed to load: " + filename);
+		Logging::GRAPHICS->error("Tile failed to load: " + sFileName);
 	}
 }
 
-void TileManager::DrawTile(string name, string shader)
+void TileManager::drawTile(string sName, string sShader)
 {
-	tiles[name]->drawTile(shader);
+	m_tiles[sName]->drawTile(sShader);
 }
 
-void TileManager::DeleteTile(string name)
+void TileManager::deleteTile(string sName)
 {
-	if (tiles.find(name) == tiles.end())
+	if (m_tiles.find(sName) == m_tiles.end())
 	{
-		delete tiles[name];
-		tiles.erase(name);
+		delete m_tiles[sName];
+		m_tiles.erase(sName);
 	}
 }
 
-void TileManager::DeleteAllTiles()
+void TileManager::deleteAllTiles()
 {
-	tiles.clear();
+	m_tiles.clear();
 }
 
-Tile *TileManager::getTile(string name) 
+Tile *TileManager::getTile(string sName) 
 { 
-	return tiles[name]; 
+	return m_tiles[sName]; 
 }
 
 map<string,Tile *> *TileManager::getTiles() 
 {
-	return &tiles;
+	return &m_tiles;
 }

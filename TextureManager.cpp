@@ -23,7 +23,7 @@ TextureManager *TextureManager::getInstance()
 	return m_pInstance;
 }
 
-void TextureManager::Initialize()
+void TextureManager::initialize()
 {
 	Logging::GRAPHICS->info("Loading Textures");
 	DIR *pDIR;
@@ -34,59 +34,59 @@ void TextureManager::Initialize()
 		{
 			if( strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0 )
 			{
-				LoadTexture(string("./Data/Textures/") + entry->d_name);
+				loadTexture(string("./Data/Textures/") + entry->d_name);
 			}
 		}
 		closedir(pDIR);
 	}
-	textures["Cloud"] = new PerlinNoise();
-	textures["Cloud"]->load("Cloud");
+	m_textures["Cloud"] = new PerlinNoise();
+	m_textures["Cloud"]->load("Cloud");
 	Logging::GRAPHICS->info("Done Loading Textures");
 }
 
-void TextureManager::LoadTexture(string filename)
+void TextureManager::loadTexture(string sFileName)
 {
 	Texture *texture = new TgaTexture();
-	if (texture->load(filename.c_str())) 
+	if (texture->load(sFileName.c_str())) 
 	{
-		int start_pos = filename.rfind("/")+1;
-		int end_pos = filename.rfind(".");
-		string name = filename.substr(start_pos,end_pos-start_pos);
-		texture->setName(name);
-		textures[name]=texture;
+		int start_pos = sFileName.rfind("/")+1;
+		int end_pos = sFileName.rfind(".");
+		string sName = sFileName.substr(start_pos,end_pos-start_pos);
+		texture->setName(sName);
+		m_textures[sName]=texture;
 	} 
 	else 
 	{
-		Logging::GRAPHICS->error("Texture failed to load: " + filename);
+		Logging::GRAPHICS->error("Texture failed to load: " + sFileName);
 	}
 }
 
-void TextureManager::BindTexture(string name)
+void TextureManager::bindTexture(string sName)
 {
-	textures[name]->use();
+	m_textures[sName]->use();
 }
 
-void TextureManager::DeleteTexture(string name)
+void TextureManager::deleteTexture(string sName)
 {
-	if (textures.find(name) != textures.end()) 
+	if (m_textures.find(sName) != m_textures.end()) 
 	{
-		textures[name]->remove();
-		delete textures[name];
-		textures.erase(name);
+		m_textures[sName]->remove();
+		delete m_textures[sName];
+		m_textures.erase(sName);
 	}
 }
 
-void TextureManager::DeleteAllTextures()
+void TextureManager::deleteAllTextures()
 {
-	textures.clear();
+	m_textures.clear();
 }
 
-Texture *TextureManager::getTexture(string name) 
+Texture *TextureManager::getTexture(string sName) 
 { 
-	return textures[name]; 
+	return m_textures[sName]; 
 }
 
 map<string,Texture *> *TextureManager::getTextures() 
 {
-	return &textures;
+	return &m_textures;
 }

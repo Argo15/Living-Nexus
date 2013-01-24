@@ -6,28 +6,28 @@ LoggerHelper::LoggerHelper(std::string sFileName, std::string sLoggingType)
 {
 	m_sFileName = std::string(sFileName);
 	m_sLoggingType = std::string(sLoggingType);
-	year = 0;
+	m_nYear = 0;
 }
 
 std::string LoggerHelper::getLogDir() 
 {
 	char cPath[100];
-	sprintf(cPath, "Logs/%i/", year);
+	sprintf(cPath, "Logs/%i/", m_nYear);
 	_mkdir(cPath);
-	sprintf(cPath, "Logs/%i/%i/", year, month);
+	sprintf(cPath, "Logs/%i/%i/", m_nYear, m_nMonth);
 	_mkdir(cPath);
-	sprintf(cPath, "Logs/%i/%i/%i/", year, month, day);
+	sprintf(cPath, "Logs/%i/%i/%i/", m_nYear, m_nMonth, m_nDay);
 	_mkdir(cPath);
 	return std::string(cPath);
 }
 
 void LoggerHelper::commonLogError(std::string sMessage, std::string sMessageType) 
 {
-	if (year == 0) 
+	if (m_nYear == 0) 
 	{
-		year = TimeManager::getInstance()->getGameTime().getYear();
-		month = TimeManager::getInstance()->getGameTime().getMonth();
-		day = TimeManager::getInstance()->getGameTime().getDay();\
+		m_nYear = TimeManager::getInstance()->getGameTime().getYear();
+		m_nMonth = TimeManager::getInstance()->getGameTime().getMonth();
+		m_nDay = TimeManager::getInstance()->getGameTime().getDay();
 	}
 	int timestamp = TimeManager::getInstance()->getTimeStamp();
 	std::string sPath = getLogDir();
@@ -35,14 +35,15 @@ void LoggerHelper::commonLogError(std::string sMessage, std::string sMessageType
 	sprintf(cFileName, "%s%s_%i.log", sPath.c_str(), m_sFileName.c_str(), timestamp);
 	std::ofstream logfile;
 	logfile.open(cFileName, std::ios::out | std::ios::app);
+	char cMessage[500];
+	sprintf(cMessage, "%s [%s] [%s]: %s\n", TimeManager::getInstance()->toString().c_str(), m_sLoggingType.c_str(), sMessageType.c_str(), sMessage.c_str());
 	if (logfile.is_open())
 	{
-		char cMessage[500];
-		sprintf(cMessage, "%s [%s] [%s]: %s\n", TimeManager::getInstance()->toString().c_str(), m_sLoggingType.c_str(), sMessageType.c_str(), sMessage.c_str());
 		logfile.seekp(0, std::ios::end);
 		logfile << cMessage;
 		logfile.close();
 	}
+	std::cout << cMessage;
 }
 
 void LoggerHelper::info(std::string sMessage) 

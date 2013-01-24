@@ -6,30 +6,30 @@ void View::use3D(bool use3D)
 {
     if (use3D)
 	{
-		MatrixManager::getInstance()->putMatrix4(PROJECTION, (glm::mat4) glm::perspective(fovy, aspect, zNear, zFar));
+		MatrixManager::getInstance()->putMatrix4(PROJECTION, (glm::mat4) glm::perspective(m_nFov, m_nAspect, m_nZNear, m_nZFar));
 	}
     else
 	{
-		MatrixManager::getInstance()->putMatrix4(PROJECTION, (glm::mat4) glm::ortho(left, right, bottom, top, front, back));
+		MatrixManager::getInstance()->putMatrix4(PROJECTION, (glm::mat4) glm::ortho(m_nLeft, m_nRight, m_nBottom, m_nTop, m_nFront, m_nBack));
 	}
 }
 
-void View::set3D(GLdouble _fovy, GLdouble _aspect, GLdouble _zNear, GLdouble _zFar)
+void View::set3D(GLdouble nFov, GLdouble nAspect, GLdouble nZNear, GLdouble nZFar)
 {
-	fovy=_fovy;
-    aspect=_aspect;
-    zNear=_zNear;
-    zFar=_zFar;
+	m_nFov=nFov;
+    m_nAspect=nAspect;
+    m_nZNear=nZNear;
+    m_nZFar=nZFar;
 }
 
-void View::set2D(GLdouble _left, GLdouble _right, GLdouble _bottom, GLdouble _top, GLdouble _front, GLdouble _back)
+void View::set2D(GLdouble nLeft, GLdouble nRight, GLdouble nBottom, GLdouble nTop, GLdouble nFront, GLdouble nBack)
 {
-        left=_left;
-        right=_right;
-        bottom=_bottom;
-        top=_top;
-        front=_front;
-        back=_back;
+        m_nLeft=nLeft;
+        m_nRight=nRight;
+        m_nBottom=nBottom;
+        m_nTop=nTop;
+        m_nFront=nFront;
+        m_nBack=nBack;
 }
 
 void View::viewport() 
@@ -46,45 +46,45 @@ void View::viewport(int x, int y, int width, int height)
 
 double View::getFOV() 
 {
-	return fovy;
+	return m_nFov;
 }
 
 double View::getAspect() 
 {
-	return aspect;
+	return m_nAspect;
 }
 
 double View::getNear() 
 {
-	return zNear;
+	return m_nZNear;
 }
 
 double View::getFar() 
 {
-	return zFar;
+	return m_nZFar;
 }
 
 double View::getOrthoWidth() 
 {
-	return right-left;
+	return m_nRight-m_nLeft;
 }
 
 double View::getOrthoHeight() 
 {
-	return top-bottom;
+	return m_nTop-m_nBottom;
 }
 
 double View::getOrthoDepth() 
 {
-	return back-front;
+	return m_nBack-m_nFront;
 }
 
 double View::getOrthoNear()
 {
-	return front;
+	return m_nFront;
 }
 
 double View::getOrthoFar() 
 {
-	return back;
+	return m_nBack;
 }

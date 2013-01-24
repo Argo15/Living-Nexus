@@ -13,11 +13,11 @@
 class User 
 {
 private:
-	std::string username;
-	Object **objects;
+	std::string m_sUsername;
+	Object **m_objects;
 
 public:
-	User(std::string name);
+	User(std::string sName);
 	~User();
 
 	std::string getName();

@@ -3,33 +3,33 @@
 
 WorldCameraManager::WorldCameraManager()
 {
-	worldCamera = new WorldCamera();
-	freeRoamCamera = new Camera();
-	current = worldCamera;
+	m_worldCamera = new WorldCamera();
+	m_freeRoamCamera = new Camera();
+	m_current = m_worldCamera;
 }
 
-void WorldCameraManager::tick(int fps)
+void WorldCameraManager::tick(int nFps)
 {
 	if (InputManager::getInstance()->isKeyDownOnce('c'))
 	{
-		if (current == worldCamera)
+		if (m_current == m_worldCamera)
 		{
-			current = freeRoamCamera;
+			m_current = m_freeRoamCamera;
 		} 
 		else
 		{
-			current = worldCamera;
+			m_current = m_worldCamera;
 		}
 	}
-	current->move(120.0/(float)fps);
+	m_current->move(120.0/(float)nFps);
 }
 
 WorldCamera *WorldCameraManager::getPlayerCamera()
 {
-	return worldCamera;
+	return m_worldCamera;
 }
 
 Camera *WorldCameraManager::getCurrentCamera()
 {
-	return current;
+	return m_current;
 }

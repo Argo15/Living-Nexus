@@ -6,18 +6,18 @@
 class WorldCamera : public Camera
 {
 private:
-	float speedFactor;
+	float m_nSpeedFactor;
 
 public:
 	WorldCamera();
 
-	void move(float speed);
-	void moveForward(float speed);
-	void moveBackward(float speed);
-	void moveLeft(float speed);
-	void moveRight(float speed);
-	void moveUp(float speed);
-	void moveDown(float speed);
+	void move(float nSpeed);
+	void moveForward(float nSpeed);
+	void moveBackward(float nSpeed);
+	void moveLeft(float nSpeed);
+	void moveRight(float nSpeed);
+	void moveUp(float nSpeed);
+	void moveDown(float nSpeed);
 };
 
 #endif

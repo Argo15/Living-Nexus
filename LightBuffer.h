@@ -18,17 +18,17 @@ using namespace std;
 class LightBuffer 
 {
 private:
-	GLuint lightTex;
-	GLuint glowTex;
-	GLuint buffer;
+	GLuint m_nLightTex;
+	GLuint m_nGlowTex;
+	GLuint m_nFrameBuffer;
 
-	int width,height;
+	int m_nWidth, m_nHeight;
 
 public:
-	LightBuffer(int width, int height);
+	LightBuffer(int nWidth, int nHeight);
 	~LightBuffer();
 
-	void drawToBuffer(GLuint normalTex, GLuint depthTex, GLuint glowTex, View *view);
+	void drawToBuffer(GLuint nNormalTex, GLuint nDepthTex, GLuint nGlowTex, View *view);
 
 	void bind();
 	void unbind();

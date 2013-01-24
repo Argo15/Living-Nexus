@@ -9,18 +9,18 @@ using namespace std;
 class ChunkManager 
 {
 private:
-	map<string,Chunk *> chunks;
+	map<string,Chunk *> m_chunks;
 
 public:
 	ChunkManager();
 
-    void Initialize();
-	void LoadChunk(string filename);
-	void DrawChunk(string name, string shader);
-	void DeleteChunk(string name);
-	void DeleteAllChunks();
+    void initialize();
+	void loadChunk(string sFileName);
+	void drawChunk(string sName, string sShader);
+	void deleteChunk(string sName);
+	void deleteAllChunks();
 
-	Chunk *getChunk(string name);
+	Chunk *getChunk(string sName);
 	map<string,Chunk *> *getChunks();
 };
 

@@ -2,22 +2,22 @@
 
 PhysicsManager::PhysicsManager()
 {
-	worldCameras = new WorldCameraManager();
-	bulletManager = new BulletManager();
+	m_worldCameras = new WorldCameraManager();
+	m_worldBulletManager = new BulletManager();
 }
 
-void PhysicsManager::tick(int fps)
+void PhysicsManager::tick(int nFps)
 {
-	bulletManager->tick(fps);
-	worldCameras->tick(fps);
+	m_worldBulletManager->tick(nFps);
+	m_worldCameras->tick(nFps);
 }
 
 WorldCameraManager *PhysicsManager::getWorldCameras() 
 {
-	return worldCameras;
+	return m_worldCameras;
 }
 
 BulletManager *PhysicsManager::getBulletManager() 
 {
-	return bulletManager;
+	return m_worldBulletManager;
 }

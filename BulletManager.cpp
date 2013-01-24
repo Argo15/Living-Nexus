@@ -10,14 +10,14 @@ BulletManager::BulletManager()
 	btCollisionDispatcher* dispatcher = new	btCollisionDispatcher(collisionConfiguration);
 	btBroadphaseInterface* overlappingPairCache = new btDbvtBroadphase();
 	btSequentialImpulseConstraintSolver* solver = new btSequentialImpulseConstraintSolver;
-	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,overlappingPairCache,solver,collisionConfiguration);
-	dynamicsWorld->setGravity(btVector3(0,-10,0));
-	playerBody = 0;
+	m_dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,overlappingPairCache,solver,collisionConfiguration);
+	m_dynamicsWorld->setGravity(btVector3(0,-10,0));
+	m_playerBody = 0;
 }
 
-void BulletManager::tick(int fps)
+void BulletManager::tick(int nFps)
 {
-	if (playerBody == 0)
+	if (m_playerBody == 0)
 	{
 		createPlayerBody();
 	}
@@ -38,18 +38,18 @@ void BulletManager::addPhysicsShape(PhysicsShape *shape)
 	btDefaultMotionState* myMotionState = new btDefaultMotionState(bodyTransform);
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,bodyShape,localInertia);
 	btRigidBody *body = new btRigidBody(rbInfo);
-	dynamicsWorld->addRigidBody(body);
+	m_dynamicsWorld->addRigidBody(body);
 }
 
 void BulletManager::clearDynamicsWorld()
 {
-	delete dynamicsWorld;
+	delete m_dynamicsWorld;
 	btDefaultCollisionConfiguration* collisionConfiguration = new btDefaultCollisionConfiguration();
 	btCollisionDispatcher* dispatcher = new	btCollisionDispatcher(collisionConfiguration);
 	btBroadphaseInterface* overlappingPairCache = new btDbvtBroadphase();
 	btSequentialImpulseConstraintSolver* solver = new btSequentialImpulseConstraintSolver;
-	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,overlappingPairCache,solver,collisionConfiguration);
-	playerBody = 0;
+	m_dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,overlappingPairCache,solver,collisionConfiguration);
+	m_playerBody = 0;
 }
 
 void BulletManager::createPlayerBody()
@@ -66,46 +66,46 @@ void BulletManager::createPlayerBody()
 	bodyShape->calculateLocalInertia(mass,localInertia);
 	btDefaultMotionState* myMotionState = new btDefaultMotionState(bodyTransform);
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,bodyShape,localInertia);
-	playerBody = new btRigidBody(rbInfo);
-	playerBody->setAngularFactor(0);
-	dynamicsWorld->addRigidBody(playerBody);
+	m_playerBody = new btRigidBody(rbInfo);
+	m_playerBody->setAngularFactor(0);
+	m_dynamicsWorld->addRigidBody(m_playerBody);
 }
 
-void BulletManager::updateDynamicsWorld(float speed)
+void BulletManager::updateDynamicsWorld(float nSpeed)
 {
 	Profiler::getInstance()->startProfile("Update Dynamics World");
 	// move camera
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 	WorldCamera *camera = worldState->getPhysicsManager()->getWorldCameras()->getPlayerCamera();
-	float oldEye[3];
-	oldEye[0] = camera->geteyeX();
-	oldEye[1] = camera->geteyeY();
-	oldEye[2] = camera->geteyeZ();
+	float nOldEye[3];
+	nOldEye[0] = camera->getEyeX();
+	nOldEye[1] = camera->getEyeY();
+	nOldEye[2] = camera->getEyeZ();
 	if (InputManager::getInstance()->isKeyDown('w'))
 	{
-		camera->moveForward(speed*0.1f);
+		camera->moveForward(nSpeed*0.1f);
 	}
 	if (InputManager::getInstance()->isKeyDown('s'))
 	{
-		camera->moveBackward(speed*0.1f);
+		camera->moveBackward(nSpeed*0.1f);
 	}
 	if (InputManager::getInstance()->isKeyDown('a'))
 	{
-		camera->moveLeft(speed*0.1f);
+		camera->moveLeft(nSpeed*0.1f);
 	}
 	if (InputManager::getInstance()->isKeyDown('d'))
 	{
-		camera->moveRight(speed*0.1f);
+		camera->moveRight(nSpeed*0.1f);
 	}
-	float *newEye = camera->getEye();
-	playerBody->activate(true);
-	playerBody->setLinearVelocity(100*btVector3(newEye[0]-oldEye[0],-0.04,newEye[2]-oldEye[2]));
+	float *nNewEye = camera->getEye();
+	m_playerBody->activate(true);
+	m_playerBody->setLinearVelocity(100*btVector3(nNewEye[0]-nOldEye[0],-0.04,nNewEye[2]-nOldEye[2]));
 
 	// check physics
-	dynamicsWorld->stepSimulation(1.f/60.f,10);
+	m_dynamicsWorld->stepSimulation(1.f/60.f,10);
 
 	// update camera
-	btVector3 camPos = playerBody->getWorldTransform().getOrigin();
+	btVector3 camPos = m_playerBody->getWorldTransform().getOrigin();
 	camera->setPosition(camPos[0],camPos[1]+0.8,camPos[2]);
 	Profiler::getInstance()->endProfile();
 }

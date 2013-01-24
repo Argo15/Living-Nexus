@@ -18,13 +18,13 @@ using namespace std;
 class FinalBuffer
 {
 private:
-	GLuint finalTex;
-	GLuint buffer;
+	GLuint m_nFinalTex;
+	GLuint m_nFrameBuffer;
 
-	int width,height;
+	int m_nWidth, m_nHeight;
 
 public:
-	FinalBuffer(int width, int height);
+	FinalBuffer(int nWidth, int nHeight);
 	~FinalBuffer();
 
 	void drawToBuffer(GLuint colorTex, GLuint lightTex, GLuint glowTex, View *view);

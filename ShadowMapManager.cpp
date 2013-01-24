@@ -2,15 +2,15 @@
 
 ShadowMapManager::ShadowMapManager()
 {
-	sunShadow = new CascadedShadowMap(1024);
+	m_sunShadow = new CascadedShadowMap(1024);
 }
 
-void ShadowMapManager::tick(int fps)
+void ShadowMapManager::tick(int m_nFps)
 {
-	sunShadow->buildShadowMaps();
+	m_sunShadow->buildShadowMaps();
 }
 
 CascadedShadowMap *ShadowMapManager::getSunShadow()
 {
-	return sunShadow;
+	return m_sunShadow;
 }

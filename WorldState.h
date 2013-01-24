@@ -16,21 +16,21 @@ class ShadowMapManager;
 class WorldState : public GameState
 {
 private:
-	ChunkManager *chunkManager;
-	TileManager *tileManager;
-	WorldRenderer *renderer;
-	PhysicsManager *physicsManager;
-	WorldManager *worldManager;
-	ShadowMapManager *shadowMapManager;
+	ChunkManager *m_chunkManager;
+	TileManager *m_tileManager;
+	WorldRenderer *m_renderer;
+	PhysicsManager *m_physicsManager;
+	WorldManager *m_worldManager;
+	ShadowMapManager *m_shadowMapManager;
 
-	bool mouseHide;
+	bool m_bMouseHide;
 
 public:
-	WorldState(const char *filename = 0);
+	WorldState(const char *sFilename = 0);
 	~WorldState();
 
-	virtual void resize(int w, int h);
-	virtual void tick(int fps);
+	virtual void resize(int nWidth, int nHeight);
+	virtual void tick(int nFps);
 
 	virtual bool mouseHidden();
 

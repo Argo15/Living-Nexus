@@ -11,23 +11,21 @@
 class CascadedShadowMap
 {
 private:
-	DepthBuffer *shadowMaps[4];
-	glm::mat4 lightMatrix[4];
-	float slices[3];
-	int size;
+	DepthBuffer *m_shadowMaps[4];
+	glm::mat4 m_m4LightMatrix[4];
+	float m_nSlices[3];
+	int m_nSize;
 
-	Camera *createLightCamera(float slice1, float slice2, Camera *camera, View *view, DirectLight *dLight);
-	View *createLightView(float slice1, float slice2, Camera *camera, Camera *lightCamera, View *view, Frustum *frustum);
+	Camera *createLightCamera(float nSlice1, float nSlice2, Camera *camera, View *view, DirectLight *dLight);
+	View *createLightView(float nSlice1, float nSlice2, Camera *camera, Camera *lightCamera, View *view, Frustum *frustum);
 
 public:
 	CascadedShadowMap();
-	CascadedShadowMap(int size, float slice1 = 0.15, float slice2 = 0.3, float slice3 = 0.6);
+	CascadedShadowMap(int nSize, float nSlice1 = 0.15, float nSlice2 = 0.3, float nSlice3 = 0.6);
 
 	void buildShadowMaps();
-	void bindShadowMap(int map);
-	void sendToShader(string shader);
-
-	void drawShadowMaps();
+	void bindShadowMap(int nMap);
+	void sendToShader(string sShader);
 };
 
 #endif

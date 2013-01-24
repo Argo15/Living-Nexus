@@ -8,8 +8,8 @@ class Tile : public Chunk
 public:
 	Tile();
 
-	bool loadTile(string filename);
-	void drawTile(string shader);
+	bool loadTile(string sFilename);
+	void drawTile(string sShader);
 };
 
 #endif

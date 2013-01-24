@@ -14,16 +14,16 @@ class Config
 {
 private:
 	static Config *m_pInstance;
-	boost::unordered_map<std::string, std::string> hmConfigFields;
+	boost::unordered_map<std::string, std::string> m_hmConfigFields;
 
 	Config();
 
 public:
 	static Config *getInstance();
 	void initializeConfig();
-	std::string getFieldString(std::string field);
-	int getFieldInt(std::string field);
-	void setField(std::string key, std::string value);
+	std::string getFieldString(std::string sField);
+	int getFieldInt(std::string sField);
+	void setField(std::string sKey, std::string sValue);
 	std::string toString();
 };
 

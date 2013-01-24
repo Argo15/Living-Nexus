@@ -5,7 +5,7 @@ UserSession* UserSession::m_pInstance = 0;
 
 UserSession::UserSession() 
 {
-	activeUser = 0;
+	m_activeUser = 0;
 }
 
 UserSession *UserSession::getInstance() 
@@ -17,25 +17,25 @@ UserSession *UserSession::getInstance()
 	return m_pInstance;
 }
 
-void UserSession::startUserSession(std::string name) 
+void UserSession::startUserSession(std::string sName) 
 {
-	Logging::GAME->info("Starting user session: " + name);
-	activeUser = new User(name);
+	Logging::GAME->info("Starting user session: " + sName);
+	m_activeUser = new User(sName);
 }
 
 void UserSession::endUserSession() 
 {
-	Logging::GAME->info("Ending user session: " + activeUser->getName());
-	delete activeUser;
-	activeUser = 0;
+	Logging::GAME->info("Ending user session: " + m_activeUser->getName());
+	delete m_activeUser;
+	m_activeUser = 0;
 }
 
 bool UserSession::isUserInSession() 
 {
-	return (activeUser != 0);
+	return (m_activeUser != 0);
 }
 
 User *UserSession::getActiveUser() 
 {
-	return activeUser;
+	return m_activeUser;
 }

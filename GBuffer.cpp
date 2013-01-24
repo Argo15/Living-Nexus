@@ -5,81 +5,81 @@
 #include "GameState.h"
 #include "ShaderManager.h"
 
-GBuffer::GBuffer(int width, int height)
+GBuffer::GBuffer(int nWidth, int nHeight)
 {
-	this->width=width;
-	this->height=height;
+	this->m_nWidth=nWidth;
+	this->m_nHeight=nHeight;
 
 	glEnable(GL_TEXTURE_2D);
 
-	glGenFramebuffers(1,&buffer);
-	glBindFramebuffer(GL_FRAMEBUFFER, buffer);
+	glGenFramebuffers(1,&m_nFrameBuffer);
+	glBindFramebuffer(GL_FRAMEBUFFER, m_nFrameBuffer);
 
 	// Generate depth texture
-	glGenTextures(1, &depthTex);
-	glBindTexture(GL_TEXTURE_2D, depthTex);
+	glGenTextures(1, &m_nDepthTex);
+	glBindTexture(GL_TEXTURE_2D, m_nDepthTex);
 	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR ); 
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
-	glTexImage2D( GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0 );
+	glTexImage2D( GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, m_nWidth, m_nHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0 );
 	glBindTexture(GL_TEXTURE_2D, 0);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthTex, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, m_nDepthTex, 0);
 
 	// Generate normal
-	glGenTextures(1, &normalTex);
-	glBindTexture(GL_TEXTURE_2D, normalTex);
+	glGenTextures(1, &m_nNormalTex);
+	glBindTexture(GL_TEXTURE_2D, m_nNormalTex);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16, width, height, 0, GL_RGBA, GL_FLOAT, 0);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16, m_nWidth, m_nHeight, 0, GL_RGBA, GL_FLOAT, 0);
 	glBindTexture(GL_TEXTURE_2D, 0);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, normalTex, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_nNormalTex, 0);
 
 	// Generate color
-	glGenTextures(1, &colorTex);
-	glBindTexture(GL_TEXTURE_2D, colorTex);
+	glGenTextures(1, &m_nColorTex);
+	glBindTexture(GL_TEXTURE_2D, m_nColorTex);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_FLOAT, 0);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_nWidth, m_nHeight, 0, GL_RGBA, GL_FLOAT, 0);
 	glBindTexture(GL_TEXTURE_2D, 0);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, colorTex, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, m_nColorTex, 0);
 
 	// World Position texture
-	glGenTextures(1, &worldPosTex);
-	glBindTexture(GL_TEXTURE_2D, worldPosTex);
+	glGenTextures(1, &m_nWorldPosTex);
+	glBindTexture(GL_TEXTURE_2D, m_nWorldPosTex);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16, width, height, 0, GL_RGBA, GL_FLOAT, 0);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16, m_nWidth, m_nHeight, 0, GL_RGBA, GL_FLOAT, 0);
 	glBindTexture(GL_TEXTURE_2D, 0);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, worldPosTex, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, m_nWorldPosTex, 0);
 
 	// Glow texture
-	glGenTextures(1, &glowTex);
-	glBindTexture(GL_TEXTURE_2D, glowTex);
+	glGenTextures(1, &m_nGlowTex);
+	glBindTexture(GL_TEXTURE_2D, m_nGlowTex);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_FLOAT, 0);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_nWidth, m_nHeight, 0, GL_RGBA, GL_FLOAT, 0);
 	glBindTexture(GL_TEXTURE_2D, 0);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT3, GL_TEXTURE_2D, glowTex, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT3, GL_TEXTURE_2D, m_nGlowTex, 0);
 
 	// Motion texture
-	glGenTextures(1, &motionTex);
-	glBindTexture(GL_TEXTURE_2D, motionTex);
+	glGenTextures(1, &m_nMotionTex);
+	glBindTexture(GL_TEXTURE_2D, m_nMotionTex);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16, width, height, 0, GL_RGBA, GL_FLOAT, 0);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16, m_nWidth, m_nHeight, 0, GL_RGBA, GL_FLOAT, 0);
 	glBindTexture(GL_TEXTURE_2D, 0);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT4, GL_TEXTURE_2D, motionTex, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT4, GL_TEXTURE_2D, m_nMotionTex, 0);
 
 	// check FbO status
 	GLenum FBOstatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
@@ -97,7 +97,7 @@ GBuffer::GBuffer(int width, int height)
 
 GBuffer::~GBuffer()
 {
-	glDeleteFramebuffers(1,&buffer);
+	glDeleteFramebuffers(1,&m_nFrameBuffer);
 }
 
 void GBuffer::drawToBuffer(View *view)
@@ -133,24 +133,24 @@ void GBuffer::drawToBuffer(View *view)
 	Camera *camera = worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera();
 	MatrixManager::getInstance()->putMatrix4(PROJECTION, camera->transformToMatrix(MatrixManager::getInstance()->getMatrix4(PROJECTION)));
 	glslProgram->sendUniform("projectionCameraMatrix", &MatrixManager::getInstance()->getMatrix4(PROJECTION)[0][0]);
-	glslProgram->sendUniform("camPos",camera->geteyeX(),camera->geteyeY(),camera->geteyeZ());
+	glslProgram->sendUniform("camPos",camera->getEyeX(),camera->getEyeY(),camera->getEyeZ());
 	
-	glslProgram->sendUniform("projectionLastCameraMatrix", &lastCameraProj[0][0]);
-	glslProgram->sendUniform("lastCamPos",lastCamera.geteyeX(),lastCamera.geteyeY(),lastCamera.geteyeZ());
+	glslProgram->sendUniform("projectionLastCameraMatrix", &m_m4LastCameraProj[0][0]);
+	glslProgram->sendUniform("lastCamPos",m_lastCamera.getEyeX(),m_lastCamera.getEyeY(),m_lastCamera.getEyeZ());
 
 	Frustum *frustum = worldState->getRenderer()->getFrustum();
 	worldState->getWorldManager()->renderWorld("GBuffer", frustum);
 	glslProgram->disable();
 	unbind();
 
-	lastCameraProj = MatrixManager::getInstance()->getMatrix4(PROJECTION);
-	lastCamera = *camera;
+	m_m4LastCameraProj = MatrixManager::getInstance()->getMatrix4(PROJECTION);
+	m_lastCamera = *camera;
 	Profiler::getInstance()->endProfile();
 }
 
 void GBuffer::bind() 
 {
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, buffer);
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_nFrameBuffer);
 }
 
 void GBuffer::unbind() 
@@ -160,70 +160,70 @@ void GBuffer::unbind()
 
 void GBuffer::bindDepthTex() 
 {
-	glBindTexture(GL_TEXTURE_2D, depthTex);
+	glBindTexture(GL_TEXTURE_2D, m_nDepthTex);
 }
 
 void GBuffer::bindNormalTex() 
 {
-	glBindTexture(GL_TEXTURE_2D, normalTex);
+	glBindTexture(GL_TEXTURE_2D, m_nNormalTex);
 }
 
 void GBuffer::bindColorTex() 
 {
-	glBindTexture(GL_TEXTURE_2D, colorTex);
+	glBindTexture(GL_TEXTURE_2D, m_nColorTex);
 }
 
 void GBuffer::bindPositionTex() 
 {
-	glBindTexture(GL_TEXTURE_2D, worldPosTex);
+	glBindTexture(GL_TEXTURE_2D, m_nWorldPosTex);
 }
 
 void GBuffer::bindGlowTex() 
 {
-	glBindTexture(GL_TEXTURE_2D, glowTex);
+	glBindTexture(GL_TEXTURE_2D, m_nGlowTex);
 }
 
 void GBuffer::bindMotionTex() 
 {
-	glBindTexture(GL_TEXTURE_2D, motionTex);
+	glBindTexture(GL_TEXTURE_2D, m_nMotionTex);
 }
 
 GLuint GBuffer::getGlowTex() 
 {
-	return glowTex;
+	return m_nGlowTex;
 }
 
 GLuint GBuffer::getDepthTex() 
 {
-	return depthTex;
+	return m_nDepthTex;
 }
 
 GLuint GBuffer::getColorTex() 
 {
-	return colorTex;
+	return m_nColorTex;
 }
 
 GLuint GBuffer::getNormalTex()
 {
-	return normalTex;
+	return m_nNormalTex;
 }
 
 GLuint GBuffer::getWorldPosTex() 
 {
-	return worldPosTex;
+	return m_nWorldPosTex;
 }
 
 GLuint GBuffer::getMotionTex() 
 {
-	return motionTex;
+	return m_nMotionTex;
 }
 
 int GBuffer::getWidth() 
 {
-	return width;
+	return m_nWidth;
 }
 
 int GBuffer::getHeight() 
 {
-	return height;
+	return m_nHeight;
 }

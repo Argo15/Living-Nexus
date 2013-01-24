@@ -24,14 +24,14 @@ class AtmosphereBuffer;
 class WorldRenderer : public Renderer
 {
 private:
-	View *view;
-	WorldCamera *camera;
-	Frustum *frustum;
-	GBuffer *gBuffer;
-	LightBuffer *lightBuffer;
-	FinalBuffer *finalBuffer;
-	MotionBlurBuffer *motionBlurBuffer;
-	AtmosphereBuffer *atmosphereBuffer;
+	View *m_view;
+	WorldCamera *m_camera;
+	Frustum *m_frustum;
+	GBuffer *m_gBuffer;
+	LightBuffer *m_lightBuffer;
+	FinalBuffer *m_finalBuffer;
+	MotionBlurBuffer *m_motionBlurBuffer;
+	AtmosphereBuffer *m_atmosphereBuffer;
 
 	void forwardRender();
 	void defferedRender();
@@ -40,7 +40,7 @@ public:
 	WorldRenderer();
 
 	void init();
-	void resize(int w, int h);
+	void resize(int nWidth, int nHeight);
 	void render();
 
 	View *getView();

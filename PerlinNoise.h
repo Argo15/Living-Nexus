@@ -13,17 +13,17 @@
 class PerlinNoise : public Texture
 {
 private:
-	float map32[32 * 32];
-	float map256[256 * 256];
+	float m_nMap32[32 * 32];
+	float m_nMap256[256 * 256];
 
-	float Noise(int x, int y, int random);
-	void SetNoise(float  *map);
-	float Interpolate(float x, float y, float  *map);
-	void OverlapOctaves(float  *map32, float  *map256);
-	void ExpFilter(float  *map);
+	float noise(int nX, int nY, int nRandom);
+	void setNoise(float  *nMap);
+	float interpolate(float nX, float nY, float  *nMap);
+	void overlapOctaves(float  *nMap32, float  *nMap256);
+	void expFilter(float  *nMap);
 
 public:
-	bool load(const char *name);
+	bool load(const char *sName);
 };
 
 #endif

@@ -2,15 +2,15 @@
 
 int Model::getNumTriangles()
 {
-	return numTriangles;
+	return m_nNumTriangles;
 }
 
 float *Model::getCenter() 
 {
-	return center;
+	return m_nCenter;
 }
 
 float Model::getRadius() 
 {
-	return radius;
+	return m_nRadius;
 }

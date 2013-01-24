@@ -7,18 +7,18 @@ Material::Material()
 {
 	for (int i=0;i<3;i++)
 	{
-		color[i]=1.0;
-		emission[i]=0.0;
+		m_nColor[i]=1.0;
+		m_nEmission[i]=0.0;
 	}
-	texOffset[0]=0.0;
-	texOffset[1]=0.0;
-	texScale[0]=1.0;
-	texScale[1]=1.0;
-	texRotate=0.0;
-	specular=0.0;
-	shininess=25;
-	normalName=TextureManager::getInstance()->getTexture("White")->getName();
-	normalEnabled=false;
+	m_nTexOffset[0]=0.0;
+	m_nTexOffset[1]=0.0;
+	m_nTexScale[0]=1.0;
+	m_nTexScale[1]=1.0;
+	m_nTexRotate=0.0;
+	m_nSpecular=0.0;
+	m_nShininess=25;
+	m_sNormalName=TextureManager::getInstance()->getTexture("White")->getName();
+	m_bNormalEnabled=false;
 }
 
 Material::Material(Material *copyMaterial)
@@ -29,57 +29,57 @@ Material::Material(Material *copyMaterial)
 
 void Material::use()
 {
-	float spec[] = {specular, specular, specular};
+	float spec[] = {m_nSpecular, m_nSpecular, m_nSpecular};
 	glDisable(GL_COLOR_MATERIAL);
-	glMaterialfv(GL_FRONT,GL_DIFFUSE,color);
-	glMaterialfv(GL_FRONT,GL_AMBIENT,color);
+	glMaterialfv(GL_FRONT,GL_DIFFUSE,m_nColor);
+	glMaterialfv(GL_FRONT,GL_AMBIENT,m_nColor);
 	glMaterialfv(GL_FRONT,GL_SPECULAR,spec);
-	glMateriali(GL_FRONT,GL_SHININESS,shininess);
-	glMaterialfv(GL_FRONT,GL_EMISSION,emission);
+	glMateriali(GL_FRONT,GL_SHININESS,m_nShininess);
+	glMaterialfv(GL_FRONT,GL_EMISSION,m_nEmission);
 	glMatrixMode(GL_TEXTURE);
 	glActiveTextureARB(GL_TEXTURE0);
 	glLoadIdentity();
-	glTranslatef(texOffset[0],texOffset[1],0.0);
-	glRotatef(texRotate,0.0,0.0,1.0);
-	glScalef(texScale[0],texScale[1],1.0);
+	glTranslatef(m_nTexOffset[0],m_nTexOffset[1],0.0);
+	glRotatef(m_nTexRotate,0.0,0.0,1.0);
+	glScalef(m_nTexScale[0],m_nTexScale[1],1.0);
 	glMatrixMode(GL_MODELVIEW);
 
 	glActiveTextureARB(GL_TEXTURE0);
 	glEnable(GL_TEXTURE_2D);
-	TextureManager::getInstance()->BindTexture(*textureName);
+	TextureManager::getInstance()->bindTexture(*m_sTextureName);
 }
 
-void Material::sendToShader(string shader)
+void Material::sendToShader(string sShader)
 {
-	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader(shader);
+	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader(sShader);
 	glActiveTextureARB(GL_TEXTURE0);
 	glEnable(GL_TEXTURE_2D);
-	TextureManager::getInstance()->BindTexture(*textureName);
+	TextureManager::getInstance()->bindTexture(*m_sTextureName);
 	glActiveTextureARB(GL_TEXTURE1);
 	glEnable(GL_TEXTURE_2D);
-	TextureManager::getInstance()->BindTexture(*normalName);
+	TextureManager::getInstance()->bindTexture(*m_sNormalName);
 	glslProgram->sendUniform("tex", 0);
 	glslProgram->sendUniform("normalmap", 1);
-	glslProgram->sendUniform("material.normalenabled", normalEnabled);
-	glslProgram->sendUniform("material.color", color[0],color[1],color[2]);
-	if (shader == "GBuffer" || shader == "Basic")
+	glslProgram->sendUniform("material.normalenabled", m_bNormalEnabled);
+	glslProgram->sendUniform("material.color", m_nColor[0],m_nColor[1],m_nColor[2]);
+	if (sShader == "GBuffer" || sShader == "Basic")
 	{
-		glslProgram->sendUniform("material.emission", emission[0],emission[1],emission[2]);
-		glslProgram->sendUniform("material.specular", specular);
-		glslProgram->sendUniform("material.shininess", (float)shininess/128.0f);
+		glslProgram->sendUniform("material.emission", m_nEmission[0],m_nEmission[1],m_nEmission[2]);
+		glslProgram->sendUniform("material.specular", m_nSpecular);
+		glslProgram->sendUniform("material.shininess", (float)m_nShininess/128.0f);
 	}
 	glm::mat4 textureMatrix = glm::mat4(1.0f);
-	textureMatrix = glm::translate(textureMatrix, glm::vec3(texOffset[0],texOffset[1],0));
-	textureMatrix = glm::rotate(textureMatrix, texRotate, glm::vec3(0,0,1.0));
-	textureMatrix = glm::scale(textureMatrix, glm::vec3(texScale[0],texScale[1],1.0));
+	textureMatrix = glm::translate(textureMatrix, glm::vec3(m_nTexOffset[0],m_nTexOffset[1],0));
+	textureMatrix = glm::rotate(textureMatrix, m_nTexRotate, glm::vec3(0,0,1.0));
+	textureMatrix = glm::scale(textureMatrix, glm::vec3(m_nTexScale[0],m_nTexScale[1],1.0));
 	glslProgram->sendUniform("textureMatrix", &textureMatrix[0][0]);
 }
 
-bool Material::loadMaterial(const char* filename) 
+bool Material::loadMaterial(const char* sFileName) 
 {
 	SaveMat load;
 
-	ifstream file(filename, ios::in|ios::binary|ios::ate);
+	ifstream file(sFileName, ios::in|ios::binary|ios::ate);
 	if (file.is_open())
 	{ 
 		file.seekg (0, ios::beg);
@@ -93,48 +93,48 @@ bool Material::loadMaterial(const char* filename)
 
 	for (int i=0; i<3; i++) 
 	{
-		color[i] = load.color[i];
-		emission[i] = load.emission[i];
+		m_nColor[i] = load.nColor[i];
+		m_nEmission[i] = load.nEmission[i];
 	}
 	for (int i=0; i<2; i++) 
 	{
-		texOffset[i] = load.texOffset[i];
-		texScale[i] = load.texScale[i];
+		m_nTexOffset[i] = load.nTexOffset[i];
+		m_nTexScale[i] = load.nTexScale[i];
 	}
-	specular = load.specular;
-	shininess = load.shininess;
-	texRotate = load.texRotate;
-	normalEnabled = load.normalEnabled;
+	m_nSpecular = load.nSpecular;
+	m_nShininess = load.nShininess;
+	m_nTexRotate = load.nTexRotate;
+	m_bNormalEnabled = load.bNormalEnabled;
 
-	name = new string(load.name);
-	textureName = new string(load.textureName);
-	normalName = new string(load.normalName);
+	m_sName = new string(load.sName);
+	m_sTextureName = new string(load.sTextureName);
+	m_sNormalName = new string(load.sNormalName);
 	return true;
 }
 
-void Material::saveMaterial(const char *filename)
+void Material::saveMaterial(const char *sFileName)
 {
 	SaveMat save;
 	for (int i=0; i<3; i++) 
 	{
-		save.color[i] = color[i];
-		save.emission[i] = emission[i];
+		save.nColor[i] = m_nColor[i];
+		save.nEmission[i] = m_nEmission[i];
 	}
 	for (int i=0; i<2; i++) 
 	{
-		save.texOffset[i] = texOffset[i];
-		save.texScale[i] = texScale[i];
+		save.nTexOffset[i] = m_nTexOffset[i];
+		save.nTexScale[i] = m_nTexScale[i];
 	}
-	save.specular = specular;
-	save.shininess = shininess;
-	save.texRotate = texRotate;
-	save.normalEnabled = normalEnabled;
+	save.nSpecular = m_nSpecular;
+	save.nShininess = m_nShininess;
+	save.nTexRotate = m_nTexRotate;
+	save.bNormalEnabled = m_bNormalEnabled;
 
-	strcpy(save.name, name->c_str());
-	strcpy(save.textureName, textureName->c_str());
-	strcpy(save.normalName, normalName->c_str());
+	strcpy(save.sName, m_sName->c_str());
+	strcpy(save.sTextureName, m_sTextureName->c_str());
+	strcpy(save.sNormalName, m_sNormalName->c_str());
 
-	ofstream file(filename, ios::out|ios::binary|ios::ate);
+	ofstream file(sFileName, ios::out|ios::binary|ios::ate);
 	if (file.is_open())
 	{ 
 		file.write((char*)&save,sizeof(save));
@@ -142,128 +142,128 @@ void Material::saveMaterial(const char *filename)
 	file.close();
 }
 
-void Material::setColor(float r, float g, float b) 
+void Material::setColor(float nRed, float nGreen, float nBlue) 
 {
-	color[0]=r;
-	color[1]=g;
-	color[2]=b;
+	m_nColor[0] = nRed;
+	m_nColor[1] = nGreen;
+	m_nColor[2] = nBlue;
 }
 
-void Material::setEmission(float r, float g, float b) 
+void Material::setEmission(float nRed, float nGreen, float nBlue) 
 {
-	emission[0]=r;
-	emission[1]=g;
-	emission[2]=b;
+	m_nEmission[0] = nRed;
+	m_nEmission[1] = nGreen;
+	m_nEmission[2] = nBlue;
 }
 
-void Material::setSpecular(float i) 
+void Material::setSpecular(float nIntensity) 
 {
-	specular=i;
+	m_nSpecular = nIntensity;
 }
 
-void Material::setShine(int shine) 
+void Material::setShine(int nShine) 
 {
-	shininess=shine;
+	m_nShininess = nShine;
 }
 
-void Material::setTexOffset(float x, float y) 
+void Material::setTexOffset(float nX, float nY) 
 {
-	texOffset[0]=x; 
-	texOffset[1]=y;
+	m_nTexOffset[0] = nX; 
+	m_nTexOffset[1] = nY;
 }
 
-void Material::setUTexOffset(float value) 
+void Material::setUTexOffset(float nValue) 
 {
-	texOffset[0]=value;
+	m_nTexOffset[0] = nValue;
 }
 
-void Material::setVTexOffset(float value) 
+void Material::setVTexOffset(float nValue) 
 {
-	texOffset[1]=value;
+	m_nTexOffset[1] = nValue;
 }
 
-void Material::setTexScale(float x, float y) 
+void Material::setTexScale(float nX, float nY) 
 {
-	texScale[0]=x; 
-	texScale[1]=y;
+	m_nTexScale[0] = nX; 
+	m_nTexScale[1] = nY;
 }
 
-void Material::setUTexScale(float value) 
+void Material::setUTexScale(float nValue) 
 {
-	texScale[0]=value;
+	m_nTexScale[0] = nValue;
 }
 
-void Material::setVTexScale(float value) 
+void Material::setVTexScale(float nValue) 
 {
-	texScale[1]=value;
+	m_nTexScale[1] = nValue;
 }
 
-void Material::setTexRotate(float rotate) 
+void Material::setTexRotate(float nRotate) 
 {
-	texRotate=rotate;
+	m_nTexRotate = nRotate;
 }
 
 float *Material::getColor() 
 {
-	return color;
+	return m_nColor;
 }
 
 float *Material::getEmission() 
 {
-	return emission;
+	return m_nEmission;
 }
 
 float Material::getSpecular() 
 {
-	return specular;
+	return m_nSpecular;
 }
 
 int Material::getShine() 
 {
-	return shininess;
+	return m_nShininess;
 }
 
 float *Material::getTexOffset() 
 {
-	return texOffset;
+	return m_nTexOffset;
 }
 
 float *Material::getTexScale() 
 {
-	return texScale;
+	return m_nTexScale;
 }
 
 float Material::getTexRotate()
 {
-	return texRotate;
+	return m_nTexRotate;
 }
 
-void Material::setTexture(string *newTextureName) 
+void Material::setTexture(string *sTextureName) 
 {
-	textureName=newTextureName;
+	m_sTextureName = sTextureName;
 }
 
 string *Material::getTexture()
 {
-	return textureName;
+	return m_sTextureName;
 }
 
-void Material::setNormal(string *newNormalName) 
+void Material::setNormal(string *sNormalName) 
 {
-	normalName=newNormalName;
+	m_sNormalName = sNormalName;
 }
 
 string *Material::getNormal() 
 {
-	return normalName;
+	return m_sNormalName;
 }
 
-void Material::enableNormal(bool enabled) 
+void Material::enableNormal(bool bEnabled) 
 {
-	normalEnabled=enabled;
+	m_bNormalEnabled = bEnabled;
 }
 
 bool Material::normalsEnabled()
 {
-	return normalEnabled;
+	return m_bNormalEnabled;
 }

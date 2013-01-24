@@ -7,24 +7,24 @@ using namespace std;
 class Light
 {
 protected:
-	float color[3];
-	float ambient;
-	float diffuse;
-	float specular;
-	bool enabled;
+	float m_nColor[3];
+	float m_nAmbient;
+	float m_nDiffuse;
+	float m_nSpecular;
+	bool m_bEnabled;
 
 public:
-	void setAmbient(float amt);
-	void setDiffuse(float amt);
-	void setSpecular(float amt);
+	void setAmbient(float nAmt);
+	void setDiffuse(float nAmt);
+	void setSpecular(float nAmt);
 	float getDiffuse();
 	float getAmbient();
 	float getSpecular();
-	void setColor(float r, float g, float b);
+	void setColor(float red, float green, float blue);
 	float *getColor();
-	bool isenabled();
-	void setEnabled(bool enabled);
-	virtual void sendToShader(string shader) = 0;
+	bool isEnabled();
+	void setEnabled(bool bEnabled);
+	virtual void sendToShader(string sShader) = 0;
 };
 
 #endif

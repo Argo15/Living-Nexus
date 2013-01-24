@@ -8,252 +8,252 @@
 
 Camera::Camera()
 {
-	hAngle=-(float)PI/4.0f;
-    vAngle=(float)PI/4.0f;
-	eyePos[0]=5.0; eyePos[1]=5.0; eyePos[2]=5.0; 
+	m_nHAngle=-(float)PI/4.0f;
+    m_nVAngle=(float)PI/4.0f;
+	m_nEyePos[0]=5.0; m_nEyePos[1]=5.0; m_nEyePos[2]=5.0; 
 	recalculate();
-	rotSpeed=0.8;
-	lastMouseX = -1;
-	lastMouseY = -1;
+	m_nRotSpeed=0.8;
+	m_nLastMouseX = -1;
+	m_nLastMouseY = -1;
 }
 
 void Camera::mouseRotate()
 {
-	int mouseX=InputManager::getInstance()->getMouseX();
-	int mouseY=InputManager::getInstance()->getMouseY();
+	int nMouseX=InputManager::getInstance()->getMouseX();
+	int nMouseY=InputManager::getInstance()->getMouseY();
 
-	if (lastMouseX == -1)
+	if (m_nLastMouseX == -1)
 	{
-		lastMouseX = mouseX;
-		lastMouseY = mouseY;
+		m_nLastMouseX = nMouseX;
+		m_nLastMouseY = nMouseY;
 		return;
 	}
 
-	int dx = mouseX - lastMouseX;
-	int dy = mouseY - lastMouseY;
+	int dx = nMouseX - m_nLastMouseX;
+	int dy = nMouseY - m_nLastMouseY;
 
-	hAngle-=(float)dx*rotSpeed*0.005f;
-	vAngle+=(float)dy*rotSpeed*0.005f;
+	m_nHAngle-=(float)dx*m_nRotSpeed*0.005f;
+	m_nVAngle+=(float)dy*m_nRotSpeed*0.005f;
 
-	if (vAngle>0.999f*PI/2.0f)
+	if (m_nVAngle>0.999f*PI/2.0f)
 	{
-        vAngle=0.999f*(float)PI/2.0f;
+        m_nVAngle=0.999f*(float)PI/2.0f;
 	}
-    if (vAngle<-0.999f*PI/2.0f)
+    if (m_nVAngle<-0.999f*PI/2.0f)
 	{
-        vAngle=-0.999f*(float)PI/2.0f;
+        m_nVAngle=-0.999f*(float)PI/2.0f;
 	}
 
 	recalculate();
 
-	lastMouseX = mouseX;
-	lastMouseY = mouseY;
+	m_nLastMouseX = nMouseX;
+	m_nLastMouseY = nMouseY;
 	
 	if (GameState::GAMESTATE->mouseHidden()) 
 	{
-		if (mouseX>500) 
+		if (nMouseX>500) 
 		{
-			glutWarpPointer(300, mouseY);
-			lastMouseX = 300;
+			glutWarpPointer(300, nMouseY);
+			m_nLastMouseX = 300;
 		}
-		if (mouseX<300) 
+		if (nMouseX<300) 
 		{
-			glutWarpPointer(500, mouseY);
-			lastMouseX = 500;
+			glutWarpPointer(500, nMouseY);
+			m_nLastMouseX = 500;
 		}
-		if (mouseY>500) 
+		if (nMouseY>500) 
 		{
-			glutWarpPointer(mouseX, 300);
-			lastMouseY = 300;
+			glutWarpPointer(nMouseX, 300);
+			m_nLastMouseY = 300;
 		}
-		if (mouseY<300) 
+		if (nMouseY<300) 
 		{
-			glutWarpPointer(mouseX, 500);
-			lastMouseY = 500;
+			glutWarpPointer(nMouseX, 500);
+			m_nLastMouseY = 500;
 		}
 	}
 }
 
-void Camera::move(float speed)
+void Camera::move(float nSpeed)
 {
 	if (InputManager::getInstance()->isKeyDown('w'))
 	{
-		moveForward(speed*0.1f);
+		moveForward(nSpeed*0.1f);
 	}
 	if (InputManager::getInstance()->isKeyDown('s'))
 	{
-		moveBackward(speed*0.1f);
+		moveBackward(nSpeed*0.1f);
 	}
 	if (InputManager::getInstance()->isKeyDown('a'))
 	{
-		moveLeft(speed*0.1f);
+		moveLeft(nSpeed*0.1f);
 	}
 	if (InputManager::getInstance()->isKeyDown('d'))
 	{
-		moveRight(speed*0.1f);
+		moveRight(nSpeed*0.1f);
 	}
 	if (InputManager::getInstance()->isKeyDown('e'))
 	{
-		moveUp(speed*0.1f);
+		moveUp(nSpeed*0.1f);
 	}
 	if (InputManager::getInstance()->isKeyDown('q'))
 	{
-		moveDown(speed*0.1f);
+		moveDown(nSpeed*0.1f);
 	}
 
 	mouseRotate();
 }
 
-void Camera::moveForward(float speed)
+void Camera::moveForward(float nSpeed)
 {
-	eyePos[0]-=cos(hAngle)*speed;
-	eyePos[2]+=sin(hAngle)*speed;
-	lookAt[0]-=cos(hAngle)*speed;
-	lookAt[2]+=sin(hAngle)*speed;
+	m_nEyePos[0]-=cos(m_nHAngle)*nSpeed;
+	m_nEyePos[2]+=sin(m_nHAngle)*nSpeed;
+	m_nLookAt[0]-=cos(m_nHAngle)*nSpeed;
+	m_nLookAt[2]+=sin(m_nHAngle)*nSpeed;
 }
 
-void Camera::moveBackward(float speed)
+void Camera::moveBackward(float nSpeed)
 {
-	eyePos[0]+=cos(hAngle)*speed;
-	eyePos[2]-=sin(hAngle)*speed;
-	lookAt[0]+=cos(hAngle)*speed;
-	lookAt[2]-=sin(hAngle)*speed;
+	m_nEyePos[0]+=cos(m_nHAngle)*nSpeed;
+	m_nEyePos[2]-=sin(m_nHAngle)*nSpeed;
+	m_nLookAt[0]+=cos(m_nHAngle)*nSpeed;
+	m_nLookAt[2]-=sin(m_nHAngle)*nSpeed;
 }
 
-void Camera::moveLeft(float speed)
+void Camera::moveLeft(float nSpeed)
 {
-	eyePos[2]+=cos(hAngle)*speed;
-	eyePos[0]+=sin(hAngle)*speed;
-	lookAt[2]+=cos(hAngle)*speed;
-	lookAt[0]+=sin(hAngle)*speed;
+	m_nEyePos[2]+=cos(m_nHAngle)*nSpeed;
+	m_nEyePos[0]+=sin(m_nHAngle)*nSpeed;
+	m_nLookAt[2]+=cos(m_nHAngle)*nSpeed;
+	m_nLookAt[0]+=sin(m_nHAngle)*nSpeed;
 }
 
-void Camera::moveRight(float speed)
+void Camera::moveRight(float nSpeed)
 {
-	eyePos[2]-=cos(hAngle)*speed;
-	eyePos[0]-=sin(hAngle)*speed;
-	lookAt[2]-=cos(hAngle)*speed;
-	lookAt[0]-=sin(hAngle)*speed;
+	m_nEyePos[2]-=cos(m_nHAngle)*nSpeed;
+	m_nEyePos[0]-=sin(m_nHAngle)*nSpeed;
+	m_nLookAt[2]-=cos(m_nHAngle)*nSpeed;
+	m_nLookAt[0]-=sin(m_nHAngle)*nSpeed;
 }
 
-void Camera::moveUp(float speed)
+void Camera::moveUp(float nSpeed)
 {
-	eyePos[1]+=speed;
-	lookAt[1]+=speed;
+	m_nEyePos[1]+=nSpeed;
+	m_nLookAt[1]+=nSpeed;
 }
 
-void Camera::moveDown(float speed)
+void Camera::moveDown(float nSpeed)
 {
-	eyePos[1]-=speed;
-	lookAt[1]-=speed;
+	m_nEyePos[1]-=nSpeed;
+	m_nLookAt[1]-=nSpeed;
 }
 
 void Camera::recalculate()
 {
-	lookAt[0]=eyePos[0]-cos(hAngle)*abs(cos(vAngle));
-	lookAt[1]=eyePos[1]-sin(vAngle);
-	lookAt[2]=eyePos[2]+sin(hAngle)*abs(cos(vAngle));
-	up[0]=cos(hAngle)*cos(vAngle+(float)PI/2);
-	up[1]=sin(vAngle+(float)PI/2);
-	up[2]=-sin(hAngle)*cos(vAngle+(float)PI/2);
-	Vector3 vLook(lookAt[0]-eyePos[0],lookAt[1]-eyePos[1],lookAt[2]-eyePos[2]);
-	Vector3 vUp(up[0],up[1],up[2]);
+	m_nLookAt[0]=m_nEyePos[0]-cos(m_nHAngle)*abs(cos(m_nVAngle));
+	m_nLookAt[1]=m_nEyePos[1]-sin(m_nVAngle);
+	m_nLookAt[2]=m_nEyePos[2]+sin(m_nHAngle)*abs(cos(m_nVAngle));
+	m_nUp[0]=cos(m_nHAngle)*cos(m_nVAngle+(float)PI/2);
+	m_nUp[1]=sin(m_nVAngle+(float)PI/2);
+	m_nUp[2]=-sin(m_nHAngle)*cos(m_nVAngle+(float)PI/2);
+	Vector3 vLook(m_nLookAt[0]-m_nEyePos[0],m_nLookAt[1]-m_nEyePos[1],m_nLookAt[2]-m_nEyePos[2]);
+	Vector3 vUp(m_nUp[0],m_nUp[1],m_nUp[2]);
 	Vector3 vRight = vLook.cross(vUp);
 	vRight.normalize();
-	right[0]=vRight[0];
-	right[1]=vRight[1];
-	right[2]=vRight[2];
+	m_nRight[0]=vRight[0];
+	m_nRight[1]=vRight[1];
+	m_nRight[2]=vRight[2];
 }
 
 void Camera::transform()
 {
 	MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::lookAt(
-		glm::vec3(eyePos[0],eyePos[1],eyePos[2]),
-		glm::vec3(lookAt[0],lookAt[1],lookAt[2]),
-		glm::vec3(up[0],up[1],up[2])
+		glm::vec3(m_nEyePos[0],m_nEyePos[1],m_nEyePos[2]),
+		glm::vec3(m_nLookAt[0],m_nLookAt[1],m_nLookAt[2]),
+		glm::vec3(m_nUp[0],m_nUp[1],m_nUp[2])
 	));
 }
 
 glm::mat4 Camera::transformToMatrix(glm::mat4 matrix)
 {
 	return matrix * glm::lookAt(
-		glm::vec3(eyePos[0],eyePos[1],eyePos[2]),
-		glm::vec3(lookAt[0],lookAt[1],lookAt[2]),
-		glm::vec3(up[0],up[1],up[2])
+		glm::vec3(m_nEyePos[0],m_nEyePos[1],m_nEyePos[2]),
+		glm::vec3(m_nLookAt[0],m_nLookAt[1],m_nLookAt[2]),
+		glm::vec3(m_nUp[0],m_nUp[1],m_nUp[2])
 	);
 }
 
 
 void Camera::setPosition(float x, float y, float z)
 {
-	eyePos[0]=x;
-	eyePos[1]=y;
-	eyePos[2]=z;
+	m_nEyePos[0]=x;
+	m_nEyePos[1]=y;
+	m_nEyePos[2]=z;
 }
 
 void Camera::setLookAt(float x, float y, float z) 
 {
-	lookAt[0]=x;
-	lookAt[1]=y;
-	lookAt[2]=z;
+	m_nLookAt[0]=x;
+	m_nLookAt[1]=y;
+	m_nLookAt[2]=z;
 }
 
 void Camera::setUp(float x, float y, float z) 
 {
-	up[0]=x;
-	up[1]=y;
-	up[2]=z;
+	m_nUp[0]=x;
+	m_nUp[1]=y;
+	m_nUp[2]=z;
 }
 
 void Camera::setRight(float x, float y, float z) 
 {
-	right[0]=x;
-	right[1]=y;
-	right[2]=z;
+	m_nRight[0]=x;
+	m_nRight[1]=y;
+	m_nRight[2]=z;
 }
 
-void Camera::setRotSpeed(float speed) 
+void Camera::setRotSpeed(float nSpeed) 
 {
-	rotSpeed=speed;
+	m_nRotSpeed=nSpeed;
 }
 
-float Camera::geteyeX() 
+float Camera::getEyeX() 
 {
-	return eyePos[0];
+	return m_nEyePos[0];
 }
 
-float Camera::geteyeY() 
+float Camera::getEyeY() 
 {
-	return eyePos[1];
+	return m_nEyePos[1];
 }
 
-float Camera::geteyeZ() 
+float Camera::getEyeZ() 
 {
-	return eyePos[2];
+	return m_nEyePos[2];
 }
 
 float *Camera::getEye() 
 {
-	float *peye = eyePos; 
+	float *peye = m_nEyePos; 
 	return peye;
 }
 
-Vector3 Camera::geteyeV() 
+Vector3 Camera::getEyeV() 
 {
-	return Vector3(eyePos[0],eyePos[1],eyePos[2]);
+	return Vector3(m_nEyePos[0],m_nEyePos[1],m_nEyePos[2]);
 }
 
 Vector3 Camera::getLookAt() 
 {
-	return Vector3(lookAt[0],lookAt[1],lookAt[2]);
+	return Vector3(m_nLookAt[0],m_nLookAt[1],m_nLookAt[2]);
 }
 
 Vector3 Camera::getUp() 
 {
-	return Vector3(up[0],up[1],up[2]);
+	return Vector3(m_nUp[0],m_nUp[1],m_nUp[2]);
 }
 
 Vector3 Camera::getRight() 
 {
-	return Vector3(right[0],right[1],right[2]);
+	return Vector3(m_nRight[0],m_nRight[1],m_nRight[2]);
 }

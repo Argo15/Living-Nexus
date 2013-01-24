@@ -12,6 +12,7 @@
 #include <string>
 #include <stdexcept>
 #include "GLSLShader.h"
+#include "Logger.h"
 #include <algorithm>
 
 using namespace std;
@@ -356,6 +357,7 @@ int GLSLProgram::getLoc(const std::string &name)
 			std::string s;
 			s.append(name);
 			s.append(" - is not a valid uniform variable name");
+			Logging::GRAPHICS->error(s);
 			throw logic_error(s);
 		}
 		uniforms_.insert(uniformmap::value_type(name,loc));

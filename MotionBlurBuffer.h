@@ -18,16 +18,16 @@ using namespace std;
 class MotionBlurBuffer
 {
 private:
-	GLuint blurTex;
-	GLuint buffer;
+	GLuint m_nBlurTex;
+	GLuint m_nFrameBuffer;
 
-	int width,height;
+	int m_nWidth, m_nHeight;
 
 public:
-	MotionBlurBuffer(int width, int height);
+	MotionBlurBuffer(int nWidth, int nHeight);
 	~MotionBlurBuffer();
 
-	void drawToBuffer(GLuint texture, GLuint velocityTex, int numSamples, View *view);
+	void drawToBuffer(GLuint nTexture, GLuint nVelocityTex, int nNumSamples, View *view);
 
 	void bind();
 	void unbind();

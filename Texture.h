@@ -11,12 +11,12 @@
 class Texture : public Entity
 {
 protected:
-	GLuint textureID;
+	GLuint m_nTextureID;
 
 public:
 	Texture();
 
-	virtual bool load(const char *filename) = 0;
+	virtual bool load(const char *sFilename) = 0;
 	void use();
 	void remove();
 };

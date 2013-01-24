@@ -11,19 +11,19 @@ class TextureManager
 {
 private:
 	static TextureManager *m_pInstance;
-	map<string,Texture *> textures;
+	map<string,Texture *> m_textures;
 
 	TextureManager();
 public:
 	static TextureManager *getInstance();
 
-    void Initialize();
-	void LoadTexture(string filename);
-	void BindTexture(string name);
-	void DeleteTexture(string name);
-	void DeleteAllTextures();
+    void initialize();
+	void loadTexture(string sFileName);
+	void bindTexture(string sName);
+	void deleteTexture(string sName);
+	void deleteAllTextures();
 
-	Texture *getTexture(string name);
+	Texture *getTexture(string sName);
 	map<string,Texture *> *getTextures();
 };
 
