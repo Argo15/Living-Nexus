@@ -14,6 +14,9 @@ WorldRenderer::WorldRenderer()
 
 }
 
+/*
+ * Initialize Opengl and Frame Buffer Objects.
+ */
 void WorldRenderer::init()
 {
 	glShadeModel(GL_SMOOTH);
@@ -36,6 +39,9 @@ void WorldRenderer::init()
 	m_motionBlurBuffer = new MotionBlurBuffer(N_FRAME_WIDTH,N_FRAME_HEIGHT);
 }
 
+/*
+ * Resize: change the view to reflect the new width and height.
+ */
 void WorldRenderer::resize(int nWidth, int nHeight)
 {
 	if(nHeight == 0)
@@ -48,6 +54,9 @@ void WorldRenderer::resize(int nWidth, int nHeight)
 	m_view->set2D(0,1,0,1,0,1);
 }
 
+/*
+ * Render the world using simple shaders.
+ */
 void WorldRenderer::forwardRender()
 {
 	MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::mat4(1.0f)); 
@@ -79,6 +88,11 @@ void WorldRenderer::forwardRender()
 	glslProgram->disable();
 }
 
+/*
+ * Render the world using deffered shading. This involves rendering
+ * the positions, color, normals, and velocity to a "G-Buffer", then using
+ * this data to render lighting, motion blur, etc.
+ */
 void WorldRenderer::defferedRender()
 {
 	m_gBuffer->drawToBuffer(m_view);
@@ -134,6 +148,9 @@ void WorldRenderer::defferedRender()
 	drawScreen(0.0,0.0,1.0,1.0);
 }
 
+/*
+ * Render the world.
+ */
 void WorldRenderer::render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

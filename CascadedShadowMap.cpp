@@ -45,8 +45,8 @@ void CascadedShadowMap::buildShadowMaps()
 		Frustum *lightFrustum = new Frustum();
 		lightFrustum->getOrthoFrustum(lightCamera,lightView);
 
-		MatrixManager::getInstance()->pushMatrix4(MODELVIEW, glm::mat4(1.0f));
-		MatrixManager::getInstance()->pushMatrix4(PROJECTION, glm::mat4(1.0f));
+		MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::mat4(1.0f));
+		MatrixManager::getInstance()->putMatrix4(PROJECTION, glm::mat4(1.0f));
 		
 		m_shadowMaps[i]->bind();
 		glClearDepth(1.0);

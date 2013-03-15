@@ -14,6 +14,12 @@ enum RenderState
 	MOTION
 };
 
+/*
+ * Author: wcrane
+ * Date: 3/15/2013
+ *
+ * Global that tells which screen to display to the user.
+ */
 class RenderStateManager
 {
 public:

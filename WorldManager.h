@@ -11,6 +11,12 @@
 #include "GameTime.h"
 using namespace std;
 
+/*
+ * Author: wcrane
+ * Date: 3/15/2013
+ *
+ * Manages components of the world. This includes the tiles and chunks.
+ */
 class WorldManager
 {
 private:

@@ -13,6 +13,12 @@
 class WorldRenderer;
 class ShadowMapManager;
 
+/*
+ * Author: wcrane
+ * Date: 3/15/2013
+ *
+ * State object for when the user is exploring the world.
+ */
 class WorldState : public GameState
 {
 private:

@@ -21,6 +21,12 @@ class FinalBuffer;
 class MotionBlurBuffer;
 class AtmosphereBuffer;
 
+/*
+ * Author: wcrane
+ * Date: 3/15/2013
+ *
+ * Handles all the rendering for the world state. 
+ */
 class WorldRenderer : public Renderer
 {
 private:

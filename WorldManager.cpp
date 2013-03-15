@@ -13,6 +13,9 @@ WorldManager::WorldManager()
 	m_sun = new DirectLight();
 }
 
+/*
+ * Update world. Re-generate world on R
+ */
 void WorldManager::tick(int nFps)
 {
 	updateSunToGameTime(TimeManager::getInstance()->getGameTime());
@@ -30,6 +33,9 @@ void WorldManager::loadWorld(std::string sFilename)
 	
 }
 
+/*
+ * Re-generate chunks and default tiles
+ */
 void WorldManager::generateNewWorld(ChunkManager *chunks, TileManager *tiles, PhysicsManager *physicsManager)
 {
 	m_worldChunks->generateChunks(chunks, physicsManager);
@@ -38,6 +44,9 @@ void WorldManager::generateNewWorld(ChunkManager *chunks, TileManager *tiles, Ph
 	this->m_tiles = tiles;
 }
 
+/*
+ * Render chunks and tiles
+ */
 void WorldManager::renderWorld(string sShader, Frustum *frustum)
 {
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
@@ -57,6 +66,9 @@ void WorldManager::renderWorld(string sShader, Frustum *frustum)
 	}
 }
 
+/*
+ * Set sun's position based on the in-game time.
+ */
 void WorldManager::updateSunToGameTime(GameTime time)
 {
 	float angle = (time.getHours()/24.0f + time.getMinutes()/60.0f/24.0f + time.getSeconds()/60.0f/60.0f/24.0f) - 0.5f;

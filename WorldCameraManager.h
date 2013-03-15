@@ -3,6 +3,13 @@
 
 #include "WorldCamera.h"
 
+/*
+ * Author: wcrane
+ * Date: 3/15/2013
+ *
+ * Manages the different cameras during the world state.
+ * For example the default world camera and a debug free-roam camera.
+ */
 class WorldCameraManager
 {
 private:

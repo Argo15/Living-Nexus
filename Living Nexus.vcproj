@@ -725,16 +725,16 @@
 					>
 				</File>
 				<File
+					RelativePath=".\RenderState.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\RenderState.h"
 					>
 				</File>
 				<Filter
 					Name="World"
 					>
-					<File
-						RelativePath=".\RenderState.cpp"
-						>
-					</File>
 					<File
 						RelativePath=".\WorldCamera.cpp"
 						>

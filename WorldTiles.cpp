@@ -7,6 +7,9 @@ WorldTiles::WorldTiles(int nWidth, int nHeight)
 	m_nHeight = nHeight;
 }
 
+/*
+ * Initialize the tiles. Set all tiles to green (available to have tiles placed on them).
+ */
 void WorldTiles::init()
 {
 	m_worldTiles = new TileData**[m_nWidth];
@@ -23,9 +26,14 @@ void WorldTiles::init()
 	m_allTiles = new vector<Tile *>();
 }
 
+/*
+ * Using chunk data, initialize the tile values.
+ * Then, fill remaining tiles randomly with trees.
+ */
 void WorldTiles::initializeFromChunks(WorldChunks *chunks, TileManager *manager, PhysicsManager *physicsManager)
 {
 	init();
+	// Initialize from chunks
 	for (int i=0; i<(m_nWidth/10); i++)
 	{
 		for (int j=0; j<(m_nHeight/10); j++)
@@ -40,6 +48,7 @@ void WorldTiles::initializeFromChunks(WorldChunks *chunks, TileManager *manager,
 			}
 		}
 	}
+	// Add trees
 	for (int i=0; i<m_nWidth; i++)
 	{
 		for (int j=0; j<m_nHeight; j++)
@@ -73,6 +82,11 @@ vector<Tile *> *WorldTiles::getVisibleTiles(Frustum *frustum)
 	return tiles;
 }
 
+/*
+ * Add a tile at position x,y
+ * Check if there are any tiles already in that location
+ * Return true if tile fits in with no conflicts
+ */
 bool WorldTiles::addTile(int nPosX, int nPosY, Tile *tile, PhysicsManager *physicsManager)
 {
 	for (int i = 0; i < 10; i++) {

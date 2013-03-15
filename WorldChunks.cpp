@@ -17,6 +17,15 @@ WorldChunks::WorldChunks(int nWidth, int nHeight)
 	}
 }
 
+/*
+ * Generates the world's chunks procedurally. The general algorithm is as follows
+ * Create a Width x Height flat world.
+ * 'Carve' out a river that goes from one end to the other.
+ * While putting a river down, add 3 bridges along the way.
+ * Add edges to the side of the world.
+ * Add an beach to the end of the world. And an ocean.
+ * Note: this needs a cleanup
+ */
 void WorldChunks::generateChunks(ChunkManager *chunks, PhysicsManager *physicsManager)
 {
 	string sChunkNames[12];
@@ -264,6 +273,7 @@ vector<Chunk *> *WorldChunks::getAllChunks()
 	return m_allChunks;
 }
 
+// Get all the chunks inside the view frustum.
 vector<Chunk *> *WorldChunks::getVisibleChunks(Frustum *frustum)
 {
 	vector<Chunk *> *chunks = new vector<Chunk *>();

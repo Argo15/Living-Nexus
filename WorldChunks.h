@@ -7,6 +7,12 @@
 #include "Frustum.h"
 using namespace std;
 
+/*
+ * Author: wcrane
+ * Date: 3/15/2013
+ *
+ * Holds all the chucks for the world.
+ */
 class WorldChunks
 {
 private:

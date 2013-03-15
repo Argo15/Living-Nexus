@@ -3,6 +3,12 @@
 
 #include "Camera.h"
 
+/*
+ * Author: wcrane
+ * Date: 3/15/2013
+ *
+ * Camera object used in the world environment.
+ */
 class WorldCamera : public Camera
 {
 private:
@@ -11,6 +17,7 @@ private:
 public:
 	WorldCamera();
 
+	// Basic move controlls based on the WASD keys
 	void move(float nSpeed);
 	void moveForward(float nSpeed);
 	void moveBackward(float nSpeed);

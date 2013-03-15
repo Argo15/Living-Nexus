@@ -15,6 +15,12 @@ enum TileMode
 	YELLOW
 };
 
+/*
+ * Author: wcrane
+ * Date: 3/15/2013
+ *
+ * Object to manage and hold the tiles in a world.
+ */
 class WorldTiles
 {
 private:

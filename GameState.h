@@ -1,6 +1,12 @@
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
 
+/*
+ * Author: wcrane
+ * Date: 3/15/2013
+ *
+ * Abstract Game State object
+ */
 class GameState
 {
 public:

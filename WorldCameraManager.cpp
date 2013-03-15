@@ -8,6 +8,10 @@ WorldCameraManager::WorldCameraManager()
 	m_current = m_worldCamera;
 }
 
+/*
+ * Called once per frame.
+ * Switch camera's on C and move the camera.
+ */
 void WorldCameraManager::tick(int nFps)
 {
 	if (InputManager::getInstance()->isKeyDownOnce('c'))
