@@ -4,6 +4,12 @@
 #include <windows.h>
 #include <gl/glee.h>
 
+/*
+ * Author: wcrane
+ * Date: 3/17/2013
+ *
+ * Framebuffer Object holding depth information
+ */
 class DepthBuffer
 {
 protected:

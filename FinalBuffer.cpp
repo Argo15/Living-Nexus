@@ -46,7 +46,9 @@ FinalBuffer::~FinalBuffer()
 	glDeleteFramebuffers(1,&m_nFrameBuffer);
 }
 
-
+/*
+ * Renders the final image using nColorTex * nLightTex + nGlowTex
+ */
 void FinalBuffer::drawToBuffer(GLuint nColorTex, GLuint nLightTex, GLuint nGlowTex, View *view)
 {
 	Profiler::getInstance()->startProfile("Draw Final");

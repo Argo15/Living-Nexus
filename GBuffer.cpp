@@ -100,6 +100,14 @@ GBuffer::~GBuffer()
 	glDeleteFramebuffers(1,&m_nFrameBuffer);
 }
 
+/*
+ * Draws multiple components to each texture
+ * Diffuse color component to colorBuffer
+ * Surface normals to normalBuffer
+ * Position to positionBuffer
+ * Emission to glowBuffer
+ * Velocity to motionBuffer
+ */
 void GBuffer::drawToBuffer(View *view)
 {
 	Profiler::getInstance()->startProfile("Draw GBuffer");

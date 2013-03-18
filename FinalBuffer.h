@@ -15,6 +15,12 @@
 #include "WorldState.h"
 using namespace std;
 
+/*
+ * Author: wcrane
+ * Date: 3/17/2013
+ *
+ * Framebuffer Object holding the final color buffer for rendering.
+ */
 class FinalBuffer
 {
 private:

@@ -7,7 +7,8 @@
 #undef __gl_h_
 #include <GL/GLee.h>
 
-class Grid{
+class Grid
+{
 private:
 	float m_nColor[3];
 	int m_nLength, m_nWidth;

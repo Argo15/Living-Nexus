@@ -14,6 +14,12 @@
 #include "View.h"
 using namespace std;
 
+/*
+ * Author: wcrane
+ * Date: 3/17/2013
+ *
+ * Framebuffer Object holding the first pass of deffered shading process.
+ */
 class GBuffer 
 {
 private:

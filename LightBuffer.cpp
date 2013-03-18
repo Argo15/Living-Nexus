@@ -55,6 +55,9 @@ LightBuffer::~LightBuffer()
 	glDeleteFramebuffers(1,&m_nFrameBuffer);
 }
 
+/*
+ * Uses nDepthTex to calculate the pixels location then uses nNormalTex to calcuate lighting
+ */
 void LightBuffer::drawToBuffer(GLuint nNormalTex, GLuint nDepthTex, GLuint nGlowTex, View *view)
 {
 	Profiler::getInstance()->startProfile("Draw Light");

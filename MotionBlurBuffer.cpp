@@ -45,6 +45,9 @@ MotionBlurBuffer::~MotionBlurBuffer()
 	glDeleteFramebuffers(1,&m_nFrameBuffer);
 }
 
+/*
+ * Uses nVelocityTex to calculate motion blur
+ */
 void MotionBlurBuffer::drawToBuffer(GLuint nTexture, GLuint nVelocityTex, int nNumSamples, View *view)
 {
 	Profiler::getInstance()->startProfile("Draw Motion Blur");

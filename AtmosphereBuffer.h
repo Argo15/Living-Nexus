@@ -21,6 +21,12 @@
 #include "TimeUtils.h"
 using namespace std;
 
+/*
+ * Author: wcrane
+ * Date: 3/17/2013
+ *
+ * Framebuffer Object for rendering the atmosphere
+ */
 class AtmosphereBuffer
 {
 private:

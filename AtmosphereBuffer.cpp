@@ -12,6 +12,9 @@ static Vector3 DEFAULT_SKY_NEAR_COLOR(77, 153, 204);
 static Vector3 DEFAULT_SKY_AWAY_COLOR(26, 52, 204);
 static Vector3 DEFAULT_CLOUD_COLOR(255, 255, 255);
 
+/*
+ * Initialize color buffer and emissive buffer
+ */
 AtmosphereBuffer::AtmosphereBuffer(int nWidth, int nHeight)
 {
 	this->m_nWidth=nWidth;
@@ -61,6 +64,10 @@ AtmosphereBuffer::~AtmosphereBuffer()
 	glDeleteFramebuffers(1,&m_nFrameBuffer);
 }
 
+/*
+ * Draws a sky with perlin noise clouds on the color buffer.
+ * Draws the sun onto the glow buffer.
+ */
 void AtmosphereBuffer::drawToBuffer(GLuint colorBuf, GLuint glowBuf, GLuint depthBuf, View *view)
 {
 	Profiler::getInstance()->startProfile("Draw Atmosphere");
