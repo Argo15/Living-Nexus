@@ -69,7 +69,7 @@ void main() {
 			xOff=i/pixelOff;
 			yOff=j/pixelOff;
 			if ( mapNum < 0.5 )
-				shadow += textureProj(shadowMap[0], shadowCoord + vec4(xOff, yOff, -0.001, 0.0));
+				shadow += textureProj(shadowMap[0], shadowCoord + vec4(xOff, yOff, -0.0015, 0.0));
 			else if(mapNum<1.5)
 				shadow += textureProj(shadowMap[1], shadowCoord + vec4(xOff, yOff, -0.0015, 0.0));
 			else if(mapNum<2.5)
