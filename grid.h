@@ -7,6 +7,12 @@
 #undef __gl_h_
 #include <GL/GLee.h>
 
+/*
+ * Author: wcrane
+ * Date: 3/17/2013
+ *
+ * Grid structure for debugging..
+ */
 class Grid
 {
 private:

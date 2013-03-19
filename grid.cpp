@@ -41,6 +41,9 @@ void Grid::setCenter(float nX, float nY)
 	m_nCenter[1]=nY;
 }
 
+/*
+ * Draw
+ */
 void Grid::draw()
 {
 	float nU = (float)m_nWidth/2.0f;
