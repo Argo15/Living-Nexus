@@ -849,6 +849,38 @@
 					</File>
 				</Filter>
 			</Filter>
+			<Filter
+				Name="Gui"
+				>
+				<File
+					RelativePath=".\GuiManager.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GuiManager.h"
+					>
+				</File>
+				<Filter
+					Name="Elements"
+					>
+					<File
+						RelativePath=".\GuiElement.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\GuiElement.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Layout.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Layout.h"
+						>
+					</File>
+				</Filter>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath=".\Config\common.ini"

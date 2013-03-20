@@ -5,6 +5,7 @@
 #include "ShaderManager.h"
 
 #define ANG2RAD 3.14159265358979323846/180.0
+static const float LIGHT_DISTANCE = 200.0f;
 
 CascadedShadowMap::CascadedShadowMap()
 {
@@ -34,7 +35,6 @@ void CascadedShadowMap::buildShadowMaps()
 	Frustum *frustum = worldState->getRenderer()->getFrustum();
 	DirectLight *sun = worldState->getWorldManager()->getSun();
 
-	m_shadowMaps[3]->bind();
 	glClearDepth(1.0);
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glDisable(GL_CULL_FACE);
@@ -89,7 +89,7 @@ Camera *CascadedShadowMap::createLightCamera(float nSlice1, float nSlice2, Camer
 	Vector3 cameraDir = camera->getLookAt()-camera->getEyeV();
 	cameraDir.normalize();
 	Vector3 lightLookPoint = camera->getEyeV()+cameraDir*viewDepth;
-	Vector3 lightPos = lightLookPoint-lightLookAt*25.0;
+	Vector3 lightPos = lightLookPoint-lightLookAt.normalize()*(LIGHT_DISTANCE/2.0f);
 	Camera *lightCamera = new Camera();
 	lightCamera->setPosition(lightPos[0],lightPos[1],lightPos[2]);
 	lightCamera->setLookAt(lightLookPoint[0],lightLookPoint[1],lightLookPoint[2]);
@@ -183,7 +183,7 @@ View *CascadedShadowMap::createLightView(float nSlice1, float nSlice2, Camera *c
 	}
 
 	View *lightView = new View();
-	lightView->set2D(left,right,down,up,0.1,50);
+	lightView->set2D(left,right,down,up,0.1,LIGHT_DISTANCE);
 	return lightView;
 }
 

@@ -5,6 +5,9 @@
 #include "RenderState.h"
 #include "MatrixManager.h"
 #include "ShaderManager.h"
+#include "GuiElement.h"
+#include "MaterialManager.h"
+#include "GuiManager.h"
 
 static int N_FRAME_WIDTH = 1280;
 static int N_FRAME_HEIGHT = 720;
@@ -37,6 +40,8 @@ void WorldRenderer::init()
 	m_lightBuffer = new LightBuffer(N_FRAME_WIDTH,N_FRAME_HEIGHT);
 	m_finalBuffer = new FinalBuffer(N_FRAME_WIDTH,N_FRAME_HEIGHT);
 	m_motionBlurBuffer = new MotionBlurBuffer(N_FRAME_WIDTH,N_FRAME_HEIGHT);
+
+	GuiManager::getInstance()->setRootElement(new GuiElement());
 }
 
 /*
@@ -158,6 +163,7 @@ void WorldRenderer::render()
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 	m_frustum->getFrustum(worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera(),m_view);
 	
+	// Draw world
 	if (RenderStateManager::RENDERSTATE == FORWARD)
 	{
 		forwardRender();
@@ -166,6 +172,10 @@ void WorldRenderer::render()
 	{
 		defferedRender();
 	}
+
+	// Draw gui
+	m_view->use3D(false);
+	GuiManager::getInstance()->render();
 
 	glutSwapBuffers();
 }

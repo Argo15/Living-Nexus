@@ -17,7 +17,9 @@ int nCurrentTime = 0;
 int nVsync = 0;
 int nSizeX = 0;
 int nSizeY = 0;
-int nCounter = 0;
+
+int nSumFps = 0;
+int nCounter = 10;
 
 void init() 
 {
@@ -50,20 +52,26 @@ void render(void)
 	if (nVsync > 0*(1000/60))
 	{
 		TimeManager::getInstance()->tick();
-		float nFps = 1000.0f/nElapsedTime;
+		int nFps = 1000/nElapsedTime;
 		if (nFps > 60)
 		{
 			nFps=60;
 		}
 		nVsync = 0;
 
-		char buffer[5];
-		_itoa((int)nFps, buffer, 10);
-		string title = string("LiNex - FPS: ") + string(buffer);
-		glutSetWindowTitle(title.c_str());
+		nSumFps+=nFps;
+		nCounter++;
+		if (nCounter >= 60)
+		{
+			char buffer[5];
+			_itoa((int)nSumFps/nCounter, buffer, 10);
+			string title = string("LiNex - FPS: ") + string(buffer);
+			glutSetWindowTitle(title.c_str());
+			nCounter = 0;
+			nSumFps = 0;
+		}
 		
 		GameState::GAMESTATE->tick((int)nFps);
-		nCounter++;
 	}
 	
 }
