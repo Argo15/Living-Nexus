@@ -37,23 +37,23 @@ void main() {
 	worldPos /= worldPos.w;
 	
 	float mapNum=0.0;
-	float sfilter=1.0;
+	float sfilter=3.0;
 	mat4 shadowMat = lightMatrix[0];
 	vec3 col = vec3(1.0,0.0,0.0);
 	if (depth<slices[1] && depth>=slices[0]){
 		shadowMat = lightMatrix[1];
 		mapNum=1.0;
-		sfilter=4.0;
+		sfilter=2.0;
 		col = vec3(1.0,1.0,0.0);
 	} else if (depth<slices[2] && depth>=slices[1]){
 		shadowMat = lightMatrix[2];
 		mapNum=2.0;
-		sfilter=3.0;
+		sfilter=1.0;
 		col = vec3(1.0,0.0,1.0);
 	} else if (depth>=slices[2]) {
 		shadowMat = lightMatrix[3];
 		mapNum=3.0;
-		sfilter=2.0;
+		sfilter=1.0;
 		col = vec3(0.0,0.0,1.0);
 	}
 	

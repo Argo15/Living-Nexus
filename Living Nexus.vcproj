@@ -871,14 +871,34 @@
 						RelativePath=".\GuiElement.h"
 						>
 					</File>
-					<File
-						RelativePath=".\Layout.cpp"
+					<Filter
+						Name="Layouts"
 						>
-					</File>
-					<File
-						RelativePath=".\Layout.h"
-						>
-					</File>
+						<File
+							RelativePath=".\HorizontalLayout.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\HorizontalLayout.h"
+							>
+						</File>
+						<File
+							RelativePath=".\Layout.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\Layout.h"
+							>
+						</File>
+						<File
+							RelativePath=".\VerticalLayout.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\VerticalLayout.h"
+							>
+						</File>
+					</Filter>
 				</Filter>
 			</Filter>
 		</Filter>

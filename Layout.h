@@ -11,14 +11,15 @@
  */
 class Layout : public GuiElement
 {
-private:
+protected:
 	vector<GuiElement *> *m_children;	// Children elements.
 
 public:
 	Layout(GuiElement *parent = 0);
 
+	void draw();
+	virtual void drawChildren() = 0;
 	void addElement(GuiElement *element);
-	
 	vector<GuiElement *> *getChildren();
 };
 
