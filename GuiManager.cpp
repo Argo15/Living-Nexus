@@ -1,5 +1,7 @@
 #include "GuiManager.h"
 #include "MaterialManager.h"
+#include "Logger.h"
+#include "DrawFunc.h"
 
 GuiManager* GuiManager::m_pInstance = 0;
 
@@ -27,6 +29,14 @@ void GuiManager::render()
 		m_rootElement->draw();
 		glColor4f(1.0, 1.0, 1.0, 1.0);
 		glBlendFunc(GL_ONE, GL_ZERO);
+	}
+}
+
+void GuiManager::onClick(int nButton, int nState, float nX, float nY)
+{
+	if (m_rootElement != 0)
+	{
+		m_rootElement->onClick(nButton, nState, nX, nY);
 	}
 }
 

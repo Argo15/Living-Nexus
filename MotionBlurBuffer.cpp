@@ -38,6 +38,10 @@ MotionBlurBuffer::MotionBlurBuffer(int nWidth, int nHeight)
 	}
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+	
+	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("MotionBlur");
+	glBindAttribLocation(glslProgram->getHandle(), 0, "v_vertex");
+	glBindAttribLocation(glslProgram->getHandle(), 1, "v_texture");
 }
 
 MotionBlurBuffer::~MotionBlurBuffer()
@@ -67,8 +71,6 @@ void MotionBlurBuffer::drawToBuffer(GLuint nTexture, GLuint nVelocityTex, int nN
 	view->use3D(false);
 
 	glBindFragDataLocation(glslProgram->getHandle(), 0, "blurBuffer");
-	glBindAttribLocation(glslProgram->getHandle(), 0, "v_vertex");
-	glBindAttribLocation(glslProgram->getHandle(), 1, "v_texture");
 
 	glslProgram->sendUniform("projectionMatrix", &MatrixManager::getInstance()->getMatrix4(PROJECTION)[0][0]);
 

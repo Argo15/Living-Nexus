@@ -33,6 +33,14 @@ void GuiElement::draw()
 	glPopMatrix();
 }
 
+void GuiElement::onClick(int nButton, int nState, float nX, float nY)
+{
+	for (int i=0; i<4; i++)
+	{
+		m_nColor[i] = 1.0f - m_nColor[i];
+	}
+}
+
 void GuiElement::setId(string sId)
 {
 	m_sId = sId;

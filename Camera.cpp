@@ -48,28 +48,31 @@ void Camera::mouseRotate()
 
 	m_nLastMouseX = nMouseX;
 	m_nLastMouseY = nMouseY;
+	int nHalfScreenWidth = 1600/2;
+	int nHalfScreenHeight = 900/2;
+	int nMouseBoxSize = 10;
 	
 	if (GameState::GAMESTATE->mouseHidden()) 
 	{
-		if (nMouseX>500) 
+		if (nMouseX>nHalfScreenWidth+nMouseBoxSize) 
 		{
-			glutWarpPointer(300, nMouseY);
-			m_nLastMouseX = 300;
+			glutWarpPointer(nHalfScreenWidth-nMouseBoxSize, nMouseY);
+			m_nLastMouseX = nHalfScreenWidth-nMouseBoxSize;
 		}
-		if (nMouseX<300) 
+		if (nMouseX<nHalfScreenWidth-nMouseBoxSize) 
 		{
-			glutWarpPointer(500, nMouseY);
-			m_nLastMouseX = 500;
+			glutWarpPointer(nHalfScreenWidth+nMouseBoxSize, nMouseY);
+			m_nLastMouseX = nHalfScreenWidth+nMouseBoxSize;
 		}
-		if (nMouseY>500) 
+		if (nMouseY>nHalfScreenHeight+nMouseBoxSize) 
 		{
-			glutWarpPointer(nMouseX, 300);
-			m_nLastMouseY = 300;
+			glutWarpPointer(nMouseX, nHalfScreenHeight-nMouseBoxSize);
+			m_nLastMouseY = nHalfScreenHeight-nMouseBoxSize;
 		}
-		if (nMouseY<300) 
+		if (nMouseY<nHalfScreenHeight-nMouseBoxSize) 
 		{
-			glutWarpPointer(nMouseX, 500);
-			m_nLastMouseY = 500;
+			glutWarpPointer(nMouseX, nHalfScreenHeight+nMouseBoxSize);
+			m_nLastMouseY = nHalfScreenHeight+nMouseBoxSize;
 		}
 	}
 }

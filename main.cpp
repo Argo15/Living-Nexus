@@ -12,6 +12,7 @@
 #include "InputManager.h"
 #include "MaterialManager.h"
 #include "TextureManager.h"
+#include "GuiManager.h"
 
 int nCurrentTime = 0;
 int nVsync = 0;
@@ -49,7 +50,7 @@ void render(void)
 	int nElapsedTime = nCurrentTime - nLastTime;
 	nVsync += nElapsedTime;
 	
-	if (nVsync > 0*(1000/60))
+	if (nVsync > 0)
 	{
 		TimeManager::getInstance()->tick();
 		int nFps = 1000/nElapsedTime;
@@ -98,6 +99,7 @@ void keyUp(unsigned char key, int xx, int yy)
 
 void mousePress(int button, int state, int x, int y) 
 {
+	GuiManager::getInstance()->onClick(button, state, (float)x/(float)nSizeX, 1.0f - (float)y/(float)nSizeY);
 	if (state == GLUT_DOWN)
 	{
 		InputManager::getInstance()->registerMouseButtonDown(button);

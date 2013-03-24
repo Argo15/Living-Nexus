@@ -3,6 +3,7 @@
 #include "GameState.h"
 #include "MatrixManager.h"
 #include "ShaderManager.h"
+#include "StringUtils.h"
 
 #define ANG2RAD 3.14159265358979323846/180.0
 static const float LIGHT_DISTANCE = 200.0f;
@@ -63,8 +64,6 @@ void CascadedShadowMap::buildShadowMaps()
 		MatrixManager::getInstance()->multMatrix4(PROJECTION, cameraMat);
 		glslProgram->sendUniform("projectionCameraMatrix",&MatrixManager::getInstance()->getMatrix4(PROJECTION)[0][0]);
 		glslProgram->sendUniform("camPos",camera->getEyeX(),camera->getEyeY(),camera->getEyeZ());
-		glBindAttribLocation(glslProgram->getHandle(), 0, "v_vertex");
-
 		worldState->getWorldManager()->renderWorld("SunShadow",lightFrustum);
 		
 		glslProgram->disable();

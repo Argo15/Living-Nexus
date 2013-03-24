@@ -29,6 +29,9 @@ public:
 	GuiElement(GuiElement *parent = 0);
 	virtual void draw();
 
+	// events
+	virtual void onClick(int nButton, int nState, float nX, float nY);
+
 	void setId(string sId);
 	void setWidth(float nWidth);
 	void setHeight(float nHeight);

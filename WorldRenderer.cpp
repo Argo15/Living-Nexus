@@ -40,35 +40,6 @@ void WorldRenderer::init()
 	m_lightBuffer = new LightBuffer(N_FRAME_WIDTH,N_FRAME_HEIGHT);
 	m_finalBuffer = new FinalBuffer(N_FRAME_WIDTH,N_FRAME_HEIGHT);
 	m_motionBlurBuffer = new MotionBlurBuffer(N_FRAME_WIDTH,N_FRAME_HEIGHT);
-
-	Layout *mainLayout = new HorizontalLayout();
-	GuiElement *leftElement = new GuiElement();
-	leftElement->setWidth(0.3);
-	leftElement->setColor(1.0,0,0,0.5);
-	GuiElement *middleElement = new GuiElement();
-	middleElement->setWidth(0.4);
-	middleElement->setHeight(0.5);
-	middleElement->setColor(0,0,1.0,0.5);
-
-	Layout *rightLayout = new VerticalLayout();
-	rightLayout->setWidth(0.3);
-	rightLayout->setPadding(0.05);
-	GuiElement *topElement = new GuiElement();
-	topElement->setHeight(0.5);
-	topElement->setColor(0,1.0,0,0.5);
-	GuiElement *bottomElement = new GuiElement();
-	bottomElement->setHeight(0.5);
-	bottomElement->setColor(1.0,0,1.0,0.5);
-	bottomElement->setPadding(0, 0, 0, 0.1);
-
-	rightLayout->addElement(bottomElement);
-	rightLayout->addElement(topElement);
-
-	mainLayout->addElement(leftElement);
-	mainLayout->addElement(middleElement);
-	mainLayout->addElement(rightLayout);
-
-	GuiManager::getInstance()->setRootElement(mainLayout);
 }
 
 /*

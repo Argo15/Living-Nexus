@@ -21,6 +21,9 @@ public:
 	static GuiManager *getInstance();
 	void render();
 
+	// event handlers
+	void onClick(int nButton, int nState, float nX, float nY);
+
 	void setRootElement(GuiElement *element);
 	GuiElement *getRootElement();
 };

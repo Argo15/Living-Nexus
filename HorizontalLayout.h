@@ -14,6 +14,7 @@ class HorizontalLayout : public Layout
 public:
 	HorizontalLayout(GuiElement *parent = 0);
 	void drawChildren();
+	void onClick(int nButton, int nState, float nX, float nY);
 };
 
 #endif

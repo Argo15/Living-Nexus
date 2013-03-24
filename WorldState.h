@@ -9,6 +9,7 @@
 #include "PhysicsManager.h"
 #include "WorldManager.h"
 #include "ShadowMapManager.h"
+#include "Layout.h"
 
 class WorldRenderer;
 class ShadowMapManager;
@@ -29,7 +30,11 @@ private:
 	WorldManager *m_worldManager;
 	ShadowMapManager *m_shadowMapManager;
 
+	Layout *m_inventoryGui;
+
+	bool m_bMovementEnabled;
 	bool m_bMouseHide;
+	void toggleMouse();
 
 public:
 	WorldState(const char *sFilename = 0);

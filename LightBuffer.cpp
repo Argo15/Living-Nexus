@@ -48,6 +48,10 @@ LightBuffer::LightBuffer(int nWidth, int nHeight)
 	}
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+	
+	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("DirectLight");
+	glBindAttribLocation(glslProgram->getHandle(), 0, "v_vertex");
+	glBindAttribLocation(glslProgram->getHandle(), 1, "v_texture");
 }
 
 LightBuffer::~LightBuffer()
@@ -86,8 +90,6 @@ void LightBuffer::drawToBuffer(GLuint nNormalTex, GLuint nDepthTex, GLuint nGlow
 
 	glBindFragDataLocation(glslProgram->getHandle(), 0, "lightBuffer");
 	glBindFragDataLocation(glslProgram->getHandle(), 1, "glowBuffer");
-	glBindAttribLocation(glslProgram->getHandle(), 0, "v_vertex");
-	glBindAttribLocation(glslProgram->getHandle(), 1, "v_texture");
 
 	worldState->getWorldManager()->getSun()->sendToShader("DirectLight");
 

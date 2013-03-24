@@ -93,6 +93,13 @@ GBuffer::GBuffer(int nWidth, int nHeight)
 	}
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("GBuffer");
+	glBindAttribLocation(glslProgram->getHandle(), 0, "v_vertex");
+	glBindAttribLocation(glslProgram->getHandle(), 1, "v_texture");
+	glBindAttribLocation(glslProgram->getHandle(), 2, "v_normal");
+	glBindAttribLocation(glslProgram->getHandle(), 3, "v_tangent");
+	glBindAttribLocation(glslProgram->getHandle(), 4, "v_bitangent");
 }
 
 GBuffer::~GBuffer()
@@ -131,11 +138,6 @@ void GBuffer::drawToBuffer(View *view)
 	glBindFragDataLocation(glslProgram->getHandle(), 2, "positionBuffer");
 	glBindFragDataLocation(glslProgram->getHandle(), 3, "glowBuffer");
 	glBindFragDataLocation(glslProgram->getHandle(), 4, "motionBuffer");
-	glBindAttribLocation(glslProgram->getHandle(), 0, "v_vertex");
-	glBindAttribLocation(glslProgram->getHandle(), 1, "v_texture");
-	glBindAttribLocation(glslProgram->getHandle(), 2, "v_normal");
-	glBindAttribLocation(glslProgram->getHandle(), 3, "v_tangent");
-	glBindAttribLocation(glslProgram->getHandle(), 4, "v_bitangent");
 
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 	Camera *camera = worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera();
