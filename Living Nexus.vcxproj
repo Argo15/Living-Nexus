@@ -40,8 +40,8 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\glm-0.9.3.1;C:\Users\Bill\Desktop\CPP\MyProjects\LivingNexus\LivingNexus\freeglut\include;C:\Users\Bill\Desktop\CPP\MyProjects\LivingNexus\LivingNexus;$(IncludePath)</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\Bill\Desktop\CPP\MyProjects\LivingNexus\LivingNexus\freeglut\lib;C:\boost_1_49_0\stage\lib;C:\boost_1_49_0\libs;$(LibraryPath)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Program Files %28x86%29\GnuWin32\include\freetype2;C:\Program Files %28x86%29\GnuWin32\include;C:\glm-0.9.3.1;C:\Users\Bill\Desktop\CPP\MyProjects\LivingNexus\LivingNexus\freeglut\include;C:\Users\Bill\Desktop\CPP\MyProjects\LivingNexus\LivingNexus;$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Program Files %28x86%29\GnuWin32\lib;C:\Users\Bill\Desktop\CPP\MyProjects\LivingNexus\LivingNexus\freeglut\lib;C:\boost_1_49_0\stage\lib;C:\boost_1_49_0\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -73,7 +73,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>libboost_date_time-vc100-mt-1_49.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libboost_date_time-vc100-mt-1_49.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>libboost_date_time-vc90-mt-1_49.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OptimizeReferences>true</OptimizeReferences>
@@ -98,6 +98,8 @@
     <None Include="Config\common.ini" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FontTexture.cpp" />
+    <ClCompile Include="FreeTypeManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -173,6 +175,8 @@
   <ItemGroup>
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="FontTexture.h" />
+    <ClInclude Include="FreeTypeManager.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="AtmosphereBuffer.h" />
     <ClInclude Include="DepthBuffer.h" />

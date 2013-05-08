@@ -8,6 +8,7 @@
 #include "HorizontalLayout.h"
 #include "VerticalLayout.h"
 #include "GuiManager.h"
+#include "FreeTypeManager.h"
 
 static int N_FRAME_WIDTH = 1280;
 static int N_FRAME_HEIGHT = 720;
@@ -173,7 +174,13 @@ void WorldRenderer::render()
 
 	// Draw gui
 	m_view->use3D(false);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glColor3f(1.0,1.0,1.0);
+	FreeTypeManager::getInstance()->getFont()->draw("Yay this is so cool. Ok time for a break.", 0.1, 0.1, 0.03f);
+	glBlendFunc(GL_ONE, GL_ZERO);
 	GuiManager::getInstance()->render();
+	glColor3f(1.0,1.0,1.0);
 
 	glutSwapBuffers();
 }

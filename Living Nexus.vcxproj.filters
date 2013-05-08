@@ -89,6 +89,9 @@
     <Filter Include="LiNex\Gui\Inventory">
       <UniqueIdentifier>{5731b3fb-ecb9-4ac0-847f-bba74eef1cd4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="LiNex\Resource\Textures\Fonts">
+      <UniqueIdentifier>{55e43b36-68f8-4f57-9fec-e71e454c70e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\Shaders\f_atmosphere.glsl">
@@ -346,6 +349,12 @@
     <ClCompile Include="InventoryGui.cpp">
       <Filter>LiNex\Gui\Inventory</Filter>
     </ClCompile>
+    <ClCompile Include="FreeTypeManager.cpp">
+      <Filter>LiNex\Resource\Textures\Fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="FontTexture.cpp">
+      <Filter>LiNex\Resource\Textures\Fonts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h">
@@ -569,6 +578,12 @@
     </ClInclude>
     <ClInclude Include="InventoryGui.h">
       <Filter>LiNex\Gui\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeTypeManager.h">
+      <Filter>LiNex\Resource\Textures\Fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="FontTexture.h">
+      <Filter>LiNex\Resource\Textures\Fonts</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

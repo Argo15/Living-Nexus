@@ -13,6 +13,7 @@
 #include "MaterialManager.h"
 #include "TextureManager.h"
 #include "GuiManager.h"
+#include "FreeTypeManager.h"
 
 int nCurrentTime = 0;
 int nVsync = 0;
@@ -30,6 +31,7 @@ void init()
 	ModelManager::getInstance()->initialize();
 	MaterialManager::getInstance()->initialize();
 	ShaderManager::getInstance()->initialize();	
+	FreeTypeManager::getInstance()->initialize();
 
 	UserSession::getInstance()->startUserSession("Argo");
 
