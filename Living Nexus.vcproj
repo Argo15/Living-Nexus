@@ -849,6 +849,70 @@
 					</File>
 				</Filter>
 			</Filter>
+			<Filter
+				Name="Gui"
+				>
+				<File
+					RelativePath=".\GuiManager.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GuiManager.h"
+					>
+				</File>
+				<Filter
+					Name="Base Elements"
+					>
+					<File
+						RelativePath=".\GuiElement.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\GuiElement.h"
+						>
+					</File>
+					<Filter
+						Name="Layouts"
+						>
+						<File
+							RelativePath=".\HorizontalLayout.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\HorizontalLayout.h"
+							>
+						</File>
+						<File
+							RelativePath=".\Layout.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\Layout.h"
+							>
+						</File>
+						<File
+							RelativePath=".\VerticalLayout.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\VerticalLayout.h"
+							>
+						</File>
+					</Filter>
+				</Filter>
+				<Filter
+					Name="Inventory"
+					>
+					<File
+						RelativePath=".\InventoryGui.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\InventoryGui.h"
+						>
+					</File>
+				</Filter>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath=".\Config\common.ini"

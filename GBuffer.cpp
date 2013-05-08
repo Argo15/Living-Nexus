@@ -93,6 +93,8 @@ GBuffer::GBuffer(int nWidth, int nHeight)
 	}
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("GBuffer");
 }
 
 GBuffer::~GBuffer()

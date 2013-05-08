@@ -57,6 +57,10 @@ AtmosphereBuffer::AtmosphereBuffer(int nWidth, int nHeight)
 	}
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+	
+	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("Atmosphere");
+	glBindAttribLocation(glslProgram->getHandle(), 0, "v_vertex");
+	glBindAttribLocation(glslProgram->getHandle(), 1, "v_texture");
 }
 
 AtmosphereBuffer::~AtmosphereBuffer()
@@ -96,8 +100,6 @@ void AtmosphereBuffer::drawToBuffer(GLuint colorBuf, GLuint glowBuf, GLuint dept
 
 	glBindFragDataLocation(glslProgram->getHandle(), 0, "colorBuffer");
 	glBindFragDataLocation(glslProgram->getHandle(), 1, "glowBuffer");
-	glBindAttribLocation(glslProgram->getHandle(), 0, "v_vertex");
-	glBindAttribLocation(glslProgram->getHandle(), 1, "v_texture");
 	glslProgram->sendUniform("projectionMatrix", &MatrixManager::getInstance()->getMatrix4(PROJECTION)[0][0]);
 	glslProgram->sendUniform("inverseMVPMatrix", &m4InvMVP[0][0]);
 	glslProgram->sendUniform("cameraPos",camera->getEyeX(),camera->getEyeY(),camera->getEyeZ());

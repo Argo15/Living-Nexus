@@ -37,23 +37,23 @@ void main() {
 	worldPos /= worldPos.w;
 	
 	float mapNum=0.0;
-	float sfilter=4.0;
+	float sfilter=3.0;
 	mat4 shadowMat = lightMatrix[0];
 	vec3 col = vec3(1.0,0.0,0.0);
 	if (depth<slices[1] && depth>=slices[0]){
 		shadowMat = lightMatrix[1];
 		mapNum=1.0;
-		sfilter=4.0;
+		sfilter=2.0;
 		col = vec3(1.0,1.0,0.0);
 	} else if (depth<slices[2] && depth>=slices[1]){
 		shadowMat = lightMatrix[2];
 		mapNum=2.0;
-		sfilter=3.0;
+		sfilter=1.0;
 		col = vec3(1.0,0.0,1.0);
 	} else if (depth>=slices[2]) {
 		shadowMat = lightMatrix[3];
 		mapNum=3.0;
-		sfilter=2.0;
+		sfilter=1.0;
 		col = vec3(0.0,0.0,1.0);
 	}
 	
@@ -66,8 +66,8 @@ void main() {
 	float shadow;
 	for (float i=-shadowij; i<=shadowij; i++){
 		for (float j=-shadowij; j<=shadowij; j++){
-			xOff=i/pixelOff;
-			yOff=j/pixelOff;
+			xOff=i/pixelOff+0.5/pixelOff;
+			yOff=j/pixelOff-0.5/pixelOff;
 			if ( mapNum < 0.5 )
 				shadow += textureProj(shadowMap[0], shadowCoord + vec4(xOff, yOff, -0.0015, 0.0));
 			else if(mapNum<1.5)

@@ -12,6 +12,7 @@ namespace Logging
 	static LoggerHelper *GRAPHICS	= new LoggerHelper(LN_LOGGING_FILE, "GRAPHICS");
 	static LoggerHelper *RESOURCE	= new LoggerHelper(LN_LOGGING_FILE, "RESOURCE");
 	static LoggerHelper *PHYSICS	= new LoggerHelper(LN_LOGGING_FILE, "PHYSICS");
+	static LoggerHelper *GUI		= new LoggerHelper(LN_LOGGING_FILE, "GUI");
 	static LoggerHelper *PROFILER	= new LoggerHelper(PROFILING_FILE, "PROFILER");
 };
 

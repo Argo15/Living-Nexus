@@ -2,7 +2,7 @@
 
 ShadowMapManager::ShadowMapManager()
 {
-	m_sunShadow = new CascadedShadowMap(1024);
+	m_sunShadow = new CascadedShadowMap(1028);
 }
 
 void ShadowMapManager::tick(int m_nFps)

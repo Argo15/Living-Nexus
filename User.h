@@ -15,11 +15,14 @@ class User
 private:
 	std::string m_sUsername;
 	Object **m_objects;
+	int m_nInventorySize;
 
 public:
 	User(std::string sName);
 	~User();
 
+	Object *getInventoryObject(int nIndex);
+	int getInventorySize();
 	std::string getName();
 };
 

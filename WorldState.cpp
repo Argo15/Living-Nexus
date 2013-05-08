@@ -2,6 +2,8 @@
 #include "Matrix.h"
 #include "TimeManager.h"
 #include "InputManager.h"
+#include "InventoryGui.h"
+#include "GuiManager.h"
 
 WorldState::WorldState(const char *sFilename)
 { 
@@ -27,6 +29,9 @@ WorldState::WorldState(const char *sFilename)
 	m_shadowMapManager = new ShadowMapManager();
 
 	m_bMouseHide = true;
+	m_bMovementEnabled = true;
+
+	m_inventoryGui = new InventoryGui();
 }
 
 WorldState::~WorldState()
@@ -43,21 +48,40 @@ void WorldState::tick(int nFps)
 {
 	if (InputManager::getInstance()->isKeyDownOnce((int)'t'))
 	{
-		m_bMouseHide = !m_bMouseHide;
-		if (m_bMouseHide)
-		{
-			glutSetCursor(GLUT_CURSOR_NONE);
-		}
-		else
-		{
-			glutSetCursor(GLUT_CURSOR_RIGHT_ARROW);
-		}
+		toggleMouse();
 	}
-
-	m_physicsManager->tick(nFps);
+	// Open inventory
+	if (InputManager::getInstance()->isKeyDownOnce((int)'f'))
+	{
+		m_inventoryGui->initialize(m_renderer->getView());
+		toggleMouse();
+		m_bMovementEnabled = !m_bMovementEnabled;
+	}
+	if (m_bMovementEnabled)
+	{
+		GuiManager::getInstance()->setRootElement(0);
+		m_physicsManager->tick(nFps);
+	}
+	else
+	{	
+		GuiManager::getInstance()->setRootElement(m_inventoryGui);
+	}
 	m_worldManager->tick(nFps);
 	m_shadowMapManager->tick(nFps);
 	m_renderer->render();
+}
+
+void WorldState::toggleMouse()
+{
+	m_bMouseHide = !m_bMouseHide;
+	if (m_bMouseHide)
+	{
+		glutSetCursor(GLUT_CURSOR_NONE);
+	}
+	else
+	{
+		glutSetCursor(GLUT_CURSOR_RIGHT_ARROW);
+	}
 }
 
 bool WorldState::mouseHidden()

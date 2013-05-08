@@ -3,6 +3,7 @@
 #undef __glxext_h_
 #undef __gl_h_
 #include <GL/GLee.h>
+#include <GL/freeglut.h>
 #include "MatrixManager.h"
 
 static void drawScreen(float nX1, float nY1, float nX2, float nY2)

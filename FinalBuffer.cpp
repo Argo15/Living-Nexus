@@ -39,6 +39,10 @@ FinalBuffer::FinalBuffer(int nWidth, int nHeight)
 	}
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+
+	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("Final");
+	glBindAttribLocation(glslProgram->getHandle(), 0, "v_vertex");
+	glBindAttribLocation(glslProgram->getHandle(), 1, "v_texture");
 }
 
 FinalBuffer::~FinalBuffer()
@@ -69,8 +73,6 @@ void FinalBuffer::drawToBuffer(GLuint nColorTex, GLuint nLightTex, GLuint nGlowT
 	view->use3D(false);
 
 	glBindFragDataLocation(glslProgram->getHandle(), 0, "finalBuffer");
-	glBindAttribLocation(glslProgram->getHandle(), 0, "v_vertex");
-	glBindAttribLocation(glslProgram->getHandle(), 1, "v_texture");
 	glslProgram->sendUniform("projectionMatrix", &MatrixManager::getInstance()->getMatrix4(PROJECTION)[0][0]);
 
 	glActiveTexture(GL_TEXTURE0); 

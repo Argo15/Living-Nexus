@@ -219,7 +219,7 @@ bool TgaTexture::load(const char *sFilename)
 		}
 		else
 		{
-			gluBuild2DMipmaps(GL_TEXTURE_2D, 3, m_width, m_height, GL_RGBA, GL_UNSIGNED_BYTE, m_pImageData);
+			gluBuild2DMipmaps(GL_TEXTURE_2D, 4, m_width, m_height, GL_RGBA, GL_UNSIGNED_BYTE, m_pImageData);
 		}
 
 		delete[] m_pImageData;
