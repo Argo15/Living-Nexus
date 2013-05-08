@@ -2,8 +2,7 @@
 #include "Matrix.h"
 #include "TimeManager.h"
 #include "InputManager.h"
-#include "HorizontalLayout.h"
-#include "VerticalLayout.h"
+#include "InventoryGui.h"
 #include "GuiManager.h"
 
 WorldState::WorldState(const char *sFilename)
@@ -32,32 +31,7 @@ WorldState::WorldState(const char *sFilename)
 	m_bMouseHide = true;
 	m_bMovementEnabled = true;
 
-	m_inventoryGui = new HorizontalLayout();
-	GuiElement *leftElement = new GuiElement();
-	leftElement->setWidth(0.3);
-	leftElement->setColor(1.0,0,0,0.5);
-	GuiElement *middleElement = new GuiElement();
-	middleElement->setWidth(0.4);
-	middleElement->setHeight(0.5);
-	middleElement->setColor(0,0,1.0,0.5);
-
-	Layout *rightLayout = new VerticalLayout();
-	rightLayout->setWidth(0.3);
-	rightLayout->setPadding(0.05);
-	GuiElement *topElement = new GuiElement();
-	topElement->setHeight(0.5);
-	topElement->setColor(0,1.0,0,0.5);
-	GuiElement *bottomElement = new GuiElement();
-	bottomElement->setHeight(0.5);
-	bottomElement->setColor(1.0,0,1.0,0.5);
-	bottomElement->setPadding(0, 0, 0, 0.1);
-
-	rightLayout->addElement(bottomElement);
-	rightLayout->addElement(topElement);
-
-	m_inventoryGui->addElement(leftElement);
-	m_inventoryGui->addElement(middleElement);
-	m_inventoryGui->addElement(rightLayout);
+	m_inventoryGui = new InventoryGui();
 }
 
 WorldState::~WorldState()
@@ -79,6 +53,7 @@ void WorldState::tick(int nFps)
 	// Open inventory
 	if (InputManager::getInstance()->isKeyDownOnce((int)'f'))
 	{
+		m_inventoryGui->initialize(m_renderer->getView());
 		toggleMouse();
 		m_bMovementEnabled = !m_bMovementEnabled;
 	}

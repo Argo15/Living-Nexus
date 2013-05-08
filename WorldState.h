@@ -9,7 +9,7 @@
 #include "PhysicsManager.h"
 #include "WorldManager.h"
 #include "ShadowMapManager.h"
-#include "Layout.h"
+#include "InventoryGui.h"
 
 class WorldRenderer;
 class ShadowMapManager;
@@ -30,7 +30,7 @@ private:
 	WorldManager *m_worldManager;
 	ShadowMapManager *m_shadowMapManager;
 
-	Layout *m_inventoryGui;
+	InventoryGui *m_inventoryGui;
 
 	bool m_bMovementEnabled;
 	bool m_bMouseHide;

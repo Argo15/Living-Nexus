@@ -29,13 +29,17 @@ void GuiElement::draw()
 		{
 			TextureManager::getInstance()->bindTexture(m_sBackgroundImage);
 		}
+		else
+		{
+			glBindTexture(GL_TEXTURE_2D, 0);
+		}
 		drawScreen(m_nPadding[0], m_nPadding[2], 1.0f-m_nPadding[1], 1.0f-m_nPadding[3]);
 	glPopMatrix();
 }
 
 void GuiElement::onClick(int nButton, int nState, float nX, float nY)
 {
-	for (int i=0; i<4; i++)
+	for (int i=0; i<3; i++)
 	{
 		m_nColor[i] = 1.0f - m_nColor[i];
 	}
@@ -86,6 +90,11 @@ void GuiElement::setPadding(float nAmt)
 {
 	setPadding(nAmt, nAmt, nAmt, nAmt);
 }
+
+void GuiElement::setBackground(string sTexture)
+{
+	m_sBackgroundImage = sTexture;
+}
 	
 string GuiElement::getId()
 {
@@ -121,8 +130,18 @@ float *GuiElement::getPadding()
 {
 	return m_nPadding;
 }
+
+string GuiElement::getBackground()
+{
+	return m_sBackgroundImage;
+}
 	
 GuiElement *GuiElement::getParent()
 {
 	return m_parent;
+}
+
+void GuiElement::setParent(GuiElement *parent)
+{
+	m_parent = parent;
 }

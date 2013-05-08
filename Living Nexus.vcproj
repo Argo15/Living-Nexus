@@ -861,7 +861,7 @@
 					>
 				</File>
 				<Filter
-					Name="Elements"
+					Name="Base Elements"
 					>
 					<File
 						RelativePath=".\GuiElement.cpp"
@@ -899,6 +899,18 @@
 							>
 						</File>
 					</Filter>
+				</Filter>
+				<Filter
+					Name="Inventory"
+					>
+					<File
+						RelativePath=".\InventoryGui.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\InventoryGui.h"
+						>
+					</File>
 				</Filter>
 			</Filter>
 		</Filter>

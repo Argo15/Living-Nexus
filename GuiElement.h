@@ -40,6 +40,7 @@ public:
 	void setColor(float nR, float nG, float nB, float nA);
 	void setPadding(float nLeft, float nRight, float nBottom, float nTop);
 	void setPadding(float nAmt);
+	void setBackground(string sTexture);
 	string getId();
 	float getWidth();
 	float getHeight();
@@ -47,7 +48,9 @@ public:
 	float getYPos();
 	float *getColor();
 	float *getPadding();
+	string getBackground();
 	GuiElement *getParent();
+	void setParent(GuiElement *parent);
 };
 
 #endif

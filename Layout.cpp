@@ -8,6 +8,7 @@ Layout::Layout(GuiElement *parent) : GuiElement(parent)
 
 void Layout::addElement(GuiElement *element)
 {
+	element->setParent(this);
 	m_children->push_back(element);
 }
 
