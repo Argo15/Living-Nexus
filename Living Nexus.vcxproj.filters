@@ -1,0 +1,574 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="LiNex">
+      <UniqueIdentifier>{75416224-a6a1-40dc-acc3-6a0685483c16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Graphics">
+      <UniqueIdentifier>{cb037fa5-eeae-4356-ae65-d9b6e89b8263}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Graphics\Frame Buffer">
+      <UniqueIdentifier>{d559b9f0-a80b-4d21-b829-0a7c3ec9c416}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Graphics\Helpers">
+      <UniqueIdentifier>{1c5e3d05-40f3-410e-b184-bd9bf0c9209c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Graphics\Transformers">
+      <UniqueIdentifier>{3ebf976f-db38-4606-a18d-f432abdc4ab1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Graphics\Lighting">
+      <UniqueIdentifier>{1e2ce1ea-b2af-4317-9fae-a6c9723838d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Math">
+      <UniqueIdentifier>{db26ad3f-3159-447d-b699-3431b79bc7b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Util">
+      <UniqueIdentifier>{d670ad5b-b469-4fb9-9185-9a2782b32305}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Util\Time">
+      <UniqueIdentifier>{ece2db26-db2a-4c38-b4d3-96ca0e69286e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Util\Config">
+      <UniqueIdentifier>{54477c9f-a886-47da-87ff-8dac30bbe7ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Util\Logging">
+      <UniqueIdentifier>{18d24a03-8f16-4cc2-ad08-10083cb0df4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Resource">
+      <UniqueIdentifier>{fd7073de-23c1-492c-bb66-50b572b77ee2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Resource\Models">
+      <UniqueIdentifier>{e2d8884b-6808-4236-9ff2-978fa34eb19f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Resource\Tiles">
+      <UniqueIdentifier>{c9183d4f-0bef-4161-93aa-04755f1ce594}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Resource\Chunks">
+      <UniqueIdentifier>{0dd41e3d-793f-42ae-86f0-9e16801e8de7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Resource\Textures">
+      <UniqueIdentifier>{19454705-f04b-49f6-810f-36f6208414ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Resource\Shaders">
+      <UniqueIdentifier>{72e4da1c-1d73-4bec-90cb-0c37d7c24620}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Resource\Material">
+      <UniqueIdentifier>{4d615b83-473b-446a-8f95-beb5466ee20e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Physics">
+      <UniqueIdentifier>{a01b6d33-3805-4dda-b201-58eff10e651f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Game States">
+      <UniqueIdentifier>{53b2ef0b-a502-41e7-af94-9e413565e189}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Game States\World">
+      <UniqueIdentifier>{573ddb05-944d-4c55-98ea-4e96283a871f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\User">
+      <UniqueIdentifier>{ebde5d64-cb0c-4eee-a02b-ec7bc828b532}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Object">
+      <UniqueIdentifier>{1faed799-6e2a-41f1-be03-f28ed38880b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Object\Fruit">
+      <UniqueIdentifier>{bb9c483f-8d24-49d0-860f-c496365282e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Gui">
+      <UniqueIdentifier>{6dd5a461-5142-4061-ac16-de9db726c478}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Gui\Base Elements">
+      <UniqueIdentifier>{75a93134-dfe7-4dfc-bc90-3ffadeeeb116}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Gui\Base Elements\Layouts">
+      <UniqueIdentifier>{ed96e690-2957-4f95-bbc4-e388365659ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Gui\Inventory">
+      <UniqueIdentifier>{5731b3fb-ecb9-4ac0-847f-bba74eef1cd4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\Shaders\f_atmosphere.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Data\Shaders\f_dlight.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Data\Shaders\f_dShadow.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Data\Shaders\f_final.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Data\Shaders\f_GBuffer.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Data\Shaders\f_material.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Data\Shaders\f_motionBlur.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Data\Shaders\v_dShadow.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Data\Shaders\v_final.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Data\Shaders\v_GBuffer.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Data\Shaders\v_light.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Data\Shaders\v_material.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Data\Shaders\v_motionBlur.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Config\common.ini" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>LiNex</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>LiNex\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>LiNex\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="GLee.c">
+      <Filter>LiNex\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="AtmosphereBuffer.cpp">
+      <Filter>LiNex\Graphics\Frame Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="DepthBuffer.cpp">
+      <Filter>LiNex\Graphics\Frame Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="FinalBuffer.cpp">
+      <Filter>LiNex\Graphics\Frame Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="GBuffer.cpp">
+      <Filter>LiNex\Graphics\Frame Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="LightBuffer.cpp">
+      <Filter>LiNex\Graphics\Frame Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="MotionBlurBuffer.cpp">
+      <Filter>LiNex\Graphics\Frame Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>LiNex\Graphics\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="PerlinNoise.cpp">
+      <Filter>LiNex\Graphics\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>LiNex\Graphics\Transformers</Filter>
+    </ClCompile>
+    <ClCompile Include="Frustum.cpp">
+      <Filter>LiNex\Graphics\Transformers</Filter>
+    </ClCompile>
+    <ClCompile Include="Transformable.cpp">
+      <Filter>LiNex\Graphics\Transformers</Filter>
+    </ClCompile>
+    <ClCompile Include="View.cpp">
+      <Filter>LiNex\Graphics\Transformers</Filter>
+    </ClCompile>
+    <ClCompile Include="CascadedShadowMap.cpp">
+      <Filter>LiNex\Graphics\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectLight.cpp">
+      <Filter>LiNex\Graphics\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>LiNex\Graphics\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadowMapManager.cpp">
+      <Filter>LiNex\Graphics\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix3.cpp">
+      <Filter>LiNex\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix4.cpp">
+      <Filter>LiNex\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="MatrixManager.cpp">
+      <Filter>LiNex\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Quaternion.cpp">
+      <Filter>LiNex\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>LiNex\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector4.cpp">
+      <Filter>LiNex\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>LiNex\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Profiler.cpp">
+      <Filter>LiNex\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTime.cpp">
+      <Filter>LiNex\Util\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>LiNex\Util\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>LiNex\Util\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="LoggerHelper.cpp">
+      <Filter>LiNex\Util\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="AObjModel.cpp">
+      <Filter>LiNex\Resource\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>LiNex\Resource\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelManager.cpp">
+      <Filter>LiNex\Resource\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticModel.cpp">
+      <Filter>LiNex\Resource\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>LiNex\Resource\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="TileManager.cpp">
+      <Filter>LiNex\Resource\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Chunk.cpp">
+      <Filter>LiNex\Resource\Chunks</Filter>
+    </ClCompile>
+    <ClCompile Include="ChunkManager.cpp">
+      <Filter>LiNex\Resource\Chunks</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>LiNex\Resource\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>LiNex\Resource\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="TgaTexture.cpp">
+      <Filter>LiNex\Resource\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="GLSLProgram.cpp">
+      <Filter>LiNex\Resource\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="GLSLShader.cpp">
+      <Filter>LiNex\Resource\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderManager.cpp">
+      <Filter>LiNex\Resource\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>LiNex\Resource\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialManager.cpp">
+      <Filter>LiNex\Resource\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletManager.cpp">
+      <Filter>LiNex\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsManager.cpp">
+      <Filter>LiNex\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsShape.cpp">
+      <Filter>LiNex\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>LiNex\Game States</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderState.cpp">
+      <Filter>LiNex\Game States</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldCamera.cpp">
+      <Filter>LiNex\Game States\World</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldCameraManager.cpp">
+      <Filter>LiNex\Game States\World</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldChunks.cpp">
+      <Filter>LiNex\Game States\World</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldManager.cpp">
+      <Filter>LiNex\Game States\World</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldRenderer.cpp">
+      <Filter>LiNex\Game States\World</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldState.cpp">
+      <Filter>LiNex\Game States\World</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldTiles.cpp">
+      <Filter>LiNex\Game States\World</Filter>
+    </ClCompile>
+    <ClCompile Include="User.cpp">
+      <Filter>LiNex\User</Filter>
+    </ClCompile>
+    <ClCompile Include="UserSession.cpp">
+      <Filter>LiNex\User</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>LiNex\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Tree.cpp">
+      <Filter>LiNex\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Fruit.cpp">
+      <Filter>LiNex\Object\Fruit</Filter>
+    </ClCompile>
+    <ClCompile Include="GuiManager.cpp">
+      <Filter>LiNex\Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="GuiElement.cpp">
+      <Filter>LiNex\Gui\Base Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="HorizontalLayout.cpp">
+      <Filter>LiNex\Gui\Base Elements\Layouts</Filter>
+    </ClCompile>
+    <ClCompile Include="Layout.cpp">
+      <Filter>LiNex\Gui\Base Elements\Layouts</Filter>
+    </ClCompile>
+    <ClCompile Include="VerticalLayout.cpp">
+      <Filter>LiNex\Gui\Base Elements\Layouts</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryGui.cpp">
+      <Filter>LiNex\Gui\Inventory</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Actor.h">
+      <Filter>LiNex\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>LiNex\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>LiNex\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="AtmosphereBuffer.h">
+      <Filter>LiNex\Graphics\Frame Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="DepthBuffer.h">
+      <Filter>LiNex\Graphics\Frame Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="FinalBuffer.h">
+      <Filter>LiNex\Graphics\Frame Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="GBuffer.h">
+      <Filter>LiNex\Graphics\Frame Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="LightBuffer.h">
+      <Filter>LiNex\Graphics\Frame Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="MotionBlurBuffer.h">
+      <Filter>LiNex\Graphics\Frame Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawFunc.h">
+      <Filter>LiNex\Graphics\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>LiNex\Graphics\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="PerlinNoise.h">
+      <Filter>LiNex\Graphics\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>LiNex\Graphics\Transformers</Filter>
+    </ClInclude>
+    <ClInclude Include="Frustum.h">
+      <Filter>LiNex\Graphics\Transformers</Filter>
+    </ClInclude>
+    <ClInclude Include="Transformable.h">
+      <Filter>LiNex\Graphics\Transformers</Filter>
+    </ClInclude>
+    <ClInclude Include="View.h">
+      <Filter>LiNex\Graphics\Transformers</Filter>
+    </ClInclude>
+    <ClInclude Include="CascadedShadowMap.h">
+      <Filter>LiNex\Graphics\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectLight.h">
+      <Filter>LiNex\Graphics\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>LiNex\Graphics\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="ShadowMapManager.h">
+      <Filter>LiNex\Graphics\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="MathUtils.h">
+      <Filter>LiNex\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>LiNex\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="MatrixManager.h">
+      <Filter>LiNex\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="dirent.h">
+      <Filter>LiNex\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>LiNex\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Profiler.h">
+      <Filter>LiNex\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="StringUtils.h">
+      <Filter>LiNex\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTime.h">
+      <Filter>LiNex\Util\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>LiNex\Util\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeUtils.h">
+      <Filter>LiNex\Util\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>LiNex\Util\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigNames.h">
+      <Filter>LiNex\Util\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>LiNex\Util\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="LoggerHelper.h">
+      <Filter>LiNex\Util\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="AObjModel.h">
+      <Filter>LiNex\Resource\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>LiNex\Resource\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelManager.h">
+      <Filter>LiNex\Resource\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticModel.h">
+      <Filter>LiNex\Resource\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>LiNex\Resource\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="TileManager.h">
+      <Filter>LiNex\Resource\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Chunk.h">
+      <Filter>LiNex\Resource\Chunks</Filter>
+    </ClInclude>
+    <ClInclude Include="ChunkManager.h">
+      <Filter>LiNex\Resource\Chunks</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>LiNex\Resource\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>LiNex\Resource\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="TgaTexture.h">
+      <Filter>LiNex\Resource\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="GLSLProgram.h">
+      <Filter>LiNex\Resource\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="GLSLShader.h">
+      <Filter>LiNex\Resource\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderManager.h">
+      <Filter>LiNex\Resource\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>LiNex\Resource\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialManager.h">
+      <Filter>LiNex\Resource\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletManager.h">
+      <Filter>LiNex\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsManager.h">
+      <Filter>LiNex\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsShape.h">
+      <Filter>LiNex\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>LiNex\Game States</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderState.h">
+      <Filter>LiNex\Game States</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldCamera.h">
+      <Filter>LiNex\Game States\World</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldCameraManager.h">
+      <Filter>LiNex\Game States\World</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldChunks.h">
+      <Filter>LiNex\Game States\World</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldManager.h">
+      <Filter>LiNex\Game States\World</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldRenderer.h">
+      <Filter>LiNex\Game States\World</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldState.h">
+      <Filter>LiNex\Game States\World</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldTiles.h">
+      <Filter>LiNex\Game States\World</Filter>
+    </ClInclude>
+    <ClInclude Include="User.h">
+      <Filter>LiNex\User</Filter>
+    </ClInclude>
+    <ClInclude Include="UserSession.h">
+      <Filter>LiNex\User</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>LiNex\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree.h">
+      <Filter>LiNex\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Fruit.h">
+      <Filter>LiNex\Object\Fruit</Filter>
+    </ClInclude>
+    <ClInclude Include="FruitFactory.h">
+      <Filter>LiNex\Object\Fruit</Filter>
+    </ClInclude>
+    <ClInclude Include="GuiManager.h">
+      <Filter>LiNex\Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="GuiElement.h">
+      <Filter>LiNex\Gui\Base Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="HorizontalLayout.h">
+      <Filter>LiNex\Gui\Base Elements\Layouts</Filter>
+    </ClInclude>
+    <ClInclude Include="Layout.h">
+      <Filter>LiNex\Gui\Base Elements\Layouts</Filter>
+    </ClInclude>
+    <ClInclude Include="VerticalLayout.h">
+      <Filter>LiNex\Gui\Base Elements\Layouts</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryGui.h">
+      <Filter>LiNex\Gui\Inventory</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
