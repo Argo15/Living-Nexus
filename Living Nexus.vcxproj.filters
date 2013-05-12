@@ -92,6 +92,9 @@
     <Filter Include="LiNex\Resource\Textures\Fonts">
       <UniqueIdentifier>{55e43b36-68f8-4f57-9fec-e71e454c70e5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="LiNex\Gui\Base Elements\Button">
+      <UniqueIdentifier>{c61f828f-4d9a-4e2f-890c-c39a6f4b6848}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\Shaders\f_atmosphere.glsl">
@@ -355,6 +358,21 @@
     <ClCompile Include="FontTexture.cpp">
       <Filter>LiNex\Resource\Textures\Fonts</Filter>
     </ClCompile>
+    <ClCompile Include="SquareFrame.cpp">
+      <Filter>LiNex\Gui\Base Elements\Layouts</Filter>
+    </ClCompile>
+    <ClCompile Include="Label.cpp">
+      <Filter>LiNex\Gui\Base Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="RelativeLayout.cpp">
+      <Filter>LiNex\Gui\Base Elements\Layouts</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionsGui.cpp">
+      <Filter>LiNex\Gui\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>LiNex\Gui\Base Elements\Button</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h">
@@ -584,6 +602,24 @@
     </ClInclude>
     <ClInclude Include="FontTexture.h">
       <Filter>LiNex\Resource\Textures\Fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="SquareFrame.h">
+      <Filter>LiNex\Gui\Base Elements\Layouts</Filter>
+    </ClInclude>
+    <ClInclude Include="Label.h">
+      <Filter>LiNex\Gui\Base Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="RelativeLayout.h">
+      <Filter>LiNex\Gui\Base Elements\Layouts</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionsGui.h">
+      <Filter>LiNex\Gui\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>LiNex\Gui\Base Elements\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonListener.h">
+      <Filter>LiNex\Gui\Base Elements\Button</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

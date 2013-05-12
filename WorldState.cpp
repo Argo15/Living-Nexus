@@ -32,6 +32,18 @@ WorldState::WorldState(const char *sFilename)
 	m_bMovementEnabled = true;
 
 	m_inventoryGui = new InventoryGui();
+	m_guiFrame = new SquareFrame();
+
+	GuiElement *frameOne = new GuiElement();
+	frameOne->setColor(1.0,0,0,0.5);
+	GuiElement *frameTwo = new GuiElement();
+	frameTwo->setColor(0,1.0,0,0.5);
+	frameTwo->setWidth(0.2);
+	frameTwo->setHeight(0.2);
+	frameTwo->setXPos(1.0);
+	frameTwo->setYPos(0.8);
+	m_guiFrame->addElement(m_inventoryGui);
+	//m_guiFrame->addElement(frameTwo);
 }
 
 WorldState::~WorldState()
@@ -42,6 +54,7 @@ WorldState::~WorldState()
 void WorldState::resize(int nWidth, int nHeight)
 {
 	m_renderer->resize(nWidth, nHeight);
+	m_guiFrame->initialize(m_renderer->getView());
 }
 
 void WorldState::tick(int nFps)
@@ -53,7 +66,7 @@ void WorldState::tick(int nFps)
 	// Open inventory
 	if (InputManager::getInstance()->isKeyDownOnce((int)'f'))
 	{
-		m_inventoryGui->initialize(m_renderer->getView());
+		m_inventoryGui->initialize();
 		toggleMouse();
 		m_bMovementEnabled = !m_bMovementEnabled;
 	}
@@ -64,7 +77,7 @@ void WorldState::tick(int nFps)
 	}
 	else
 	{	
-		GuiManager::getInstance()->setRootElement(m_inventoryGui);
+		GuiManager::getInstance()->setRootElement(m_guiFrame);
 	}
 	m_worldManager->tick(nFps);
 	m_shadowMapManager->tick(nFps);

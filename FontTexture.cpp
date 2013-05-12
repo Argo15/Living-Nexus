@@ -150,3 +150,13 @@ int FontTexture::getSize()
 {
 	return nSize;
 }
+
+float FontTexture::getPhraseWidth(string sPhrase, float nStartX, float nHeight)
+{
+	float nCurWidth = nStartX;
+	for (int i=0; i<sPhrase.length(); i++)
+	{
+		nCurWidth += nHeight*(float)m_texData[sPhrase[i]].nAdvanceX/(float)nSize;
+	}
+	return nCurWidth;
+}

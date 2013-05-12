@@ -8,7 +8,7 @@ VerticalLayout::VerticalLayout(GuiElement *parent) : Layout(parent)
 
 void VerticalLayout::drawChildren()
 {
-	for (int i=0; i < (int)m_children->size(); i++)
+	for (int i=m_children->size()-1; i >= 0; i--)
 	{
 		GuiElement *child = (*m_children)[i];
 		child->draw();
@@ -20,7 +20,7 @@ void VerticalLayout::drawChildren()
 void VerticalLayout::onClick(int nButton, int nState, float nX, float nY)
 {
 	float nCurYPos = 0;
-	for (int i=0; i < (int)m_children->size(); i++)
+	for (int i=m_children->size()-1; i >= 0; i--)
 	{
 		GuiElement *child = (*m_children)[i];
 		float nChildClickX = (nX - child->getXPos()) / child->getWidth();

@@ -14,6 +14,7 @@ GuiElement::GuiElement(GuiElement *parent)
 	for (int i=0; i<4; i++)
 	{
 		m_nColor[i] = 1.0f;
+		m_nColorExtra[i] = 0.0f;
 		m_nPadding[i] = 0.0f;
 	}
 }
@@ -24,7 +25,7 @@ void GuiElement::draw()
 		glMatrixMode(GL_MODELVIEW);
 		glTranslatef(m_nXPos, m_nYPos, 0);
 		glScalef(m_nWidth, m_nHeight, 0);
-		glColor4f(m_nColor[0], m_nColor[1], m_nColor[2], m_nColor[3]);
+		glColor4f(m_nColor[0]+m_nColorExtra[0], m_nColor[1]+m_nColorExtra[1], m_nColor[2]+m_nColorExtra[2], m_nColor[3]+m_nColorExtra[3]);
 		if (m_sBackgroundImage.length() > 0)
 		{
 			TextureManager::getInstance()->bindTexture(m_sBackgroundImage);
@@ -39,10 +40,6 @@ void GuiElement::draw()
 
 void GuiElement::onClick(int nButton, int nState, float nX, float nY)
 {
-	for (int i=0; i<3; i++)
-	{
-		m_nColor[i] = 1.0f - m_nColor[i];
-	}
 }
 
 void GuiElement::setId(string sId)
@@ -50,6 +47,14 @@ void GuiElement::setId(string sId)
 	m_sId = sId;
 }
 	
+void GuiElement::setDimensions(float nXPos, float nYPos, float nWidth, float nHeight)
+{
+	setWidth(nWidth);
+	setHeight(nHeight);
+	setXPos(nXPos);
+	setYPos(nYPos);
+}
+
 void GuiElement::setWidth(float nWidth)
 {
 	m_nWidth = nWidth;
@@ -76,6 +81,14 @@ void GuiElement::setColor(float nR, float nG, float nB, float nA)
 	m_nColor[1] = nG;
 	m_nColor[2] = nB;
 	m_nColor[3] = nA;
+}
+
+void GuiElement::setColorExtra(float nR, float nG, float nB, float nA)
+{
+	m_nColorExtra[0] = nR;
+	m_nColorExtra[1] = nG;
+	m_nColorExtra[2] = nB;
+	m_nColorExtra[3] = nA;
 }
 
 void GuiElement::setPadding(float nLeft, float nRight, float nBottom, float nTop)
@@ -121,6 +134,11 @@ float GuiElement::getYPos()
 	return m_nYPos;
 }
 	
+float *GuiElement::getColorExtra()
+{
+	return m_nColorExtra;
+}
+
 float *GuiElement::getColor()
 {
 	return m_nColor;

@@ -98,8 +98,10 @@
     <None Include="Config\common.ini" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="FontTexture.cpp" />
     <ClCompile Include="FreeTypeManager.cpp" />
+    <ClCompile Include="Label.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -111,9 +113,12 @@
     <ClCompile Include="LightBuffer.cpp" />
     <ClCompile Include="MotionBlurBuffer.cpp" />
     <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="OptionsGui.cpp" />
     <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Frustum.cpp" />
+    <ClCompile Include="RelativeLayout.cpp" />
+    <ClCompile Include="SquareFrame.cpp" />
     <ClCompile Include="Transformable.cpp" />
     <ClCompile Include="View.cpp" />
     <ClCompile Include="CascadedShadowMap.cpp" />
@@ -174,9 +179,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="ButtonListener.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="FontTexture.h" />
     <ClInclude Include="FreeTypeManager.h" />
+    <ClInclude Include="Label.h" />
+    <ClInclude Include="OptionsGui.h" />
+    <ClInclude Include="RelativeLayout.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="AtmosphereBuffer.h" />
     <ClInclude Include="DepthBuffer.h" />
@@ -189,6 +199,7 @@
     <ClInclude Include="PerlinNoise.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Frustum.h" />
+    <ClInclude Include="SquareFrame.h" />
     <ClInclude Include="Transformable.h" />
     <ClInclude Include="View.h" />
     <ClInclude Include="CascadedShadowMap.h" />

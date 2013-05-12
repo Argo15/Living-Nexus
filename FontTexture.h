@@ -44,6 +44,7 @@ public:
 	void draw(string sPhrase, float nX1, float nY1, float nHeight);
 	
 	int getSize();
+	float getPhraseWidth(string sPhrase, float nStartX, float nHeight);
 };
 
 

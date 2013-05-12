@@ -21,6 +21,7 @@ private:
 	float m_nYPos;		// Y value between 0 - 1.0 for the bottom left of the element
 	float m_nPadding[4];// left, right, bottom, top padding
 	float m_nColor[4];	// RGBA values of the background color.
+	float m_nColorExtra[4];	// Additional color values that can be used for clicking, hovers, ect.
 	string m_sBackgroundImage; // Name of texture for background.
 
 	GuiElement *m_parent;				// Parent element. All nodes have one except for the root.
@@ -33,11 +34,13 @@ public:
 	virtual void onClick(int nButton, int nState, float nX, float nY);
 
 	void setId(string sId);
+	void setDimensions(float nXPos, float nYPos, float nWidth, float nHeight);
 	void setWidth(float nWidth);
 	void setHeight(float nHeight);
 	void setXPos(float nXPos);
 	void setYPos(float nYPos);
 	void setColor(float nR, float nG, float nB, float nA);
+	void setColorExtra(float nR, float nG, float nB, float nA);
 	void setPadding(float nLeft, float nRight, float nBottom, float nTop);
 	void setPadding(float nAmt);
 	void setBackground(string sTexture);
@@ -47,6 +50,7 @@ public:
 	float getXPos();
 	float getYPos();
 	float *getColor();
+	float *getColorExtra();
 	float *getPadding();
 	string getBackground();
 	GuiElement *getParent();

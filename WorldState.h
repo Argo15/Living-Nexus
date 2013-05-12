@@ -10,6 +10,7 @@
 #include "WorldManager.h"
 #include "ShadowMapManager.h"
 #include "InventoryGui.h"
+#include "SquareFrame.h"
 
 class WorldRenderer;
 class ShadowMapManager;
@@ -29,7 +30,8 @@ private:
 	PhysicsManager *m_physicsManager;
 	WorldManager *m_worldManager;
 	ShadowMapManager *m_shadowMapManager;
-
+	
+	SquareFrame *m_guiFrame;
 	InventoryGui *m_inventoryGui;
 
 	bool m_bMovementEnabled;
