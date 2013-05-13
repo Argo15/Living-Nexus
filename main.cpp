@@ -101,6 +101,14 @@ void keyUp(unsigned char key, int xx, int yy)
 
 void mousePress(int button, int state, int x, int y) 
 {
+	typedef struct {
+		int nButton;
+		int nState;
+	} OnclickData; // this is a good example of what to send 
+	OnclickData *data = new OnclickData();
+	data->nButton = button;
+	data->nState = state;
+
 	GuiManager::getInstance()->onClick(button, state, (float)x/(float)nSizeX, 1.0f - (float)y/(float)nSizeY);
 	if (state == GLUT_DOWN)
 	{
