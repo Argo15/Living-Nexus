@@ -12,7 +12,7 @@
 class Fruit : public Object
 {
 public:
-	Fruit(std::string sWorldTile, std::string sInventoryTexture, std::string sGroundTile);
+	Fruit(string sName, string sWorldTile, string sInventoryTexture, string sGroundTile);
 };
 
 #endif

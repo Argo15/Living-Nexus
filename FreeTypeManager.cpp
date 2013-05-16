@@ -28,7 +28,7 @@ void FreeTypeManager::initialize()
 	}
 
 	m_font = new FontTexture();
-	m_font->load("Data/Fonts/ArialBlack.ttf", library, 64);
+	m_font->load("Data/Fonts/Arial.ttf", library, 64);
 
 	FT_Done_FreeType(library);
 }

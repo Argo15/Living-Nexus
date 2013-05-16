@@ -10,17 +10,26 @@ User::User(std::string sName)
 	m_objects = new Object*[m_nInventorySize];
 	for (int i=0; i < m_nInventorySize; i++) 
 	{
-		m_objects[i] = FruitFactory::buildFruit((FruitType)(rand() % 5));
-		if (m_objects[i] != 0)
-			Logging::GAME->info("Fruit: " + m_objects[i]->getWorldTile());
-		else
-			Logging::GAME->info("Fruit: None");
+		m_objects[i] = 0;
 	}
 }
 
 User::~User() 
 {
 
+}
+
+bool User::addObject(Object *object)
+{
+	for (int i=0; i < m_nInventorySize; i++) 
+	{
+		if (m_objects[i] == 0)
+		{
+			m_objects[i] = object;
+			return true;
+		}
+	}
+	return false;
 }
 
 std::string User::getName() 

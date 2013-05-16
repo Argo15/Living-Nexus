@@ -3,6 +3,7 @@
 #include "Camera.h"
 #include "GameState.h"
 #include "InputManager.h"
+#include "ClickManager.h"
 
 static Vector3 V_SUN_QUATERNION(2.0f,0.0f,-1.0f);
 
@@ -18,14 +19,16 @@ WorldManager::WorldManager()
  */
 void WorldManager::tick(int nFps)
 {
+	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 	updateSunToGameTime(TimeManager::getInstance()->getGameTime());
 	if(InputManager::getInstance()->isKeyDownOnce('r'))
 	{
-		WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 		worldState->getPhysicsManager()->getBulletManager()->clearDynamicsWorld();
 		m_worldChunks->generateChunks(m_chunks, worldState->getPhysicsManager());
 		m_worldTiles->initializeFromChunks(m_worldChunks, m_tiles, worldState->getPhysicsManager());
 	}
+	ClickManager::getInstance()->clear();
+	m_worldTiles->addClickObjects(worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera());
 }
 
 void WorldManager::loadWorld(std::string sFilename)

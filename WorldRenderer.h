@@ -31,7 +31,6 @@ class WorldRenderer : public Renderer
 {
 private:
 	View *m_view;
-	WorldCamera *m_camera;
 	Frustum *m_frustum;
 	GBuffer *m_gBuffer;
 	LightBuffer *m_lightBuffer;

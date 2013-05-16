@@ -2,7 +2,7 @@
 #define WORLDTILES_H
 
 #include <vector>
-#include "Tile.h"
+#include "Tree.h"
 #include "TileManager.h"
 #include "WorldChunks.h"
 #include "Frustum.h"
@@ -33,6 +33,7 @@ private:
 	int m_nWidth, m_nHeight;
 	TileData ***m_worldTiles;
 	vector<Tile *> *m_allTiles;
+	vector<Tree *> *m_trees;
 
 public:
 	WorldTiles(int nWidth, int nHeight);
@@ -40,6 +41,7 @@ public:
 	void init();
 	void initializeFromChunks(WorldChunks *chunks, TileManager *manager, PhysicsManager *physicsManager);
 	bool addTile(int nPosX, int nPosY, Tile *tile, PhysicsManager *physicsManager);
+	void addClickObjects(Camera *camera);
 	vector<Tile *> *getAllTiles();
 	vector<Tile *> *getVisibleTiles(Frustum *frustum);
 	int getWidth();

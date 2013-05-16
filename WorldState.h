@@ -10,7 +10,7 @@
 #include "WorldManager.h"
 #include "ShadowMapManager.h"
 #include "InventoryGui.h"
-#include "SquareFrame.h"
+#include "WorldHud.h"
 
 class WorldRenderer;
 class ShadowMapManager;
@@ -33,6 +33,7 @@ private:
 	
 	SquareFrame *m_guiFrame;
 	InventoryGui *m_inventoryGui;
+	WorldHud *m_worldHud;
 
 	bool m_bMovementEnabled;
 	bool m_bMouseHide;

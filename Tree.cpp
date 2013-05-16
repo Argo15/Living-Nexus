@@ -3,6 +3,8 @@
 #include "FruitFactory.h"
 #include "GameState.h"
 #include "MatrixManager.h"
+#include "ClickManager.h"
+#include "FruitClickObject.h"
 
 Tree::Tree() : Tile() 
 {
@@ -36,4 +38,34 @@ void Tree::drawExtra(std::string sShader)
 			MatrixManager::getInstance()->popMatrix3(NORMAL);
 		}
 	}
+}
+
+void Tree::addFruitClickObjects(Vector3 camPos, Vector3 treePos)
+{
+	for (int i=0; i<3; i++)
+	{
+		if (m_fruit[i] != 0) 
+		{
+			Vector3 fruitPos = treePos + m_fruitTransforms[i]->getTranslateV();
+			if ((camPos-fruitPos).length() <= 4.0f)
+			{	
+				ClickManager::getInstance()->addClickObject(new FruitClickObject(this, i));
+			}
+		}
+	}
+}
+
+Object *Tree::getFruit(int index)
+{
+	return m_fruit[index];
+}
+
+void Tree::setFruit(int index, Object *fruit)
+{
+	m_fruit[index] = fruit;
+}
+
+Transformable *Tree::getTransform(int index)
+{
+	return m_fruitTransforms[index];
 }

@@ -10,6 +10,11 @@ namespace StringUtils
 	{
 		return boost::lexical_cast<std::string>(nNumber);
 	}
+
+	static std::string valueOf(float nNumber) 
+	{
+		return boost::lexical_cast<std::string>(nNumber);
+	}
 };
 
 #endif

@@ -15,6 +15,12 @@ private:
 public:
 	Tree();
 	void drawExtra(std::string sShader);
+	void addFruitClickObjects(Vector3 camPos, Vector3 treePos);
+
+	Object *getFruit(int index);
+	void setFruit(int index, Object *fruit);
+
+	Transformable *getTransform(int index);
 };
 
 #endif

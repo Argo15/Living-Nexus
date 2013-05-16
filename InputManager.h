@@ -2,8 +2,9 @@
 #define INPUTMANAGER_H
 
 #include <set>
+#include "EventManager.h"
 
-class InputManager 
+class InputManager : public EventListener
 {
 private:
 	static InputManager *m_pInstance;
@@ -33,6 +34,8 @@ public:
 	int getMouseX();
 	int getMouseY();
 	bool isMouseMoved();
+
+	void eventTriggered(string sEventName, void *pEventData);
 };
 
 #endif

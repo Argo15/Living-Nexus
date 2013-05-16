@@ -1,5 +1,5 @@
 #include "WorldTiles.h"
-#include "Tree.h"
+#include "Logger.h"
 
 WorldTiles::WorldTiles(int nWidth, int nHeight)
 {
@@ -24,6 +24,7 @@ void WorldTiles::init()
 		}
 	}
 	m_allTiles = new vector<Tile *>();
+	m_trees = new vector<Tree *>();
 }
 
 /*
@@ -58,7 +59,10 @@ void WorldTiles::initializeFromChunks(WorldChunks *chunks, TileManager *manager,
 			blockTile->translate(i-5.0f, 0, j-5.0f);
 			if (rand() % 50 == 1)
 			{
-				addTile(i,j,blockTile,physicsManager);
+				if(addTile(i,j,blockTile,physicsManager))
+				{
+					m_trees->push_back((Tree *)blockTile);
+				}
 			}
 		}
 	}
@@ -143,6 +147,16 @@ bool WorldTiles::addTile(int nPosX, int nPosY, Tile *tile, PhysicsManager *physi
 	m_allTiles->push_back(tile);
 	tile->addPhysicsToDynamicWorld(physicsManager);
 	return true;
+}
+
+void WorldTiles::addClickObjects(Camera *camera)
+{
+	for (vector<Tree *>::iterator it = m_trees->begin(); it != m_trees->end(); it++)
+	{
+		Vector3 treePos = (*it)->getTranslateV();
+		Vector3 camPos = camera->getEyeV();
+		(*it)->addFruitClickObjects(camPos, treePos);
+	}
 }
 
 int WorldTiles::getWidth()

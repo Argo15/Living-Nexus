@@ -14,6 +14,8 @@
 #include "TextureManager.h"
 #include "GuiManager.h"
 #include "FreeTypeManager.h"
+#include "EventManager.h"
+#include "ClickManager.h"
 
 int nCurrentTime = 0;
 int nVsync = 0;
@@ -32,6 +34,7 @@ void init()
 	MaterialManager::getInstance()->initialize();
 	ShaderManager::getInstance()->initialize();	
 	FreeTypeManager::getInstance()->initialize();
+	ClickManager::getInstance();
 
 	UserSession::getInstance()->startUserSession("Argo");
 
@@ -104,20 +107,15 @@ void mousePress(int button, int state, int x, int y)
 	typedef struct {
 		int nButton;
 		int nState;
+		float nX;
+		float nY;
 	} OnclickData; // this is a good example of what to send 
 	OnclickData *data = new OnclickData();
 	data->nButton = button;
 	data->nState = state;
-
-	GuiManager::getInstance()->onClick(button, state, (float)x/(float)nSizeX, 1.0f - (float)y/(float)nSizeY);
-	if (state == GLUT_DOWN)
-	{
-		InputManager::getInstance()->registerMouseButtonDown(button);
-	}
-	else
-	{
-		InputManager::getInstance()->registerMouseButtonUp(button);
-	}
+	data->nX = (float)x/(float)nSizeX;
+	data->nY = 1.0f - (float)y/(float)nSizeY;
+	EventManager::getInstance()->notify("onMouseClick", (void *)data);
 }
 
 void mousePressedMove(int x, int y) 

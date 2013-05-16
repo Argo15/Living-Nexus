@@ -8,6 +8,7 @@ GuiManager* GuiManager::m_pInstance = 0;
 GuiManager::GuiManager()
 {
 	m_rootElement = 0;
+	EventManager::getInstance()->addListener("onMouseClick", this);
 }
 
 GuiManager *GuiManager::getInstance()
@@ -48,4 +49,14 @@ void GuiManager::setRootElement(GuiElement *element)
 GuiElement *GuiManager::getRootElement()
 {
 	return m_rootElement;
+}
+
+void GuiManager::eventTriggered(string sEventName, void *pEventData)
+{
+	if (sEventName == "onMouseClick")
+	{
+		typedef struct { int nButton; int nState; float nX; float nY; } OnclickData;
+		OnclickData *data = (OnclickData *)pEventData;
+		this->onClick(data->nButton, data->nState, data->nX, data->nY);
+	}
 }

@@ -2,6 +2,7 @@
 #define GUIMANAGER_H
 
 #include "GuiElement.h"
+#include "EventManager.h"
 
 /*
  * Author: wcrane
@@ -9,7 +10,7 @@
  *
  * Manages the main GUI layer. Consists of a single root node.
  */
-class GuiManager 
+class GuiManager : public EventListener
 {
 private:
 	static GuiManager *m_pInstance;
@@ -26,6 +27,8 @@ public:
 
 	void setRootElement(GuiElement *element);
 	GuiElement *getRootElement();
+	
+	void eventTriggered(string sEventName, void *pEventData);
 };
 
 #endif

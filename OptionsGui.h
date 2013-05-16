@@ -7,6 +7,12 @@
 #include <vector>
 using namespace std;
 
+/*
+ * Author: wcrane
+ * Date: 5/9/2013
+ *
+ * Gui Object that holds a Label followed by a number of Buttons.
+ */
 class OptionsGui : public RelativeLayout
 {
 private:

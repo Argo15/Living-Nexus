@@ -33,17 +33,9 @@ WorldState::WorldState(const char *sFilename)
 
 	m_inventoryGui = new InventoryGui();
 	m_guiFrame = new SquareFrame();
+	m_worldHud = new WorldHud();
 
-	GuiElement *frameOne = new GuiElement();
-	frameOne->setColor(1.0,0,0,0.5);
-	GuiElement *frameTwo = new GuiElement();
-	frameTwo->setColor(0,1.0,0,0.5);
-	frameTwo->setWidth(0.2);
-	frameTwo->setHeight(0.2);
-	frameTwo->setXPos(1.0);
-	frameTwo->setYPos(0.8);
 	m_guiFrame->addElement(m_inventoryGui);
-	//m_guiFrame->addElement(frameTwo);
 }
 
 WorldState::~WorldState()
@@ -55,6 +47,7 @@ void WorldState::resize(int nWidth, int nHeight)
 {
 	m_renderer->resize(nWidth, nHeight);
 	m_guiFrame->initialize(m_renderer->getView());
+	m_worldHud->initialize(m_renderer->getView());
 }
 
 void WorldState::tick(int nFps)
@@ -72,7 +65,7 @@ void WorldState::tick(int nFps)
 	}
 	if (m_bMovementEnabled)
 	{
-		GuiManager::getInstance()->setRootElement(0);
+		GuiManager::getInstance()->setRootElement(m_worldHud);
 		m_physicsManager->tick(nFps);
 	}
 	else

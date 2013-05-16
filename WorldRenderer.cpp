@@ -9,6 +9,7 @@
 #include "VerticalLayout.h"
 #include "GuiManager.h"
 #include "FreeTypeManager.h"
+#include "ClickManager.h"
 
 static int N_FRAME_WIDTH = 1280;
 static int N_FRAME_HEIGHT = 720;
@@ -33,7 +34,6 @@ void WorldRenderer::init()
 	glEnable(GL_CULL_FACE);
 
 	m_view = new View();
-	m_camera = new WorldCamera();
 	m_frustum = new Frustum();
 
 	m_gBuffer = new GBuffer(N_FRAME_WIDTH,N_FRAME_HEIGHT);
@@ -128,6 +128,7 @@ void WorldRenderer::defferedRender()
 	if (RenderStateManager::RENDERSTATE == POSITION)
 	{
 		m_gBuffer->bindPositionTex();
+		ClickManager::getInstance()->getSelectionBuffer()->bindSelectionTex();
 	}
 	if (RenderStateManager::RENDERSTATE == NORMALMAP)	
 	{
@@ -160,8 +161,11 @@ void WorldRenderer::render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
-	m_frustum->getFrustum(worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera(),m_view);
-	
+	Camera *camera = worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera();
+	m_frustum->getFrustum(camera,m_view);
+	ClickManager::getInstance()->setView(m_view);
+	ClickManager::getInstance()->setCamera(camera);
+
 	// Draw world
 	if (RenderStateManager::RENDERSTATE == FORWARD)
 	{

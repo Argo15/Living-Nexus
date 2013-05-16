@@ -1,6 +1,6 @@
 #include "Fruit.h"
 
-Fruit::Fruit(std::string sWorldTile, std::string sInventoryTexture, std::string sGroundTile) : Object()
+Fruit::Fruit(string sName, string sWorldTile, string sInventoryTexture, string sGroundTile) : Object(sName)
 {
 	setWorldTile(sWorldTile);
 	setInventoryTexture(sInventoryTexture);

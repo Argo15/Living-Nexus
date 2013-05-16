@@ -43,6 +43,7 @@ void ShaderManager::initialize()
 	loadShader("SunShadow", "Data/Shaders/v_dShadow.glsl","Data/Shaders/f_dShadow.glsl");
 	loadShader("MotionBlur", "Data/Shaders/v_motionBlur.glsl","Data/Shaders/f_motionBlur.glsl");
 	loadShader("Atmosphere", "Data/Shaders/v_motionBlur.glsl","Data/Shaders/f_atmosphere.glsl");
+	loadShader("Selection", "Data/Shaders/v_selection.glsl","Data/Shaders/f_selection.glsl");
 	Logging::GRAPHICS->info("Done Loading Shaders");
 }
 

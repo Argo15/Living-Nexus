@@ -89,6 +89,7 @@
     <None Include="Data\Shaders\f_GBuffer.glsl" />
     <None Include="Data\Shaders\f_material.glsl" />
     <None Include="Data\Shaders\f_motionBlur.glsl" />
+    <None Include="Data\Shaders\f_selection.glsl" />
     <None Include="Data\Shaders\v_dShadow.glsl" />
     <None Include="Data\Shaders\v_final.glsl" />
     <None Include="Data\Shaders\v_GBuffer.glsl" />
@@ -96,11 +97,16 @@
     <None Include="Data\Shaders\v_material.glsl" />
     <None Include="Data\Shaders\v_motionBlur.glsl" />
     <None Include="Config\common.ini" />
+    <None Include="Data\Shaders\v_selection.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="ClickManager.cpp" />
+    <ClCompile Include="ClickObject.cpp" />
+    <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="FontTexture.cpp" />
     <ClCompile Include="FreeTypeManager.cpp" />
+    <ClCompile Include="FruitClickObject.cpp" />
     <ClCompile Include="Label.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Actor.cpp" />
@@ -118,6 +124,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="RelativeLayout.cpp" />
+    <ClCompile Include="SelectionBuffer.cpp" />
     <ClCompile Include="SquareFrame.cpp" />
     <ClCompile Include="Transformable.cpp" />
     <ClCompile Include="View.cpp" />
@@ -161,6 +168,7 @@
     <ClCompile Include="WorldCamera.cpp" />
     <ClCompile Include="WorldCameraManager.cpp" />
     <ClCompile Include="WorldChunks.cpp" />
+    <ClCompile Include="WorldHud.cpp" />
     <ClCompile Include="WorldManager.cpp" />
     <ClCompile Include="WorldRenderer.cpp" />
     <ClCompile Include="WorldState.cpp" />
@@ -181,9 +189,14 @@
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="ButtonListener.h" />
+    <ClInclude Include="ClickManager.h" />
+    <ClInclude Include="ClickObject.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="EventListener.h" />
+    <ClInclude Include="EventManager.h" />
     <ClInclude Include="FontTexture.h" />
     <ClInclude Include="FreeTypeManager.h" />
+    <ClInclude Include="FruitClickObject.h" />
     <ClInclude Include="Label.h" />
     <ClInclude Include="OptionsGui.h" />
     <ClInclude Include="RelativeLayout.h" />
@@ -199,6 +212,7 @@
     <ClInclude Include="PerlinNoise.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Frustum.h" />
+    <ClInclude Include="SelectionBuffer.h" />
     <ClInclude Include="SquareFrame.h" />
     <ClInclude Include="Transformable.h" />
     <ClInclude Include="View.h" />
@@ -244,6 +258,7 @@
     <ClInclude Include="WorldCamera.h" />
     <ClInclude Include="WorldCameraManager.h" />
     <ClInclude Include="WorldChunks.h" />
+    <ClInclude Include="WorldHud.h" />
     <ClInclude Include="WorldManager.h" />
     <ClInclude Include="WorldRenderer.h" />
     <ClInclude Include="WorldState.h" />

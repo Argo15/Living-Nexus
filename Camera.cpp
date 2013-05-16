@@ -48,8 +48,8 @@ void Camera::mouseRotate()
 
 	m_nLastMouseX = nMouseX;
 	m_nLastMouseY = nMouseY;
-	int nHalfScreenWidth = 1600/2;
-	int nHalfScreenHeight = 900/2;
+	int nHalfScreenWidth = glutGet(GLUT_WINDOW_WIDTH)/2;
+	int nHalfScreenHeight = glutGet(GLUT_WINDOW_HEIGHT)/2;
 	int nMouseBoxSize = 10;
 	
 	if (GameState::GAMESTATE->mouseHidden()) 

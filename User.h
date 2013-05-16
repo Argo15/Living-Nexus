@@ -21,6 +21,7 @@ public:
 	User(std::string sName);
 	~User();
 
+	bool addObject(Object *object);
 	Object *getInventoryObject(int nIndex);
 	int getInventorySize();
 	std::string getName();

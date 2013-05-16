@@ -95,6 +95,15 @@
     <Filter Include="LiNex\Gui\Base Elements\Button">
       <UniqueIdentifier>{c61f828f-4d9a-4e2f-890c-c39a6f4b6848}</UniqueIdentifier>
     </Filter>
+    <Filter Include="LiNex\Gui\WorldHUD">
+      <UniqueIdentifier>{c3ca2f3c-7f66-4ab2-9fbb-680c324d5c12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Util\Events">
+      <UniqueIdentifier>{6a11e1a7-baf2-4515-bd3b-b94ee8ccbcf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Util\Clicking">
+      <UniqueIdentifier>{9e57e704-c402-43b2-b6a8-16d2175f0356}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\Shaders\f_atmosphere.glsl">
@@ -137,6 +146,12 @@
       <Filter>Shaders</Filter>
     </None>
     <None Include="Config\common.ini" />
+    <None Include="Data\Shaders\f_selection.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Data\Shaders\v_selection.glsl">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -367,11 +382,29 @@
     <ClCompile Include="RelativeLayout.cpp">
       <Filter>LiNex\Gui\Base Elements\Layouts</Filter>
     </ClCompile>
-    <ClCompile Include="OptionsGui.cpp">
-      <Filter>LiNex\Gui\Inventory</Filter>
-    </ClCompile>
     <ClCompile Include="Button.cpp">
       <Filter>LiNex\Gui\Base Elements\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionsGui.cpp">
+      <Filter>LiNex\Gui\Base Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldHud.cpp">
+      <Filter>LiNex\Gui\WorldHUD</Filter>
+    </ClCompile>
+    <ClCompile Include="EventManager.cpp">
+      <Filter>LiNex\Util\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="ClickManager.cpp">
+      <Filter>LiNex\Util\Clicking</Filter>
+    </ClCompile>
+    <ClCompile Include="ClickObject.cpp">
+      <Filter>LiNex\Util\Clicking</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectionBuffer.cpp">
+      <Filter>LiNex\Graphics\Frame Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="FruitClickObject.cpp">
+      <Filter>LiNex\Object\Fruit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -612,14 +645,35 @@
     <ClInclude Include="RelativeLayout.h">
       <Filter>LiNex\Gui\Base Elements\Layouts</Filter>
     </ClInclude>
-    <ClInclude Include="OptionsGui.h">
-      <Filter>LiNex\Gui\Inventory</Filter>
-    </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>LiNex\Gui\Base Elements\Button</Filter>
     </ClInclude>
     <ClInclude Include="ButtonListener.h">
       <Filter>LiNex\Gui\Base Elements\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionsGui.h">
+      <Filter>LiNex\Gui\Base Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldHud.h">
+      <Filter>LiNex\Gui\WorldHUD</Filter>
+    </ClInclude>
+    <ClInclude Include="EventManager.h">
+      <Filter>LiNex\Util\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventListener.h">
+      <Filter>LiNex\Util\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="ClickManager.h">
+      <Filter>LiNex\Util\Clicking</Filter>
+    </ClInclude>
+    <ClInclude Include="ClickObject.h">
+      <Filter>LiNex\Util\Clicking</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectionBuffer.h">
+      <Filter>LiNex\Graphics\Frame Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="FruitClickObject.h">
+      <Filter>LiNex\Object\Fruit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

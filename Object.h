@@ -2,6 +2,7 @@
 #define OBJECT_H
 
 #include <string>
+using namespace std;
 
 /*
  * Author: wcrane
@@ -11,12 +12,14 @@
 class Object
 {
 private:
-	std::string m_sWorldTile;
-	std::string m_sInventoryTexture;
-	std::string m_sGroundTile;
+	string m_sName;
+
+	string m_sWorldTile;
+	string m_sInventoryTexture;
+	string m_sGroundTile;
 
 public:
-	Object();
+	Object(string sName = "");
 
 	std::string getWorldTile();
 	void setWorldTile(std::string sTile);
@@ -26,6 +29,9 @@ public:
 
 	std::string getGroundTile();
 	void setGroundTile(std::string sTile);
+
+	string getName();
+	void setName(string sName);
 };
 
 #endif

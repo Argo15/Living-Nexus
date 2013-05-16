@@ -25,6 +25,7 @@ InputManager::InputManager()
 	m_nMouseX = 0;
 	m_nMouseY = 0;
 	m_bMouseCentered = false;
+	EventManager::getInstance()->addListener("onMouseClick", this);
 }
 
 void InputManager::registerKeyDown(int nKey)
@@ -116,4 +117,21 @@ int InputManager::getMouseY()
 bool InputManager::isMouseMoved() 
 {
 	return m_bMouseMoved;
+}
+
+void InputManager::eventTriggered(string sEventName, void *pEventData)
+{
+	if (sEventName == "onMouseClick")
+	{
+		typedef struct { int nButton; int nState; float nX; float nY; } OnclickData;
+		OnclickData *data = (OnclickData *)pEventData;
+		if (data->nState == 0)
+		{
+			this->registerMouseButtonDown(data->nButton);
+		}
+		else
+		{
+			this->registerMouseButtonUp(data->nButton);
+		}
+	}
 }
