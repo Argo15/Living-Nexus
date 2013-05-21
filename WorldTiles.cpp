@@ -1,5 +1,6 @@
 #include "WorldTiles.h"
 #include "Logger.h"
+#include "ClickManager.h"
 
 WorldTiles::WorldTiles(int nWidth, int nHeight)
 {
@@ -49,6 +50,21 @@ void WorldTiles::initializeFromChunks(WorldChunks *chunks, TileManager *manager,
 			}
 		}
 	}
+
+	// Add Fruit Stand
+	int nStandX;
+	int nStandY;
+	m_fruitStand = new Tile();
+	Quaternion rot;
+	rot.createQuaternion(3.1414f, 0, 1.0f, 0);
+	do
+	{
+		nStandX = rand() % 70 + 15;
+		nStandY = rand() % 70 + 15;
+		*m_fruitStand = *manager->getTile("FruitStand");
+		m_fruitStand->setRotate(rot);
+	} while (!addTile(nStandX,nStandY,m_fruitStand,physicsManager));
+
 	// Add trees
 	for (int i=0; i<m_nWidth; i++)
 	{
@@ -56,7 +72,6 @@ void WorldTiles::initializeFromChunks(WorldChunks *chunks, TileManager *manager,
 		{
 			Tile *blockTile = new Tree();
 			*blockTile = *(Tree*)manager->getTile("Tree");
-			blockTile->translate(i-5.0f, 0, j-5.0f);
 			if (rand() % 50 == 1)
 			{
 				if(addTile(i,j,blockTile,physicsManager))
@@ -93,6 +108,7 @@ vector<Tile *> *WorldTiles::getVisibleTiles(Frustum *frustum)
  */
 bool WorldTiles::addTile(int nPosX, int nPosY, Tile *tile, PhysicsManager *physicsManager)
 {
+	tile->translate(nPosX-5.0f, 0, nPosY-5.0f);
 	for (int i = 0; i < 10; i++) {
 		for (int j = 0; j < 10; j++) {
 			int nWorldX = nPosX+i-5;
@@ -151,11 +167,16 @@ bool WorldTiles::addTile(int nPosX, int nPosY, Tile *tile, PhysicsManager *physi
 
 void WorldTiles::addClickObjects(Camera *camera)
 {
+	Vector3 camPos = camera->getEyeV();
 	for (vector<Tree *>::iterator it = m_trees->begin(); it != m_trees->end(); it++)
 	{
 		Vector3 treePos = (*it)->getTranslateV();
-		Vector3 camPos = camera->getEyeV();
 		(*it)->addFruitClickObjects(camPos, treePos);
+	}
+	Vector3 standPos = m_fruitStand->getTranslateV();
+	if ((camPos-standPos).length() <= 6.0f)
+	{	
+		ClickManager::getInstance()->addClickObject(new ClickObject(m_fruitStand, glm::mat4(1.0)));
 	}
 }
 

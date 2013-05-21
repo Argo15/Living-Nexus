@@ -5,6 +5,11 @@
 #include "InventoryGui.h"
 #include "GuiManager.h"
 
+WorldState *WorldState::getInstance()
+{
+	return (WorldState *) GameState::GAMESTATE;
+}
+
 WorldState::WorldState(const char *sFilename)
 { 
 	m_physicsManager = new PhysicsManager();
@@ -31,11 +36,9 @@ WorldState::WorldState(const char *sFilename)
 	m_bMouseHide = true;
 	m_bMovementEnabled = true;
 
-	m_inventoryGui = new InventoryGui();
-	m_guiFrame = new SquareFrame();
 	m_worldHud = new WorldHud();
-
-	m_guiFrame->addElement(m_inventoryGui);
+	m_inventoryFrame = new SquareFrame();
+	m_inventoryFrame->addElement(InventoryGui::getInstance());
 }
 
 WorldState::~WorldState()
@@ -46,7 +49,7 @@ WorldState::~WorldState()
 void WorldState::resize(int nWidth, int nHeight)
 {
 	m_renderer->resize(nWidth, nHeight);
-	m_guiFrame->initialize(m_renderer->getView());
+	m_inventoryFrame->initialize(m_renderer->getView());
 	m_worldHud->initialize(m_renderer->getView());
 }
 
@@ -59,22 +62,31 @@ void WorldState::tick(int nFps)
 	// Open inventory
 	if (InputManager::getInstance()->isKeyDownOnce((int)'f'))
 	{
-		m_inventoryGui->initialize();
-		toggleMouse();
-		m_bMovementEnabled = !m_bMovementEnabled;
+		toggleInventory();
 	}
 	if (m_bMovementEnabled)
 	{
-		GuiManager::getInstance()->setRootElement(m_worldHud);
 		m_physicsManager->tick(nFps);
-	}
-	else
-	{	
-		GuiManager::getInstance()->setRootElement(m_guiFrame);
+		GuiManager::getInstance()->setRootElement(m_worldHud);
 	}
 	m_worldManager->tick(nFps);
 	m_shadowMapManager->tick(nFps);
 	m_renderer->render();
+}
+
+void WorldState::toggleInventory()
+{
+	m_bMovementEnabled = !m_bMovementEnabled;
+	toggleMouse();
+	if (GuiManager::getInstance()->getRootElement() == m_inventoryFrame)
+	{
+		GuiManager::getInstance()->setRootElement(m_worldHud);
+	}
+	else
+	{
+		InventoryGui::getInstance()->init();
+		GuiManager::getInstance()->setRootElement(m_inventoryFrame);
+	}
 }
 
 void WorldState::toggleMouse()

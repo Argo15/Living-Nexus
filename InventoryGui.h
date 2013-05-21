@@ -1,7 +1,7 @@
 #ifndef INVENTORYGUI_H
 #define INVENTORYGUI_H
 
-#include "GuiElement.h"
+#include "SquareFrame.h"
 #include "View.h"
 #include "ButtonListener.h"
 #include "OptionsGui.h"
@@ -15,6 +15,7 @@
 class InventoryGui : public GuiElement, public ButtonListener
 {
 private:
+	static InventoryGui *m_pInstance;
 	int m_nNumChildren;
 	GuiElement **m_children;	// Children elements.
 	int m_nClickedChild;
@@ -25,10 +26,12 @@ private:
 
 	void drawChildren();
 
-public:
 	InventoryGui(GuiElement *parent = 0);
 
-	void initialize();
+public:
+	static InventoryGui *getInstance(GuiElement *parent = 0);
+
+	void init();
 	void draw();
 	GuiElement *getChild(int nIndex);
 	void onClick(int nButton, int nState, float nX, float nY);

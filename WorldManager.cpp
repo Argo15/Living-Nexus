@@ -19,16 +19,19 @@ WorldManager::WorldManager()
  */
 void WorldManager::tick(int nFps)
 {
-	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 	updateSunToGameTime(TimeManager::getInstance()->getGameTime());
 	if(InputManager::getInstance()->isKeyDownOnce('r'))
 	{
-		worldState->getPhysicsManager()->getBulletManager()->clearDynamicsWorld();
-		m_worldChunks->generateChunks(m_chunks, worldState->getPhysicsManager());
-		m_worldTiles->initializeFromChunks(m_worldChunks, m_tiles, worldState->getPhysicsManager());
+		WorldState::getInstance()->getPhysicsManager()->getBulletManager()->clearDynamicsWorld();
+		m_worldChunks->generateChunks(m_chunks, WorldState::getInstance()->getPhysicsManager());
+		m_worldTiles->initializeFromChunks(m_worldChunks, m_tiles, WorldState::getInstance()->getPhysicsManager());
 	}
+	// Mount click objects
 	ClickManager::getInstance()->clear();
-	m_worldTiles->addClickObjects(worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera());
+	if (WorldState::getInstance()->mouseHidden())
+	{
+		m_worldTiles->addClickObjects(WorldState::getInstance()->getPhysicsManager()->getWorldCameras()->getCurrentCamera());
+	}
 }
 
 void WorldManager::loadWorld(std::string sFilename)

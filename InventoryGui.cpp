@@ -2,12 +2,23 @@
 #include "DrawFunc.h"
 #include "UserSession.h"
 
+InventoryGui* InventoryGui::m_pInstance = 0;
+
 InventoryGui::InventoryGui(GuiElement *parent)
 {
 	m_children = 0;
 }
 
-void InventoryGui::initialize()
+InventoryGui *InventoryGui::getInstance(GuiElement *parent)
+{
+	if (m_pInstance == 0)
+	{
+		m_pInstance = new InventoryGui(parent);
+	}
+	return m_pInstance;
+}
+
+void InventoryGui::init()
 {
 	if (m_children != 0)
 	{

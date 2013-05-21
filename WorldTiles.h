@@ -34,6 +34,7 @@ private:
 	TileData ***m_worldTiles;
 	vector<Tile *> *m_allTiles;
 	vector<Tree *> *m_trees;
+	Tile *m_fruitStand;
 
 public:
 	WorldTiles(int nWidth, int nHeight);

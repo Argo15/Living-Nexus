@@ -128,7 +128,6 @@ void WorldRenderer::defferedRender()
 	if (RenderStateManager::RENDERSTATE == POSITION)
 	{
 		m_gBuffer->bindPositionTex();
-		ClickManager::getInstance()->getSelectionBuffer()->bindSelectionTex();
 	}
 	if (RenderStateManager::RENDERSTATE == NORMALMAP)	
 	{

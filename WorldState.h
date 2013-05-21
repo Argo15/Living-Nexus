@@ -31,15 +31,16 @@ private:
 	WorldManager *m_worldManager;
 	ShadowMapManager *m_shadowMapManager;
 	
-	SquareFrame *m_guiFrame;
-	InventoryGui *m_inventoryGui;
 	WorldHud *m_worldHud;
+	SquareFrame *m_inventoryFrame;
 
 	bool m_bMovementEnabled;
 	bool m_bMouseHide;
 	void toggleMouse();
 
 public:
+	static WorldState* getInstance();
+
 	WorldState(const char *sFilename = 0);
 	~WorldState();
 
@@ -54,5 +55,7 @@ public:
 	WorldRenderer *getRenderer();
 	ShadowMapManager *getShadowMapManager();
 	TileManager *getTileManager();
+
+	void toggleInventory();
 };
 #endif
