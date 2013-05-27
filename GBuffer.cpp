@@ -112,7 +112,7 @@ GBuffer::~GBuffer()
  */
 void GBuffer::drawToBuffer(View *view)
 {
-	Profiler::getInstance()->startProfile("Draw GBuffer");
+	gProfiler->startProfile("Draw GBuffer");
 	GLSLProgram *glslProgram = gShaderManager->getShader("GBuffer");
 	glslProgram->use();
 
@@ -155,7 +155,7 @@ void GBuffer::drawToBuffer(View *view)
 
 	m_m4LastCameraProj = gMatrixManager->getMatrix4(PROJECTION);
 	m_lastCamera = *camera;
-	Profiler::getInstance()->endProfile();
+	gProfiler->endProfile();
 }
 
 void GBuffer::bind() 

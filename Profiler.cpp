@@ -3,7 +3,9 @@
 #include "Logger.h"
 #include "StringUtils.h"
 
-Profiler* Profiler::m_pInstance = 0;
+Profiler localProfiler;
+Profiler *gProfiler = &localProfiler;
+
 typedef boost::unordered_map<std::string, int>::value_type int_value;
 
 Profiler::Profiler()
@@ -11,18 +13,9 @@ Profiler::Profiler()
 	m_sLastSection = "";
 }
 
-Profiler *Profiler::getInstance() 
-{
-	if (m_pInstance == 0) 
-	{
-		m_pInstance = new Profiler();
-	}
-	return m_pInstance;
-}
-
 void Profiler::startProfile(std::string sSection) 
 {
-	int currentTime = TimeManager::getInstance()->getTimeInMicroseconds();
+	int currentTime = gTimeManager->getTimeInMicroseconds();
 	if (m_hmSectionCounts.find(sSection) == m_hmSectionCounts.end()) 
 	{
 		m_hmSectionCounts[sSection] = 0;
@@ -38,7 +31,7 @@ void Profiler::endProfile()
 {
 	if (m_sLastSection != "") 
 	{
-		int currentTime = TimeManager::getInstance()->getTimeInMicroseconds();
+		int currentTime = gTimeManager->getTimeInMicroseconds();
 		int changeInTime = currentTime - m_hmSectionLastTimes[m_sLastSection];
 		if (changeInTime > 0) 
 		{

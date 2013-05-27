@@ -28,7 +28,7 @@ CascadedShadowMap::CascadedShadowMap(int nSize, float nSlice1, float nSlice2, fl
 
 void CascadedShadowMap::buildShadowMaps()
 {
-	Profiler::getInstance()->startProfile("Build Shadow Maps");
+	gProfiler->startProfile("Build Shadow Maps");
 	float nSlice[] = {0.0, m_nSlices[0], m_nSlices[1], m_nSlices[2], 1.0};
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 	Camera *camera = worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera();
@@ -76,7 +76,7 @@ void CascadedShadowMap::buildShadowMaps()
 		delete lightFrustum;
 	}
 	glEnable(GL_CULL_FACE);
-	Profiler::getInstance()->endProfile();
+	gProfiler->endProfile();
 }
 
 Camera *CascadedShadowMap::createLightCamera(float nSlice1, float nSlice2, Camera *camera, View *view, DirectLight *dLight)

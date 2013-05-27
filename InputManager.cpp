@@ -1,15 +1,7 @@
 #include "InputManager.h"
 
-InputManager* InputManager::m_pInstance = 0;
-
-InputManager *InputManager::getInstance() 
-{
-	if (m_pInstance == 0) 
-	{
-		m_pInstance = new InputManager();
-	}
-	return m_pInstance;
-}
+InputManager localInputManager;
+InputManager *gInputManager = &localInputManager;
 
 InputManager::InputManager()
 {
@@ -25,7 +17,7 @@ InputManager::InputManager()
 	m_nMouseX = 0;
 	m_nMouseY = 0;
 	m_bMouseCentered = false;
-	EventManager::getInstance()->addListener("onMouseClick", this);
+	gEventManager->addListener("onMouseClick", this);
 }
 
 void InputManager::registerKeyDown(int nKey)

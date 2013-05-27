@@ -19,8 +19,8 @@ Camera::Camera()
 
 void Camera::mouseRotate()
 {
-	int nMouseX=InputManager::getInstance()->getMouseX();
-	int nMouseY=InputManager::getInstance()->getMouseY();
+	int nMouseX=gInputManager->getMouseX();
+	int nMouseY=gInputManager->getMouseY();
 
 	if (m_nLastMouseX == -1)
 	{
@@ -79,27 +79,27 @@ void Camera::mouseRotate()
 
 void Camera::move(float nSpeed)
 {
-	if (InputManager::getInstance()->isKeyDown('w'))
+	if (gInputManager->isKeyDown('w'))
 	{
 		moveForward(nSpeed*0.1f);
 	}
-	if (InputManager::getInstance()->isKeyDown('s'))
+	if (gInputManager->isKeyDown('s'))
 	{
 		moveBackward(nSpeed*0.1f);
 	}
-	if (InputManager::getInstance()->isKeyDown('a'))
+	if (gInputManager->isKeyDown('a'))
 	{
 		moveLeft(nSpeed*0.1f);
 	}
-	if (InputManager::getInstance()->isKeyDown('d'))
+	if (gInputManager->isKeyDown('d'))
 	{
 		moveRight(nSpeed*0.1f);
 	}
-	if (InputManager::getInstance()->isKeyDown('e'))
+	if (gInputManager->isKeyDown('e'))
 	{
 		moveUp(nSpeed*0.1f);
 	}
-	if (InputManager::getInstance()->isKeyDown('q'))
+	if (gInputManager->isKeyDown('q'))
 	{
 		moveDown(nSpeed*0.1f);
 	}

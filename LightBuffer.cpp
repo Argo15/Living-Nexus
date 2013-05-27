@@ -64,7 +64,7 @@ LightBuffer::~LightBuffer()
  */
 void LightBuffer::drawToBuffer(GLuint nNormalTex, GLuint nDepthTex, GLuint nGlowTex, View *view)
 {
-	Profiler::getInstance()->startProfile("Draw Light");
+	gProfiler->startProfile("Draw Light");
 	GLSLProgram *glslProgram = gShaderManager->getShader("DirectLight");
 	glslProgram->use();
 
@@ -114,7 +114,7 @@ void LightBuffer::drawToBuffer(GLuint nNormalTex, GLuint nDepthTex, GLuint nGlow
 	drawScreenShader(0,0,1.0f,1.0f);
 	glslProgram->disable();
 	unbind();	
-	Profiler::getInstance()->endProfile();
+	gProfiler->endProfile();
 }
 
 void LightBuffer::bind() 

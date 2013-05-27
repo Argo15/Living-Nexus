@@ -7,7 +7,6 @@
 class InputManager : public EventListener
 {
 private:
-	static InputManager *m_pInstance;
 	bool m_bKeys[256];
 	bool m_bKeysPressedNotChecked[256];
 	bool m_bMouseButtons[5];
@@ -16,9 +15,8 @@ private:
 	bool m_bMouseCentered;
 	bool m_bMouseMoved;
 
-	InputManager();
 public:
-	static InputManager *getInstance();
+	InputManager();
 
 	void registerKeyDown(int nKey);
 	void registerKeyUp(int nKey);
@@ -37,5 +35,7 @@ public:
 
 	void eventTriggered(string sEventName, void *pEventData);
 };
+
+extern InputManager *gInputManager;
 
 #endif

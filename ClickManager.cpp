@@ -3,21 +3,12 @@
 #include "Logger.h"
 #include "StringUtils.h"
 
-ClickManager* ClickManager::m_pInstance = 0;
-
-ClickManager *ClickManager::getInstance() 
-{
-	if (m_pInstance == 0) 
-	{
-		m_pInstance = new ClickManager();
-	}
-	return m_pInstance;
-}
+ClickManager localClickManager;
+ClickManager *gClickManager = &localClickManager;
 
 ClickManager::ClickManager()
 {
-	EventManager::getInstance()->addListener("onMouseClick", this);
-	m_selectionBuffer = new SelectionBuffer(1280,720);
+	m_selectionBuffer = 0;
 	m_view = 0;
 	m_camera = 0;
 }
@@ -28,6 +19,10 @@ void ClickManager::handleClickEvent(void *pEventData)
 	OnclickData *data = (OnclickData *)pEventData;
 	if (data->nState == 0)
 	{
+		if (m_selectionBuffer == 0)
+		{
+			m_selectionBuffer = new SelectionBuffer(1280,720);
+		}
 		m_selectionBuffer->drawToBuffer(&m_clickObjects, m_view, m_camera);
 		int nSelectedObj = m_selectionBuffer->getSelectedObject();
 		if (nSelectedObj >= 0)

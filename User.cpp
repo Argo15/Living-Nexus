@@ -6,7 +6,7 @@
 User::User(std::string sName) 
 {
 	m_sUsername = sName;
-	m_nInventorySize = Config::getInstance()->getFieldInt("INVENTORY_SIZE");
+	m_nInventorySize = gConfig->getFieldInt("INVENTORY_SIZE");
 	m_objects = new Object*[m_nInventorySize];
 	for (int i=0; i < m_nInventorySize; i++) 
 	{

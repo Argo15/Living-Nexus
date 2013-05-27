@@ -17,17 +17,16 @@ using namespace std;
 class EventManager
 {
 private:
-	static EventManager *m_pInstance;
 	map<string, set<EventListener *> > m_eventListeners;
 
-	EventManager();
-
 public:
-	static EventManager *getInstance();
+	EventManager();
 
 	void addListener(string sEventName, EventListener *eventListener);
 	void notify(string sEventName, void *pEventData);
 	void removeObserver(string sEventName, EventListener *eventListener);
 };
+
+extern EventManager *gEventManager;
 
 #endif

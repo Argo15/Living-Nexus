@@ -19,15 +19,15 @@ WorldManager::WorldManager()
  */
 void WorldManager::tick(int nFps)
 {
-	updateSunToGameTime(TimeManager::getInstance()->getGameTime());
-	if(InputManager::getInstance()->isKeyDownOnce('r'))
+	updateSunToGameTime(gTimeManager->getGameTime());
+	if(gInputManager->isKeyDownOnce('r'))
 	{
 		WorldState::getInstance()->getPhysicsManager()->getBulletManager()->clearDynamicsWorld();
 		m_worldChunks->generateChunks(m_chunks, WorldState::getInstance()->getPhysicsManager());
 		m_worldTiles->initializeFromChunks(m_worldChunks, m_tiles, WorldState::getInstance()->getPhysicsManager());
 	}
 	// Mount click objects
-	ClickManager::getInstance()->clear();
+	gClickManager->clear();
 	if (WorldState::getInstance()->mouseHidden())
 	{
 		m_worldTiles->addClickObjects(WorldState::getInstance()->getPhysicsManager()->getWorldCameras()->getCurrentCamera());

@@ -41,7 +41,7 @@ namespace TimeUtils
 
 	static Vector3 getSkyNearSunColor(TimeOfDay time) 
 	{
-		std::string sColor = Config::getInstance()->getFieldString(SKY_NEAR_SUN_COLORS[time]);
+		std::string sColor = gConfig->getFieldString(SKY_NEAR_SUN_COLORS[time]);
 		std::vector<std::string> strs;
 		boost::split(strs, sColor, boost::is_any_of(" "));
 		if (strs.size() >= 3) 
@@ -56,7 +56,7 @@ namespace TimeUtils
 
 	static Vector3 getSkyAwaySunColor(TimeOfDay time) 
 	{
-		std::string sColor = Config::getInstance()->getFieldString(SKY_AWAY_SUN_COLORS[time]);
+		std::string sColor = gConfig->getFieldString(SKY_AWAY_SUN_COLORS[time]);
 		std::vector<std::string> strs;
 		boost::split(strs, sColor, boost::is_any_of(" "));
 		if (strs.size() >= 3) 
@@ -71,20 +71,20 @@ namespace TimeUtils
 
 	static Vector3 getCloudColor(TimeOfDay time) 
 	{
-		int nColor = Config::getInstance()->getFieldInt(CLOUD_COLORS[time]);
+		int nColor = gConfig->getFieldInt(CLOUD_COLORS[time]);
 		return Vector3(nColor/255.0f, nColor/255.0f, nColor/255.0f);
 	}
 
 	static float getWeightForTimeOfDay(TimeOfDay time)
 	{
-		int nMorningHour = Config::getInstance()->getFieldInt(ConfigNames::MORNING_HOUR);
-		int nEveningHour = Config::getInstance()->getFieldInt(ConfigNames::EVENING_HOUR);
-		int nTransitionLength = Config::getInstance()->getFieldInt(ConfigNames::TRANSITION_LEGTH);
-		int nCurrentHour = TimeManager::getInstance()->getGameTime().getHours();
+		int nMorningHour = gConfig->getFieldInt(ConfigNames::MORNING_HOUR);
+		int nEveningHour = gConfig->getFieldInt(ConfigNames::EVENING_HOUR);
+		int nTransitionLength = gConfig->getFieldInt(ConfigNames::TRANSITION_LEGTH);
+		int nCurrentHour = gTimeManager->getGameTime().getHours();
 		int nMorningSeconds = nMorningHour * 60 * 60;
 		int nEveningSeconds = nEveningHour * 60 * 60;
 		int nTransitionSeconds = nTransitionLength * 60 * 60;
-		int nCurrentSeconds = TimeManager::getInstance()->getGameTime().getSecondsSinceMidnight();
+		int nCurrentSeconds = gTimeManager->getGameTime().getSecondsSinceMidnight();
 		float nColorWeights[4] = {0, 0, 0, 0};
 		if (nCurrentSeconds <= nMorningSeconds) 
 		{

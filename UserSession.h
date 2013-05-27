@@ -13,16 +13,16 @@
 class UserSession 
 {
 private:
-	static UserSession *m_pInstance;
 	User *m_activeUser;
 
-	UserSession();
 public:
-	static UserSession *getInstance();
+	UserSession();
 	void startUserSession(std::string sName);
 	void endUserSession();
 	bool isUserInSession();
 	User *getActiveUser();
 };
+
+extern UserSession *gUserSession;
 
 #endif

@@ -17,16 +17,14 @@
 class ClickManager : public EventListener
 {
 private:
-	static ClickManager *m_pInstance;
 	SelectionBuffer *m_selectionBuffer;
 	vector<ClickObject *> m_clickObjects;
 	View *m_view;
 	Camera *m_camera;
 
 	void handleClickEvent(void *pEventData);
-	ClickManager();
 public:
-	static ClickManager *getInstance();
+	ClickManager();
 
 	void addClickObject(ClickObject *clickObject);
 	void clear();
@@ -36,5 +34,7 @@ public:
 	void setCamera(Camera *camera);
 	SelectionBuffer *getSelectionBuffer();
 };
+
+extern ClickManager *gClickManager;
 
 #endif

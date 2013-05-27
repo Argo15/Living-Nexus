@@ -54,7 +54,7 @@ MotionBlurBuffer::~MotionBlurBuffer()
  */
 void MotionBlurBuffer::drawToBuffer(GLuint nTexture, GLuint nVelocityTex, int nNumSamples, View *view)
 {
-	Profiler::getInstance()->startProfile("Draw Motion Blur");
+	gProfiler->startProfile("Draw Motion Blur");
 	GLSLProgram *glslProgram = gShaderManager->getShader("MotionBlur");
 	glslProgram->use();
 
@@ -85,7 +85,7 @@ void MotionBlurBuffer::drawToBuffer(GLuint nTexture, GLuint nVelocityTex, int nN
 	drawScreenShader(0,0,1.0f,1.0f);
 	glslProgram->disable();
 	unbind();	
-	Profiler::getInstance()->endProfile();
+	gProfiler->endProfile();
 }
 
 void MotionBlurBuffer::bind() 

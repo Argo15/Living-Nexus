@@ -64,7 +64,7 @@ SelectionBuffer::~SelectionBuffer()
 
 void SelectionBuffer::drawToBuffer(vector<ClickObject *> *clickObjects, View *view, Camera *camera)
 {
-	Profiler::getInstance()->startProfile("Draw Selection");
+	gProfiler->startProfile("Draw Selection");
 	GLSLProgram *glslProgram = gShaderManager->getShader("Selection");
 	glslProgram->use();
 
@@ -107,7 +107,7 @@ void SelectionBuffer::drawToBuffer(vector<ClickObject *> *clickObjects, View *vi
 
 	glslProgram->disable();
 	unbind();	
-	Profiler::getInstance()->endProfile();
+	gProfiler->endProfile();
 }
 
 void SelectionBuffer::bind() 

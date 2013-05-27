@@ -1,20 +1,12 @@
 #include "UserSession.h"
 #include "Logger.h"
 
-UserSession* UserSession::m_pInstance = 0;
+UserSession localUserSession;
+UserSession *gUserSession = &localUserSession;
 
 UserSession::UserSession() 
 {
 	m_activeUser = 0;
-}
-
-UserSession *UserSession::getInstance() 
-{
-	if (m_pInstance == 0) 
-	{
-		m_pInstance = new UserSession();
-	}
-	return m_pInstance;
 }
 
 void UserSession::startUserSession(std::string sName) 

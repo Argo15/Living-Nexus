@@ -8,7 +8,6 @@
 class Profiler 
 {
 private:
-	static Profiler *m_pInstance;
 	std::string m_sLastSection;
 	boost::unordered_map<std::string, int> m_hmSectionLastTimes;
 	boost::unordered_map<std::string, int> m_hmSectionAverages;
@@ -16,13 +15,14 @@ private:
 	boost::unordered_map<std::string, int> m_hmSectionMaximum;
 	boost::unordered_map<std::string, int> m_hmSectionCounts;
 
+public:
 	Profiler();
 
-public:
-	static Profiler *getInstance();
 	void startProfile(std::string sSection);
 	void endProfile();
 	void logProfile();
 };
+
+extern Profiler *gProfiler;
 
 #endif

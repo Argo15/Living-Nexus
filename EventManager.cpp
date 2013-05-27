@@ -1,15 +1,7 @@
 #include "EventManager.h"
 
-EventManager* EventManager::m_pInstance = 0;
-
-EventManager *EventManager::getInstance() 
-{
-	if (m_pInstance == 0) 
-	{
-		m_pInstance = new EventManager();
-	}
-	return m_pInstance;
-}
+EventManager localEventManager;
+EventManager *gEventManager = &localEventManager;
 
 EventManager::EventManager()
 {

@@ -25,18 +25,18 @@ void LoggerHelper::commonLogError(std::string sMessage, std::string sMessageType
 {
 	if (m_nYear == 0) 
 	{
-		m_nYear = TimeManager::getInstance()->getGameTime().getYear();
-		m_nMonth = TimeManager::getInstance()->getGameTime().getMonth();
-		m_nDay = TimeManager::getInstance()->getGameTime().getDay();
+		m_nYear = gTimeManager->getGameTime().getYear();
+		m_nMonth = gTimeManager->getGameTime().getMonth();
+		m_nDay = gTimeManager->getGameTime().getDay();
 	}
-	int timestamp = TimeManager::getInstance()->getTimeStamp();
+	int timestamp = gTimeManager->getTimeStamp();
 	std::string sPath = getLogDir();
 	char cFileName[200];
 	sprintf(cFileName, "%s%s_%i.log", sPath.c_str(), m_sFileName.c_str(), timestamp);
 	std::ofstream logfile;
 	logfile.open(cFileName, std::ios::out | std::ios::app);
 	char cMessage[500];
-	sprintf(cMessage, "%s [%s] [%s]: %s\n", TimeManager::getInstance()->toString().c_str(), m_sLoggingType.c_str(), sMessageType.c_str(), sMessage.c_str());
+	sprintf(cMessage, "%s [%s] [%s]: %s\n", gTimeManager->toString().c_str(), m_sLoggingType.c_str(), sMessageType.c_str(), sMessage.c_str());
 	if (logfile.is_open())
 	{
 		logfile.seekp(0, std::ios::end);

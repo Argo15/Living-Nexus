@@ -18,7 +18,7 @@ FruitClickObject::FruitClickObject(Tree *parentTree, int nFruitIndex) : ClickObj
 void FruitClickObject::onClick()
 {
 	Object *fruit = m_parentTree->getFruit(m_nFruitIndex);
-	if (UserSession::getInstance()->getActiveUser()->addObject(fruit))
+	if (gUserSession->getActiveUser()->addObject(fruit))
 	{
 		m_parentTree->setFruit(m_nFruitIndex, 0);
 		Logging::GAME->info("Added to inventory: " + *(m_tile->getName()));

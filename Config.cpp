@@ -4,20 +4,11 @@ static std::string S_COMMON_INI_PATH = "Config/common.ini";
 
 typedef boost::unordered_map<std::string, std::string>::value_type string_value;
 
-Config* Config::m_pInstance = 0;
+Config localConfig;
+Config *gConfig = &localConfig;
 
 Config::Config() 
 {
-	initializeConfig();
-}
-
-Config *Config::getInstance() 
-{
-	if (m_pInstance == 0) 
-	{
-		m_pInstance = new Config();
-	}
-	return m_pInstance;
 }
 
 void Config::initializeConfig() 

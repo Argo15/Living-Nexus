@@ -14,7 +14,7 @@ WorldCameraManager::WorldCameraManager()
  */
 void WorldCameraManager::tick(int nFps)
 {
-	if (InputManager::getInstance()->isKeyDownOnce('c'))
+	if (gInputManager->isKeyDownOnce('c'))
 	{
 		if (m_current == m_worldCamera)
 		{

@@ -55,7 +55,7 @@ FinalBuffer::~FinalBuffer()
  */
 void FinalBuffer::drawToBuffer(GLuint nColorTex, GLuint nLightTex, GLuint nGlowTex, View *view)
 {
-	Profiler::getInstance()->startProfile("Draw Final");
+	gProfiler->startProfile("Draw Final");
 	GLSLProgram *glslProgram = gShaderManager->getShader("Final");
 	glslProgram->use();
 
@@ -88,7 +88,7 @@ void FinalBuffer::drawToBuffer(GLuint nColorTex, GLuint nLightTex, GLuint nGlowT
 	drawScreenShader(0,0,1.0f,1.0f);
 	glslProgram->disable();
 	unbind();	
-	Profiler::getInstance()->endProfile();
+	gProfiler->endProfile();
 }
 
 void FinalBuffer::bind() 

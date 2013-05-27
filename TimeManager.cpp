@@ -1,20 +1,12 @@
 #include "TimeManager.h"
 
-TimeManager* TimeManager::m_pInstance = 0;
+TimeManager localTimeManager;
+TimeManager *gTimeManager = &localTimeManager;
 
 TimeManager::TimeManager() 
 {
 	m_gameTime.updateToSystemTime();
 	m_nTimestamp = m_gameTime.getSecondsSinceMidnight();
-}
-
-TimeManager *TimeManager::getInstance() 
-{
-	if (m_pInstance == 0) 
-	{
-		m_pInstance = new TimeManager();
-	}
-	return m_pInstance;
 }
 
 void TimeManager::tick() 

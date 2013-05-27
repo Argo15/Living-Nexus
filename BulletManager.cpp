@@ -73,7 +73,7 @@ void BulletManager::createPlayerBody()
 
 void BulletManager::updateDynamicsWorld(float nSpeed)
 {
-	Profiler::getInstance()->startProfile("Update Dynamics World");
+	gProfiler->startProfile("Update Dynamics World");
 	// move camera
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 	WorldCamera *camera = worldState->getPhysicsManager()->getWorldCameras()->getPlayerCamera();
@@ -81,19 +81,19 @@ void BulletManager::updateDynamicsWorld(float nSpeed)
 	nOldEye[0] = camera->getEyeX();
 	nOldEye[1] = camera->getEyeY();
 	nOldEye[2] = camera->getEyeZ();
-	if (InputManager::getInstance()->isKeyDown('w'))
+	if (gInputManager->isKeyDown('w'))
 	{
 		camera->moveForward(nSpeed*0.1f);
 	}
-	if (InputManager::getInstance()->isKeyDown('s'))
+	if (gInputManager->isKeyDown('s'))
 	{
 		camera->moveBackward(nSpeed*0.1f);
 	}
-	if (InputManager::getInstance()->isKeyDown('a'))
+	if (gInputManager->isKeyDown('a'))
 	{
 		camera->moveLeft(nSpeed*0.1f);
 	}
-	if (InputManager::getInstance()->isKeyDown('d'))
+	if (gInputManager->isKeyDown('d'))
 	{
 		camera->moveRight(nSpeed*0.1f);
 	}
@@ -107,5 +107,5 @@ void BulletManager::updateDynamicsWorld(float nSpeed)
 	// update camera
 	btVector3 camPos = m_playerBody->getWorldTransform().getOrigin();
 	camera->setPosition(camPos[0],camPos[1]+0.8,camPos[2]);
-	Profiler::getInstance()->endProfile();
+	gProfiler->endProfile();
 }

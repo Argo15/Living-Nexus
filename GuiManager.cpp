@@ -9,7 +9,7 @@ GuiManager *gGuiManager = &localGuiManager;
 GuiManager::GuiManager()
 {
 	m_rootElement = 0;
-	EventManager::getInstance()->addListener("onMouseClick", this);
+	gEventManager->addListener("onMouseClick", this);
 }
 
 void GuiManager::render()

@@ -8,14 +8,12 @@
 class TimeManager 
 {
 private:
-	static TimeManager *m_pInstance;
 	GameTime m_gameTime;
 	int m_nTimestamp;
 
+public:
 	TimeManager();
 
-public:
-	static TimeManager *getInstance();
 	std::string toString();
 	void tick();
 	GameTime getGameTime();
@@ -23,5 +21,7 @@ public:
 	int getTimeInMilliseconds();
 	int getTimeInMicroseconds();
 };
+
+extern TimeManager *gTimeManager;
 
 #endif

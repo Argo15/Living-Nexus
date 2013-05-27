@@ -74,7 +74,7 @@ AtmosphereBuffer::~AtmosphereBuffer()
  */
 void AtmosphereBuffer::drawToBuffer(GLuint colorBuf, GLuint glowBuf, GLuint depthBuf, View *view)
 {
-	Profiler::getInstance()->startProfile("Draw Atmosphere");
+	gProfiler->startProfile("Draw Atmosphere");
 	GLSLProgram *glslProgram = gShaderManager->getShader("Atmosphere");
 	glslProgram->use();
 
@@ -127,7 +127,7 @@ void AtmosphereBuffer::drawToBuffer(GLuint colorBuf, GLuint glowBuf, GLuint dept
 	drawScreenShader(0,0,1.0f,1.0f);
 	glslProgram->disable();
 	unbind();	
-	Profiler::getInstance()->endProfile();
+	gProfiler->endProfile();
 }
 
 Vector3 AtmosphereBuffer::getNearSunColor()

@@ -27,16 +27,16 @@ int nCounter = 10;
 
 void init() 
 {
-	Config::getInstance();
+	gConfig->initializeConfig();
 
 	gTextureManager->initialize();
 	gModelManager->initialize();
 	gMaterialManager->initialize();
 	gShaderManager->initialize();	
 	gFontManager->initialize();
-	ClickManager::getInstance();
+	gEventManager->addListener("onMouseClick", gClickManager);
 
-	UserSession::getInstance()->startUserSession("Argo");
+	gUserSession->startUserSession("Argo");
 
 	GameState::GAMESTATE = new WorldState();
 }
@@ -57,7 +57,7 @@ void render(void)
 	
 	if (nVsync > 0)
 	{
-		TimeManager::getInstance()->tick();
+		gTimeManager->tick();
 		int nFps = 1000/nElapsedTime;
 		if (nFps > 60)
 		{
@@ -86,11 +86,11 @@ void keyDown(unsigned char key, int xx, int yy)
 {
 	if (key == 27) 
 	{ 
-		UserSession::getInstance()->endUserSession();
-		Profiler::getInstance()->logProfile();
+		gUserSession->endUserSession();
+		gProfiler->logProfile();
 		exit(0);
 	}
-	InputManager::getInstance()->registerKeyDown((int)key);
+	gInputManager->registerKeyDown((int)key);
 	if (key >= '1' && key <= '9') 
 	{
 		RenderStateManager::RENDERSTATE = (RenderState)((int)key-(int)'0');
@@ -99,7 +99,7 @@ void keyDown(unsigned char key, int xx, int yy)
 
 void keyUp(unsigned char key, int xx, int yy) 
 {
-	InputManager::getInstance()->registerKeyUp((int)key);
+	gInputManager->registerKeyUp((int)key);
 }
 
 void mousePress(int button, int state, int x, int y) 
@@ -115,17 +115,17 @@ void mousePress(int button, int state, int x, int y)
 	data->nState = state;
 	data->nX = (float)x/(float)nSizeX;
 	data->nY = 1.0f - (float)y/(float)nSizeY;
-	EventManager::getInstance()->notify("onMouseClick", (void *)data);
+	gEventManager->notify("onMouseClick", (void *)data);
 }
 
 void mousePressedMove(int x, int y) 
 {
-	InputManager::getInstance()->setMousePosition(x,y);
+	gInputManager->setMousePosition(x,y);
 }
 
 void mouseReleasedMove(int x, int y) 
 {
-	InputManager::getInstance()->setMousePosition(x,y);
+	gInputManager->setMousePosition(x,y);
 }
 
 void specialKeyDown(int key, int xx, int yy)

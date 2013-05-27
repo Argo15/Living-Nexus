@@ -11,19 +11,19 @@ void GameTime::updateToSystemTime()
 {
 	time_t t = time(0);
 	struct tm * now = localtime( & t );
-    if (InputManager::getInstance()->isKeyDownOnce('-')) 
+    if (gInputManager->isKeyDownOnce('-')) 
 	{
 		m_nHourOffset -= 1;
 	}
-	if (InputManager::getInstance()->isKeyDownOnce('=')) 
+	if (gInputManager->isKeyDownOnce('=')) 
 	{
 		m_nHourOffset += 1;
 	}
-	if (InputManager::getInstance()->isKeyDown('[')) 
+	if (gInputManager->isKeyDown('[')) 
 	{
 		m_nMinuteOffset -= 1.0;
 	}
-	if (InputManager::getInstance()->isKeyDown(']')) 
+	if (gInputManager->isKeyDown(']')) 
 	{
 		m_nMinuteOffset += 1.0;
 	}

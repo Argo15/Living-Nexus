@@ -176,7 +176,7 @@ void WorldTiles::addClickObjects(Camera *camera)
 	Vector3 standPos = m_fruitStand->getTranslateV();
 	if ((camPos-standPos).length() <= 6.0f)
 	{	
-		ClickManager::getInstance()->addClickObject(new ClickObject(m_fruitStand, glm::mat4(1.0)));
+		gClickManager->addClickObject(new ClickObject(m_fruitStand, glm::mat4(1.0)));
 	}
 }
 

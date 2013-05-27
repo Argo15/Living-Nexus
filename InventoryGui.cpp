@@ -13,7 +13,7 @@ void InventoryGui::init()
 	{
 		delete[] m_children;
 	}
-	User *user = UserSession::getInstance()->getActiveUser();
+	User *user = gUserSession->getActiveUser();
 	int nInventorySize = user->getInventorySize();
 	m_nNumChildren = nInventorySize;
 	m_children = new GuiElement*[m_nNumChildren];
@@ -65,7 +65,7 @@ void InventoryGui::drawChildren()
 
 void InventoryGui::draw()
 {
-	User *user = UserSession::getInstance()->getActiveUser();
+	User *user = gUserSession->getActiveUser();
 	int nInventorySize = user->getInventorySize();
 
 	glPushMatrix();
@@ -101,7 +101,7 @@ void InventoryGui::onClick(int nButton, int nState, float nX, float nY)
 			&& nChildClickY >= nPadding[2] && nChildClickY <= (1.0f - nPadding[3]))
 		{
 			child->onClick(nButton, nState, nChildClickX, nChildClickY);
-			User *user = UserSession::getInstance()->getActiveUser();
+			User *user = gUserSession->getActiveUser();
 			Object *obj = user->getInventoryObject(i);
 			if (obj != 0)
 			{

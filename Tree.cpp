@@ -49,7 +49,7 @@ void Tree::addFruitClickObjects(Vector3 camPos, Vector3 treePos)
 			Vector3 fruitPos = treePos + m_fruitTransforms[i]->getTranslateV();
 			if ((camPos-fruitPos).length() <= 4.0f)
 			{	
-				ClickManager::getInstance()->addClickObject(new FruitClickObject(this, i));
+				gClickManager->addClickObject(new FruitClickObject(this, i));
 			}
 		}
 	}

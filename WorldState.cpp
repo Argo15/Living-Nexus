@@ -56,12 +56,12 @@ void WorldState::resize(int nWidth, int nHeight)
 
 void WorldState::tick(int nFps)
 {
-	if (InputManager::getInstance()->isKeyDownOnce((int)'t'))
+	if (gInputManager->isKeyDownOnce((int)'t'))
 	{
 		toggleMouse();
 	}
 	// Open inventory
-	if (InputManager::getInstance()->isKeyDownOnce((int)'f'))
+	if (gInputManager->isKeyDownOnce((int)'f'))
 	{
 		toggleInventory();
 	}

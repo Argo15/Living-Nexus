@@ -162,8 +162,8 @@ void WorldRenderer::render()
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 	Camera *camera = worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera();
 	m_frustum->getFrustum(camera,m_view);
-	ClickManager::getInstance()->setView(m_view);
-	ClickManager::getInstance()->setCamera(camera);
+	gClickManager->setView(m_view);
+	gClickManager->setCamera(camera);
 
 	// Draw world
 	if (RenderStateManager::RENDERSTATE == FORWARD)
