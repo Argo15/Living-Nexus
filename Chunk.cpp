@@ -19,24 +19,24 @@ Chunk::Chunk() : Transformable()
 
 void Chunk::drawChunk(string sShader) 
 {
-	MatrixManager::getInstance()->pushMatrix4(MODELVIEW, transformToMatrix(MatrixManager::getInstance()->getMatrix4(MODELVIEW)));
-	MatrixManager::getInstance()->pushMatrix3(NORMAL, transformToMatrix(MatrixManager::getInstance()->getMatrix3(NORMAL)));
-		glm::mat4 normMat(MatrixManager::getInstance()->getMatrix3(NORMAL));
+	gMatrixManager->pushMatrix4(MODELVIEW, transformToMatrix(gMatrixManager->getMatrix4(MODELVIEW)));
+	gMatrixManager->pushMatrix3(NORMAL, transformToMatrix(gMatrixManager->getMatrix3(NORMAL)));
+		glm::mat4 normMat(gMatrixManager->getMatrix3(NORMAL));
 		normMat[3] = glm::vec4(0,0,0,1.0f);
-		MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::rotate(MatrixManager::getInstance()->getMatrix4(MODELVIEW), 90.0f*m_nOrientation, glm::vec3(0,1.0f,0)));
+		gMatrixManager->putMatrix4(MODELVIEW, glm::rotate(gMatrixManager->getMatrix4(MODELVIEW), 90.0f*m_nOrientation, glm::vec3(0,1.0f,0)));
 		normMat = glm::rotate(normMat, 90.0f*m_nOrientation, glm::vec3(0,1.0f,0));
-		MatrixManager::getInstance()->putMatrix3(NORMAL, glm::mat3(normMat));
+		gMatrixManager->putMatrix3(NORMAL, glm::mat3(normMat));
 		for (int i=0; i<m_nNumActors; i++) 
 		{
-			MatrixManager::getInstance()->pushMatrix4(MODELVIEW, m_actors[i]->transformToMatrix(MatrixManager::getInstance()->getMatrix4(MODELVIEW)));
-			MatrixManager::getInstance()->pushMatrix3(NORMAL, m_actors[i]->transformToMatrix(MatrixManager::getInstance()->getMatrix3(NORMAL)));
+			gMatrixManager->pushMatrix4(MODELVIEW, m_actors[i]->transformToMatrix(gMatrixManager->getMatrix4(MODELVIEW)));
+			gMatrixManager->pushMatrix3(NORMAL, m_actors[i]->transformToMatrix(gMatrixManager->getMatrix3(NORMAL)));
 			m_actors[i]->drawActor(sShader);
-			MatrixManager::getInstance()->popMatrix4(MODELVIEW);
-			MatrixManager::getInstance()->popMatrix3(NORMAL);
+			gMatrixManager->popMatrix4(MODELVIEW);
+			gMatrixManager->popMatrix3(NORMAL);
 		}
 		drawExtra(sShader);
-	MatrixManager::getInstance()->popMatrix4(MODELVIEW);
-	MatrixManager::getInstance()->popMatrix3(NORMAL);
+	gMatrixManager->popMatrix4(MODELVIEW);
+	gMatrixManager->popMatrix3(NORMAL);
 }
 
 void Chunk::drawExtra(string sShader)
@@ -57,7 +57,7 @@ bool Chunk::loadChunk(string sFileName)
 
 		for(int i=0; i<m_nNumActors; i++) 
 		{
-			string *sModel = ModelManager::getInstance()->getModel(loadActors[i].sModel)->getName();
+			string *sModel = gModelManager->getModel(loadActors[i].sModel)->getName();
 			string *mat = new string(loadActors[i].sMaterial);
 			m_actors[i] = new Actor(sModel, mat);
 			m_actors[i]->setName(loadActors[i].sName);

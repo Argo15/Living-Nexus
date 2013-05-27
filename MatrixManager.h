@@ -15,13 +15,11 @@ enum Matrix3Type {NORMAL};
 class MatrixManager
 {
 private:
-	static MatrixManager *m_pInstance;
 	stack<glm::mat4> *m_matrix4;
 	stack<glm::mat3> *m_matrix3;
 
-	MatrixManager();
 public:
-	static MatrixManager *getInstance();
+	MatrixManager();
 
 	void putMatrix4(Matrix4Type type, glm::mat4 matrix);
 	void putMatrix3(Matrix3Type type, glm::mat3 matrix);
@@ -36,5 +34,7 @@ public:
 	void multMatrix4(Matrix4Type type, glm::mat4 matrix);
 	void multMatrix3(Matrix3Type type, glm::mat3 matrix);
 };
+
+extern MatrixManager *gMatrixManager;
 
 #endif

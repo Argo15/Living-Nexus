@@ -8,13 +8,11 @@ using namespace std;
 
 class MaterialManager {
 private:
-	static MaterialManager *m_pInstance;
 	map<string,Material *> m_materials;
 	string getSafeName(string baseName);
 
-	MaterialManager();
 public:
-	static MaterialManager *getInstance();
+	MaterialManager();
 
     void initialize();
 	void loadMaterial(string sFileName);
@@ -30,5 +28,7 @@ public:
 	Material *getMaterial(string sName);
 	map<string,Material *> *getMaterials();
 };
+
+extern MaterialManager *gMaterialManager;
 
 #endif

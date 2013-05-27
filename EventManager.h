@@ -11,6 +11,7 @@ using namespace std;
  * Author: wcrane
  * Date: 5/13/2013
  *
+ * Anti-pattern, probably a bad idea
  * Allows you to listen for an event name or allows you to broadcast an event.
  */
 class EventManager

@@ -94,7 +94,7 @@ GBuffer::GBuffer(int nWidth, int nHeight)
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("GBuffer");
+	GLSLProgram *glslProgram = gShaderManager->getShader("GBuffer");
 }
 
 GBuffer::~GBuffer()
@@ -113,7 +113,7 @@ GBuffer::~GBuffer()
 void GBuffer::drawToBuffer(View *view)
 {
 	Profiler::getInstance()->startProfile("Draw GBuffer");
-	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("GBuffer");
+	GLSLProgram *glslProgram = gShaderManager->getShader("GBuffer");
 	glslProgram->use();
 
 	bind();
@@ -123,9 +123,9 @@ void GBuffer::drawToBuffer(View *view)
 	glPushAttrib( GL_VIEWPORT_BIT );
 	glViewport( 0, 0, getWidth(), getHeight());
 
-	MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::mat4(1.0f));
-	MatrixManager::getInstance()->putMatrix4(PROJECTION, glm::mat4(1.0f));
-	MatrixManager::getInstance()->putMatrix3(NORMAL, glm::mat3(1.0f));
+	gMatrixManager->putMatrix4(MODELVIEW, glm::mat4(1.0f));
+	gMatrixManager->putMatrix4(PROJECTION, glm::mat4(1.0f));
+	gMatrixManager->putMatrix3(NORMAL, glm::mat3(1.0f));
 	view->use3D(true);
 
 	glBindFragDataLocation(glslProgram->getHandle(), 0, "normalBuffer");
@@ -141,8 +141,8 @@ void GBuffer::drawToBuffer(View *view)
 
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 	Camera *camera = worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera();
-	MatrixManager::getInstance()->putMatrix4(PROJECTION, camera->transformToMatrix(MatrixManager::getInstance()->getMatrix4(PROJECTION)));
-	glslProgram->sendUniform("projectionCameraMatrix", &MatrixManager::getInstance()->getMatrix4(PROJECTION)[0][0]);
+	gMatrixManager->putMatrix4(PROJECTION, camera->transformToMatrix(gMatrixManager->getMatrix4(PROJECTION)));
+	glslProgram->sendUniform("projectionCameraMatrix", &gMatrixManager->getMatrix4(PROJECTION)[0][0]);
 	glslProgram->sendUniform("camPos",camera->getEyeX(),camera->getEyeY(),camera->getEyeZ());
 	
 	glslProgram->sendUniform("projectionLastCameraMatrix", &m_m4LastCameraProj[0][0]);
@@ -153,7 +153,7 @@ void GBuffer::drawToBuffer(View *view)
 	glslProgram->disable();
 	unbind();
 
-	m_m4LastCameraProj = MatrixManager::getInstance()->getMatrix4(PROJECTION);
+	m_m4LastCameraProj = gMatrixManager->getMatrix4(PROJECTION);
 	m_lastCamera = *camera;
 	Profiler::getInstance()->endProfile();
 }

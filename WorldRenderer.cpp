@@ -63,15 +63,15 @@ void WorldRenderer::resize(int nWidth, int nHeight)
  */
 void WorldRenderer::forwardRender()
 {
-	MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::mat4(1.0f)); 
-	MatrixManager::getInstance()->putMatrix4(PROJECTION, glm::mat4(1.0f)); 
-	MatrixManager::getInstance()->putMatrix3(NORMAL, glm::mat3(1.0f)); 
+	gMatrixManager->putMatrix4(MODELVIEW, glm::mat4(1.0f)); 
+	gMatrixManager->putMatrix4(PROJECTION, glm::mat4(1.0f)); 
+	gMatrixManager->putMatrix3(NORMAL, glm::mat3(1.0f)); 
 	m_view->use3D(true);
 
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 	Camera *m_camera = worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera();
 	m_camera->transform();
-	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("Basic");
+	GLSLProgram *glslProgram = gShaderManager->getShader("Basic");
 	glslProgram->use();
 
 	glBindFragDataLocation(glslProgram->getHandle(), 0, "fragColor");
@@ -85,7 +85,7 @@ void WorldRenderer::forwardRender()
 	glslProgram->sendUniform("light.color", 1.0f,1.0f,1.0f);
 	glslProgram->sendUniform("light.ambient", 0.7f);
 	glslProgram->sendUniform("light.diffuse", 0.6f);
-	glslProgram->sendUniform("projectionMatrix", &MatrixManager::getInstance()->getMatrix4(PROJECTION)[0][0]);
+	glslProgram->sendUniform("projectionMatrix", &gMatrixManager->getMatrix4(PROJECTION)[0][0]);
 
 	worldState->getWorldManager()->renderWorld("Basic");
 
@@ -177,7 +177,7 @@ void WorldRenderer::render()
 
 	// Draw gui
 	m_view->use3D(false);
-	GuiManager::getInstance()->render();
+	gGuiManager->render();
 
 	glutSwapBuffers();
 }

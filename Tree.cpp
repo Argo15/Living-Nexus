@@ -31,11 +31,11 @@ void Tree::drawExtra(std::string sShader)
 		{
 			std::string sFruitTile = m_fruit[i]->getWorldTile();
 			Tile *fruitTile = worldState->getTileManager()->getTile(sFruitTile);
-			MatrixManager::getInstance()->pushMatrix4(MODELVIEW, m_fruitTransforms[i]->transformToMatrix(MatrixManager::getInstance()->getMatrix4(MODELVIEW)));
-			MatrixManager::getInstance()->pushMatrix3(NORMAL, m_fruitTransforms[i]->transformToMatrix(MatrixManager::getInstance()->getMatrix3(NORMAL)));
+			gMatrixManager->pushMatrix4(MODELVIEW, m_fruitTransforms[i]->transformToMatrix(gMatrixManager->getMatrix4(MODELVIEW)));
+			gMatrixManager->pushMatrix3(NORMAL, m_fruitTransforms[i]->transformToMatrix(gMatrixManager->getMatrix3(NORMAL)));
 			fruitTile->drawTile(sShader);
-			MatrixManager::getInstance()->popMatrix4(MODELVIEW);
-			MatrixManager::getInstance()->popMatrix3(NORMAL);
+			gMatrixManager->popMatrix4(MODELVIEW);
+			gMatrixManager->popMatrix3(NORMAL);
 		}
 	}
 }

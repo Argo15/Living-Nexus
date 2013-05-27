@@ -3,7 +3,8 @@
 static int N_NUM_MATRIX4 = 2;
 static int N_NUM_MATRIX3 = 1;
 
-MatrixManager* MatrixManager::m_pInstance = 0;
+MatrixManager localMatrixManager;
+MatrixManager *gMatrixManager = &localMatrixManager;
 
 MatrixManager::MatrixManager()
 {
@@ -12,15 +13,6 @@ MatrixManager::MatrixManager()
 	pushMatrix4(MODELVIEW, glm::mat4(1.0f)); 
 	pushMatrix4(PROJECTION, glm::mat4(1.0f)); 
 	pushMatrix3(NORMAL, glm::mat3(1.0f)); 
-}
-
-MatrixManager *MatrixManager::getInstance()
-{
-	if (m_pInstance == 0)
-	{
-		m_pInstance = new MatrixManager();
-	}
-	return m_pInstance;
 }
 
 void MatrixManager::putMatrix4(Matrix4Type type, glm::mat4 matrix)

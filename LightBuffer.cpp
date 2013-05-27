@@ -49,7 +49,7 @@ LightBuffer::LightBuffer(int nWidth, int nHeight)
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 	
-	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("DirectLight");
+	GLSLProgram *glslProgram = gShaderManager->getShader("DirectLight");
 	glBindAttribLocation(glslProgram->getHandle(), 0, "v_vertex");
 	glBindAttribLocation(glslProgram->getHandle(), 1, "v_texture");
 }
@@ -65,7 +65,7 @@ LightBuffer::~LightBuffer()
 void LightBuffer::drawToBuffer(GLuint nNormalTex, GLuint nDepthTex, GLuint nGlowTex, View *view)
 {
 	Profiler::getInstance()->startProfile("Draw Light");
-	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("DirectLight");
+	GLSLProgram *glslProgram = gShaderManager->getShader("DirectLight");
 	glslProgram->use();
 
 	bind();
@@ -77,15 +77,15 @@ void LightBuffer::drawToBuffer(GLuint nNormalTex, GLuint nDepthTex, GLuint nGlow
 
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 
-	MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::mat4(1.0f));
-	MatrixManager::getInstance()->putMatrix4(PROJECTION, glm::mat4(1.0f));
+	gMatrixManager->putMatrix4(MODELVIEW, glm::mat4(1.0f));
+	gMatrixManager->putMatrix4(PROJECTION, glm::mat4(1.0f));
 	Camera *camera = worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera();
 	camera->transform();
 	view->use3D(true);
-	glm::mat4 m4InvMVP = MatrixManager::getInstance()->getMatrix4(PROJECTION) * MatrixManager::getInstance()->getMatrix4(MODELVIEW);
+	glm::mat4 m4InvMVP = gMatrixManager->getMatrix4(PROJECTION) * gMatrixManager->getMatrix4(MODELVIEW);
 	m4InvMVP = glm::inverse(m4InvMVP);
-	MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::mat4(1.0f));
-	MatrixManager::getInstance()->putMatrix4(PROJECTION, glm::mat4(1.0f));
+	gMatrixManager->putMatrix4(MODELVIEW, glm::mat4(1.0f));
+	gMatrixManager->putMatrix4(PROJECTION, glm::mat4(1.0f));
 	view->use3D(false);
 
 	glBindFragDataLocation(glslProgram->getHandle(), 0, "lightBuffer");
@@ -93,7 +93,7 @@ void LightBuffer::drawToBuffer(GLuint nNormalTex, GLuint nDepthTex, GLuint nGlow
 
 	worldState->getWorldManager()->getSun()->sendToShader("DirectLight");
 
-	glslProgram->sendUniform("projectionMatrix", &MatrixManager::getInstance()->getMatrix4(PROJECTION)[0][0]);
+	glslProgram->sendUniform("projectionMatrix", &gMatrixManager->getMatrix4(PROJECTION)[0][0]);
 	glslProgram->sendUniform("inverseMVPMatrix", &m4InvMVP[0][0]);
 	glslProgram->sendUniform("near", (float)view->getNear());
 	glslProgram->sendUniform("far", (float)view->getFar());

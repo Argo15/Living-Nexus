@@ -17,7 +17,7 @@ Material::Material()
 	m_nTexRotate=0.0;
 	m_nSpecular=0.0;
 	m_nShininess=25;
-	m_sNormalName=TextureManager::getInstance()->getTexture("White")->getName();
+	m_sNormalName=gTextureManager->getTexture("White")->getName();
 	m_bNormalEnabled=false;
 }
 
@@ -46,18 +46,18 @@ void Material::use()
 
 	glActiveTextureARB(GL_TEXTURE0);
 	glEnable(GL_TEXTURE_2D);
-	TextureManager::getInstance()->bindTexture(*m_sTextureName);
+	gTextureManager->bindTexture(*m_sTextureName);
 }
 
 void Material::sendToShader(string sShader)
 {
-	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader(sShader);
+	GLSLProgram *glslProgram = gShaderManager->getShader(sShader);
 	glActiveTextureARB(GL_TEXTURE0);
 	glEnable(GL_TEXTURE_2D);
-	TextureManager::getInstance()->bindTexture(*m_sTextureName);
+	gTextureManager->bindTexture(*m_sTextureName);
 	glActiveTextureARB(GL_TEXTURE1);
 	glEnable(GL_TEXTURE_2D);
-	TextureManager::getInstance()->bindTexture(*m_sNormalName);
+	gTextureManager->bindTexture(*m_sNormalName);
 	glslProgram->sendUniform("tex", 0);
 	glslProgram->sendUniform("normalmap", 1);
 	glslProgram->sendUniform("material.normalenabled", m_bNormalEnabled);

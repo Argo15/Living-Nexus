@@ -9,12 +9,10 @@ using namespace std;
 class ModelManager
 {
 private:
-	static ModelManager *m_pInstance;
 	map<string,Model *> m_models;
 
-	ModelManager();
 public:
-	static ModelManager *getInstance();
+	ModelManager();
 
     void initialize();
 	void loadModel(string sFileName);
@@ -26,5 +24,7 @@ public:
 	Model *getModel(string sName);
 	map<string,Model *> *getModels();
 };
+
+extern ModelManager *gModelManager;
 
 #endif

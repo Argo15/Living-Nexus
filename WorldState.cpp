@@ -37,8 +37,9 @@ WorldState::WorldState(const char *sFilename)
 	m_bMovementEnabled = true;
 
 	m_worldHud = new WorldHud();
+	m_inventoryGui = new InventoryGui();
 	m_inventoryFrame = new SquareFrame();
-	m_inventoryFrame->addElement(InventoryGui::getInstance());
+	m_inventoryFrame->addElement(m_inventoryGui);
 }
 
 WorldState::~WorldState()
@@ -67,7 +68,7 @@ void WorldState::tick(int nFps)
 	if (m_bMovementEnabled)
 	{
 		m_physicsManager->tick(nFps);
-		GuiManager::getInstance()->setRootElement(m_worldHud);
+		gGuiManager->setRootElement(m_worldHud);
 	}
 	m_worldManager->tick(nFps);
 	m_shadowMapManager->tick(nFps);
@@ -78,14 +79,14 @@ void WorldState::toggleInventory()
 {
 	m_bMovementEnabled = !m_bMovementEnabled;
 	toggleMouse();
-	if (GuiManager::getInstance()->getRootElement() == m_inventoryFrame)
+	if (gGuiManager->getRootElement() == m_inventoryFrame)
 	{
-		GuiManager::getInstance()->setRootElement(m_worldHud);
+		gGuiManager->setRootElement(m_worldHud);
 	}
 	else
 	{
-		InventoryGui::getInstance()->init();
-		GuiManager::getInstance()->setRootElement(m_inventoryFrame);
+		m_inventoryGui->init();
+		gGuiManager->setRootElement(m_inventoryFrame);
 	}
 }
 

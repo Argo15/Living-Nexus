@@ -170,7 +170,7 @@ void Camera::recalculate()
 
 void Camera::transform()
 {
-	MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::lookAt(
+	gMatrixManager->putMatrix4(MODELVIEW, glm::lookAt(
 		glm::vec3(m_nEyePos[0],m_nEyePos[1],m_nEyePos[2]),
 		glm::vec3(m_nLookAt[0],m_nLookAt[1],m_nLookAt[2]),
 		glm::vec3(m_nUp[0],m_nUp[1],m_nUp[2])

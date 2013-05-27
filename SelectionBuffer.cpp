@@ -65,7 +65,7 @@ SelectionBuffer::~SelectionBuffer()
 void SelectionBuffer::drawToBuffer(vector<ClickObject *> *clickObjects, View *view, Camera *camera)
 {
 	Profiler::getInstance()->startProfile("Draw Selection");
-	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("Selection");
+	GLSLProgram *glslProgram = gShaderManager->getShader("Selection");
 	glslProgram->use();
 
 	bind();
@@ -76,28 +76,28 @@ void SelectionBuffer::drawToBuffer(vector<ClickObject *> *clickObjects, View *vi
 	glPushAttrib( GL_VIEWPORT_BIT );
 	glViewport( 0, 0, getWidth(), getHeight());
 
-	MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::mat4(1.0f));
-	MatrixManager::getInstance()->putMatrix4(PROJECTION, glm::mat4(1.0f));
+	gMatrixManager->putMatrix4(MODELVIEW, glm::mat4(1.0f));
+	gMatrixManager->putMatrix4(PROJECTION, glm::mat4(1.0f));
 	view->use3D(true);
-	MatrixManager::getInstance()->putMatrix4(PROJECTION, camera->transformToMatrix(MatrixManager::getInstance()->getMatrix4(PROJECTION)));
+	gMatrixManager->putMatrix4(PROJECTION, camera->transformToMatrix(gMatrixManager->getMatrix4(PROJECTION)));
 
 	glBindFragDataLocation(glslProgram->getHandle(), 0, "selectionBuffer");
 	glBindAttribLocation(glslProgram->getHandle(), 0, "v_vertex");
 
-	glslProgram->sendUniform("projectionCameraMatrix", &MatrixManager::getInstance()->getMatrix4(PROJECTION)[0][0]);
+	glslProgram->sendUniform("projectionCameraMatrix", &gMatrixManager->getMatrix4(PROJECTION)[0][0]);
 	glslProgram->sendUniform("camPos",camera->getEyeX(),camera->getEyeY(),camera->getEyeZ());
 
 	int nId=1;
 	for (std::vector<ClickObject *>::iterator it = clickObjects->begin(); it != clickObjects->end(); it++)
 	{
-		MatrixManager::getInstance()->pushMatrix4(MODELVIEW);
-			MatrixManager::getInstance()->multMatrix4(MODELVIEW, (*it)->getTransform());
-			glslProgram->sendUniform("modelviewMatrix", &MatrixManager::getInstance()->getMatrix4(MODELVIEW)[0][0]);
+		gMatrixManager->pushMatrix4(MODELVIEW);
+			gMatrixManager->multMatrix4(MODELVIEW, (*it)->getTransform());
+			glslProgram->sendUniform("modelviewMatrix", &gMatrixManager->getMatrix4(MODELVIEW)[0][0]);
 			float nColor[3];
 			getColorFromID(nId, nColor);
 			glslProgram->sendUniform("color", nColor[0], nColor[1], nColor[2]);
 			(*it)->getTile()->drawTile("Selection");
-		MatrixManager::getInstance()->popMatrix4(MODELVIEW);
+		gMatrixManager->popMatrix4(MODELVIEW);
 		nId++;
 	}
 

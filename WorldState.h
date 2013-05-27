@@ -32,6 +32,7 @@ private:
 	ShadowMapManager *m_shadowMapManager;
 	
 	WorldHud *m_worldHud;
+	InventoryGui *m_inventoryGui;
 	SquareFrame *m_inventoryFrame;
 
 	bool m_bMovementEnabled;

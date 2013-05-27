@@ -28,7 +28,7 @@ void GuiElement::draw()
 		glColor4f(m_nColor[0]+m_nColorExtra[0], m_nColor[1]+m_nColorExtra[1], m_nColor[2]+m_nColorExtra[2], m_nColor[3]+m_nColorExtra[3]);
 		if (m_sBackgroundImage.length() > 0)
 		{
-			TextureManager::getInstance()->bindTexture(m_sBackgroundImage);
+			gTextureManager->bindTexture(m_sBackgroundImage);
 		}
 		else
 		{

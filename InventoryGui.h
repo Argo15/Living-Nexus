@@ -15,7 +15,6 @@
 class InventoryGui : public GuiElement, public ButtonListener
 {
 private:
-	static InventoryGui *m_pInstance;
 	int m_nNumChildren;
 	GuiElement **m_children;	// Children elements.
 	int m_nClickedChild;
@@ -26,10 +25,9 @@ private:
 
 	void drawChildren();
 
-	InventoryGui(GuiElement *parent = 0);
 
 public:
-	static InventoryGui *getInstance(GuiElement *parent = 0);
+	InventoryGui(GuiElement *parent = 0);
 
 	void init();
 	void draw();

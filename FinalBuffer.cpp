@@ -40,7 +40,7 @@ FinalBuffer::FinalBuffer(int nWidth, int nHeight)
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 
-	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("Final");
+	GLSLProgram *glslProgram = gShaderManager->getShader("Final");
 	glBindAttribLocation(glslProgram->getHandle(), 0, "v_vertex");
 	glBindAttribLocation(glslProgram->getHandle(), 1, "v_texture");
 }
@@ -56,7 +56,7 @@ FinalBuffer::~FinalBuffer()
 void FinalBuffer::drawToBuffer(GLuint nColorTex, GLuint nLightTex, GLuint nGlowTex, View *view)
 {
 	Profiler::getInstance()->startProfile("Draw Final");
-	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("Final");
+	GLSLProgram *glslProgram = gShaderManager->getShader("Final");
 	glslProgram->use();
 
 	bind();
@@ -68,12 +68,12 @@ void FinalBuffer::drawToBuffer(GLuint nColorTex, GLuint nLightTex, GLuint nGlowT
 
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 
-	MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::mat4(1.0f));
-	MatrixManager::getInstance()->putMatrix4(PROJECTION, glm::mat4(1.0f));
+	gMatrixManager->putMatrix4(MODELVIEW, glm::mat4(1.0f));
+	gMatrixManager->putMatrix4(PROJECTION, glm::mat4(1.0f));
 	view->use3D(false);
 
 	glBindFragDataLocation(glslProgram->getHandle(), 0, "finalBuffer");
-	glslProgram->sendUniform("projectionMatrix", &MatrixManager::getInstance()->getMatrix4(PROJECTION)[0][0]);
+	glslProgram->sendUniform("projectionMatrix", &gMatrixManager->getMatrix4(PROJECTION)[0][0]);
 
 	glActiveTexture(GL_TEXTURE0); 
 	glBindTexture(GL_TEXTURE_2D, nColorTex);

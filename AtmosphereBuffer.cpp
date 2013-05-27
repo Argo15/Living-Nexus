@@ -58,7 +58,7 @@ AtmosphereBuffer::AtmosphereBuffer(int nWidth, int nHeight)
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 	
-	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("Atmosphere");
+	GLSLProgram *glslProgram = gShaderManager->getShader("Atmosphere");
 	glBindAttribLocation(glslProgram->getHandle(), 0, "v_vertex");
 	glBindAttribLocation(glslProgram->getHandle(), 1, "v_texture");
 }
@@ -75,7 +75,7 @@ AtmosphereBuffer::~AtmosphereBuffer()
 void AtmosphereBuffer::drawToBuffer(GLuint colorBuf, GLuint glowBuf, GLuint depthBuf, View *view)
 {
 	Profiler::getInstance()->startProfile("Draw Atmosphere");
-	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("Atmosphere");
+	GLSLProgram *glslProgram = gShaderManager->getShader("Atmosphere");
 	glslProgram->use();
 
 	bind();
@@ -87,20 +87,20 @@ void AtmosphereBuffer::drawToBuffer(GLuint colorBuf, GLuint glowBuf, GLuint dept
 
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 
-	MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::mat4(1.0f)); 
-	MatrixManager::getInstance()->putMatrix4(PROJECTION, glm::mat4(1.0f)); 
+	gMatrixManager->putMatrix4(MODELVIEW, glm::mat4(1.0f)); 
+	gMatrixManager->putMatrix4(PROJECTION, glm::mat4(1.0f)); 
 	Camera *camera = worldState->getPhysicsManager()->getWorldCameras()->getCurrentCamera();
 	camera->transform();
 	view->use3D(true);
-	glm::mat4 m4InvMVP = MatrixManager::getInstance()->getMatrix4(PROJECTION) * MatrixManager::getInstance()->getMatrix4(MODELVIEW);
+	glm::mat4 m4InvMVP = gMatrixManager->getMatrix4(PROJECTION) * gMatrixManager->getMatrix4(MODELVIEW);
 	m4InvMVP = glm::inverse(m4InvMVP);
-	MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::mat4(1.0f));
-	MatrixManager::getInstance()->putMatrix4(PROJECTION, glm::mat4(1.0f));
+	gMatrixManager->putMatrix4(MODELVIEW, glm::mat4(1.0f));
+	gMatrixManager->putMatrix4(PROJECTION, glm::mat4(1.0f));
 	view->use3D(false);
 
 	glBindFragDataLocation(glslProgram->getHandle(), 0, "colorBuffer");
 	glBindFragDataLocation(glslProgram->getHandle(), 1, "glowBuffer");
-	glslProgram->sendUniform("projectionMatrix", &MatrixManager::getInstance()->getMatrix4(PROJECTION)[0][0]);
+	glslProgram->sendUniform("projectionMatrix", &gMatrixManager->getMatrix4(PROJECTION)[0][0]);
 	glslProgram->sendUniform("inverseMVPMatrix", &m4InvMVP[0][0]);
 	glslProgram->sendUniform("cameraPos",camera->getEyeX(),camera->getEyeY(),camera->getEyeZ());
 	Vector3 vSunDir = worldState->getWorldManager()->getSun()->getDirection();
@@ -116,7 +116,7 @@ void AtmosphereBuffer::drawToBuffer(GLuint colorBuf, GLuint glowBuf, GLuint dept
 	glActiveTexture(GL_TEXTURE2); 
 	glBindTexture(GL_TEXTURE_2D, depthBuf);
 	glActiveTexture(GL_TEXTURE3); 
-	TextureManager::getInstance()->bindTexture("Cloud");
+	gTextureManager->bindTexture("Cloud");
 	glslProgram->sendUniform("colorTex",0);
 	glslProgram->sendUniform("glowTex",1);
 	glslProgram->sendUniform("depthTex",2);

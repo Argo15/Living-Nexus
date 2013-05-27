@@ -3,21 +3,13 @@
 #include "Logger.h"
 #include "DrawFunc.h"
 
-GuiManager* GuiManager::m_pInstance = 0;
+GuiManager localGuiManager;
+GuiManager *gGuiManager = &localGuiManager;
 
 GuiManager::GuiManager()
 {
 	m_rootElement = 0;
 	EventManager::getInstance()->addListener("onMouseClick", this);
-}
-
-GuiManager *GuiManager::getInstance()
-{
-	if (m_pInstance == 0)
-	{
-		m_pInstance = new GuiManager();
-	}
-	return m_pInstance;
 }
 
 void GuiManager::render()
@@ -26,7 +18,7 @@ void GuiManager::render()
 	{
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		MaterialManager::getInstance()->useMaterial("Default");
+		gMaterialManager->useMaterial("Default");
 		m_rootElement->draw();
 		glColor4f(1.0, 1.0, 1.0, 1.0);
 		glBlendFunc(GL_ONE, GL_ZERO);

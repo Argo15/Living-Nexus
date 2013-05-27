@@ -7,19 +7,11 @@
 #include "dirent.h"
 #include "Logger.h"
 
-ModelManager* ModelManager::m_pInstance = 0;
+ModelManager localModelManager;
+ModelManager *gModelManager = &localModelManager;
 
 ModelManager::ModelManager()
 {
-}
-
-ModelManager *ModelManager::getInstance() 
-{
-	if (m_pInstance == 0) 
-	{
-		m_pInstance = new ModelManager();
-	}
-	return m_pInstance;
 }
 
 void ModelManager::initialize()

@@ -46,8 +46,8 @@ void CascadedShadowMap::buildShadowMaps()
 		Frustum *lightFrustum = new Frustum();
 		lightFrustum->getOrthoFrustum(lightCamera,lightView);
 
-		MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::mat4(1.0f));
-		MatrixManager::getInstance()->putMatrix4(PROJECTION, glm::mat4(1.0f));
+		gMatrixManager->putMatrix4(MODELVIEW, glm::mat4(1.0f));
+		gMatrixManager->putMatrix4(PROJECTION, glm::mat4(1.0f));
 		
 		m_shadowMaps[i]->bind();
 		glClearDepth(1.0);
@@ -58,11 +58,11 @@ void CascadedShadowMap::buildShadowMaps()
 		lightView->use3D(false);
 		glm::mat4 cameraMat = glm::mat4(1.0f);
 		cameraMat = lightCamera->transformToMatrix(cameraMat);
-		m_m4LightMatrix[i] = MatrixManager::getInstance()->getMatrix4(PROJECTION) * cameraMat;
-		GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("SunShadow");
+		m_m4LightMatrix[i] = gMatrixManager->getMatrix4(PROJECTION) * cameraMat;
+		GLSLProgram *glslProgram = gShaderManager->getShader("SunShadow");
 		glslProgram->use();
-		MatrixManager::getInstance()->multMatrix4(PROJECTION, cameraMat);
-		glslProgram->sendUniform("projectionCameraMatrix",&MatrixManager::getInstance()->getMatrix4(PROJECTION)[0][0]);
+		gMatrixManager->multMatrix4(PROJECTION, cameraMat);
+		glslProgram->sendUniform("projectionCameraMatrix",&gMatrixManager->getMatrix4(PROJECTION)[0][0]);
 		glslProgram->sendUniform("camPos",camera->getEyeX(),camera->getEyeY(),camera->getEyeZ());
 		worldState->getWorldManager()->renderWorld("SunShadow",lightFrustum);
 		
@@ -188,7 +188,7 @@ View *CascadedShadowMap::createLightView(float nSlice1, float nSlice2, Camera *c
 
 void CascadedShadowMap::sendToShader(string sShader)
 {
-	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader(sShader);
+	GLSLProgram *glslProgram = gShaderManager->getShader(sShader);
 	glActiveTexture(GL_TEXTURE4);
 	glBindTexture(GL_TEXTURE_2D,m_shadowMaps[0]->getTexture());
 	glslProgram->sendUniform("shadowMap[0]",4);

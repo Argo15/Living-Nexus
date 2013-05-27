@@ -6,11 +6,11 @@ void View::use3D(bool use3D)
 {
     if (use3D)
 	{
-		MatrixManager::getInstance()->putMatrix4(PROJECTION, (glm::mat4) glm::perspective(m_nFov, m_nAspect, m_nZNear, m_nZFar));
+		gMatrixManager->putMatrix4(PROJECTION, (glm::mat4) glm::perspective(m_nFov, m_nAspect, m_nZNear, m_nZFar));
 	}
     else
 	{
-		MatrixManager::getInstance()->putMatrix4(PROJECTION, (glm::mat4) glm::ortho(m_nLeft, m_nRight, m_nBottom, m_nTop, m_nFront, m_nBack));
+		gMatrixManager->putMatrix4(PROJECTION, (glm::mat4) glm::ortho(m_nLeft, m_nRight, m_nBottom, m_nTop, m_nFront, m_nBack));
 	}
 }
 

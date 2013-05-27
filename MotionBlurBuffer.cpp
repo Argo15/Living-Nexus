@@ -39,7 +39,7 @@ MotionBlurBuffer::MotionBlurBuffer(int nWidth, int nHeight)
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 	
-	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("MotionBlur");
+	GLSLProgram *glslProgram = gShaderManager->getShader("MotionBlur");
 	glBindAttribLocation(glslProgram->getHandle(), 0, "v_vertex");
 	glBindAttribLocation(glslProgram->getHandle(), 1, "v_texture");
 }
@@ -55,7 +55,7 @@ MotionBlurBuffer::~MotionBlurBuffer()
 void MotionBlurBuffer::drawToBuffer(GLuint nTexture, GLuint nVelocityTex, int nNumSamples, View *view)
 {
 	Profiler::getInstance()->startProfile("Draw Motion Blur");
-	GLSLProgram *glslProgram = ShaderManager::getInstance()->getShader("MotionBlur");
+	GLSLProgram *glslProgram = gShaderManager->getShader("MotionBlur");
 	glslProgram->use();
 
 	bind();
@@ -66,13 +66,13 @@ void MotionBlurBuffer::drawToBuffer(GLuint nTexture, GLuint nVelocityTex, int nN
 
 	WorldState *worldState = (WorldState *) GameState::GAMESTATE;
 
-	MatrixManager::getInstance()->putMatrix4(MODELVIEW, glm::mat4(1.0f));
-	MatrixManager::getInstance()->putMatrix4(PROJECTION, glm::mat4(1.0f));
+	gMatrixManager->putMatrix4(MODELVIEW, glm::mat4(1.0f));
+	gMatrixManager->putMatrix4(PROJECTION, glm::mat4(1.0f));
 	view->use3D(false);
 
 	glBindFragDataLocation(glslProgram->getHandle(), 0, "blurBuffer");
 
-	glslProgram->sendUniform("projectionMatrix", &MatrixManager::getInstance()->getMatrix4(PROJECTION)[0][0]);
+	glslProgram->sendUniform("projectionMatrix", &gMatrixManager->getMatrix4(PROJECTION)[0][0]);
 
 	glActiveTexture(GL_TEXTURE0); 
 	glBindTexture(GL_TEXTURE_2D, nTexture);

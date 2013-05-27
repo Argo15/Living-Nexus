@@ -10,12 +10,10 @@ using namespace std;
 class TextureManager 
 {
 private:
-	static TextureManager *m_pInstance;
 	map<string,Texture *> m_textures;
 
-	TextureManager();
 public:
-	static TextureManager *getInstance();
+	TextureManager();
 
     void initialize();
 	void loadTexture(string sFileName);
@@ -26,5 +24,7 @@ public:
 	Texture *getTexture(string sName);
 	map<string,Texture *> *getTextures();
 };
+
+extern TextureManager *gTextureManager;
 
 #endif

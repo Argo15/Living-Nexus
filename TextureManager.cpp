@@ -7,20 +7,12 @@
 #include "dirent.h"
 #include "Logger.h"
 
-TextureManager* TextureManager::m_pInstance = 0;
+TextureManager localTextureManager;
+TextureManager *gTextureManager = &localTextureManager;
 
 TextureManager::TextureManager()
 {
 	
-}
-
-TextureManager *TextureManager::getInstance()
-{
-	if (m_pInstance == 0)
-	{
-		m_pInstance = new TextureManager();
-	}
-	return m_pInstance;
 }
 
 void TextureManager::initialize()

@@ -29,10 +29,10 @@ void init()
 {
 	Config::getInstance();
 
-	TextureManager::getInstance()->initialize();
-	ModelManager::getInstance()->initialize();
-	MaterialManager::getInstance()->initialize();
-	ShaderManager::getInstance()->initialize();	
+	gTextureManager->initialize();
+	gModelManager->initialize();
+	gMaterialManager->initialize();
+	gShaderManager->initialize();	
 	FreeTypeManager::getInstance()->initialize();
 	ClickManager::getInstance();
 

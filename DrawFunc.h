@@ -30,8 +30,8 @@ static void transformNoShaders()
 {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glMultMatrixf(&MatrixManager::getInstance()->getMatrix4(PROJECTION)[0][0]);
+	glMultMatrixf(&gMatrixManager->getMatrix4(PROJECTION)[0][0]);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glMultMatrixf(&MatrixManager::getInstance()->getMatrix4(MODELVIEW)[0][0]);
+	glMultMatrixf(&gMatrixManager->getMatrix4(MODELVIEW)[0][0]);
 }

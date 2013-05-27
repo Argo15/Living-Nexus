@@ -13,13 +13,11 @@
 class GuiManager : public EventListener
 {
 private:
-	static GuiManager *m_pInstance;
 	GuiElement *m_rootElement;
 
+public:
 	GuiManager();
 
-public:
-	static GuiManager *getInstance();
 	void render();
 
 	// event handlers
@@ -30,5 +28,7 @@ public:
 	
 	void eventTriggered(string sEventName, void *pEventData);
 };
+
+extern GuiManager *gGuiManager;
 
 #endif
