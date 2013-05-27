@@ -4,6 +4,7 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include "FontTexture.h"
+#include "FontManager.h"
 
 /*
  * Author: wcrane
@@ -11,18 +12,18 @@
  *
  * Wrapper for the FreeType2 font library
  */
-class FreeTypeManager 
+class FreeTypeManager : public FontManager
 {
 private:
-	static FreeTypeManager *m_pInstance;
 	FontTexture *m_font;
 
-	FreeTypeManager();
 public:
-	static FreeTypeManager *getInstance();
+	FreeTypeManager();
 
     void initialize();
 	FontTexture *getFont();
 };
+
+extern FontManager *gFontManager;
 
 #endif

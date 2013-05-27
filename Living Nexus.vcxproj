@@ -104,6 +104,7 @@
     <ClCompile Include="ClickManager.cpp" />
     <ClCompile Include="ClickObject.cpp" />
     <ClCompile Include="EventManager.cpp" />
+    <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="FontTexture.cpp" />
     <ClCompile Include="FreeTypeManager.cpp" />
     <ClCompile Include="FruitClickObject.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EventListener.h" />
     <ClInclude Include="EventManager.h" />
+    <ClInclude Include="FontManager.h" />
     <ClInclude Include="FontTexture.h" />
     <ClInclude Include="FreeTypeManager.h" />
     <ClInclude Include="FruitClickObject.h" />

@@ -33,7 +33,7 @@ void init()
 	gModelManager->initialize();
 	gMaterialManager->initialize();
 	gShaderManager->initialize();	
-	FreeTypeManager::getInstance()->initialize();
+	gFontManager->initialize();
 	ClickManager::getInstance();
 
 	UserSession::getInstance()->startUserSession("Argo");

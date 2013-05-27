@@ -1,20 +1,12 @@
 #include "FreeTypeManager.h"
 #include "Logger.h"
 
-FreeTypeManager* FreeTypeManager::m_pInstance = 0;
+FreeTypeManager localFontManager;
+FontManager *gFontManager = &localFontManager;
 
 FreeTypeManager::FreeTypeManager()
 {
 	
-}
-
-FreeTypeManager *FreeTypeManager::getInstance()
-{
-	if (m_pInstance == 0)
-	{
-		m_pInstance = new FreeTypeManager();
-	}
-	return m_pInstance;
 }
 
 void FreeTypeManager::initialize()
