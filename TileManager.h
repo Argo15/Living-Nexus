@@ -24,4 +24,6 @@ public:
 	map<string,Tile *> *getTiles();
 };
 
+extern TileManager *gTileManager;
+
 #endif

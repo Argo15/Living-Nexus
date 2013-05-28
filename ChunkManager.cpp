@@ -7,6 +7,9 @@
 #include "dirent.h"
 #include "Logger.h"
 
+ChunkManager localChunkManager;
+ChunkManager *gChunkManager = &localChunkManager;
+
 ChunkManager::ChunkManager()
 {
 	

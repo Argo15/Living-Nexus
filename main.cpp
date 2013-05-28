@@ -33,6 +33,8 @@ void init()
 	gModelManager->initialize();
 	gMaterialManager->initialize();
 	gShaderManager->initialize();	
+	gChunkManager->initialize();
+	gTileManager->initialize();
 	gFontManager->initialize();
 	gEventManager->addListener("onMouseClick", gClickManager);
 

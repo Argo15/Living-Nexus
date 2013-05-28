@@ -26,7 +26,7 @@ WorldChunks::WorldChunks(int nWidth, int nHeight)
  * Add an beach to the end of the world. And an ocean.
  * Note: this needs a cleanup
  */
-void WorldChunks::generateChunks(ChunkManager *chunks, PhysicsManager *physicsManager)
+void WorldChunks::generateChunks(PhysicsManager *physicsManager)
 {
 	string sChunkNames[12];
 	sChunkNames[0] = "Flat Chunk";
@@ -58,13 +58,13 @@ void WorldChunks::generateChunks(ChunkManager *chunks, PhysicsManager *physicsMa
 		{
 			for (int j=0; j<m_nHeight-1; j++)
 			{
-				*m_worldChunks[i][j] = *(chunks->getChunk(sChunkNames[0]));
+				*m_worldChunks[i][j] = *(gChunkManager->getChunk(sChunkNames[0]));
 				m_worldChunks[i][j]->setTranslate(i*10.0f,0,j*10.0f);
 			}
 		}
 		for (int i=0; i< m_nWidth; i++)
 		{
-			*m_worldChunks[i][m_nHeight-1] = *(chunks->getChunk(sChunkNames[8]));
+			*m_worldChunks[i][m_nHeight-1] = *(gChunkManager->getChunk(sChunkNames[8]));
 			m_worldChunks[i][m_nHeight-1]->setTranslate(i*10.0f,0,(m_nHeight-1)*10.0f);
 		}
 
@@ -76,11 +76,11 @@ void WorldChunks::generateChunks(ChunkManager *chunks, PhysicsManager *physicsMa
 		} 
 		while (abs(vStartPoint.x-m_nWidth/2) < 2);
 
-		*m_worldChunks[vStartPoint.x][vStartPoint.y] = *(chunks->getChunk(sChunkNames[1]));
+		*m_worldChunks[vStartPoint.x][vStartPoint.y] = *(gChunkManager->getChunk(sChunkNames[1]));
 		m_worldChunks[vStartPoint.x][vStartPoint.y]->setTranslate(vStartPoint.x*10.0f,0,vStartPoint.y*10.0f);
 		m_worldChunks[vStartPoint.x][vStartPoint.y]->setOrientation(1);
 		Chunk *waterChunk = new Chunk();
-		*waterChunk = *(chunks->getChunk(sChunkNames[7]));
+		*waterChunk = *(gChunkManager->getChunk(sChunkNames[7]));
 		waterChunk->setTranslate(vStartPoint.x*10.0f,0,vStartPoint.y*10.0f);
 		m_allChunks->push_back(waterChunk);
 
@@ -118,7 +118,7 @@ void WorldChunks::generateChunks(ChunkManager *chunks, PhysicsManager *physicsMa
 			}
 
 			// set river chunk, and move a nDirection
-			*m_worldChunks[vCurrentPoint.x][vCurrentPoint.y] = *(chunks->getChunk(sChunkNames[1+nBridgeOffset]));
+			*m_worldChunks[vCurrentPoint.x][vCurrentPoint.y] = *(gChunkManager->getChunk(sChunkNames[1+nBridgeOffset]));
 			m_worldChunks[vCurrentPoint.x][vCurrentPoint.y]->setTranslate(vCurrentPoint.x*10.0f,0,vCurrentPoint.y*10.0f);
 			m_worldChunks[vCurrentPoint.x][vCurrentPoint.y]->setOrientation(nOrientation);
 			nLastDirection = nDirection;
@@ -156,26 +156,26 @@ void WorldChunks::generateChunks(ChunkManager *chunks, PhysicsManager *physicsMa
 			// Check if a turn was made, and replace chunk if needed
 			if (nDirection == 0 && nLastDirection != 0 )
 			{
-				*m_worldChunks[vCurrentPoint.x][vCurrentPoint.y] = *(chunks->getChunk(sChunkNames[2+nBridgeOffset]));
+				*m_worldChunks[vCurrentPoint.x][vCurrentPoint.y] = *(gChunkManager->getChunk(sChunkNames[2+nBridgeOffset]));
 				m_worldChunks[vCurrentPoint.x][vCurrentPoint.y]->setTranslate(vCurrentPoint.x*10.0f,0,vCurrentPoint.y*10.0f);
 				m_worldChunks[vCurrentPoint.x][vCurrentPoint.y]->setOrientation(nLastDirection + 2);
 			}
 			else if ( nDirection != 0 && nLastDirection == 0 )
 			{
-				*m_worldChunks[vCurrentPoint.x][vCurrentPoint.y] = *(chunks->getChunk(sChunkNames[2+nBridgeOffset]));
+				*m_worldChunks[vCurrentPoint.x][vCurrentPoint.y] = *(gChunkManager->getChunk(sChunkNames[2+nBridgeOffset]));
 				m_worldChunks[vCurrentPoint.x][vCurrentPoint.y]->setTranslate(vCurrentPoint.x*10.0f,0,vCurrentPoint.y*10.0f);
 				m_worldChunks[vCurrentPoint.x][vCurrentPoint.y]->setOrientation(nDirection);
 			}
 
 			Chunk *waterChunk = new Chunk();
-			*waterChunk = *(chunks->getChunk(sChunkNames[7]));
+			*waterChunk = *(gChunkManager->getChunk(sChunkNames[7]));
 			waterChunk->setTranslate(vCurrentPoint.x*10.0f,0,vCurrentPoint.y*10.0f);
 			m_allChunks->push_back(waterChunk);
 
 		}
 		while (vCurrentPoint.y < m_nHeight-2 && vCurrentPoint.x < m_nWidth-1 && vCurrentPoint.x > 0);
 
-		*m_worldChunks[vCurrentPoint.x][vCurrentPoint.y+1] = *(chunks->getChunk(sChunkNames[9]));
+		*m_worldChunks[vCurrentPoint.x][vCurrentPoint.y+1] = *(gChunkManager->getChunk(sChunkNames[9]));
 		m_worldChunks[vCurrentPoint.x][vCurrentPoint.y+1]->setTranslate(vCurrentPoint.x*10.0f,0,(vCurrentPoint.y+1)*10.0f);
 		m_worldChunks[vCurrentPoint.x][vCurrentPoint.y+1]->setOrientation(nDirection);
 		for (int j=0; j<m_nHeight; j++)
@@ -210,7 +210,7 @@ void WorldChunks::generateChunks(ChunkManager *chunks, PhysicsManager *physicsMa
 	for (int i=0; i< m_nWidth; i++)
 	{
 		Chunk *edgeChunk = new Chunk();
-		*edgeChunk = *(chunks->getChunk(sChunkNames[3]));
+		*edgeChunk = *(gChunkManager->getChunk(sChunkNames[3]));
 		edgeChunk->setTranslate(i*10.0f,0,-10.0f);
 		edgeChunk->setOrientation(2);
 		m_allChunks->push_back(edgeChunk);
@@ -218,12 +218,12 @@ void WorldChunks::generateChunks(ChunkManager *chunks, PhysicsManager *physicsMa
 	for (int i=0; i<m_nHeight; i++)
 	{
 		Chunk *edgeChunk = new Chunk();
-		*edgeChunk = *(chunks->getChunk(sChunkNames[3]));
+		*edgeChunk = *(gChunkManager->getChunk(sChunkNames[3]));
 		edgeChunk->setTranslate(-10.0f,0,i*10.0f);
 		edgeChunk->setOrientation(3);
 		m_allChunks->push_back(edgeChunk);
 		edgeChunk = new Chunk();
-		*edgeChunk = *(chunks->getChunk(sChunkNames[3]));
+		*edgeChunk = *(gChunkManager->getChunk(sChunkNames[3]));
 		edgeChunk->setTranslate(m_nWidth*10.0f,0,i*10.0f);
 		edgeChunk->setOrientation(1);
 		m_allChunks->push_back(edgeChunk);
@@ -235,7 +235,7 @@ void WorldChunks::generateChunks(ChunkManager *chunks, PhysicsManager *physicsMa
 		for (int j=0; j<3; j++)
 		{
 			Chunk *waterChunk = new Chunk();
-			*waterChunk = *(chunks->getChunk(sChunkNames[7]));
+			*waterChunk = *(gChunkManager->getChunk(sChunkNames[7]));
 			waterChunk->setTranslate(i*10.0f,0,(m_nHeight+j)*10.0f);
 			m_allChunks->push_back(waterChunk);
 		}
@@ -243,11 +243,11 @@ void WorldChunks::generateChunks(ChunkManager *chunks, PhysicsManager *physicsMa
 
 	// add the corners
 	Chunk *cornerChunk = new Chunk();
-	*cornerChunk = *(chunks->getChunk(sChunkNames[4]));
+	*cornerChunk = *(gChunkManager->getChunk(sChunkNames[4]));
 	cornerChunk->setTranslate(-10.0f,0,-10.0f);
 	m_allChunks->push_back(cornerChunk);
 	cornerChunk = new Chunk();
-	*cornerChunk = *(chunks->getChunk(sChunkNames[4]));
+	*cornerChunk = *(gChunkManager->getChunk(sChunkNames[4]));
 	cornerChunk->setTranslate(m_nWidth*10.0f,0,-10.0f);
 	m_allChunks->push_back(cornerChunk);
 	cornerChunk = new Chunk();

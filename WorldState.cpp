@@ -13,10 +13,6 @@ WorldState *WorldState::getInstance()
 WorldState::WorldState(const char *sFilename)
 { 
 	m_physicsManager = new PhysicsManager();
-	m_chunkManager = new ChunkManager();
-	m_chunkManager->initialize();
-	m_tileManager = new TileManager();
-	m_tileManager->initialize();
 	m_renderer = new WorldRenderer();
 	m_renderer->init();
 	glutSetCursor(GLUT_CURSOR_NONE);
@@ -24,7 +20,7 @@ WorldState::WorldState(const char *sFilename)
 	m_worldManager = new WorldManager();
 	if (sFilename == 0)
 	{
-		m_worldManager->generateNewWorld(m_chunkManager, m_tileManager, m_physicsManager);
+		m_worldManager->generateNewWorld(m_physicsManager);
 	}
 	else
 	{
@@ -108,11 +104,6 @@ bool WorldState::mouseHidden()
 	return m_bMouseHide;
 }
 
-ChunkManager *WorldState::getChunkManager()
-{
-	return m_chunkManager;
-}
-	
 PhysicsManager *WorldState::getPhysicsManager()
 {
 	return m_physicsManager;
@@ -131,9 +122,4 @@ WorldRenderer *WorldState::getRenderer()
 ShadowMapManager *WorldState::getShadowMapManager()
 {
 	return m_shadowMapManager;
-}
-	
-TileManager *WorldState::getTileManager()
-{
-	return m_tileManager;
 }

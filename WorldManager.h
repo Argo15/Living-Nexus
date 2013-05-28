@@ -22,8 +22,6 @@ class WorldManager
 private:
 	WorldChunks *m_worldChunks;
 	WorldTiles *m_worldTiles;
-	ChunkManager *m_chunks;
-	TileManager *m_tiles;
 	DirectLight *m_sun;
 
 public:
@@ -31,7 +29,7 @@ public:
 
 	void tick(int nFps);
 	void loadWorld(string sFilename);
-	void generateNewWorld(ChunkManager *chunks, TileManager *tiles, PhysicsManager *physicsManager);
+	void generateNewWorld(PhysicsManager *physicsManager);
 	void renderWorld(string sShader, Frustum *frustum = 0);
 	void updateSunToGameTime(GameTime time);
 

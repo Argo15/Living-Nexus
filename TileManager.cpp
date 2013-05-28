@@ -7,6 +7,9 @@
 #include "dirent.h"
 #include "Logger.h"
 
+TileManager localTileManager;
+TileManager *gTileManager = &localTileManager;
+
 TileManager::TileManager()
 {
 	

@@ -9,7 +9,7 @@ FruitClickObject::FruitClickObject(Tree *parentTree, int nFruitIndex) : ClickObj
 	WorldState *worldState = (WorldState *)GameState::GAMESTATE;
 	Object *fruit = parentTree->getFruit(nFruitIndex);
 	Transformable *transform = parentTree->getTransform(nFruitIndex);
-	Tile *fruitTile = worldState->getTileManager()->getTile(fruit->getWorldTile());
+	Tile *fruitTile = gTileManager->getTile(fruit->getWorldTile());
 
 	m_tile = fruitTile;
 	m_transformMat = transform->transformToMatrix(parentTree->transformToMatrix(glm::mat4(1.0f)));

@@ -40,7 +40,7 @@ public:
 	WorldTiles(int nWidth, int nHeight);
 
 	void init();
-	void initializeFromChunks(WorldChunks *chunks, TileManager *manager, PhysicsManager *physicsManager);
+	void initializeFromChunks(WorldChunks *chunks, PhysicsManager *physicsManager);
 	bool addTile(int nPosX, int nPosY, Tile *tile, PhysicsManager *physicsManager);
 	void addClickObjects(Camera *camera);
 	vector<Tile *> *getAllTiles();

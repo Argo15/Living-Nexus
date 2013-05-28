@@ -24,8 +24,6 @@ class ShadowMapManager;
 class WorldState : public GameState
 {
 private:
-	ChunkManager *m_chunkManager;
-	TileManager *m_tileManager;
 	WorldRenderer *m_renderer;
 	PhysicsManager *m_physicsManager;
 	WorldManager *m_worldManager;
@@ -50,12 +48,10 @@ public:
 
 	virtual bool mouseHidden();
 
-	ChunkManager *getChunkManager();
 	PhysicsManager *getPhysicsManager();
 	WorldManager *getWorldManager();
 	WorldRenderer *getRenderer();
 	ShadowMapManager *getShadowMapManager();
-	TileManager *getTileManager();
 
 	void toggleInventory();
 };

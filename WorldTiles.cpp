@@ -32,7 +32,7 @@ void WorldTiles::init()
  * Using chunk data, initialize the tile values.
  * Then, fill remaining tiles randomly with trees.
  */
-void WorldTiles::initializeFromChunks(WorldChunks *chunks, TileManager *manager, PhysicsManager *physicsManager)
+void WorldTiles::initializeFromChunks(WorldChunks *chunks, PhysicsManager *physicsManager)
 {
 	init();
 	// Initialize from chunks
@@ -61,7 +61,7 @@ void WorldTiles::initializeFromChunks(WorldChunks *chunks, TileManager *manager,
 	{
 		nStandX = rand() % 70 + 15;
 		nStandY = rand() % 70 + 15;
-		*m_fruitStand = *manager->getTile("FruitStand");
+		*m_fruitStand = *gTileManager->getTile("FruitStand");
 		m_fruitStand->setRotate(rot);
 	} while (!addTile(nStandX,nStandY,m_fruitStand,physicsManager));
 
@@ -71,7 +71,7 @@ void WorldTiles::initializeFromChunks(WorldChunks *chunks, TileManager *manager,
 		for (int j=0; j<m_nHeight; j++)
 		{
 			Tile *blockTile = new Tree();
-			*blockTile = *(Tree*)manager->getTile("Tree");
+			*blockTile = *(Tree*)gTileManager->getTile("Tree");
 			if (rand() % 50 == 1)
 			{
 				if(addTile(i,j,blockTile,physicsManager))

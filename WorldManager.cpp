@@ -23,8 +23,8 @@ void WorldManager::tick(int nFps)
 	if(gInputManager->isKeyDownOnce('r'))
 	{
 		WorldState::getInstance()->getPhysicsManager()->getBulletManager()->clearDynamicsWorld();
-		m_worldChunks->generateChunks(m_chunks, WorldState::getInstance()->getPhysicsManager());
-		m_worldTiles->initializeFromChunks(m_worldChunks, m_tiles, WorldState::getInstance()->getPhysicsManager());
+		m_worldChunks->generateChunks(WorldState::getInstance()->getPhysicsManager());
+		m_worldTiles->initializeFromChunks(m_worldChunks, WorldState::getInstance()->getPhysicsManager());
 	}
 	// Mount click objects
 	gClickManager->clear();
@@ -42,12 +42,10 @@ void WorldManager::loadWorld(std::string sFilename)
 /*
  * Re-generate chunks and default tiles
  */
-void WorldManager::generateNewWorld(ChunkManager *chunks, TileManager *tiles, PhysicsManager *physicsManager)
+void WorldManager::generateNewWorld(PhysicsManager *physicsManager)
 {
-	m_worldChunks->generateChunks(chunks, physicsManager);
-	m_worldTiles->initializeFromChunks(m_worldChunks, tiles, physicsManager);
-	this->m_chunks = chunks;
-	this->m_tiles = tiles;
+	m_worldChunks->generateChunks(physicsManager);
+	m_worldTiles->initializeFromChunks(m_worldChunks, physicsManager);
 }
 
 /*

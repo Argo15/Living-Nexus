@@ -23,7 +23,7 @@ private:
 public:
 	WorldChunks(int nWidth, int nHeight);
 
-	void generateChunks(ChunkManager *chunks, PhysicsManager *physicsManager);
+	void generateChunks(PhysicsManager *physicsManager);
 	vector<Chunk *> *getAllChunks();
 	vector<Chunk *> *getVisibleChunks(Frustum *frustum);
 	Chunk *getChunk(int x, int y);

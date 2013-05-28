@@ -24,4 +24,6 @@ public:
 	map<string,Chunk *> *getChunks();
 };
 
+extern ChunkManager *gChunkManager;
+
 #endif

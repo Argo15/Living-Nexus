@@ -30,7 +30,7 @@ void Tree::drawExtra(std::string sShader)
 		if (m_fruit[i] != 0) 
 		{
 			std::string sFruitTile = m_fruit[i]->getWorldTile();
-			Tile *fruitTile = worldState->getTileManager()->getTile(sFruitTile);
+			Tile *fruitTile = gTileManager->getTile(sFruitTile);
 			gMatrixManager->pushMatrix4(MODELVIEW, m_fruitTransforms[i]->transformToMatrix(gMatrixManager->getMatrix4(MODELVIEW)));
 			gMatrixManager->pushMatrix3(NORMAL, m_fruitTransforms[i]->transformToMatrix(gMatrixManager->getMatrix3(NORMAL)));
 			fruitTile->drawTile(sShader);
