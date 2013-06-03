@@ -59,6 +59,7 @@ void WorldState::tick(int nFps)
 	// Open inventory
 	if (gInputManager->isKeyDownOnce((int)'f'))
 	{
+		m_inventoryGui->setOptionsType(USE_OPTIONS);
 		toggleInventory();
 	}
 	if (m_bMovementEnabled)
@@ -69,6 +70,11 @@ void WorldState::tick(int nFps)
 	m_worldManager->tick(nFps);
 	m_shadowMapManager->tick(nFps);
 	m_renderer->render();
+}
+
+InventoryGui *WorldState::getInventory()
+{
+	return m_inventoryGui;
 }
 
 void WorldState::toggleInventory()

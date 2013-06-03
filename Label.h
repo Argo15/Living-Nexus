@@ -28,6 +28,7 @@ public:
 	void setTextSize(float nSizeX, float nSizeY);
 	void setTextPos(float nX, float nY);
 	void centerTextPos();
+	string getText();
 };
 
 #endif

@@ -108,6 +108,8 @@
     <ClCompile Include="FontTexture.cpp" />
     <ClCompile Include="FreeTypeManager.cpp" />
     <ClCompile Include="FruitClickObject.cpp" />
+    <ClCompile Include="FruitStandClickObject.cpp" />
+    <ClCompile Include="InventoryOptionsFactory.cpp" />
     <ClCompile Include="Label.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Actor.cpp" />
@@ -199,6 +201,8 @@
     <ClInclude Include="FontTexture.h" />
     <ClInclude Include="FreeTypeManager.h" />
     <ClInclude Include="FruitClickObject.h" />
+    <ClInclude Include="FruitStandClickObject.h" />
+    <ClInclude Include="InventoryOptionsFactory.h" />
     <ClInclude Include="Label.h" />
     <ClInclude Include="OptionsGui.h" />
     <ClInclude Include="RelativeLayout.h" />

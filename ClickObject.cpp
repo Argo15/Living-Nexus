@@ -19,6 +19,4 @@ glm::mat4 ClickObject::getTransform()
 
 void ClickObject::onClick()
 {
-	Logging::GAME->info("I was clicked: " + *m_tile->getName());
-	WorldState::getInstance()->toggleInventory();
 }

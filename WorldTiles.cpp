@@ -1,6 +1,7 @@
 #include "WorldTiles.h"
 #include "Logger.h"
 #include "ClickManager.h"
+#include "FruitStandClickObject.h"
 
 WorldTiles::WorldTiles(int nWidth, int nHeight)
 {
@@ -176,7 +177,7 @@ void WorldTiles::addClickObjects(Camera *camera)
 	Vector3 standPos = m_fruitStand->getTranslateV();
 	if ((camPos-standPos).length() <= 6.0f)
 	{	
-		gClickManager->addClickObject(new ClickObject(m_fruitStand, glm::mat4(1.0)));
+		gClickManager->addClickObject(new FruitStandClickObject(m_fruitStand, glm::mat4(1.0)));
 	}
 }
 

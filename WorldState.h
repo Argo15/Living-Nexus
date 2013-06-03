@@ -53,6 +53,7 @@ public:
 	WorldRenderer *getRenderer();
 	ShadowMapManager *getShadowMapManager();
 
+	InventoryGui *getInventory();
 	void toggleInventory();
 };
 #endif

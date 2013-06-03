@@ -40,18 +40,6 @@ void InventoryGui::init()
 			m_children[i]->setBackground(invItem->getInventoryTexture());
 		}
 	}
-	m_options = new OptionsGui();
-	m_options->setDimensions(0.4f,0.4f,0.3f,0.24f);
-	m_useButton = new Button("Use", this, this);
-	m_useButton->setTextSize(0.4f, 0.4f);
-	m_useButton->centerTextPos();
-	m_useButton->setPadding(0.04f,0.04f,0.08f,0.08f);
-	m_cancelButton = new Button("Cancel", this, this);
-	m_cancelButton->setTextSize(0.7f, 0.4f);
-	m_cancelButton->centerTextPos();
-	m_cancelButton->setPadding(0.04f,0.04f,0.08f,0.08f);
-	m_options->addButton(m_useButton);
-	m_options->addButton(m_cancelButton);
 }
 
 void InventoryGui::drawChildren()
@@ -134,9 +122,14 @@ void InventoryGui::onClick(int nButton, int nState, float nX, float nY)
 
 void InventoryGui::buttonClicked(Button *button)
 {
-	if (button == m_cancelButton)
+	if (button->getText() == "Cancel")
 	{
 		m_nClickedChild = -1;
 		this->setColorExtra(0, 0, 0, 0);
 	}
+}
+
+void InventoryGui::setOptionsType(OptionsType type)
+{
+	m_options = InventoryOptionsFactory::getOptionsGui(type, this);
 }

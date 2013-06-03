@@ -73,7 +73,7 @@ void render(void)
 		{
 			char buffer[5];
 			_itoa((int)nSumFps/nCounter, buffer, 10);
-			string title = string("LiNex - FPS: ") + string(buffer);
+			string title = string("Worlds of the LiNex: ") + string(buffer);
 			glutSetWindowTitle(title.c_str());
 			nCounter = 0;
 			nSumFps = 0;

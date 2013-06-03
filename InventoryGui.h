@@ -5,6 +5,7 @@
 #include "View.h"
 #include "ButtonListener.h"
 #include "OptionsGui.h"
+#include "InventoryOptionsFactory.h"
 
 /*
  * Author: wcrane
@@ -20,8 +21,6 @@ private:
 	int m_nClickedChild;
 
 	OptionsGui *m_options;
-	Button *m_useButton;
-	Button *m_cancelButton;
 
 	void drawChildren();
 
@@ -34,6 +33,7 @@ public:
 	GuiElement *getChild(int nIndex);
 	void onClick(int nButton, int nState, float nX, float nY);
 	void buttonClicked(Button *button);
+	void setOptionsType(OptionsType type);
 };
 
 #endif

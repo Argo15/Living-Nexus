@@ -409,6 +409,12 @@
     <ClCompile Include="FontManager.cpp">
       <Filter>LiNex\Resource\Fonts</Filter>
     </ClCompile>
+    <ClCompile Include="FruitStandClickObject.cpp">
+      <Filter>LiNex\Util\Clicking</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryOptionsFactory.cpp">
+      <Filter>LiNex\Gui\Inventory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h">
@@ -680,6 +686,12 @@
     </ClInclude>
     <ClInclude Include="FontManager.h">
       <Filter>LiNex\Resource\Fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="FruitStandClickObject.h">
+      <Filter>LiNex\Util\Clicking</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryOptionsFactory.h">
+      <Filter>LiNex\Gui\Inventory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

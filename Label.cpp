@@ -34,6 +34,11 @@ void Label::setText(string text)
 	m_sText = text;
 }
 
+string Label::getText()
+{
+	return m_sText;
+}
+
 void Label::setTextColor(float nR, float nG, float nB, float nA)
 {
 	m_nTextColor[0] = nR;
