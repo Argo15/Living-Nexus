@@ -41,9 +41,6 @@
     <Filter Include="LiNex\Resource">
       <UniqueIdentifier>{fd7073de-23c1-492c-bb66-50b572b77ee2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="LiNex\Resource\Models">
-      <UniqueIdentifier>{e2d8884b-6808-4236-9ff2-978fa34eb19f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="LiNex\Resource\Tiles">
       <UniqueIdentifier>{c9183d4f-0bef-4161-93aa-04755f1ce594}</UniqueIdentifier>
     </Filter>
@@ -103,6 +100,9 @@
     </Filter>
     <Filter Include="LiNex\Resource\Fonts">
       <UniqueIdentifier>{55e43b36-68f8-4f57-9fec-e71e454c70e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LiNex\Resource\Models">
+      <UniqueIdentifier>{e2d8884b-6808-4236-9ff2-978fa34eb19f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
