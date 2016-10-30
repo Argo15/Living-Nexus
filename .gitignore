@@ -12,6 +12,7 @@ Release/*
 CMakeFiles/*
 src/*
 *.sdf
+*.ipch
 
 # Packages #
 ############
